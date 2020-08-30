@@ -1,0 +1,44 @@
+import { NgModule } from '@angular/core';
+
+import {RouterModule, Routes} from '@angular/router';
+import {LoginComponent} from './login/login.component';
+import {PanelClientesComponent} from './panel-clientes/panel-clientes.component';
+import {ConfiguracionComponent} from './configuracion/configuracion.component';
+import {ListaUsuariosComponent} from './lista-usuarios/lista-usuarios.component';
+import {CrearUsuarioComponent} from './crear-usuario/crear-usuario.component';
+import {CrearPedidoComponent} from './crear-pedido/crear-pedido.component';
+import {PedidosBorradorComponent} from './pedidos-borrador/pedidos-borrador.component';
+import {HistorialPedidosComponent} from './historial-pedidos/historial-pedidos.component';
+import {PedidosVerificacionComponent} from './pedidos-verificacion/pedidos-verificacion.component';
+import {RoleGuard} from './login/guards/role.guard';
+import {AuthGuard} from './login/guards/auth.guard';
+
+
+const routes: Routes = [
+  {path: '', redirectTo: '/login', pathMatch: 'full'},
+  {path: 'login', component: LoginComponent},
+  {path: 'panel-clientes', component: PanelClientesComponent, canActivate: [RoleGuard, AuthGuard], data: {role: 'ROLE_CLIENTE'}},
+  {path: 'configuracion', component: ConfiguracionComponent, canActivate: [RoleGuard, AuthGuard], data: {role: 'ROLE_CLIENTE'}},
+  {path: 'lista-usuarios', component: ListaUsuariosComponent, canActivate: [RoleGuard, AuthGuard], data: {role: 'ROLE_ADMIN'}},
+  {path: 'crear-usuario', component: CrearUsuarioComponent, canActivate: [RoleGuard, AuthGuard], data: {role: 'ROLE_ADMIN'}},
+  {path: 'crear-pedido', component: CrearPedidoComponent, canActivate: [RoleGuard, AuthGuard], data: {role: 'ROLE_CLIENTE'}},
+  {path: 'pedidos-borrador', component: PedidosBorradorComponent, canActivate: [RoleGuard, AuthGuard], data: {role: 'ROLE_CLIENTE'}},
+  {path: 'historial-pedidos', component: HistorialPedidosComponent, canActivate: [RoleGuard, AuthGuard], data: {role: 'ROLE_CLIENTE'}},
+  // tslint:disable-next-line:max-line-length
+  {path: 'pedidos-verificacion',  component: PedidosVerificacionComponent, canActivate: [RoleGuard, AuthGuard], data: {role: 'ROLE_CLIENTE'}}
+];
+
+
+
+@NgModule({
+  declarations: [],
+  imports: [
+    RouterModule.forRoot(
+      routes
+    )
+  ],
+  exports: [RouterModule]
+})
+
+
+export class AppRoutingModule { }

@@ -1,0 +1,42 @@
+
+
+  <!-- Body -->
+  <div class="modal-body">
+
+    <div class="text-center">
+      <h4 class="font-weight-bold dark-grey-text"><i class="fas fa-users p-2 fa-1x"></i> Portal Web</h4>
+    </div>
+
+
+    <div class="md-form md-outline font-weight-bold">
+      <input type="text" id="nit-proveedor" class="form-control">
+      <label for="nit-proveedor">Nit Proveedor</label>
+    </div>
+
+    <div class="md-form md-outline font-weight-bold">
+      <input type="password" id="password-proveedor" class="form-control">
+      <label for="password-proveedor">Contraseña</label>
+    </div>
+
+    <div class="text-center form-sm mt-2">
+      <button class="btn btn-primary btn-rounded"
+              (click)="loginProveedor()"
+              type="submit"
+              value="loginP"
+      >
+        Ingresar <i class="fas fa-sign-in-alt ml-1"></i>
+      </button>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="modal-footer display-footer">
+    <div class="options text-center text-md-right mt-1">
+      <p>¿Necesitas <a href="#" class="blue-text">Ayuda?</a></p>
+      <p>¿Contraseña <a href="#" class="blue-text">Olvidada?</a></p>
+    </div>
+  </div>
+
+
+

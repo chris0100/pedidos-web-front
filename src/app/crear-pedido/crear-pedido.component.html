@@ -1,0 +1,190 @@
+<app-header></app-header>
+
+
+<!-- CARD DE CONTENIDO SEGUN PAGINA-->
+<div class="card mx-auto" style="width: 90%; margin-top: 200px">
+
+  <div class="card-header warning-color-dark">
+    <h5 class="font-weight-bold text-black"><i class="fas fa-shopping-cart"></i> Crear Pedido</h5>
+  </div>
+
+  <div class="card-body">
+
+    <h5 class="p-1 font-weight-bold">Solicitud de Pedido - Formulario de solicitud de pedido</h5>
+
+    <hr>
+
+    <div class="row">
+
+
+      <!--Columna izquierda-->
+      <div class="col-sm-4">
+
+        <div class="md-form md-outline">
+          <input type="text" id="responsable" class="form-control">
+          <label for="responsable" class="">Responsable del pedido</label>
+        </div>
+
+        <div class="md-form md-outline">
+          <input type="text" id="num-oc-op" class="form-control">
+          <label for="num-oc-op" class="">Número OC/OP</label>
+        </div>
+
+        <!-- Basic textarea -->
+        <div class="md-form md-outline">
+          <textarea type="text" id="notas" class="md-textarea form-control" rows="6"></textarea>
+          <label for="notas">Notas</label>
+        </div>
+
+      </div>
+
+
+      <!--Columna de la derecha-->
+      <div class="col-sm-8">
+
+        <div class="card card-cascade mt-4">
+
+          <!-- Card image -->
+          <div class="view view-cascade gradient-card-header primary-color-dark">
+            <h5 class="card-header-title" style="margin-bottom: 0px !important;">
+              <i class="fas fa-truck"></i>
+              Datos de envío del Pedido
+            </h5>
+          </div>
+
+          <!-- Card content -->
+          <div class="card-body card-body-cascade text-center">
+
+            <div class="row">
+
+              <div class="col-sm-6">
+                <div class="md-form md-outline">
+                  <input type="text" id="sucursal-fac" class="form-control border-primary"
+                         placeholder="100 - CI HERMECO SA" disabled>
+                  <label for="sucursal-fac" class="">Sucursal a Facturar</label>
+                </div>
+
+                <div class="md-form md-outline">
+                  <input type="text" id="punto-envio" class="form-control border-primary"
+                         placeholder="000 - CI HERMECO SA" disabled>
+                  <label for="punto-envio" class="">Punto de Envío</label>
+                </div>
+
+                <div class="md-form md-outline">
+                  <input type="text" id="vendedor" class="form-control border-primary"
+                         placeholder="0127 - LOPERA ECHAVARRIA DIANA" disabled>
+                  <label for="vendedor" class="">Vendedor</label>
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+
+                <div class="md-form md-outline">
+                  <input type="text" id="sucursal-rem" class="form-control border-primary"
+                         placeholder="100 - CI HERMECO SA" disabled>
+                  <label for="sucursal-rem" class="">Sucursal a Remisionar</label>
+                </div>
+
+                <div class="md-form md-outline">
+                  <input type="text" id="direccion-envio" class="form-control border-primary"
+                         placeholder="CLL 7 50-174 DESPACHO DE MERCANCIA" disabled>
+                  <label for="direccion-envio" class="">Dirección de Envío</label>
+                </div>
+
+                <div class="md-form md-outline">
+                  <input type="text" id="contacto" class="form-control border-primary"
+                         placeholder="FERNELY PEÑA" disabled>
+                  <label for="contacto" class="">Contacto</label>
+                </div>
+
+              </div>
+
+            </div>
+
+
+          </div>
+
+        </div>
+        <!-- Card -->
+
+      </div>
+
+    </div>
+
+
+    <!-- Gird column -->
+    <div class="col-md-12 mt-4">
+
+
+      <ul class="nav nav-tabs nav-justified md-tabs light-blue darken-3" id="myTabJust" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" id="home-tab-just" data-toggle="tab" href="#home-just" role="tab"
+             aria-controls="home-just"
+             aria-selected="true">Buscar por código EKA</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="profile-tab-just" data-toggle="tab" href="#profile-just" role="tab"
+             aria-controls="profile-just"
+             aria-selected="false">Buscar tu código</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="contact-tab-just" data-toggle="tab" href="#contact-just" role="tab"
+             aria-controls="contact-just"
+             aria-selected="false">Cargar hoja de calculo</a>
+        </li>
+      </ul>
+
+
+
+
+      <div class="tab-content card pt-5" id="myTabContentJust">
+
+        <!--TAB 1-->
+        <div class="tab-pane fade show active" id="home-just" role="tabpanel"
+             aria-labelledby="home-tab-just">
+
+          <!--componente codigo eka-->
+          <app-codigo-eka></app-codigo-eka>
+
+        </div>
+
+
+
+        <!--TAB 2-->
+        <div class="tab-pane fade" id="profile-just" role="tabpanel" aria-labelledby="profile-tab-just">
+
+          <!--componente tu codigo item cliente-->
+          <app-tu-codigo></app-tu-codigo>
+
+        </div>
+
+
+
+
+        <!--TAB 3-->
+        <div class="tab-pane fade" id="contact-just" role="tabpanel" aria-labelledby="contact-tab-just">
+
+          <!--componente de insercion hoja de calculo-->
+          <app-hoja-calculo></app-hoja-calculo>
+
+        </div>
+
+
+      </div>
+
+
+      <div class="text-center mt-3">
+        <button class="btn btn-rounded btn-primary">Verificar Datos del Pedido</button>
+
+        <button class="btn btn-rounded btn-danger" style="min-width: 270px"
+                [routerLink]="['/panel-clientes']">Cancelar</button>
+      </div>
+
+
+
+    </div>
+
+
+  </div>
+
+</div>

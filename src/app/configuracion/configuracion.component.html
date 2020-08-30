@@ -1,0 +1,152 @@
+<app-header></app-header>
+
+<!-- CARD DE CONTENIDO SEGUN PAGINA-->
+<div class="card mx-auto mb-4" style="width: 90%; margin-top: 200px">
+
+  <div class="card-header warning-color-dark">
+    <h5 class="font-weight-bold text-black">Configuración</h5>
+  </div>
+
+
+  <div class="card-body">
+
+    <div class="col-md-12 mb-4">
+
+
+      <!-- Card Data -->
+      <div class="admin-up d-flex justify-content-start align-items-center">
+        <i class="fas fa-cog fa-2x"></i>
+        <h5 class="font-weight-bold dark-grey-text ml-2" style="margin-bottom: 0px !important;">
+          Formulario de actualización de datos de acceso
+        </h5>
+      </div>
+      <!-- Card Data -->
+
+
+      <!-- Grid row -->
+      <div class="row mt-3">
+
+        <!-- Grid column -->
+        <div class="col-lg-8">
+
+          <div class="md-form form-sm mb-0">
+            <input type="text" id="form12" class="form-control form-control-sm"
+                   value="HERMECO PRUEBA"
+            >
+            <label for="form12" class="">Nombre del Responsable</label>
+          </div>
+
+        </div>
+        <!-- Grid column -->
+
+      </div>
+
+
+
+      <div class="row mt-3">
+
+        <!-- Grid column -->
+        <div class="col-lg-8">
+
+          <div class="md-form form-sm mb-0">
+            <input type="text" id="form3" class="form-control form-control-sm"
+                   value="hermecoprueba@hotmail.com"
+            >
+            <label for="form3" class="">Correo Corporativo</label>
+          </div>
+
+        </div>
+
+      </div>
+      <!-- Grid column -->
+
+
+
+      <div class="row mt-3">
+        <!-- Grid column -->
+        <div class="col-lg-8">
+
+          <div class="md-form form-sm mb-0">
+            <input type="password" id="form4" class="form-control form-control-sm" disabled
+                   value="contraseña"
+            >
+            <label for="form4">Contraseña</label>
+          </div>
+
+        </div>
+        <!-- Grid column -->
+      </div>
+
+
+      <div class="row">
+        <div class="mt-4">
+          <button class="btn-primary btn btn-rounded" onclick="window.location.href='../../index.html'"
+          >Aceptar Cambios</button>
+        </div>
+
+        <div class="mt-4">
+          <button class="btn-dark-green btn btn-rounded" data-toggle="modal" data-target="#modalLoginForm">
+            Cambiar Contraseña
+          </button>
+        </div>
+
+
+      </div>
+
+
+
+
+    </div>
+    <!-- Grid column -->
+
+
+  </div>
+
+
+</div>
+
+
+
+<!--CREACION DEL MODAL-->
+
+<div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Cambiar Contraseña</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body mx-3">
+
+        <div class="md-form mb-4">
+          <i class="fas fa-key prefix grey-text"></i>
+          <input type="password" id="defaultForm-pass-1" class="form-control validate">
+          <label data-error="wrong" data-success="right" for="defaultForm-pass-1">Contraseña Actual</label>
+        </div>
+
+        <div class="md-form mb-4">
+          <i class="fas fa-lock-open prefix grey-text"></i>
+          <input type="password" id="defaultForm-pass-2" class="form-control validate">
+          <label data-error="wrong" data-success="right" for="defaultForm-pass-2">Nueva Contraseña</label>
+        </div>
+
+        <div class="md-form mb-4">
+          <i class="fas fa-lock prefix grey-text"></i>
+          <input type="password" id="defaultForm-pass-3" class="form-control validate">
+          <label data-error="wrong" data-success="right" for="defaultForm-pass-3">Repetir Contraseña</label>
+        </div>
+
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <button class="btn btn-primary btn-rounded">Aceptar Cambios</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+

@@ -1,0 +1,97 @@
+<!-- Body -->
+
+<div class="modal-body">
+
+    <div class="text-center">
+      <h4 class="font-weight-bold dark-grey-text"><i class="fas fa-users fa-1x"></i> Portal Web</h4>
+    </div>
+
+
+  <form method="post">
+
+    <div class="md-form md-outline font-weight-bold">
+      <input type="text"
+             id="nit-cliente"
+             class="form-control"
+             name="username"
+             [(ngModel)]="usuario.username"
+             (change)="obtenerSucursal()"
+      >
+      <label for="nit-cliente">Nit Cliente</label>
+    </div>
+
+
+    <div class="row" style="margin-top: -20px">
+      <div class="col-md-12 select-outline">
+
+        <select class="mdb-select md-form md-outline colorful-select dropdown-primary"
+                name="sucursalSeleccionada"
+                id="sucursalSeleccionada"
+                [(ngModel)]="sucursalSeleccionada"
+                (change)="obtenerPuntoEnvio()"
+        >
+          <option value="" disabled selected class="font-weight-bold">Seleccionar</option>
+          <option [value]="item" *ngFor="let item of listadoSucursal">{{item}}</option>
+        </select>
+        <label>Sucursal</label>
+
+      </div>
+    </div>
+
+
+
+    <div class="row" style="margin-top: -20px">
+      <div class="col-md-12">
+
+        <select class="md-form md-outline colorful-select dropdown-primary"
+                name="puntoEnvioSeleccionado"
+                id="puntoEnvioSeleccionado"
+                [(ngModel)]="puntoEnvioSeleccionado"
+        >
+          <option value="" disabled selected class="font-weight-bold">Seleccionar</option>
+          <option [value]="item" *ngFor="let item of listadoPuntoEnvio">{{item}}</option>
+        </select>
+
+
+      </div>
+    </div>
+
+
+
+
+    <div class="md-form md-outline font-weight-bold" style="margin-top: 0px">
+      <input type="password"
+             id="password-cliente"
+             class="form-control"
+             name="password"
+             [(ngModel)]="usuario.password"
+      >
+      <label for="password-cliente">Contraseña</label>
+    </div>
+
+
+    <div class="text-center">
+      <button class="btn btn-primary btn-rounded"
+              type="submit"
+              (click)="loginCliente()"
+      >
+        Ingresar <i class="fas fa-sign-in-alt ml-1"></i>
+      </button>
+    </div>
+
+
+  </form>
+
+</div>
+
+
+  <!-- Footer -->
+  <div class="modal-footer display-footer">
+    <div class="options text-center text-md-right">
+      <p>¿Necesitas <a href="#" class="blue-text">Ayuda?</a></p>
+      <p>¿Contraseña <a href="#" class="blue-text">Olvidada?</a></p>
+    </div>
+  </div>
+
+
+

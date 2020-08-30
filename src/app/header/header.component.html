@@ -1,0 +1,111 @@
+<!-- Navbar  navbar navbar-expand-lg navbar-dark primary-color -->
+<nav class="navbar navbar-expand-lg fixed-top navbar-light" style="z-index: 3">
+
+
+  <a [routerLink]="['/panel-clientes']" style="margin-left: 80px">
+    <img alt="Logo" src="resources/img/logos/logo-eka.png" class="img-fluid" style="max-width: 100px"/>
+  </a>
+
+
+  <!-- Collapse button -->
+  <button class="navbar-toggler text-dark" type="button" data-toggle="collapse" data-target="#basicExampleNav12"
+          aria-controls="basicExampleNav12" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+
+  <!-- Collapsible content -->
+  <div class="collapse navbar-collapse" id="basicExampleNav12">
+
+
+    <!-- Navbar links -->
+    <ul class="navbar-nav ml-auto">
+
+      <li class="nav-item dropdown mr-2">
+        <a class="nav-link dropdown-toggle waves-effect"  id="userDropdown" data-toggle="dropdown"
+           aria-haspopup="true" aria-expanded="false">
+          <i class="fas fa-user"></i> HERMECO | HERMECO COMPANY
+        </a>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+          <a class="dropdown-item"  (click)="logout()">Cerrar Sesión</a>
+        </div>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link waves-effect"><i class="fas fa-question-circle"></i> Ayuda</a>
+      </li>
+
+      <li class="nav-item mr-5">
+        <a class="nav-link waves-effect" [routerLink]="['/configuracion']">
+          <i class="fas fa-cog"></i> Configuración
+        </a>
+      </li>
+
+
+    </ul>
+    <!-- Navbar links -->
+
+  </div>
+
+</nav>
+<!-- Navbar -->
+
+
+
+
+
+
+
+<!--Navbar secundaria-->
+<!--Navbar-->
+<nav class="navbar navbar-expand-lg navbar-dark primary-color-dark fixed-top" style="margin-top: 70px; z-index: 1">
+
+  <div class="container">
+    <!-- Collapse button -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+            aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="basicExampleNav">
+      <!-- Links -->
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" [routerLink]="['/panel-clientes']">Panel
+            <span class="sr-only">(current)</span>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/lista-usuarios']">Lista de Usuarios</a>
+        </li>
+
+        <!-- Dropdown -->
+        <li class="nav-item dropdown multi-level-dropdown">
+          <a href="#" id="menu" data-toggle="dropdown" class="nav-link dropdown-toggle w-100">Gestión de Pedidos</a>
+          <ul class="dropdown-menu mt-2 rounded-0 primary-color-dark border-0 z-depth-1">
+
+            <li class="dropdown-item dropdown-submenu" style="padding: 0.5rem 0 0.5rem 0!important;">
+              <a [routerLink]="['/crear-pedido']" class="text-white w-100" >Crear Nuevo Pedido</a>
+            </li>
+
+            <li class="dropdown-item dropdown-submenu" style="padding: 0.5rem 0 0.5rem 0!important;">
+              <a [routerLink]="['/pedidos-borrador']" class="text-white w-100">Pedidos en Borrador</a>
+            </li>
+
+            <li class="dropdown-item dropdown-submenu" style="padding: 0.5rem 0 0.5rem 0!important;">
+              <a [routerLink]="['/historial-pedidos']" class="text-white w-100">Historial de Pedidos</a>
+            </li>
+
+            <li class="dropdown-item dropdown-submenu" style="padding: 0.5rem 0 0.5rem 0!important;">
+              <a [routerLink]="['/pedidos-verificacion']" class="text-white w-100">Pedidos en Verificación</a>
+            </li>
+
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
