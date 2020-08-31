@@ -83,10 +83,26 @@ export class AuthService {
   guardarUsuario(accessToken: string): void {
     const objPayload = this.obtenerDatosToken(accessToken);
     this._usuario = new Usuario();
-    this._usuario.nombre = objPayload.nombre;
+    this._usuario.nombre = objPayload.nombre.trim();
     this._usuario.cliente = objPayload.cliente;
-    this._usuario.email = objPayload.email;
-    this._usuario.username = objPayload.user_name;
+    this._usuario.email = objPayload.email.trim();
+    this._usuario.username = objPayload.user_name.trim();
+    this._usuario.roles = objPayload.authorities;
+    this._usuario.id_sucursal = objPayload.id_sucursal;
+    this._usuario.descripcion_punto_envio = objPayload.descripcion_punto_envio;
+    this._usuario.id = objPayload.id_usuario;
+
+    // Se guarda en el session como un string
+    sessionStorage.setItem('usuario', JSON.stringify(this._usuario));
+  }
+
+
+  ModificarDatosUsuarioSessionStorage(objPayload: any, nombre: string, email: string) {
+    this._usuario = new Usuario();
+    this._usuario.nombre = nombre.trim();
+    this._usuario.cliente = objPayload.cliente;
+    this._usuario.email = email.trim();
+    this._usuario.username = objPayload.user_name.trim();
     this._usuario.roles = objPayload.authorities;
     this._usuario.id_sucursal = objPayload.id_sucursal;
     this._usuario.descripcion_punto_envio = objPayload.descripcion_punto_envio;
@@ -101,6 +117,12 @@ export class AuthService {
   guardarToken(accessToken: string): void {
     this._token = accessToken;
     sessionStorage.setItem('token', accessToken);
+  }
+
+
+  // Obtener token guardado
+  obtenerTokenGuardado(): any {
+    return sessionStorage.getItem('token');
   }
 
 
