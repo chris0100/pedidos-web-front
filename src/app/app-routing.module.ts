@@ -17,15 +17,15 @@ import {AuthGuard} from './login/guards/auth.guard';
 const routes: Routes = [
   {path: '', redirectTo: '/login', pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
-  {path: 'panel-clientes', component: PanelClientesComponent, canActivate: [RoleGuard, AuthGuard], data: {role: 'ROLE_CLIENTE'}},
-  {path: 'configuracion', component: ConfiguracionComponent, canActivate: [RoleGuard, AuthGuard], data: {role: 'ROLE_CLIENTE'}},
+  {path: 'panel-clientes', component: PanelClientesComponent, canActivate: [RoleGuard, AuthGuard], data: {role: 'proveedor'}},
+  {path: 'configuracion', component: ConfiguracionComponent, canActivate: [RoleGuard, AuthGuard], data: {role: 'proveedor'}},
   {path: 'lista-usuarios', component: ListaUsuariosComponent, canActivate: [RoleGuard, AuthGuard], data: {role: 'ROLE_ADMIN'}},
   {path: 'crear-usuario', component: CrearUsuarioComponent, canActivate: [RoleGuard, AuthGuard], data: {role: 'ROLE_ADMIN'}},
-  {path: 'crear-pedido', component: CrearPedidoComponent, canActivate: [RoleGuard, AuthGuard], data: {role: 'ROLE_CLIENTE'}},
-  {path: 'pedidos-borrador', component: PedidosBorradorComponent, canActivate: [RoleGuard, AuthGuard], data: {role: 'ROLE_CLIENTE'}},
-  {path: 'historial-pedidos', component: HistorialPedidosComponent, canActivate: [RoleGuard, AuthGuard], data: {role: 'ROLE_CLIENTE'}},
+  {path: 'crear-pedido', component: CrearPedidoComponent, canActivate: [RoleGuard, AuthGuard], data: {role: 'proveedor'}},
+  {path: 'pedidos-borrador', component: PedidosBorradorComponent, canActivate: [RoleGuard, AuthGuard], data: {role: 'proveedor'}},
+  {path: 'historial-pedidos', component: HistorialPedidosComponent, canActivate: [RoleGuard, AuthGuard], data: {role: 'proveedor'}},
   // tslint:disable-next-line:max-line-length
-  {path: 'pedidos-verificacion',  component: PedidosVerificacionComponent, canActivate: [RoleGuard, AuthGuard], data: {role: 'ROLE_CLIENTE'}}
+  {path: 'pedidos-verificacion',  component: PedidosVerificacionComponent, canActivate: [RoleGuard, AuthGuard], data: {role: 'proveedor'}}
 ];
 
 

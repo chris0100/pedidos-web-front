@@ -29,7 +29,7 @@ export class AuthService {
       return this._usuario;
     }
 
-    // Si el usuario es nulo pero existe en el sessionStorage
+      // Si el usuario es nulo pero existe en el sessionStorage
     // tslint:disable-next-line:one-line
     else if (this._usuario == null && sessionStorage.getItem('usuario') != null) {
       this._usuario = JSON.parse(sessionStorage.getItem('usuario')) as Usuario;
@@ -45,7 +45,7 @@ export class AuthService {
       return this._token;
     }
 
-    // Si el token es nulo pero existe en el sessionStorage
+      // Si el token es nulo pero existe en el sessionStorage
     // tslint:disable-next-line:one-line
     else if (this._token == null && sessionStorage.getItem('token') != null) {
       this._token = sessionStorage.getItem('token');
@@ -84,10 +84,12 @@ export class AuthService {
     const objPayload = this.obtenerDatosToken(accessToken);
     this._usuario = new Usuario();
     this._usuario.nombre = objPayload.nombre;
-    this._usuario.apellido = objPayload.apellido;
+    this._usuario.cliente = objPayload.cliente;
     this._usuario.email = objPayload.email;
     this._usuario.username = objPayload.user_name;
     this._usuario.roles = objPayload.authorities;
+    this._usuario.id_sucursal = objPayload.id_sucursal;
+    this._usuario.descripcion_punto_envio = objPayload.descripcion_punto_envio;
 
     // Se guarda en el session como un string
     sessionStorage.setItem('usuario', JSON.stringify(this._usuario));
@@ -130,13 +132,12 @@ export class AuthService {
 
   // Revisa si el usuario tiene un rol incluido
   hasRole(role: string): boolean {
+    console.log(this.usuario.roles + ' para hasrole');
     if (this.usuario.roles.includes(role)) {
       return true;
     }
     return false;
   }
-
-
 
 
   // Obtener la sucursal desde el backend
@@ -149,6 +150,13 @@ export class AuthService {
   // Obtener el punto de envio desde el backend
   obtenerPuntoEnvioJava(nitCliente: string, sucursal: string): Observable<string[]> {
     const urlEndPoint = 'http://localhost:8082/obtener-punto-envio';
+    return this.http.get<string[]>(`${urlEndPoint}/${nitCliente}/${sucursal.substring(0, 3)}`);
+  }
+
+
+  // Validar la entidad dinamica en el backend
+  validarEntidadDinamicaJava(nitCliente: string, sucursal: string): Observable<string[]> {
+    const urlEndPoint = 'http://localhost:8082/validar-entidad-dinamica';
     return this.http.get<string[]>(`${urlEndPoint}/${nitCliente}/${sucursal.substring(0, 3)}`);
   }
 

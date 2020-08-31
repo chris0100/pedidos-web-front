@@ -23,6 +23,8 @@
       <!-- Card Data -->
 
 
+      <form #clienteForm="ngForm">
+
       <!-- Grid row -->
       <div class="row mt-3">
 
@@ -30,11 +32,25 @@
         <div class="col-lg-8">
 
           <div class="md-form form-sm mb-0">
-            <input type="text" id="form12" class="form-control form-control-sm"
-                   value="HERMECO PRUEBA"
+            <input type="text"
+                   id="nombre"
+                   class="form-control form-control-sm"
+                   [(ngModel)]="usuario.nombre"
+                   name="nombre"
+                   #nombre="ngModel"
+                   required="required"
             >
-            <label for="form12" class="">Nombre del Responsable</label>
+            <label for="nombre" class="active">Nombre del Responsable</label>
+            <div class="alert alert-danger" *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
+              <div *ngIf="nombre.errors.required">
+                Nombre es requerido
+              </div>
+              <div *ngIf="nombre.errors.minlength">
+                Nombre debe tener al menos 4 caracteres
+              </div>
+            </div>
           </div>
+
 
         </div>
         <!-- Grid column -->
@@ -49,10 +65,23 @@
         <div class="col-lg-8">
 
           <div class="md-form form-sm mb-0">
-            <input type="text" id="form3" class="form-control form-control-sm"
-                   value="hermecoprueba@hotmail.com"
+            <input type="text"
+                   id="email"
+                   class="form-control form-control-sm"
+                   [(ngModel)]="usuario.email"
+                   name="email"
+                   #email="ngModel"
+                   required="required"
             >
-            <label for="form3" class="">Correo Corporativo</label>
+            <label for="email" class="active">Correo Corporativo</label>
+            <div class="alert alert-danger" *ngIf="email.invalid && (email.dirty || email.touched)">
+              <div *ngIf="email.errors.required">
+                Email es requerido
+              </div>
+              <div *ngIf="email.errors.email">
+                Email debe tener un formato válido
+              </div>
+            </div>
           </div>
 
         </div>
@@ -67,10 +96,13 @@
         <div class="col-lg-8">
 
           <div class="md-form form-sm mb-0">
-            <input type="password" id="form4" class="form-control form-control-sm" disabled
-                   value="contraseña"
+            <input type="password"
+                   id="password"
+                   class="form-control form-control-sm"
+                   disabled
+                   value="xxxxxx"
             >
-            <label for="form4">Contraseña</label>
+            <label for="password" class="active">Contraseña</label>
           </div>
 
         </div>
@@ -80,7 +112,9 @@
 
       <div class="row">
         <div class="mt-4">
-          <button class="btn-primary btn btn-rounded" onclick="window.location.href='../../index.html'"
+          <button class="btn-primary btn btn-rounded"
+                  (click)="update()"
+                  [disabled]="!clienteForm.form.valid"
           >Aceptar Cambios</button>
         </div>
 
@@ -92,6 +126,8 @@
 
 
       </div>
+
+      </form>
 
 
 

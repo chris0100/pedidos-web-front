@@ -10,7 +10,7 @@ import swal from 'sweetalert2';
 export class RoleGuard implements CanActivate {
 
 
-  constructor(private authService: AuthService, private router: Router){}
+  constructor(private authService: AuthService, private router: Router) {}
 
 
   // @ts-ignore
@@ -19,7 +19,7 @@ export class RoleGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
     // Revisa si esta autenticado
-    if (!this.authService.isAuthenticated()){
+    if (!this.authService.isAuthenticated()) {
       this.router.navigate(['/login']);
       console.log('Redirecciona porque no esta autenticado');
       return false;
@@ -29,7 +29,7 @@ export class RoleGuard implements CanActivate {
     console.log('Role asignado: ' + role);
 
     // Si encuentra el role correspondiente retorna verdadero
-    if (this.authService.hasRole(role)){
+    if (this.authService.hasRole(role)) {
       return true;
     }
 

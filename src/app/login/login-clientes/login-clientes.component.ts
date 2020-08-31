@@ -4,7 +4,7 @@ import {Router} from '@angular/router';
 import {Usuario} from '../usuario';
 import {AuthService} from '../auth.service';
 import {FormControl} from '@angular/forms';
-import {Observable} from 'rxjs';
+import {Observable, throwError} from 'rxjs';
 import {flatMap, map} from 'rxjs/operators';
 
 @Component({
@@ -31,11 +31,15 @@ export class LoginClientesComponent implements OnInit {
   // Punto de envio seleccionado
   puntoEnvioSeleccionado: string;
 
+  // Validacion para entidad dinamica
+  validaEntidad: boolean;
+
 
   constructor(private router: Router, private authService: AuthService) {
     this.usuario = new Usuario();
     this.listadoSucursal = [];
     this.listadoPuntoEnvio = [];
+    this.validaEntidad = false;
   }
 
 
@@ -66,6 +70,18 @@ export class LoginClientesComponent implements OnInit {
       obj => this.listadoPuntoEnvio.push(...obj)
     );
     console.log(this.listadoPuntoEnvio);
+    this.validarEntidadDinamica();
+  }
+
+
+  validarEntidadDinamica(): void {
+    this.authService.validarEntidadDinamicaJava(this.usuario.username, this.sucursalSeleccionada).subscribe(
+      obj => {
+        if (obj[0] === 'Si') {
+          this.validaEntidad = true;
+        }
+      }
+    );
   }
 
 
@@ -80,29 +96,42 @@ export class LoginClientesComponent implements OnInit {
       return;
     }
 
-    // Se llama al servicio para realizar el login
-    this.authService.login(this.usuario).subscribe(
-      response => {
+    if (this.sucursalSeleccionada == null || this.puntoEnvioSeleccionado == null) {
+      swal('Error de ingreso', 'Debes seleccionar una sucursal con un punto de envio para continuar', 'error');
+      return;
+    }
 
-        // Guardar el usuario
-        this.authService.guardarUsuario(response.access_token);
 
-        // Guardar el token
-        this.authService.guardarToken(response.access_token);
+    if (this.validaEntidad) {
 
-        // Se crea la variable usuario
-        const usuario = this.authService.usuario;
+      // Se llama al servicio para realizar el login
+      this.authService.login(this.usuario).subscribe(
+        response => {
 
-        // Redirecciona a la pagina principal con mensaje de bienvenida
-        swal('Login', `Bienvenido ${usuario.username}, has iniciado sesión correctamente`, 'success');
-        this.router.navigate(['/panel-clientes']);
-      },
-      error => {
-        if (error.status === 400) {
-          swal('Error Login', 'Username o Password incorrectos', 'error');
+          // Guardar el usuario
+          this.authService.guardarUsuario(response.access_token);
+
+          // Guardar el token
+          this.authService.guardarToken(response.access_token);
+
+          // Se crea la variable usuario
+          const usuario = this.authService.usuario;
+
+          // Redirecciona a la pagina principal con mensaje de bienvenida
+          swal('Login', `Bienvenido ${usuario.username}, has iniciado sesión correctamente`, 'success');
+          this.router.navigate(['/panel-clientes']);
+        },
+        error => {
+          if (error.status === 400) {
+            swal('Error Login', 'Username o Password incorrectos', 'error');
+          }
         }
-      }
-    );
+      );
+    }
+    // tslint:disable-next-line:one-line
+    else{
+      // Redirecciona a la pagina login con mensaje
+      swal('Error', `Su cuenta no se encuentra habilitada`, 'error');
+    }
   }
-
 }
