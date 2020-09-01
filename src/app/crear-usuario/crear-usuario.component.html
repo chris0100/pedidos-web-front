@@ -2,11 +2,25 @@
 
 
 <!-- CARD DE CONTENIDO SEGUN PAGINA-->
-<div class="card mx-auto" style="width: 90%; margin-top: 200px">
+<div class="card mx-auto" style="width: 90%; margin-top: 200px; margin-bottom: 280px">
 
   <div class="card-header warning-color-dark  d-flex justify-content-start align-items-center">
-    <i class="fas fa-user-plus fa-2x text-black-50"></i>
-    <h5 class="font-weight-bold text-black ml-2" style="margin-bottom: 0px !important;"> Crear Usuario</h5>
+    <div *ngIf="!usuario.id else elseBlock" class="d-flex align-items-center">
+      <i class="fas fa-user-plus fa-2x text-black-50"></i>
+      <h5 class="font-weight-bold text-black ml-2"
+          style="margin-bottom: 0px !important;"
+      > Crear Usuario
+      </h5>
+    </div>
+
+
+    <ng-template #elseBlock>
+        <i class="fas fa-user-edit fa-2x text-black-50"></i>
+        <h5 class="font-weight-bold text-black ml-2"
+            style="margin-bottom: 0px !important;"
+        > Editar Usuario
+        </h5>
+    </ng-template>
   </div>
 
 
@@ -15,28 +29,147 @@
 
     <form #usuarioForm="ngForm">
 
-    <div class="col-md-12 mb-4">
+      <div class="col-md-12 mb-4">
 
 
-      <!-- Grid row -->
-      <div class="row">
+        <!-- Grid row -->
+        <div class="row">
 
-        <!-- Grid column -->
-        <div class="col-lg-6">
+          <!-- Grid column -->
+          <div class="col-lg-6">
 
-          <div class="md-form form-sm mb-0">
-            <input type="text"
-                   id="nombre"
-                   class="form-control form-control-sm"
-                   name="nombre"
-                   [(ngModel)]="usuario.nombre"
-                   required
-                   #nombre="ngModel"
+            <div class="md-form form-sm mb-0">
+              <input type="text"
+                     id="nombre"
+                     class="form-control form-control-sm"
+                     name="nombre"
+                     [(ngModel)]="usuario.nombre"
+                     required
+                     #nombre="ngModel"
+              >
+              <label for="nombre" class="active">Nombre</label>
+              <div class="alert alert-danger"
+                   *ngIf="nombre.invalid && nombre.touched || nombre.invalid && usuarioForm.submitted"
+              >El nombre es requerido
+              </div>
+            </div>
+
+          </div>
+          <!-- Grid column -->
+
+
+          <!-- Grid column -->
+          <div class="col-lg-6">
+
+            <div class="md-form form-sm mb-0">
+              <input type="text"
+                     id="nit"
+                     class="form-control form-control-sm"
+                     name="nit"
+                     [(ngModel)]="usuario.nit"
+                     required
+                     #nit="ngModel"
+              >
+              <label for="nit" class="active">Nit / Identificación</label>
+              <div class="alert alert-danger"
+                   *ngIf="nit.invalid && nit.touched || nit.invalid && usuarioForm.submitted"
+              >El Nit es requerido
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="row mt-3">
+
+          <div class="col-lg-6">
+            <div class="md-form form-sm mb-0">
+              <input type="text"
+                     id="username"
+                     class="form-control form-control-sm"
+                     name="username"
+                     [(ngModel)]="usuario.username"
+                     required
+                     #username="ngModel"
+              >
+              <label for="username" class="active">Username</label>
+              <div class="alert alert-danger"
+                   *ngIf="username.invalid && username.touched || username.invalid && usuarioForm.submitted"
+              >El Username es requerido
+              </div>
+            </div>
+          </div>
+
+
+          <!--LISTA DESPLEGABLE PARA AJUSTAR LOS QUE YA ESTAN SELECT-->
+          <div class="col-lg-6">
+
+            <select class="mdb-select colorful-select dropdown-primary md-form" multiple
+                    searchable="Filtrar.." name="roles" [(ngModel)]="usuario.rolesPrincipal" required
             >
-            <label for="nombre" class="active">Nombre</label>
-            <div class="alert alert-danger"
-                 *ngIf="nombre.invalid && nombre.touched || nombre.invalid && usuarioForm.submitted"
-            >El nombre es requerido
+              <option value="" disabled selected>Seleccionar Roles</option>
+              <option value="ADMIN">Admin - ROLE_ADMIN</option>
+              <option value="CLI">CLI - Cliente</option>
+              <option value="ITE">ITE - Validar item existente en unoee</option>
+              <option value="JSER">JSER - Jefe servicio al cliente</option>
+              <option value="PRO">PRO - Proveedor</option>
+              <option value="SER">SER - Servicio al cliente</option>
+              <option value="USER">USER - ROLE_USER</option>
+            </select>
+            <button class="btn-save btn btn-primary btn-sm">Guardar</button>
+
+          </div>
+
+        </div>
+
+
+        <div class="row mt-3">
+
+          <div class="col-lg-6">
+            <div class="md-form form-sm mb-0">
+              <input type="email"
+                     id="email"
+                     class="form-control form-control-sm"
+                     name="email"
+                     [(ngModel)]="usuario.email"
+                     required
+                     #email="ngModel"
+              >
+              <label for="email" class="active">Correo Electronico</label>
+              <div class="alert alert-danger"
+                   *ngIf="email.invalid && email.touched || email.invalid && usuarioForm.submitted"
+              >El Email es requerido
+              </div>
+            </div>
+          </div>
+
+
+          <div class="col-lg-6">
+            <div class="md-form form-sm mb-0">
+
+              <input type="password"
+                     id="password"
+                     name="password"
+                     class="form-control form-control-sm"
+                     [(ngModel)]="usuario.password"
+                     required
+                     *ngIf="!usuario.id else elseBlock3"
+              >
+
+              <ng-template #elseBlock3>
+              <input type="password"
+                     id="password"
+                     name="password"
+                     class="form-control form-control-sm"
+                     [value]="xx"
+                     required
+                     disabled
+              >
+              </ng-template>
+
+              <label for="password" class="active">Contraseña</label>
             </div>
           </div>
 
@@ -44,158 +177,56 @@
         <!-- Grid column -->
 
 
+        <div class="row mt-4">
+          <div class="col-lg-6">
+            <fieldset class="form-check" style="padding: 0px !important;">
+              <input class="form-check-input"
+                     type="checkbox"
+                     id="primerLogin"
+                     name="primerLogin"
+                     [(ngModel)]="usuario.primerLogin"
+              >
+              <label class="form-check-label" for="primerLogin">Solicitar cambio al ingresar</label>
+            </fieldset>
+          </div>
 
-        <!-- Grid column -->
-        <div class="col-lg-6">
 
-          <div class="md-form form-sm mb-0">
-            <input type="text"
-                   id="nit"
-                   class="form-control form-control-sm"
-                   name="nit"
-                   [(ngModel)]="usuario.nit"
-                   required
-                   #nit="ngModel"
-            >
-            <label for="nit" class="active">Nit / Identificación</label>
-            <div class="alert alert-danger"
-                 *ngIf="nit.invalid && nit.touched || nit.invalid && usuarioForm.submitted"
-            >El Nit es requerido
-            </div>
+          <div class="mt-4" *ngIf="usuario.id">
+            <button class="btn-dark-green btn btn-rounded" data-toggle="modal" data-target="#modalLoginForm">
+              Cambiar Contraseña
+            </button>
           </div>
 
         </div>
 
-      </div>
 
+        <!--BOTONES -->
+        <div class="row">
+          <div class="mt-4">
+            <button class="btn-primary btn btn-rounded"
+                    (click)="crearUsuario()"
+                    *ngIf="!usuario.id else elseBlock2"
+            >Crear
+            </button>
 
-      <div class="row mt-3">
-
-        <div class="col-lg-12">
-          <div class="md-form form-sm mb-0">
-            <input type="text"
-                   id="username"
-                   class="form-control form-control-sm"
-                   name="username"
-                   [(ngModel)]="usuario.username"
-                   required
-                   #username="ngModel"
-            >
-            <label for="username" class="active">Username</label>
-            <div class="alert alert-danger"
-                 *ngIf="username.invalid && username.touched || username.invalid && usuarioForm.submitted"
-            >El Username es requerido
-            </div>
+            <ng-template #elseBlock2>
+              <button class="btn-primary btn btn-rounded"
+                      (click)="updateUsuario()"
+              >Editar
+              </button>
+            </ng-template>
           </div>
-        </div>
 
-      </div>
-
-
-      <div class="row mt-3">
-
-        <div class="col-lg-6">
-
-          <select class="mdb-select colorful-select dropdown-primary md-form" multiple
-                  searchable="Filtrar.." name="roles" [(ngModel)]="usuario.rolesPrincipal" required>
-            <option value="" disabled selected>Seleccionar Roles</option>
-            <option value="ADMIN">Admin - ROLE_ADMIN</option>
-            <option value="CLI">CLI - Cliente</option>
-            <option value="ITE">ITE - Validar item existente en unoee</option>
-            <option value="JSER">JSER - Jefe servicio al cliente</option>
-            <option value="PRO">PRO - Proveedor</option>
-            <option value="SER">SER - Servicio al cliente</option>
-            <option value="USER">USER - ROLE_USER</option>
-          </select>
-          <button class="btn-save btn btn-primary btn-sm">Guardar</button>
-
-        </div>
-
-
-        <div class="col-lg-6">
-          <div class="md-form form-sm mb-0">
-            <input type="email"
-                   id="email"
-                   class="form-control form-control-sm"
-                   name="email"
-                   [(ngModel)]="usuario.email"
-                   required
-                   #email="ngModel"
-            >
-            <label for="email" class="active">Correo Electronico</label>
-            <div class="alert alert-danger"
-                 *ngIf="email.invalid && email.touched || email.invalid && usuarioForm.submitted"
-            >El Email es requerido
-            </div>
+          <div class="mt-4">
+            <button class="btn-danger btn btn-rounded" [routerLink]="['/lista-usuarios']"
+            >Cancelar
+            </button>
           </div>
+
         </div>
 
       </div>
       <!-- Grid column -->
-
-
-
-
-
-      <div class="row mt-3">
-
-        <div class="col-lg-6">
-          <div class="md-form form-sm mb-0">
-            <input type="password"
-                   id="password"
-                   name="password"
-                   class="form-control form-control-sm"
-                   [(ngModel)]="usuario.password"
-                   required
-                   #password="ngModel"
-            >
-            <label for="password" class="active">Contraseña</label>
-            <div class="alert alert-danger"
-                 *ngIf="password.invalid && password.touched || password.invalid && usuarioForm.submitted"
-            >El Password es requerido
-            </div>
-          </div>
-        </div>
-
-
-      </div>
-
-
-      <div class="row mt-4">
-        <div class="col-lg-6">
-          <fieldset class="form-check" style="padding: 0px !important;">
-            <input class="form-check-input"
-                   type="checkbox"
-                   id="primerLogin"
-                   name="primerLogin"
-                   [(ngModel)]="usuario.primerLogin"
-            >
-            <label class="form-check-label" for="primerLogin">Solicitar cambio al ingresar</label>
-          </fieldset>
-        </div>
-
-      </div>
-
-
-
-
-
-      <!--BOTONES -->
-      <div class="row">
-        <div class="mt-4">
-          <button class="btn-primary btn btn-rounded" (click)="crearUsuario()">Aceptar</button>
-        </div>
-
-        <div class="mt-4">
-          <button class="btn-danger btn btn-rounded" [routerLink]="['/lista-usuarios']"
-          >Cancelar</button>
-        </div>
-
-      </div>
-
-
-    </div>
-    <!-- Grid column -->
 
     </form>
 
@@ -203,4 +234,51 @@
   </div>
 
 
+</div>
+
+
+
+
+
+
+<!--CREACION DEL MODAL-->
+
+<div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Cambiar Contraseña</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body mx-3">
+
+        <div class="md-form mb-4">
+          <i class="fas fa-lock-open prefix grey-text"></i>
+          <input type="password" id="passwordNuevo" class="form-control validate" [(ngModel)]="passwordNuevo">
+          <label data-error="wrong" data-success="right" for="passwordNuevo">Nueva Contraseña</label>
+        </div>
+
+        <div class="md-form mb-4">
+          <i class="fas fa-lock prefix grey-text"></i>
+          <input type="password" id="passwordNuevoRepetir" class="form-control validate">
+          <label data-error="wrong" data-success="right" for="passwordNuevoRepetir">Repetir Contraseña</label>
+        </div>
+
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <button
+          class="btn btn-primary btn-rounded"
+          (click)="cambiarPasswordOtroUsuario()"
+          data-dismiss="modal"
+          aria-label="Close"
+        >Aceptar Cambios
+        </button>
+      </div>
+    </div>
+  </div>
 </div>

@@ -72,6 +72,27 @@ export class UsuariosService {
   }
 
 
+  updatePasswordOtroUsuarioJava(passwordNuevo: string, id): Observable<any> {
+    const urlEndPoint = 'http://localhost:8082/update-pass-otro-usuario';
+
+    // Retorna lo que se obtiene de la peticion
+    return this.http.put(`${urlEndPoint}/${id}`, passwordNuevo)
+      .pipe(
+        catchError(e => {
+          if (e.status === 400) {
+            return throwError(e);
+          }
+
+          if (e.error.mensaje) {
+            console.error(e.error.mensaje);
+          }
+
+          return throwError(e);
+        })
+      );
+  }
+
+
   // Crear un usuario de parte del admin
   crearUsuarioJava(usuario: Usuario): Observable<any> {
     const urlEndPoint = 'http://localhost:8082/crear-usuario';
@@ -100,5 +121,23 @@ export class UsuariosService {
     );
   }
 
+
+  // Actualizar otro usuario
+  editarUsuarioJava(usuario: Usuario): Observable<any> {
+    const urlEndPoint = 'http://localhost:8082/editar-otro-usuario';
+    return this.http.put<any>(`${urlEndPoint}/${usuario.id}`, usuario).pipe(
+      catchError(e => {
+        if (e.status === 400) {
+          return throwError(e);
+        }
+
+        if (e.error.mensaje) {
+          console.error(e.error.mesaje);
+        }
+
+        return throwError(e);
+      })
+    );
+  }
 
 }

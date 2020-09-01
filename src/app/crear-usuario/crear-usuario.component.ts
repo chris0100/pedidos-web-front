@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Usuario} from '../login/usuario';
 import {UsuariosService} from '../login/usuarios.service';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -17,10 +17,14 @@ declare var lista: any;
 export class CrearUsuarioComponent implements OnInit {
 
   public usuario: Usuario = new Usuario();
+  passwordNuevo: string;
+
+  errores: string[];
 
 
   constructor(private usuariosService: UsuariosService, private router: Router,
-              private activatedRoute: ActivatedRoute) { }
+              private activatedRoute: ActivatedRoute) {
+  }
 
   ngOnInit(): void {
     // Ejecuta el script
@@ -28,6 +32,7 @@ export class CrearUsuarioComponent implements OnInit {
 
     // Se carga el usuario cuando es el caso de editar
     this.cargarUsuario();
+    this.passwordNuevo = '';
   }
 
 
@@ -46,7 +51,6 @@ export class CrearUsuarioComponent implements OnInit {
   }
 
 
-
   // Crear usuario
   crearUsuario(): void {
     console.log(this.usuario);
@@ -56,5 +60,44 @@ export class CrearUsuarioComponent implements OnInit {
         this.router.navigate(['/lista-usuarios']);
       });
   }
+
+
+  // Editar Usuario
+  updateUsuario(): void {
+    console.log(this.usuario);
+    this.usuariosService.editarUsuarioJava(this.usuario).subscribe(
+      json => {
+        this.router.navigate(['/lista-usuarios']);
+        swal('Usuario actualizado', `${json.mensaje}: ${json.usuario.nombre}`, 'success');
+      },
+      err => {
+        this.errores = err.error.errors as string[];
+        console.error('Codigo del error desde el backend: ' + err.status);
+        console.error(err.error.errors);
+      });
+  }
+
+
+  // Se actualiza la contraseña
+  cambiarPasswordOtroUsuario(): void {
+    console.log(this.usuario.id);
+    if (this.passwordNuevo.trim() == '') {
+      swal('Error', 'Revisa que los campos esten diligenciados correctamente', 'error');
+    } else {
+      this.usuariosService.updatePasswordOtroUsuarioJava(this.passwordNuevo, this.usuario.id)
+        .subscribe(
+          json => {
+            swal('Contraseña Actualizada', `${json.mensaje}`, 'success');
+          },
+          err => {
+            swal('Error', 'Ha ocurrido un error, revisa que los datos ingresados sean validos', 'error');
+            this.errores = err.error.errors as string[];
+            console.error('Codigo de error desde backend' + err.status);
+            console.error(err.error.errors);
+          }
+        );
+    }
+  }
+
 
 }

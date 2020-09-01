@@ -76,7 +76,6 @@ export class ConfiguracionComponent implements OnInit {
 
   // Se actualiza la contraseña
   cambiarPassword(): void {
-
     if (this.passwordActual.trim() == '' || this.passwordNuevo.trim() == '') {
       swal('Error', 'Revisa que los campos esten diligenciados correctamente', 'error');
     } else {
