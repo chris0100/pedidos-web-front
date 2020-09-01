@@ -87,6 +87,7 @@ export class AuthService {
     this._usuario.cliente = objPayload.cliente;
     this._usuario.email = objPayload.email.trim();
     this._usuario.username = objPayload.user_name.trim();
+    this._usuario.nit = objPayload.nit;
     this._usuario.roles = objPayload.authorities;
     this._usuario.id_sucursal = objPayload.id_sucursal;
     this._usuario.descripcion_punto_envio = objPayload.descripcion_punto_envio;
@@ -103,6 +104,7 @@ export class AuthService {
     this._usuario.cliente = objPayload.cliente;
     this._usuario.email = email.trim();
     this._usuario.username = objPayload.user_name.trim();
+    this._usuario.nit = objPayload.nit;
     this._usuario.roles = objPayload.authorities;
     this._usuario.id_sucursal = objPayload.id_sucursal;
     this._usuario.descripcion_punto_envio = objPayload.descripcion_punto_envio;
