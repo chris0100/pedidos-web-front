@@ -4,6 +4,7 @@ import {AuthService} from './auth.service';
 import {Usuario} from './usuario';
 import {Observable, throwError} from 'rxjs';
 import {catchError} from 'rxjs/operators';
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,8 @@ export class UsuariosService {
 
   public usuario: Usuario;
 
-  constructor(private http: HttpClient, private authService: AuthService) {
+  constructor(private http: HttpClient, private authService: AuthService,
+              private router: Router) {
   }
 
 
@@ -70,11 +72,32 @@ export class UsuariosService {
   }
 
 
-
   // Crear un usuario de parte del admin
   crearUsuarioJava(usuario: Usuario): Observable<any> {
     const urlEndPoint = 'http://localhost:8082/crear-usuario';
     return this.http.post<Usuario>(urlEndPoint, usuario);
+  }
+
+
+  // Listar usuarios de backend
+  listarUsuariosJava(): Observable<any> {
+    const urlEndPoint = 'http://localhost:8082/listar-usuarios';
+    return this.http.get(urlEndPoint);
+  }
+
+
+  // Obtener un usuario con el id desde el backend
+  obtenerUsuarioJava(id): Observable<any> {
+    const urlEndPoint = 'http://localhost:8082/obtener-usuario';
+    return this.http.get<Usuario>(`${urlEndPoint}/${id}`).pipe(
+      catchError(e => {
+        if (e.status != 401 && e.error.mensaje) {
+          this.router.navigate(['/clientes']);
+          console.log(e.error.mensaje);
+        }
+        return throwError(e);
+      })
+    );
   }
 
 

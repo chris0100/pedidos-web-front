@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Usuario} from '../login/usuario';
 import {UsuariosService} from '../login/usuarios.service';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import swal from 'sweetalert2';
 
 // carga de archivo js para mdbootstrap
@@ -16,16 +16,35 @@ declare var lista: any;
 
 export class CrearUsuarioComponent implements OnInit {
 
-  usuario: Usuario = new Usuario();
+  public usuario: Usuario = new Usuario();
 
 
-  constructor(private usuariosService: UsuariosService, private router: Router) { }
+  constructor(private usuariosService: UsuariosService, private router: Router,
+              private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
     // Ejecuta el script
     new lista();
 
+    // Se carga el usuario cuando es el caso de editar
+    this.cargarUsuario();
   }
+
+
+  cargarUsuario(): void {
+    this.activatedRoute.params.subscribe(
+      params => {
+        const id = params['id'];
+        if (id) {
+          this.usuariosService.obtenerUsuarioJava(id).subscribe(
+            obj => {
+              this.usuario = obj;
+              return this.usuario;
+            });
+        }
+      });
+  }
+
 
 
   // Crear usuario
