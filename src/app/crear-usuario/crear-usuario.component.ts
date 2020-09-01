@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Usuario} from '../login/usuario';
 import {UsuariosService} from '../login/usuarios.service';
 import {Router} from '@angular/router';
+import swal from 'sweetalert2';
 
 // carga de archivo js para mdbootstrap
 declare var lista: any;
@@ -16,7 +17,7 @@ declare var lista: any;
 export class CrearUsuarioComponent implements OnInit {
 
   usuario: Usuario = new Usuario();
-  cambioIngreso: boolean;
+
 
   constructor(private usuariosService: UsuariosService, private router: Router) { }
 
@@ -24,16 +25,17 @@ export class CrearUsuarioComponent implements OnInit {
     // Ejecuta el script
     new lista();
 
-    this.cambioIngreso = false;
-
   }
 
 
   // Crear usuario
   crearUsuario(): void {
     console.log(this.usuario);
-    console.log(this.cambioIngreso);
-    // this.usuariosService.crearUsuarioJava(this.usuario)
+    this.usuariosService.crearUsuarioJava(this.usuario).subscribe(
+      obj => {
+        swal('Correcto', `${obj.mensaje}`, 'success');
+        this.router.navigate(['/lista-usuarios']);
+      });
   }
 
 }

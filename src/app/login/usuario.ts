@@ -8,5 +8,7 @@ export class Usuario {
   descripcion_punto_envio: string;
   cliente: string;
   email: string;
+  primer_login: boolean;
   roles: string[] = [];
+  rolesPrincipal: string[] = [];   // Se usa para pasar correctamente los roles al crearlos
 }

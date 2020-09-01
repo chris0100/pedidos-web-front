@@ -72,10 +72,8 @@ export class UsuariosService {
 
 
   // Crear un usuario de parte del admin
-  crearUsuarioJava(usuario: Usuario): Observable<any>{
+  crearUsuarioJava(usuario: Usuario): Observable<any> {
     const urlEndPoint = 'http://localhost:8082/crear-usuario';
-
-    this.usuario = this.authService.usuario;
     return this.http.post<Usuario>(urlEndPoint, usuario);
   }
 
