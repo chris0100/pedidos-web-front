@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import swal from 'sweetalert2';
 import {Router} from '@angular/router';
-import {Usuario} from '../usuario';
+import {Usuario} from '../../usuario/usuario';
 import {AuthService} from '../auth.service';
 import {FormControl} from '@angular/forms';
 import {Observable, throwError} from 'rxjs';

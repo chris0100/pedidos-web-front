@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {AuthService} from './auth.service';
+import {AuthService} from '../login/auth.service';
 import {Usuario} from './usuario';
 import {Observable, throwError} from 'rxjs';
 import {catchError} from 'rxjs/operators';

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {Usuario} from '../login/usuario';
-import {UsuariosService} from '../login/usuarios.service';
+import {Usuario} from '../usuario';
+import {UsuariosService} from '../usuarios.service';
 import {Router} from '@angular/router';
 
 // carga de variable para mdbootstrap

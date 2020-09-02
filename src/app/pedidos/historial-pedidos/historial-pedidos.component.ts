@@ -1,16 +1,19 @@
 import { Component, OnInit } from '@angular/core';
+import {Pedido} from '../pedido';
 
 // carga de archivo para mdbootstrap
 declare var historial: any;
 
 
 @Component({
-  selector: 'app-pedidos-verificacion',
-  templateUrl: './pedidos-verificacion.component.html'
+  selector: 'app-historial-pedidos',
+  templateUrl: './historial-pedidos.component.html'
 })
 
 
-export class PedidosVerificacionComponent implements OnInit {
+export class HistorialPedidosComponent implements OnInit {
+
+  pedidosUnoEE: PedidoUnoEE;
 
   constructor() { }
 
