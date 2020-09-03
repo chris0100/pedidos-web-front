@@ -18,23 +18,25 @@
       <div class="col-sm-4">
 
         <div class="md-form md-outline">
-          <input type="text" id="responsable" class="form-control" disabled>
-          <label for="responsable" class="active">Código del pedido</label>
+          <input type="text" id="codPedido" class="form-control" disabled [value]="pedidoUnoEE.numeroDocumento">
+          <label for="codPedido" class="active">Código del pedido</label>
         </div>
 
         <div class="md-form md-outline">
-          <input type="text" id="num-oc-op" class="form-control" disabled>
-          <label for="num-oc-op" class="active">Número OC/OP</label>
+          <input type="text" id="numOc" class="form-control" disabled [value]="pedidoUnoEE.ordenCompra">
+          <label for="numOc" class="active">Número OC/OP</label>
         </div>
 
         <div class="md-form md-outline">
-          <input type="text" id="estado" class="form-control" disabled>
+          <input type="text" id="estado" class="form-control" disabled [value]="pedidoUnoEE.estado">
           <label for="estado" class="active">Estado</label>
         </div>
 
         <!-- Basic textarea -->
         <div class="md-form md-outline">
-          <textarea type="text" id="notas" class="md-textarea form-control" rows="6" disabled></textarea>
+          <textarea type="text" id="notas" class="md-textarea form-control" rows="6"
+                    disabled [value]="pedidoUnoEE.notas">
+          </textarea>
           <label for="notas" class="active">Notas</label>
         </div>
 
@@ -62,25 +64,25 @@
               <div class="col-sm-6">
                 <div class="md-form md-outline">
                   <input type="text" id="sucursal-fac" class="form-control border-primary"
-                         placeholder="100 - CI HERMECO SA" disabled>
+                         [value]="pedidoUnoEE.sucursalFactura" disabled>
                   <label for="sucursal-fac" class="active">Sucursal a Facturar</label>
                 </div>
 
                 <div class="md-form md-outline">
                   <input type="text" id="punto-envio" class="form-control border-primary"
-                         placeholder="000 - CI HERMECO SA" disabled>
+                         [value]="pedidoUnoEE.puntoEnvio" disabled>
                   <label for="punto-envio" class="active">Punto de Envío</label>
                 </div>
 
                 <div class="md-form md-outline">
                   <input type="text" id="vendedor" class="form-control border-primary"
-                         placeholder="0127 - LOPERA ECHAVARRIA DIANA" disabled>
+                         [value]="pedidoUnoEE.vendedor" disabled>
                   <label for="vendedor" class="active">Vendedor</label>
                 </div>
 
                 <div class="md-form md-outline">
                   <input type="text" id="fecha-creacion" class="form-control border-primary"
-                         placeholder="0127 - LOPERA ECHAVARRIA DIANA" disabled>
+                         [value]="pedidoUnoEE.fecha" disabled>
                   <label for="vendedor" class="active">Fecha de creación</label>
                 </div>
               </div>
@@ -89,25 +91,25 @@
 
                 <div class="md-form md-outline">
                   <input type="text" id="sucursal-rem" class="form-control border-primary"
-                         placeholder="100 - CI HERMECO SA" disabled>
+                         [value]="pedidoUnoEE.sucursalDespacho" disabled>
                   <label for="sucursal-rem" class="active">Sucursal a Remisionar</label>
                 </div>
 
                 <div class="md-form md-outline">
                   <input type="text" id="direccion-envio" class="form-control border-primary"
-                         placeholder="CLL 7 50-174 DESPACHO DE MERCANCIA" disabled>
+                         [value]="pedidoUnoEE.direccion1" disabled>
                   <label for="direccion-envio" class="active">Dirección de Envío</label>
                 </div>
 
                 <div class="md-form md-outline">
                   <input type="text" id="contacto" class="form-control border-primary"
-                         placeholder="FERNELY PEÑA" disabled>
+                         [value]="pedidoUnoEE.contacto" disabled>
                   <label for="contacto" class="active">Contacto</label>
                 </div>
 
                 <div class="md-form md-outline">
                   <input type="text" id="fecha-entrega" class="form-control border-primary"
-                         placeholder="0127 - LOPERA ECHAVARRIA DIANA" disabled>
+                         [value]="pedidoUnoEE.fechaEntrega" disabled>
                   <label for="vendedor" class="active">Fecha de entrega</label>
                 </div>
 
@@ -150,46 +152,34 @@
               <table class="table">
                 <thead>
                 <tr>
-                  <th scope="col">Código EKA</th>
-                  <th scope="col">Descripción</th>
-                  <th scope="col">Extensión 1</th>
-                  <th scope="col">Extensión 2</th>
-                  <th scope="col">Cantidad</th>
-                  <th scope="col">U. Medida</th>
-                  <th scope="col">Fecha Entrega</th>
-                  <th scope="col">Precio Unitario</th>
-                  <th scope="col">Vlr. Bruto</th>
-                  <th scope="col">Vlr. Impuestos</th>
-                  <th scope="col">Vlr. Neto</th>
+                  <th scope="col" class="font-weight-bold">Código EKA</th>
+                  <th scope="col" class="font-weight-bold">Descripción</th>
+                  <th scope="col" class="font-weight-bold">Extensión 1</th>
+                  <th scope="col" class="font-weight-bold">Extensión 2</th>
+                  <th scope="col" class="font-weight-bold">Cantidad</th>
+                  <th scope="col" class="font-weight-bold">U. Medida</th>
+                  <th scope="col" class="font-weight-bold">Fecha Entrega</th>
+                  <th scope="col" class="font-weight-bold">Precio Unitario</th>
+                  <th scope="col" class="font-weight-bold">Vlr. Bruto</th>
+                  <th scope="col" class="font-weight-bold">Vlr. Impuestos</th>
+                  <th scope="col" class="font-weight-bold">Vlr. Neto</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                  <th scope="row">785644</th>
-                  <td>POLYESTER 50</td>
-                  <td>VERDE</td>
-                  <td>20</td>
-                  <td>3</td>
-                  <td>CMS</td>
-                  <td>2020-01-20</td>
-                  <td>$ 2500</td>
-                  <td>$ 3000</td>
-                  <td>$ 500</td>
-                  <td>$ 5000</td>
+                <tr *ngFor="let item of itemsPedidoUnoEE">
+                  <th scope="row">{{item.codItem}}</th>
+                  <td>{{item.descripcion}}</td>
+                  <td>{{item.ext1}}</td>
+                  <td>{{item.ext2}}</td>
+                  <td>{{item.cantPedida}}</td>
+                  <td>{{item.und}}</td>
+                  <td>{{item.fechaEntrega}}</td>
+                  <td>$ {{item.precioUnd}}</td>
+                  <td>$ {{item.valorBruto}}</td>
+                  <td>$ {{item.valorImp}}</td>
+                  <td>$ {{item.valorNeto}}</td>
                 </tr>
-                <tr>
-                  <th scope="row">785644</th>
-                  <td>POLYESTER 50</td>
-                  <td>VERDE</td>
-                  <td>20</td>
-                  <td>3</td>
-                  <td>CMS</td>
-                  <td>2020-01-20</td>
-                  <td>$ 2500</td>
-                  <td>$ 3000</td>
-                  <td>$ 500</td>
-                  <td>$ 5000</td>
-                </tr>
+
 
                 </tbody>
               </table>
@@ -197,9 +187,9 @@
 
           </div>
 
-            <div class="float-right font-weight-bold">SUBTOTAL: $ <span>0</span></div><br>
-            <div class="float-right font-weight-bold">IMPUESTOS: $ <span>0</span></div><br>
-            <div class="float-right font-weight-bold">TOTAL: $ <span>0</span></div><br>
+            <div class="float-right font-weight-bold">SUBTOTAL: $ <span>{{pedidoUnoEE.valorBrutoDocumento}}</span></div><br>
+            <div class="float-right font-weight-bold">IMPUESTOS: $ <span>{{pedidoUnoEE.valorImpDocumento}}</span></div><br>
+            <div class="float-right font-weight-bold">TOTAL: $ <span>{{pedidoUnoEE.valorNetoDocumento}}</span></div><br>
 
 
         </div>

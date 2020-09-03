@@ -17,7 +17,7 @@ export class DetalleHistorialPedidosComponent implements OnInit {
   }
 
   pedidoUnoEE: PedidoUnoEE;
-  pedidosUnoEE: PedidoUnoEE[];
+  pedidosUnoEE: PedidoUnoEE[]; // Solo se utiliza para recorrer y extraer
   itemsPedidoUnoEE: ItemPedidoUnoEE[];
 
 
