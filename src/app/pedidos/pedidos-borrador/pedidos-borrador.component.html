@@ -55,8 +55,12 @@
           <td>{{pedido.fechaPedido | date:"EEEE dd, MMMM yyyy HH:mm"}}</td>
           <td>{{pedido.estado? 'NO BORRADOR':'EN BORRADOR'}}</td>
           <td class="d-flex">
-            <button class="btn btn-sm btn-primary btn-rounded"><i class="fas fa-user-edit"></i></button>
-            <button class="btn btn-sm btn-warning btn-rounded"><i class="fas fa-search"></i></button>
+            <button class="btn btn-sm btn-warning btn-rounded"
+                    [routerLink]="['/detalle-pedidos-borrador',pedido.id]"
+            >
+              <i class="fas fa-search"></i>
+            </button>
+            <button class="btn btn-sm btn-primary btn-rounded"><i class="fas fa-edit"></i></button>
             <button class="btn btn-sm btn-danger btn-rounded"><i class="far fa-trash-alt"></i></button>
           </td>
         </tr>

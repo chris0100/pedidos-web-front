@@ -84,6 +84,20 @@ export class PedidoService {
   }
 
 
+  obtenerPedidoVBJava(id: number): Observable<any> {
+    const urlEndPoint = 'http://localhost:8082/obtener-lista-items-vb';
+    return this.http.get<ItemPedidoUnoEE[]>(`${urlEndPoint}/${id}`).pipe(
+      catchError(e => {
+        if (e.status != 401 && e.error.mensaje) {
+          this.router.navigate(['/panel-clientes']);
+          console.log(e.error.mensaje);
+        }
+        return throwError(e);
+      })
+    );
+  }
+
+
   // Se guarda el token en el sessionStorage
   guardarPedidosUnoEESessionStorage(pedidosUnoEE: PedidoUnoEE[]): void {
     sessionStorage.setItem('pedidosUnoEEHistorial', JSON.stringify(pedidosUnoEE));

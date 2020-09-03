@@ -65,9 +65,12 @@
           <td>{{pedido.sucursalFacturar}}</td>
           <td>{{pedido.sucursalRemisionar}}</td>
           <td>{{pedido.fechaPedido | date:"EEEE dd, MMMM yyyy HH:mm"}}</td>
-          <td class="d-flex">
-            <button class="btn btn-sm btn-warning btn-rounded"><i class="fas fa-search"></i></button>
-          </td>
+          <td>
+            <button class="btn btn-sm btn-primary btn-rounded"
+                    [routerLink]="['/detalle-pedidos-verificacion',pedido.id]"
+            >
+              <i class="fas fa-search"></i>
+            </button></td>
         </tr>
 
 

@@ -87,9 +87,9 @@
           <td>{{pedidoUnoEE.estado}}</td>
           <td>{{pedidoUnoEE.notas}}</td>
           <td>{{pedidoUnoEE.ordenCompra}}</td>
-          <td>{{pedidoUnoEE.valorBrutoDocumento}}</td>
-          <td>{{pedidoUnoEE.valorImpDocumento}}</td>
-          <td>{{pedidoUnoEE.valorNetoDocumento}}</td>
+          <td>${{pedidoUnoEE.valorBrutoDocumento | currency: 0 : ""}}</td>
+          <td>${{pedidoUnoEE.valorImpDocumento | currency: 0 : ""}}</td>
+          <td>${{pedidoUnoEE.valorNetoDocumento | currency: 0 : ""}}</td>
           <td>{{pedidoUnoEE.idPuntoEnvio}}</td>
           <td>{{pedidoUnoEE.puntoEnvio}}</td>
           <td>{{pedidoUnoEE.direccion1}}</td>
@@ -99,7 +99,7 @@
             <button class="btn btn-sm btn-primary btn-rounded"
                                   [routerLink]="['/detalle-historial-pedido', pedidoUnoEE.rowid]"
           >
-            <i class="fas fa-user-edit"></i>
+              <i class="fas fa-search"></i>
           </button></td>
         </tr>
 

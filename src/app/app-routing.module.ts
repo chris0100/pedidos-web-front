@@ -13,6 +13,8 @@ import {PedidosVerificacionComponent} from './pedidos/pedidos-verificacion/pedid
 import {RoleGuard} from './login/guards/role.guard';
 import {AuthGuard} from './login/guards/auth.guard';
 import {DetalleHistorialPedidosComponent} from './pedidos/historial-pedidos/detalle-historial-pedidos/detalle-historial-pedidos.component';
+import {DetallePedidosVerificacionComponent} from './pedidos/pedidos-verificacion/detalle-pedidos-verificacion/detalle-pedidos-verificacion.component';
+import {DetallePedidosBorradorComponent} from './pedidos/pedidos-borrador/detalle-pedidos-borrador/detalle-pedidos-borrador.component';
 
 
 const routes: Routes = [
@@ -25,9 +27,11 @@ const routes: Routes = [
   {path: 'editar-usuario/:id', component: CrearUsuarioComponent, canActivate: [RoleGuard, AuthGuard], data: {role: 'proveedor'}},
   {path: 'crear-pedido', component: CrearPedidoComponent, canActivate: [RoleGuard, AuthGuard], data: {role: 'proveedor'}},
   {path: 'pedidos-borrador', component: PedidosBorradorComponent, canActivate: [RoleGuard, AuthGuard], data: {role: 'proveedor'}},
+  {path: 'detalle-pedidos-borrador/:id', component: DetallePedidosBorradorComponent, canActivate: [RoleGuard, AuthGuard], data: {role: 'proveedor'}},
   {path: 'historial-pedidos', component: HistorialPedidosComponent, canActivate: [RoleGuard, AuthGuard], data: {role: 'proveedor'}},
   {path: 'detalle-historial-pedido/:id', component: DetalleHistorialPedidosComponent, canActivate: [RoleGuard, AuthGuard], data: {role: 'proveedor'}},
-  {path: 'pedidos-verificacion',  component: PedidosVerificacionComponent, canActivate: [RoleGuard, AuthGuard], data: {role: 'proveedor'}}
+  {path: 'pedidos-verificacion',  component: PedidosVerificacionComponent, canActivate: [RoleGuard, AuthGuard], data: {role: 'proveedor'}},
+  {path: 'detalle-pedidos-verificacion/:id', component: DetallePedidosVerificacionComponent, canActivate: [RoleGuard, AuthGuard], data: {role: 'proveedor'}}
 ];
 
 

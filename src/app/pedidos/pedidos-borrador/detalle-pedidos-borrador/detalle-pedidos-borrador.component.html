@@ -1,0 +1,185 @@
+<app-header></app-header>
+
+
+<!-- CARD DE CONTENIDO SEGUN PAGINA-->
+<div class="card mx-auto" style="width: 90%; margin-top: 200px; margin-bottom: 280px">
+
+  <div class="card-header warning-color-dark">
+    <h5 class="font-weight-bold text-black"><i class="fas fa-file-invoice"></i> Detalle del Pedido</h5>
+  </div>
+
+
+  <div class="card-body">
+
+
+    <div class="row">
+
+
+      <!--Columna izquierda-->
+      <div class="col-sm-4">
+
+        <div class="md-form md-outline">
+          <input type="text" id="codPedido" class="form-control" disabled [value]="pedidoBorrador.idUsuario.nombre">
+          <label for="codPedido" class="active">Responsable del pedido</label>
+        </div>
+
+        <div class="md-form md-outline">
+          <input type="text" id="numOc" class="form-control" disabled [value]="pedidoBorrador.oc">
+          <label for="numOc" class="active">Número OC/OP</label>
+        </div>
+
+        <!-- Basic textarea -->
+        <div class="md-form md-outline">
+          <textarea type="text" id="notas" class="md-textarea form-control" rows="6"
+                    disabled [value]="pedidoBorrador.nota">
+          </textarea>
+          <label for="notas" class="active">Notas</label>
+        </div>
+
+      </div>
+
+
+      <!--Columna de la derecha-->
+      <div class="col-sm-8">
+
+        <div class="card card-cascade mt-4">
+
+          <!-- Card image -->
+          <div class="view view-cascade gradient-card-header primary-color-dark">
+            <h5 class="card-header-title" style="margin-bottom: 0px !important;">
+              <i class="fas fa-truck"></i>
+              Datos de envío del Pedido
+            </h5>
+          </div>
+
+          <!-- Card content -->
+          <div class="card-body card-body-cascade text-center">
+
+            <div class="row">
+
+              <div class="col-sm-6">
+                <div class="md-form md-outline">
+                  <input type="text" id="sucursal-fac" class="form-control border-primary"
+                         [value]="pedidoBorrador.sucursalFacturar" disabled>
+                  <label for="sucursal-fac" class="active">Sucursal a Facturar</label>
+                </div>
+
+                <div class="md-form md-outline">
+                  <input type="text" id="punto-envio" class="form-control border-primary"
+                         [value]="pedidoBorrador.puntoEnvio" disabled>
+                  <label for="punto-envio" class="active">Punto de Envío</label>
+                </div>
+
+                <div class="md-form md-outline">
+                  <input type="text" id="vendedor" class="form-control border-primary"
+                         [value]="pedidoBorrador.terceroVendedor" disabled>
+                  <label for="vendedor" class="active">Vendedor</label>
+                </div>
+
+              </div>
+
+
+              <div class="col-sm-6">
+
+                <div class="md-form md-outline">
+                  <input type="text" id="sucursal-rem" class="form-control border-primary"
+                         [value]="pedidoBorrador.sucursalRemisionar" disabled>
+                  <label for="sucursal-rem" class="active">Sucursal a Remisionar</label>
+                </div>
+
+                <div class="md-form md-outline">
+                  <input type="text" id="direccion-envio" class="form-control border-primary"
+                         [value]="pedidoBorrador.direccion" disabled>
+                  <label for="direccion-envio" class="active">Dirección de Envío</label>
+                </div>
+
+                <div class="md-form md-outline">
+                  <input type="text" id="contacto" class="form-control border-primary"
+                         [value]="pedidoBorrador.contacto" disabled>
+                  <label for="contacto" class="active">Contacto</label>
+                </div>
+
+              </div>
+            </div>
+
+
+          </div>
+
+        </div>
+        <!-- Card -->
+
+      </div>
+
+    </div>
+
+
+
+
+    <!--Columna de la derecha-->
+    <div class="col-sm-12">
+
+      <div class="card card-cascade mt-4">
+
+        <!-- Card image -->
+        <div class="view view-cascade gradient-card-header primary-color-dark">
+          <h5 class="card-header-title" style="margin-bottom: 0px !important;">
+            <i class="fas fa-luggage-cart"></i>
+            Ítems del Pedido
+          </h5>
+        </div>
+
+        <!-- Card content -->
+        <div class="card-body card-body-cascade text-center">
+
+          <div class="row">
+
+            <div class="table-responsive table-striped table-hover ">
+              <table class="table">
+                <thead>
+                <tr>
+                  <th scope="col" class="font-weight-bold">Código del ítem del cliente</th>
+                  <th scope="col" class="font-weight-bold">Código EKA</th>
+                  <th scope="col" class="font-weight-bold">Descripción</th>
+                  <th scope="col" class="font-weight-bold">Extensión 1</th>
+                  <th scope="col" class="font-weight-bold">Extensión 2</th>
+                  <th scope="col" class="font-weight-bold">Cantidad</th>
+                  <th scope="col" class="font-weight-bold">U. Medida</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr *ngFor="let item of itemsPedidoBorrador">
+                  <th scope="row">{{item.codCliente}}</th>
+                  <td>{{item.codItem}}</td>
+                  <td>{{item.descripcion}}</td>
+                  <td>{{item.descripcionExt1}}</td>
+                  <td>{{item.descripcionExt2}}</td>
+                  <td>{{item.cantidad}}</td>
+                  <td>{{item.unidadMedida}}</td>
+                </tr>
+
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+      <!-- Card -->
+
+      <div class="text-center mt-3">
+
+        <button class="btn btn-rounded btn-danger" style="min-width: 270px"
+                [routerLink]="['/pedidos-borrador']">Regresar</button>
+      </div>
+
+    </div>
+
+
+
+
+  </div>
+
+</div>

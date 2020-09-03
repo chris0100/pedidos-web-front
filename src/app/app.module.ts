@@ -29,6 +29,8 @@ import {MatMomentDateModule} from '@angular/material-moment-adapter';
 import {registerLocaleData} from '@angular/common';
 import localeES from '@angular/common/locales/es';
 import { DetalleHistorialPedidosComponent } from './pedidos/historial-pedidos/detalle-historial-pedidos/detalle-historial-pedidos.component';
+import { DetallePedidosVerificacionComponent } from './pedidos/pedidos-verificacion/detalle-pedidos-verificacion/detalle-pedidos-verificacion.component';
+import { DetallePedidosBorradorComponent } from './pedidos/pedidos-borrador/detalle-pedidos-borrador/detalle-pedidos-borrador.component';
 
 registerLocaleData(localeES, 'es');
 
@@ -53,7 +55,9 @@ registerLocaleData(localeES, 'es');
     PedidosBorradorComponent,
     HistorialPedidosComponent,
     PedidosVerificacionComponent,
-    DetalleHistorialPedidosComponent
+    DetalleHistorialPedidosComponent,
+    DetallePedidosVerificacionComponent,
+    DetallePedidosBorradorComponent
   ],
   imports: [
     BrowserModule,

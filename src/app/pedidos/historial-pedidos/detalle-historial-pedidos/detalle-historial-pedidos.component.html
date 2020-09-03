@@ -138,8 +138,8 @@
         <!-- Card image -->
         <div class="view view-cascade gradient-card-header primary-color-dark">
           <h5 class="card-header-title" style="margin-bottom: 0px !important;">
-            <i class="fas fa-truck"></i>
-            Datos de envío del Pedido
+            <i class="fas fa-luggage-cart"></i>
+            Ítems del Pedido
           </h5>
         </div>
 
@@ -174,10 +174,10 @@
                   <td>{{item.cantPedida}}</td>
                   <td>{{item.und}}</td>
                   <td>{{item.fechaEntrega}}</td>
-                  <td>$ {{item.precioUnd}}</td>
-                  <td>$ {{item.valorBruto}}</td>
-                  <td>$ {{item.valorImp}}</td>
-                  <td>$ {{item.valorNeto}}</td>
+                  <td>${{item.precioUnd | currency: 0 : ""}}</td>
+                  <td>${{item.valorBruto | currency: 0 : ""}}</td>
+                  <td>${{item.valorImp | currency: 0 : ""}}</td>
+                  <td>${{item.valorNeto | currency: 0 : ""}}</td>
                 </tr>
 
 
@@ -187,9 +187,9 @@
 
           </div>
 
-            <div class="float-right font-weight-bold">SUBTOTAL: $ <span>{{pedidoUnoEE.valorBrutoDocumento}}</span></div><br>
-            <div class="float-right font-weight-bold">IMPUESTOS: $ <span>{{pedidoUnoEE.valorImpDocumento}}</span></div><br>
-            <div class="float-right font-weight-bold">TOTAL: $ <span>{{pedidoUnoEE.valorNetoDocumento}}</span></div><br>
+            <div class="float-right font-weight-bold">SUBTOTAL:  $ <span>{{pedidoUnoEE.valorBrutoDocumento | currency: 0 : ""}}</span></div><br>
+            <div class="float-right font-weight-bold">IMPUESTOS:  $ <span>{{pedidoUnoEE.valorImpDocumento | currency: 0 : ""}}</span></div><br>
+            <div class="float-right font-weight-bold">TOTAL:  $ <span>{{pedidoUnoEE.valorNetoDocumento | currency: 0 : ""}}</span></div><br>
 
 
         </div>
