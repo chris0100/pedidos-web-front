@@ -5,7 +5,6 @@ import {Router} from '@angular/router';
 import {AuthService} from '../../login/auth.service';
 
 
-
 @Component({
   selector: 'app-historial-pedidos',
   templateUrl: './historial-pedidos.component.html'
@@ -19,12 +18,18 @@ export class HistorialPedidosComponent implements OnInit {
   fechaParametro1: string;
   fechaParametro2: string;
 
+  pedidoSelect: PedidoUnoEE;
+
   constructor(private pedidosService: PedidoService, private router: Router,
               private authService: AuthService) {
   }
 
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+
+    // Si se encuentra el historial aun en el session storage
+    this.pedidosUnoEE = this.pedidosService.obtenerPedidoUnoEEGuardadoSessionStorage();
+  }
 
 
   // Cuando se de clic en el boton de consultar,, tomara los datos de las
@@ -36,6 +41,11 @@ export class HistorialPedidosComponent implements OnInit {
     this.pedidosService.listaHistorialPedidosJava(this.authService.usuario.nit, this.fechaParametro1, this.fechaParametro2).subscribe(
       obj => {
         this.pedidosUnoEE = obj;
+        console.log(this.pedidosUnoEE);
+
+        // Se guarda el listado de pedidosUNOEE encontrado en la busqueda
+        this.pedidosService.guardarPedidosUnoEESessionStorage(this.pedidosUnoEE);
+
       });
   }
 

@@ -75,6 +75,7 @@
           </th>
           <th class="th-sm font-weight-bold">Fecha Entrega
           </th>
+          <th></th>
         </tr>
         </thead>
 
@@ -94,6 +95,12 @@
           <td>{{pedidoUnoEE.direccion1}}</td>
           <td>{{pedidoUnoEE.fecha | date:"EEEE dd, MMMM yyyy"}}</td>
           <td>{{pedidoUnoEE.fechaEntrega | date:"EEEE dd, MMMM yyyy"}}</td>
+          <td>
+            <button class="btn btn-sm btn-primary btn-rounded"
+                                  [routerLink]="['/detalle-historial-pedido', pedidoUnoEE.rowid]"
+          >
+            <i class="fas fa-user-edit"></i>
+          </button></td>
         </tr>
 
         </tbody>

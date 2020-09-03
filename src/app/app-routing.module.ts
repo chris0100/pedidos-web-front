@@ -12,6 +12,7 @@ import {HistorialPedidosComponent} from './pedidos/historial-pedidos/historial-p
 import {PedidosVerificacionComponent} from './pedidos/pedidos-verificacion/pedidos-verificacion.component';
 import {RoleGuard} from './login/guards/role.guard';
 import {AuthGuard} from './login/guards/auth.guard';
+import {DetalleHistorialPedidosComponent} from './pedidos/historial-pedidos/detalle-historial-pedidos/detalle-historial-pedidos.component';
 
 
 const routes: Routes = [
@@ -25,7 +26,7 @@ const routes: Routes = [
   {path: 'crear-pedido', component: CrearPedidoComponent, canActivate: [RoleGuard, AuthGuard], data: {role: 'proveedor'}},
   {path: 'pedidos-borrador', component: PedidosBorradorComponent, canActivate: [RoleGuard, AuthGuard], data: {role: 'proveedor'}},
   {path: 'historial-pedidos', component: HistorialPedidosComponent, canActivate: [RoleGuard, AuthGuard], data: {role: 'proveedor'}},
-  // tslint:disable-next-line:max-line-length
+  {path: 'detalle-historial-pedido/:id', component: DetalleHistorialPedidosComponent, canActivate: [RoleGuard, AuthGuard], data: {role: 'proveedor'}},
   {path: 'pedidos-verificacion',  component: PedidosVerificacionComponent, canActivate: [RoleGuard, AuthGuard], data: {role: 'proveedor'}}
 ];
 

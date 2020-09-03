@@ -6,6 +6,7 @@ import {Observable, throwError} from 'rxjs';
 import {any} from 'codelyzer/util/function';
 import {catchError} from 'rxjs/operators';
 import {PedidoUnoEE} from './pedido-uno-ee';
+import {ItemPedidoUnoEE} from './item-pedido-uno-ee';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,7 @@ import {PedidoUnoEE} from './pedido-uno-ee';
 export class PedidoService {
 
   public pedido: Pedido;
+
 
 
   constructor(private http: HttpClient, private router: Router) { }
@@ -64,6 +66,39 @@ export class PedidoService {
       })
     );
   }
+
+
+
+  // Obtener un solo pedido unoEE
+  obtenerListaItemsPedidoUnoEEJava(id: number): Observable<any> {
+    const urlEndPoint = 'http://localhost:8082/obtener-lista-items-pedidoUnoEE';
+    return this.http.get<ItemPedidoUnoEE[]>(`${urlEndPoint}/${id}`).pipe(
+      catchError(e => {
+        if (e.status != 401 && e.error.mensaje) {
+          this.router.navigate(['/panel-clientes']);
+          console.log(e.error.mensaje);
+        }
+        return throwError(e);
+      })
+    );
+  }
+
+
+  // Se guarda el token en el sessionStorage
+  guardarPedidosUnoEESessionStorage(pedidosUnoEE: PedidoUnoEE[]): void {
+    sessionStorage.setItem('pedidosUnoEEHistorial', JSON.stringify(pedidosUnoEE));
+  }
+
+
+  // Obtener historial de pedidos guardado en Session Storage
+  obtenerPedidoUnoEEGuardadoSessionStorage(): PedidoUnoEE[] {
+    return JSON.parse(sessionStorage.getItem('pedidosUnoEEHistorial')) as PedidoUnoEE[];
+  }
+
+
+
+
+
 }
 
 

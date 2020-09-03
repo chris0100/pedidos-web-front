@@ -21,6 +21,10 @@ export class PanelClientesComponent implements OnInit {
   ngOnInit(): void {
     // Ejecucion del script
     new tablas();
+
+    // Remover la busqueda del historial de pedidos
+    sessionStorage.removeItem('pedidosUnoEEHistorial');
+
   }
 
 }

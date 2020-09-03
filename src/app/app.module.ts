@@ -28,6 +28,7 @@ import {MatAutocompleteModule, MatDatepickerModule, MatFormFieldModule, MatInput
 import {MatMomentDateModule} from '@angular/material-moment-adapter';
 import {registerLocaleData} from '@angular/common';
 import localeES from '@angular/common/locales/es';
+import { DetalleHistorialPedidosComponent } from './pedidos/historial-pedidos/detalle-historial-pedidos/detalle-historial-pedidos.component';
 
 registerLocaleData(localeES, 'es');
 
@@ -51,7 +52,8 @@ registerLocaleData(localeES, 'es');
     HojaCalculoComponent,
     PedidosBorradorComponent,
     HistorialPedidosComponent,
-    PedidosVerificacionComponent
+    PedidosVerificacionComponent,
+    DetalleHistorialPedidosComponent
   ],
   imports: [
     BrowserModule,
