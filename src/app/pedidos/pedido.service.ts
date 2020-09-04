@@ -84,6 +84,7 @@ export class PedidoService {
   }
 
 
+  // Obtiene el pedido ya sea de verificacion o de borrador
   obtenerPedidoVBJava(id: number): Observable<any> {
     const urlEndPoint = 'http://localhost:8082/obtener-lista-items-vb';
     return this.http.get<ItemPedidoUnoEE[]>(`${urlEndPoint}/${id}`).pipe(
@@ -98,7 +99,59 @@ export class PedidoService {
   }
 
 
-  // Se guarda el token en el sessionStorage
+
+  // Obtiene datos del punto de envio
+  obtenerPuntoEnvio(nit: string, idSucursal: string, idPuntoEnvio: string): Observable<string[]> {
+    const urlEndPoint = 'http://localhost:8082/obtener-punto-envio';
+    return this.http.get<string[]>(`${urlEndPoint}/${nit}/${idSucursal}/${idPuntoEnvio}`).pipe(
+      catchError(e => {
+        if (e.status != 401 && e.error.mensaje) {
+          this.router.navigate(['/panel-clientes']);
+          console.log(e.error.mensaje);
+        }
+        return throwError(e);
+      })
+    );
+  }
+
+
+
+
+  // Hace busqueda de algun codigo item cliente asociado para mostrar el panel "BUSCAR TU CODIGO"
+  contarMostrarPanel(nit: string): Observable<number[]> {
+    const urlEndPoint = 'http://localhost:8082/contar-mostrar-panel';
+    return this.http.get<number[]>(`${urlEndPoint}/${nit}`).pipe(
+      catchError(e => {
+        if (e.status != 401 && e.error.mensaje) {
+          this.router.navigate(['/panel-clientes']);
+          console.log(e.error.mensaje);
+        }
+        return throwError(e);
+      })
+    );
+  }
+
+
+
+
+  // Consulta la lista de item patron
+  obtenerListaItemPatronJava(): Observable<string[]> {
+    const urlEndPoint = 'http://localhost:8082/lista-item-patron';
+    return this.http.get<string[]>(`${urlEndPoint}`).pipe(
+      catchError(e => {
+        if (e.status != 401 && e.error.mensaje) {
+          this.router.navigate(['/panel-clientes']);
+          console.log(e.error.mensaje);
+        }
+        return throwError(e);
+      })
+    );
+  }
+
+
+
+
+  // Se guarda el pedido en el sessionStorage para historial de pedidos
   guardarPedidosUnoEESessionStorage(pedidosUnoEE: PedidoUnoEE[]): void {
     sessionStorage.setItem('pedidosUnoEEHistorial', JSON.stringify(pedidosUnoEE));
   }

@@ -82,6 +82,7 @@ export class AuthService {
   // Se guarda el usuario en el sessionStorage
   guardarUsuario(accessToken: string): void {
     const objPayload = this.obtenerDatosToken(accessToken);
+    console.log(objPayload);
     this._usuario = new Usuario();
     this._usuario.nombre = objPayload.nombre.trim();
     this._usuario.cliente = objPayload.cliente;
@@ -91,7 +92,9 @@ export class AuthService {
     this._usuario.roles = objPayload.authorities;
     this._usuario.id_sucursal = objPayload.id_sucursal;
     this._usuario.descripcion_punto_envio = objPayload.descripcion_punto_envio;
+    this._usuario.descripcion_sucursal = objPayload.descripcion_sucursal;
     this._usuario.id = objPayload.id_usuario;
+    this._usuario.id_punto_envio = objPayload.id_punto_envio;
 
     // Se guarda en el session como un string
     sessionStorage.setItem('usuario', JSON.stringify(this._usuario));
@@ -108,7 +111,9 @@ export class AuthService {
     this._usuario.roles = objPayload.authorities;
     this._usuario.id_sucursal = objPayload.id_sucursal;
     this._usuario.descripcion_punto_envio = objPayload.descripcion_punto_envio;
+    this._usuario.descripcion_sucursal = objPayload.descripcion_sucursal;
     this._usuario.id = objPayload.id_usuario;
+    this._usuario.id_punto_envio = objPayload.id_punto_envio;
 
     // Se guarda en el session como un string
     sessionStorage.setItem('usuario', JSON.stringify(this._usuario));

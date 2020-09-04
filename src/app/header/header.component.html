@@ -77,7 +77,7 @@
           </a>
         </li>
 
-        <li class="nav-item" *ngIf="authService.hasRole('proveedor')">
+        <li class="nav-item" *ngIf="authService.hasRole('ROLE_ADMIN')">
           <a class="nav-link" [routerLink]="['/lista-usuarios']">Lista de Usuarios</a>
         </li>
 
