@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {PedidoService} from '../../pedido.service';
 
 @Component({
   selector: 'app-codigo-eka',
@@ -8,10 +9,20 @@ import { Component, OnInit } from '@angular/core';
 
 export class CodigoEkaComponent implements OnInit {
 
-  constructor() { }
+
+
+  constructor() {
+  }
+
 
 
   ngOnInit(): void {
+
   }
+
+
+
+
+
 
 }

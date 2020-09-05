@@ -3,6 +3,8 @@ import {Pedido} from '../pedido';
 import {PedidoService} from '../pedido.service';
 import {AuthService} from '../../login/auth.service';
 import {Usuario} from '../../usuario/usuario';
+import {flatMap, map} from 'rxjs/operators';
+
 
 // carga de archivo js para mdbootstrap
 declare var pedidos: any;
@@ -18,7 +20,6 @@ export class CrearPedidoComponent implements OnInit {
   pedidoActual: Pedido = new Pedido();
   usuario: Usuario;
   contarItemMostrarPanel: number;
-  responsablePedido: string;
   numeroOcOp: string;
   notas: string;
 
@@ -28,10 +29,14 @@ export class CrearPedidoComponent implements OnInit {
   listaItemPatron: string[];
 
 
+  // *************
+  lastkeydown1 = 0;
+  subscription: any;
+  userList1: any[];
+
 
   constructor(private pedidosService: PedidoService, private authService: AuthService) {
     this.usuario = this.authService.usuario;
-    this.responsablePedido = '';
     this.numeroOcOp = '';
     this.notas = '';
   }
@@ -46,7 +51,7 @@ export class CrearPedidoComponent implements OnInit {
     this.pedidoActual.terceroVendedor = '';
     this.pedidoActual.contacto = '';
 
-    // Consulta la BD para otros datos
+    // Consulta la BD para completar datos pedidoActual de inicio
     const cadena = '';
     this.pedidosService.obtenerPuntoEnvio(this.usuario.nit.trim(),
       this.authService.usuario.id_sucursal.trim(), this.usuario.id_punto_envio.trim()).subscribe(
@@ -58,7 +63,7 @@ export class CrearPedidoComponent implements OnInit {
         console.log(this.pedidoActual);
       });
 
-    // Consulta la BD para saber si el cliente tiene item homologado para codigo item cliente EKA
+    // Consulta la BD para saber si el cliente tiene items homologados para codigo item cliente EKA
     this.pedidosService.contarMostrarPanel(this.usuario.nit.trim()).subscribe(
       obj => {
         this.contarItemMostrarPanel = obj[0];
@@ -75,10 +80,36 @@ export class CrearPedidoComponent implements OnInit {
       });
 
 
-
     // Ejecutar script js
     new pedidos();
-
   }
+
+
+
+  getUserIdsFirstWay($event) {
+    const userId = (<HTMLInputElement>document.getElementById('buscar')).value;
+    this.userList1 = [];
+    if (userId.length > 2) {
+      if ($event.timeStamp - this.lastkeydown1 > 200) {
+        this.userList1 = this.searchFromArray(this.listaItemPatron, userId);
+        console.log(this.userList1);
+      }
+    }
+  }
+
+  searchFromArray(arr, regex) {
+    // tslint:disable-next-line:prefer-const
+    let matches = [], i;
+    for (i = 0; i < arr.length; i++) {
+      if (matches.length <= 8) {
+        if (arr[i].match(regex)) {
+          matches.push(arr[i]);
+        }
+      }
+    }
+    console.log(matches);
+    return matches;
+  }
+
 
 }

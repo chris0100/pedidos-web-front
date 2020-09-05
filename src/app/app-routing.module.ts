@@ -17,6 +17,7 @@ import {DetallePedidosVerificacionComponent} from './pedidos/pedidos-verificacio
 import {DetallePedidosBorradorComponent} from './pedidos/pedidos-borrador/detalle-pedidos-borrador/detalle-pedidos-borrador.component';
 
 
+
 const routes: Routes = [
   {path: '', redirectTo: '/login', pathMatch: 'full'},
   {path: 'login', component: LoginComponent},

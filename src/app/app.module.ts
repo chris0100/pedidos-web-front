@@ -32,6 +32,7 @@ import { DetalleHistorialPedidosComponent } from './pedidos/historial-pedidos/de
 import { DetallePedidosVerificacionComponent } from './pedidos/pedidos-verificacion/detalle-pedidos-verificacion/detalle-pedidos-verificacion.component';
 import { DetallePedidosBorradorComponent } from './pedidos/pedidos-borrador/detalle-pedidos-borrador/detalle-pedidos-borrador.component';
 
+
 registerLocaleData(localeES, 'es');
 
 
