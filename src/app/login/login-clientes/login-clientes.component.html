@@ -22,7 +22,7 @@
 
 
     <div class="row" style="margin-top: -20px">
-      <div class="col-md-12 select-outline">
+      <div class="col-md-12">
 
         <select class="mdb-select md-form md-outline colorful-select dropdown-primary"
                 name="sucursalSeleccionada"
@@ -40,17 +40,22 @@
 
 
 
-    <div class="row" style="margin-top: -20px">
+    <div class="row" style="margin-top: -10px">
       <div class="col-md-12">
 
-        <select class="md-form md-outline colorful-select dropdown-primary"
-                name="puntoEnvioSeleccionado"
-                id="puntoEnvioSeleccionado"
-                [(ngModel)]="puntoEnvioSeleccionado"
-        >
-          <option value="" disabled selected class="font-weight-bold">Seleccionar</option>
-          <option [value]="item" *ngFor="let item of listadoPuntoEnvio">{{item}}</option>
-        </select>
+
+        <div class="form-group">
+          <label>Punto de Envio</label>
+          <select class="form-control"
+                  name="puntoEnvioSeleccionado"
+                  id="puntoEnvioSeleccionado"
+                  [(ngModel)]="puntoEnvioSeleccionado"
+                  style="margin-top: -5px"
+          >
+            <option value="" disabled selected class="font-weight-bold">Seleccionar</option>
+            <option [value]="item" *ngFor="let item of listadoPuntoEnvio">{{item}}</option>
+          </select>
+        </div>
 
       </div>
     </div>

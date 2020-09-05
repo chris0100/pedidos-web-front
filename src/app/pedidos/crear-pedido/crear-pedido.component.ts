@@ -4,6 +4,7 @@ import {PedidoService} from '../pedido.service';
 import {AuthService} from '../../login/auth.service';
 import {Usuario} from '../../usuario/usuario';
 import {flatMap, map} from 'rxjs/operators';
+import {ItemPedido} from '../item-pedido';
 
 
 // carga de archivo js para mdbootstrap
@@ -29,6 +30,14 @@ export class CrearPedidoComponent implements OnInit {
   listaItemPatron: string[];
 
 
+  tipoExt1: string;
+  tipoExt2: string;
+  itemPedidoActual: ItemPedido = new ItemPedido();
+
+  coditemPatronBuscado: string;
+
+
+  // selectores cod Item
   // *************
   lastkeydown1 = 0;
   subscription: any;
@@ -85,7 +94,8 @@ export class CrearPedidoComponent implements OnInit {
   }
 
 
-
+  // METODOS PARA BUSQUEDA EN WL MOMENTO DE ESCRIBIR SECUENCIALMENTE EL CODIGO DEL ITEM
+  // ***********************************************************************************
   getUserIdsFirstWay($event) {
     const userId = (<HTMLInputElement>document.getElementById('buscar')).value;
     this.userList1 = [];
@@ -109,6 +119,56 @@ export class CrearPedidoComponent implements OnInit {
     }
     console.log(matches);
     return matches;
+  }
+
+  // ***********************************************************************************
+  // ***********************************************************************************
+
+
+  // Realiza consulta para buscar datos restantes.
+  consultarTipoExt(): void {
+    console.log(this.coditemPatronBuscado);
+    const codigoItem = this.coditemPatronBuscado.substring(0, 7);
+
+    // Obtener tipo de extensiones(TAMAÑO Y COLOR)
+    this.pedidosService.consultarTipoExtJava(codigoItem).subscribe(
+      obj => {
+        this.tipoExt1 = obj[0].substring(0, 2);
+        this.tipoExt2 = obj[0].substring(2, 4);
+        console.log(this.tipoExt1 + ' : ' + this.tipoExt2);
+
+        // LISTA TAMAÑOS
+        this.pedidosService.consultaExt1Java(this.tipoExt1).subscribe(
+          objx1 => {
+            this.listaExt1 = objx1;
+            console.log(this.listaExt1);
+          });
+
+        // LISTA COLORES
+        this.pedidosService.consultaExt2Java(this.tipoExt2).subscribe(
+          objx2 => {
+            this.listaExt2 = objx2;
+            console.log(this.listaExt2);
+          });
+      });
+
+
+    // Obtener la unidad de medida
+    this.pedidosService.consultarUnidadInventarioJava(codigoItem).subscribe(
+      obj => {
+        this.itemPedidoActual.unidadMedida = obj[0];
+
+        // Obtener los decimales de acuerdo a la unidad de medida
+        this.pedidosService.consultaDecimalesUnidadInventario(this.itemPedidoActual.unidadMedida).subscribe(
+          objum => {
+            console.log(objum[0]);
+          });
+      });
+
+
+
+
+
   }
 
 

@@ -150,6 +150,88 @@ export class PedidoService {
 
 
 
+  // Consulta el tipo de extension
+  consultarTipoExtJava(codigoItem: string): Observable<string[]> {
+    const urlEndPoint = 'http://localhost:8082/tipo-extensiones';
+    return this.http.get<string[]>(`${urlEndPoint}/${codigoItem}`).pipe(
+      catchError(e => {
+        if (e.status != 401 && e.error.mensaje) {
+          this.router.navigate(['/panel-clientes']);
+          console.log(e.error.mensaje);
+        }
+        return throwError(e);
+      })
+    );
+  }
+
+
+
+  // Consulta el ext1(tamaño)
+  consultaExt1Java(ext1: string): Observable<string[]> {
+    const urlEndPoint = 'http://localhost:8082/ext1';
+    return this.http.get<string[]>(`${urlEndPoint}/${ext1}`).pipe(
+      catchError(e => {
+        if (e.status != 401 && e.error.mensaje) {
+          this.router.navigate(['/panel-clientes']);
+          console.log(e.error.mensaje);
+        }
+        return throwError(e);
+      })
+    );
+  }
+
+
+
+  // Consulta el ext2(tamaño)
+  consultaExt2Java(ext2: string): Observable<string[]> {
+    const urlEndPoint = 'http://localhost:8082/ext2';
+    return this.http.get<string[]>(`${urlEndPoint}/${ext2}`).pipe(
+      catchError(e => {
+        if (e.status != 401 && e.error.mensaje) {
+          this.router.navigate(['/panel-clientes']);
+          console.log(e.error.mensaje);
+        }
+        return throwError(e);
+      })
+    );
+  }
+
+
+  // Consulta la unidad del item en el inventario
+  consultarUnidadInventarioJava(codigoItem: string): Observable<string[]> {
+    const urlEndPoint = 'http://localhost:8082/unidad-inventario';
+    return this.http.get<string[]>(`${urlEndPoint}/${codigoItem}`).pipe(
+      catchError(e => {
+        if (e.status != 401 && e.error.mensaje) {
+          this.router.navigate(['/panel-clientes']);
+          console.log(e.error.mensaje);
+        }
+        return throwError(e);
+      })
+    );
+  }
+
+
+
+  // Consultar decimales unidad inventario
+  consultaDecimalesUnidadInventario(unidadMedida: string): Observable<string[]> {
+    const urlEndPoint = 'http://localhost:8082/decimales-unidad-inventario';
+    return this.http.get<string[]>(`${urlEndPoint}/${unidadMedida}`).pipe(
+      catchError(e => {
+        if (e.status != 401 && e.error.mensaje) {
+          this.router.navigate(['/panel-clientes']);
+          console.log(e.error.mensaje);
+        }
+        return throwError(e);
+      })
+    );
+  }
+
+
+
+
+
+
 
   // Se guarda el pedido en el sessionStorage para historial de pedidos
   guardarPedidosUnoEESessionStorage(pedidosUnoEE: PedidoUnoEE[]): void {

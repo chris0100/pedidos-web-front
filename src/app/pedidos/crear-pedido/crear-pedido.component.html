@@ -152,8 +152,15 @@
 
               <div class="md-form md-outline">
                 <i class="fas fa-search prefix"></i>
-                <input type="text" (keyup)="getUserIdsFirstWay($event)" id="buscar" list="dynmicUserIds"
-                       class="form-control validate" style="margin-bottom: 0px !important;">
+                <input type="text"
+                       (keyup)="getUserIdsFirstWay($event)"
+                       id="buscar"
+                       list="dynmicUserIds"
+                       class="form-control validate"
+                       style="margin-bottom: 0px !important;"
+                       [(ngModel)]="coditemPatronBuscado"
+                       (change)="consultarTipoExt()"
+                >
                 <datalist id="dynmicUserIds">
                   <option *ngFor="let item of userList1" >{{item}}</option>
                 </datalist>
