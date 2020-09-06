@@ -1,70 +1,86 @@
-<!--
-
-&lt;!&ndash; Grid row &ndash;&gt;
+<!-- Grid row -->
 <div class="row">
 
-  &lt;!&ndash; Grid column &ndash;&gt;
+
+  <!-- Grid column -->
   <div class="col-md-4">
 
     <div class="md-form md-outline">
       <i class="fas fa-search prefix"></i>
-      <input type="text" id="cod-item" class="form-control validate" style="margin-bottom: 0px !important;">
-      <label for="cod-item" data-error="wrong" data-success="right">Código del
-        ítem</label>
+      <input type="text"
+             (keyup)="getUserIdsFirstWay($event)"
+             id="buscar"
+             list="dynmicUserIds"
+             class="form-control validate"
+             style="margin-bottom: 0px !important;"
+             [(ngModel)]="coditemPatronBuscado"
+             (change)="consultarTipoExt()"
+      >
+      <datalist id="dynmicUserIds">
+        <option *ngFor="let item of userList1">{{item}}</option>
+      </datalist>
+      <label for="buscar" data-error="wrong" data-success="right">Código del ítem</label>
     </div>
-
   </div>
-
 
 
   <div class="col-md-4">
 
     <div class="md-form md-outline">
       <i class="fas fa-balance-scale-left prefix"></i>
-      <input type="text" id="unidadmedidabtc" class="form-control" disabled>
-      <label for="unidadmedidabtc">Unidad de
+      <input type="text" id="unidad-medida-ce" class="form-control" [value]="itemPedidoActual.unidadMedida"
+             style="background-color: #e7e7e5" disabled>
+      <label for="unidad-medida-ce" data-error="error" data-success="correcto" class="active">Unidad de
         Medida</label>
     </div>
-
 
   </div>
 
   <div class="col-md-4">
-    <select class="mdb-select md-form md-outline colorful-select dropdown-primary">
+    <label data-error="error" data-success="correcto" class="small">{{descripcionLabelExt1}}</label>
+    <select class="form-control validate"
+            [(ngModel)]="itemPedidoActual.descripcionExt1"
+            style="margin-top: -6px"
+    >
       <option value="" disabled selected>Seleccionar</option>
-      <option value="1">Option 1</option>
-      <option value="2">Option 2</option>
-      <option value="3">Option 3</option>
+      <option [value]="item" *ngFor="let item of listaExt1">{{item}}</option>
     </select>
-    <label>Tamaño</label>
-
   </div>
 
 
 </div>
 
 
-
-
 <div class="row" style="margin-top: -30px">
 
-  &lt;!&ndash; Grid column &ndash;&gt;
   <div class="col-md-4">
+
     <div class="md-form md-outline">
       <i class="fas fa-tint prefix"></i>
-      <input type="text" id="colorbtc" class="form-control">
-      <label for="colorbtc">Color</label>
+      <input type="text"
+             (keyup)="getUserIdsFirstWay2($event)"
+             id="buscar-color"
+             list="dynmicUserIds2"
+             class="form-control validate"
+             style="margin-bottom: 0px !important;"
+             [(ngModel)]="itemPedidoActual.descripcionExt2"
+      >
+      <datalist id="dynmicUserIds2">
+        <option *ngFor="let item of userList2">{{item}}</option>
+      </datalist>
+      <label for="buscar-color" data-error="wrong" data-success="right">{{descripcionLabelExt2}}</label>
     </div>
 
   </div>
+
 
 
   <div class="col-md-4">
 
     <div class="md-form md-outline">
       <i class="fas fa-boxes prefix"></i>
-      <input type="text" id="cantidadbtc" class="form-control validate">
-      <label for="cantidadbtc" data-error="wrong" data-success="right">Cantidad</label>
+      <input type="text" id="cantidad" class="form-control validate" [(ngModel)]="itemPedidoActual.cantidad">
+      <label for="cantidad" data-error="error" data-success="correcto" class="active">Cantidad</label>
     </div>
 
   </div>
@@ -73,45 +89,48 @@
 </div>
 
 
-<div class="row mb-5 d-flex justify-content-center" style="margin-top: -25px">
-  <button class="btn btn-success btn-rounded" style="min-width: 270px"><i class="fas fa-plus"></i> Agregar ítem</button>
+<div class="row mb-5 d-flex justify-content-center" style="margin-top: -15px">
+  <button class="btn btn-success btn-rounded"
+          style="min-width: 270px"
+          (click)="agregarItem()"
+          [disabled]="itemPedidoActual.cantidad<1"
+  >
+    <i class="fas fa-plus"></i> Agregar
+    ítem
+  </button>
 </div>
 
 
-<div class="table-responsive table-striped table-hover ">
+<div class="table-responsive table-striped table-hover" *ngIf="listaItemPedidoSelect.length>0">
   <table class="table">
     <thead>
     <tr>
-      <th scope="col">Código del ítem</th>
-      <th scope="col">Código EKA</th>
-      <th scope="col">Descripción</th>
-      <th scope="col">Extensión 1</th>
-      <th scope="col">Extensión 2</th>
-      <th scope="col">Cantidad</th>
-      <th scope="col">U. Medida</th>
+      <th scope="col" class="font-weight-bold">Código del ítem</th>
+      <th scope="col" class="font-weight-bold">Código EKA</th>
+      <th scope="col" class="font-weight-bold">Descripción</th>
+      <th scope="col" class="font-weight-bold">Extensión 1</th>
+      <th scope="col" class="font-weight-bold">Extensión 2</th>
+      <th scope="col" class="font-weight-bold">Cantidad</th>
+      <th scope="col" class="font-weight-bold">U. Medida</th>
+      <th scope="col" class="font-weight-bold"></th>
     </tr>
     </thead>
     <tbody>
-    <tr>
-      <th scope="row">785644</th>
-      <td>2584</td>
-      <td>POLYESTER 50</td>
-      <td>VERDE</td>
-      <td>20</td>
-      <td>3</td>
-      <td>CMS</td>
-    </tr>
-    <tr>
-      <th scope="row">785644</th>
-      <td>2584</td>
-      <td>POLYESTER 50</td>
-      <td>VERDE</td>
-      <td>20</td>
-      <td>3</td>
-      <td>CMS</td>
+    <tr *ngFor="let item of listaItemPedidoSelect">
+      <th scope="row">{{item.codCliente}}</th>
+      <td>{{item.codItem}}</td>
+      <td>{{item.descripcion}}</td>
+      <td>{{item.descripcionExt1}}</td>
+      <td>{{item.descripcionExt2}}</td>
+      <td>{{item.cantidad}}</td>
+      <td>{{item.unidadMedida}}</td>
+      <td><i class="fas fa-trash"></i></td>
     </tr>
 
     </tbody>
   </table>
 </div>
--->
+
+<div class="mt-3 mb-4 text-center" *ngIf="listaItemPedidoSelect.length==0">
+  <h5 class="p-1 font-weight-bold">Aún no has añadido ítems</h5>
+</div>

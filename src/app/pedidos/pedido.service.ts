@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Pedido} from './pedido';
 import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
@@ -7,6 +7,7 @@ import {any} from 'codelyzer/util/function';
 import {catchError} from 'rxjs/operators';
 import {PedidoUnoEE} from './pedido-uno-ee';
 import {ItemPedidoUnoEE} from './item-pedido-uno-ee';
+import {ItemPedido} from './item-pedido';
 
 @Injectable({
   providedIn: 'root'
@@ -18,8 +19,8 @@ export class PedidoService {
   public pedido: Pedido;
 
 
-
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router) {
+  }
 
 
   // Se llama a la lista de pedidos en borrador
@@ -52,7 +53,6 @@ export class PedidoService {
   }
 
 
-
   // Se llama a la lista de pedidos en el historial para el usuario con los parametro necesarios
   listaHistorialPedidosJava(nit: string, fechaParametro1: string, fechaParametro2: string): Observable<any> {
     const urlEndPoint = 'http://localhost:8082/listar-historial-pedidos';
@@ -66,7 +66,6 @@ export class PedidoService {
       })
     );
   }
-
 
 
   // Obtener un solo pedido unoEE
@@ -99,7 +98,6 @@ export class PedidoService {
   }
 
 
-
   // Obtiene datos del punto de envio
   obtenerPuntoEnvio(nit: string, idSucursal: string, idPuntoEnvio: string): Observable<string[]> {
     const urlEndPoint = 'http://localhost:8082/obtener-punto-envio';
@@ -113,8 +111,6 @@ export class PedidoService {
       })
     );
   }
-
-
 
 
   // Hace busqueda de algun codigo item cliente asociado para mostrar el panel "BUSCAR TU CODIGO"
@@ -132,8 +128,6 @@ export class PedidoService {
   }
 
 
-
-
   // Consulta la lista de item patron
   obtenerListaItemPatronJava(): Observable<string[]> {
     const urlEndPoint = 'http://localhost:8082/lista-item-patron';
@@ -147,7 +141,6 @@ export class PedidoService {
       })
     );
   }
-
 
 
   // Consulta el tipo de extension
@@ -165,7 +158,6 @@ export class PedidoService {
   }
 
 
-
   // Consulta el ext1(tamaño)
   consultaExt1Java(ext1: string): Observable<string[]> {
     const urlEndPoint = 'http://localhost:8082/ext1';
@@ -179,7 +171,6 @@ export class PedidoService {
       })
     );
   }
-
 
 
   // Consulta el ext2(tamaño)
@@ -212,7 +203,6 @@ export class PedidoService {
   }
 
 
-
   // Consultar decimales unidad inventario
   consultaDecimalesUnidadInventario(unidadMedida: string): Observable<string[]> {
     const urlEndPoint = 'http://localhost:8082/decimales-unidad-inventario';
@@ -228,9 +218,49 @@ export class PedidoService {
   }
 
 
+  // Consulta la descripcion del label Ext1
+  consultarDescripcionLabelExt1(ext1: string): Observable<string[]> {
+    const urlEndPoint = 'http://localhost:8082/consulta-descripcion-label-ext1';
+    return this.http.get<string[]>(`${urlEndPoint}/${ext1}`).pipe(
+      catchError(e => {
+        if (e.status != 401 && e.error.mensaje) {
+          this.router.navigate(['/panel-clientes']);
+          console.log(e.error.mensaje);
+        }
+        return throwError(e);
+      })
+    );
+  }
 
 
+  // Consulta la descripcion del label Ext2
+  consultarDescripcionLabelExt2(ext2: string): Observable<string[]> {
+    const urlEndPoint = 'http://localhost:8082/consulta-descripcion-label-ext2';
+    return this.http.get<string[]>(`${urlEndPoint}/${ext2}`).pipe(
+      catchError(e => {
+        if (e.status != 401 && e.error.mensaje) {
+          this.router.navigate(['/panel-clientes']);
+          console.log(e.error.mensaje);
+        }
+        return throwError(e);
+      })
+    );
+  }
 
+
+  // Consulta la bodega del item
+  obtenerBodegaItemJava(codigoItem: string): Observable<string[]> {
+    const urlEndPoint = 'http://localhost:8082/obtener-bodega-item';
+    return this.http.get<string[]>(`${urlEndPoint}/${codigoItem}`).pipe(
+      catchError(e => {
+        if (e.status != 401 && e.error.mensaje) {
+          this.router.navigate(['/panel-clientes']);
+          console.log(e.error.mensaje);
+        }
+        return throwError(e);
+      })
+    );
+  }
 
 
   // Se guarda el pedido en el sessionStorage para historial de pedidos
@@ -245,7 +275,20 @@ export class PedidoService {
   }
 
 
+  // Se guarda el la lista de itemPedidoSeleccionada en el sessionStorage
+  guardarListaItemPedidoSelectStorage(listaItemPedidoSelect: ItemPedido[]): void {
+    sessionStorage.setItem('listaItemPedidoSelect', JSON.stringify(listaItemPedidoSelect));
+  }
 
+
+  // Obtener la lista de itemPedidoSeleccionada en el sessionStorage
+  obtenerListaItemPedidoSelectStoragee(): ItemPedido[] {
+    const listaItemsPedidoSelect: ItemPedido[] = JSON.parse(sessionStorage.getItem('listaItemPedidoSelect')) as ItemPedido[];
+    if (listaItemsPedidoSelect == null){
+      return [];
+    }
+    return listaItemsPedidoSelect;
+  }
 
 
 }
