@@ -1,7 +1,7 @@
 import {Pedido} from './pedido';
 
 export class ItemPedido {
-  idItem: number;
+  idtemp: number;
   codItem: number;
   codCliente: string;
   descripcion: string;

@@ -11,7 +11,7 @@
              (keyup)="getUserIdsFirstWay($event)"
              id="buscar"
              list="dynmicUserIds"
-             class="form-control validate"
+             class="form-control"
              style="margin-bottom: 0px !important;"
              [(ngModel)]="coditemPatronBuscado"
              (change)="consultarTipoExt()"
@@ -19,7 +19,7 @@
       <datalist id="dynmicUserIds">
         <option *ngFor="let item of userList1">{{item}}</option>
       </datalist>
-      <label for="buscar" data-error="wrong" data-success="right">Código del ítem</label>
+      <label for="buscar">Código del ítem</label>
     </div>
   </div>
 
@@ -30,15 +30,15 @@
       <i class="fas fa-balance-scale-left prefix"></i>
       <input type="text" id="unidad-medida-ce" class="form-control" [value]="itemPedidoActual.unidadMedida"
              style="background-color: #e7e7e5" disabled>
-      <label for="unidad-medida-ce" data-error="error" data-success="correcto" class="active">Unidad de
+      <label for="unidad-medida-ce" class="active">Unidad de
         Medida</label>
     </div>
 
   </div>
 
   <div class="col-md-4">
-    <label data-error="error" data-success="correcto" class="small">{{descripcionLabelExt1}}</label>
-    <select class="form-control validate"
+    <label class="small">{{descripcionLabelExt1}}</label>
+    <select class="form-control"
             [(ngModel)]="itemPedidoActual.descripcionExt1"
             style="margin-top: -6px"
     >
@@ -61,14 +61,14 @@
              (keyup)="getUserIdsFirstWay2($event)"
              id="buscar-color"
              list="dynmicUserIds2"
-             class="form-control validate"
+             class="form-control"
              style="margin-bottom: 0px !important;"
              [(ngModel)]="itemPedidoActual.descripcionExt2"
       >
       <datalist id="dynmicUserIds2">
         <option *ngFor="let item of userList2">{{item}}</option>
       </datalist>
-      <label for="buscar-color" data-error="wrong" data-success="right">{{descripcionLabelExt2}}</label>
+      <label for="buscar-color">{{descripcionLabelExt2}}</label>
     </div>
 
   </div>
@@ -79,8 +79,8 @@
 
     <div class="md-form md-outline">
       <i class="fas fa-boxes prefix"></i>
-      <input type="text" id="cantidad" class="form-control validate" [(ngModel)]="itemPedidoActual.cantidad">
-      <label for="cantidad" data-error="error" data-success="correcto" class="active">Cantidad</label>
+      <input type="text" id="cantidad" class="form-control" [(ngModel)]="itemPedidoActual.cantidad">
+      <label for="cantidad" class="active">Cantidad</label>
     </div>
 
   </div>
@@ -124,7 +124,7 @@
       <td>{{item.descripcionExt2}}</td>
       <td>{{item.cantidad}}</td>
       <td>{{item.unidadMedida}}</td>
-      <td><i class="fas fa-trash"></i></td>
+      <td><a (click)="removerItem(item)"><i class="fas fa-trash"></i></a></td>
     </tr>
 
     </tbody>
