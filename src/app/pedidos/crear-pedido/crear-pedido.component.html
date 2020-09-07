@@ -180,7 +180,9 @@
         </button>
 
         <button class="btn btn-rounded btn-success"
-                (click)="confirmarPedidoCrear()"
+                (click)="addPedidoBorrador()"
+                [disabled]="pedidoActual.contacto.trim().length<1 || pedidoActual.direccion.trim().length<1 ||
+                pedidoActual.terceroVendedor.trim().length<1 || notas.trim().length<1 || numeroOcOp.trim().length<1 || listaItemPedidoSelect.length<1"
         >
           Guardar Borrador
         </button>
@@ -264,8 +266,8 @@
       <div class="text-center mt-3">
 
         <button class="btn btn-rounded btn-primary"
-                [disabled]="pedidoActual.contacto.length<1 || pedidoActual.direccion.length<1 ||
-                pedidoActual.terceroVendedor.length<1 || notas.length<1 || numeroOcOp.length<1 || listaItemPedidoSelect.length<1"
+                [disabled]="pedidoActual.contacto.trim().length<1 || pedidoActual.direccion.trim().length<1 ||
+                pedidoActual.terceroVendedor.trim().length<1 || notas.trim().length<1 || numeroOcOp.trim().length<1 || listaItemPedidoSelect.length<1"
                 (click)="confirmarPedidoCrear()"
         >
           Verificar Datos del Pedido

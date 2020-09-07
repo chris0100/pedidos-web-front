@@ -5,7 +5,7 @@ export class Pedido {
   id: number;
   codPedido: string;
   nota: string;
-  estado: string;
+  estado: number;
   fechaPedido: string;
   totalBruto: number;
   descuentos: number;

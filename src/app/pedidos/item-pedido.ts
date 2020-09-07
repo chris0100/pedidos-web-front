@@ -1,7 +1,6 @@
 import {Pedido} from './pedido';
 
 export class ItemPedido {
-  idtemp: number;
   codItem: number;
   codCliente: string;
   descripcion: string;
@@ -22,5 +21,4 @@ export class ItemPedido {
   unoeePortafolio: number;
   unoeeListaMateriales: number;
   cantidad: number;
-  idPedido: Pedido;
 }

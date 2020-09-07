@@ -4,6 +4,8 @@ import {PedidoService} from '../pedido.service';
 import {AuthService} from '../../login/auth.service';
 import {Usuario} from '../../usuario/usuario';
 import {ItemPedido} from '../item-pedido';
+import swal from 'sweetalert2';
+import {Router} from '@angular/router';
 
 
 // carga de archivo js para mdbootstrap
@@ -25,18 +27,16 @@ export class CrearPedidoComponent implements OnInit {
   listaItemPedidoSelect: ItemPedido[];  // Listado de items que van siendo añadidos
 
 
-
   // Indicacdor de ventana para habilitar panel pos verificacion datos del pedido
   habilitaVerificacionPedido = false;
 
 
-
-  constructor(private pedidosService: PedidoService, private authService: AuthService) {
+  constructor(private pedidosService: PedidoService, private authService: AuthService,
+              private router: Router) {
     this.usuario = this.authService.usuario;
     this.numeroOcOp = '';
     this.notas = '';
   }
-
 
 
   // Recibe datos de las listas que se estan modificando cada que se añaden o eliminan items
@@ -53,8 +53,6 @@ export class CrearPedidoComponent implements OnInit {
     console.log('se trae lista a padre desde codigo EKA');
     console.log(this.listaItemPedidoSelect);
   }
-
-
 
 
   ngOnInit(): void {
@@ -116,6 +114,33 @@ export class CrearPedidoComponent implements OnInit {
   }
 
 
+  // Añadir pedido como borrador
+  addPedidoBorrador(): void {
+    console.log('se procede a añadir el pedido como borrador');
+    this.pedidoActual.estado = 0;
+    this.pedidoActual.listaItemPedido = this.listaItemPedidoSelect;
+
+
+    this.pedidoActual.nota = this.notas;
+    this.pedidoActual.oc = this.numeroOcOp;
+
+    // Eliminar la parte de los roles
+    const roles = this.pedidoActual.idUsuario.roles;
+    this.pedidoActual.idUsuario.roles = [];
+
+    console.log(this.pedidoActual);
+
+    // Se guarda el pedido en la base de datos
+    this.pedidosService.crearPedidoBorrador(this.pedidoActual).subscribe(
+      obj => {
+        console.log(obj);
+        swal('Correcto', 'El Borrador ha sido creado con exito', 'success');
+        this.router.navigate(['/panel-clientes']);
+
+        this.pedidoActual.idUsuario.roles = roles;
+      }
+    );
+  }
 
 
 }

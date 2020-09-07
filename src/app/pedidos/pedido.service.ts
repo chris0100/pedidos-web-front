@@ -278,8 +278,11 @@ export class PedidoService {
   }
 
 
-
-
+  // Crea el pedido como borrador.
+  crearPedidoBorrador(pedido: Pedido): Observable<string> {
+    const urlEndPoint = 'http://localhost:8082/add-pedido-borrador';
+    return this.http.post<string>(urlEndPoint, pedido);
+  }
 
 
   // Se guarda el pedido en el sessionStorage para historial de pedidos
@@ -303,7 +306,7 @@ export class PedidoService {
   // Obtener la lista de itemPedidoSeleccionada en el sessionStorage
   obtenerListaItemPedidoSelectStoragee(): ItemPedido[] {
     const listaItemsPedidoSelect: ItemPedido[] = JSON.parse(sessionStorage.getItem('listaItemPedidoSelect')) as ItemPedido[];
-    if (listaItemsPedidoSelect == null){
+    if (listaItemsPedidoSelect == null) {
       return [];
     }
     return listaItemsPedidoSelect;
