@@ -6,11 +6,16 @@
 
     <div class="md-form md-outline">
       <i class="fas fa-search prefix"></i>
-      <input type="text" id="cod-item-cliente" class="form-control validate" style="margin-bottom: 0px !important;">
+      <input type="text"
+             id="cod-item-cliente"
+             class="form-control"
+             style="margin-bottom: 0px !important;"
+             [(ngModel)]="codigoCliente"
+             (change)="consultarItemHomologado()"
+      >
       <label for="cod-item-cliente" data-error="wrong" data-success="right">Código del
         cliente del ítem</label>
     </div>
-
   </div>
 
 
@@ -38,8 +43,6 @@
 </div>
 
 
-
-
 <div class="row" style="margin-top: -30px">
 
   <!-- Grid column -->
@@ -53,7 +56,6 @@
   </div>
 
 
-
   <div class="col-md-4">
 
     <div class="md-form md-outline">
@@ -64,7 +66,6 @@
     </div>
 
   </div>
-
 
 
   <div class="col-md-4">

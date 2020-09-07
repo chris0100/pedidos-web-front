@@ -263,6 +263,25 @@ export class PedidoService {
   }
 
 
+  // Localiza el item homologado para el cliente con el codigoitem asignado
+  contarHomologarItemDuplicado(nit: string, codigoItem: string): Observable<string[]> {
+    const urlEndPoint = 'http://localhost:8082/contar-homologar-item-duplicado';
+    return this.http.get<string[]>(`${urlEndPoint}/${nit}/${codigoItem}`).pipe(
+      catchError(e => {
+        if (e.status != 401 && e.error.mensaje) {
+          this.router.navigate(['/panel-clientes']);
+          console.log(e.error.mensaje);
+        }
+        return throwError(e);
+      })
+    );
+  }
+
+
+
+
+
+
   // Se guarda el pedido en el sessionStorage para historial de pedidos
   guardarPedidosUnoEESessionStorage(pedidosUnoEE: PedidoUnoEE[]): void {
     sessionStorage.setItem('pedidosUnoEEHistorial', JSON.stringify(pedidosUnoEE));
