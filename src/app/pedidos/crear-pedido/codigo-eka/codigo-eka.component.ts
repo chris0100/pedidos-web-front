@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {PedidoService} from '../../pedido.service';
 import swal from 'sweetalert2';
 import {AuthService} from '../../../login/auth.service';
@@ -41,6 +41,10 @@ export class CodigoEkaComponent implements OnInit {
   // *************
   lastkeydown2 = 0;
   userList2: any[];
+
+  @Input() listaInputItemPedidoSelect: ItemPedido[];
+
+  @Output() listaOutputItemPedidoSelect = new EventEmitter<ItemPedido[]>();
 
 
 
@@ -202,8 +206,9 @@ export class CodigoEkaComponent implements OnInit {
       this.itemPedidoActual.cantidad = 0;
 
       this.pedidosService.obtenerBodegaItemJava(this.codigoItem).subscribe(
-        obj => this.itemPedidoActual.idBodega = obj[0]
-      );
+        obj => {
+          this.itemPedidoActual.idBodega = obj[0];
+        });
     }
   }
 
@@ -268,6 +273,9 @@ export class CodigoEkaComponent implements OnInit {
 
     // Se unicializan campos
     this.limpiarCampos();
+
+    // Prueba para emitir lista.
+    this.listaOutputItemPedidoSelect.emit(this.listaItemPedidoSelect);
   }
 
 

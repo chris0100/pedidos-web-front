@@ -3,6 +3,7 @@ import {Pedido} from '../pedido';
 import {PedidoService} from '../pedido.service';
 import {AuthService} from '../../login/auth.service';
 import {Usuario} from '../../usuario/usuario';
+import {ItemPedido} from '../item-pedido';
 
 
 // carga de archivo js para mdbootstrap
@@ -21,6 +22,7 @@ export class CrearPedidoComponent implements OnInit {
   contarItemMostrarPanel: number;
   numeroOcOp: string;
   notas: string;
+  listaItemPedidoSelect: ItemPedido[] = [];  // Listado de items que van siendo añadidos
 
 
   constructor(private pedidosService: PedidoService, private authService: AuthService) {
@@ -31,7 +33,26 @@ export class CrearPedidoComponent implements OnInit {
 
 
 
+  onTuCodigo(listaOutputItemPedidoSelect: ItemPedido[]): void {
+    this.listaItemPedidoSelect = listaOutputItemPedidoSelect;
+    console.log('se trae lista a padre desde tu codigo');
+    console.log(this.listaItemPedidoSelect);
+  }
+
+  onCodigoEka(listaOutputItemPedidoSelect: ItemPedido[]): void {
+    this.listaItemPedidoSelect = listaOutputItemPedidoSelect;
+    console.log('se trae lista a padre desde codigo EKA');
+    console.log(this.listaItemPedidoSelect);
+  }
+
+
+
   ngOnInit(): void {
+
+    // Cargar la lista de los items añadidos
+    this.listaItemPedidoSelect = this.pedidosService.obtenerListaItemPedidoSelectStoragee();
+
+
     // Carga los datos del pedido por defecto
     this.pedidoActual.idUsuario = this.usuario;
     this.pedidoActual.sucursalRemisionar = this.usuario.id_sucursal + ' - ' + this.usuario.descripcion_sucursal;

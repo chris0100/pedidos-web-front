@@ -21,10 +21,16 @@
 
   <div class="col-md-4">
 
-    <div class="md-form">
+    <div class="md-form md-outline">
       <i class="fas fa-building prefix"></i>
-      <input type="text" id="cod-item-eka" class="form-control" disabled style="background-color: #e7e7e5">
-      <label for="cod-item-eka">Código del ítem EKA</label>
+      <input type="text"
+             id="cod-item-eka"
+             class="form-control"
+             disabled
+             style="background-color: #e7e7e5"
+             [(ngModel)]="itemPatron"
+      >
+      <label for="cod-item-eka" class="active">Código del ítem EKA</label>
     </div>
 
 
@@ -33,8 +39,14 @@
   <div class="col-md-4">
     <div class="md-form md-outline">
       <i class="fas fa-ruler-vertical prefix"></i>
-      <input type="password" id="tamano-eka" class="form-control" disabled style="background-color: #e7e7e5">
-      <label for="tamano-eka">Tamaño</label>
+      <input type="text"
+             id="tamano-eka"
+             class="form-control"
+             disabled
+             style="background-color: #e7e7e5"
+             [(ngModel)]="ext1"
+      >
+      <label for="tamano-eka" class="active">{{descripcionLabelExt1}}</label>
     </div>
 
   </div>
@@ -49,8 +61,14 @@
   <div class="col-md-4">
     <div class="md-form md-outline">
       <i class="fas fa-tint prefix"></i>
-      <input type="text" id="color-eka" class="form-control" disabled style="background-color: #e7e7e5">
-      <label for="color-eka">Color</label>
+      <input type="text"
+             id="color-eka"
+             class="form-control"
+             disabled
+             style="background-color: #e7e7e5"
+             [(ngModel)]="ext2"
+      >
+      <label for="color-eka" class="active">{{descripcionLabelExt2}}</label>
     </div>
 
   </div>
@@ -60,8 +78,14 @@
 
     <div class="md-form md-outline">
       <i class="fas fa-balance-scale-left prefix"></i>
-      <input type="text" id="unidad-medida-eka" class="form-control" disabled style="background-color: #e7e7e5">
-      <label for="unidad-medida-eka">Unidad de
+      <input type="text"
+             id="unidad-medida-eka"
+             class="form-control"
+             disabled
+             style="background-color: #e7e7e5"
+             [(ngModel)]="itemPedidoActual.unidadMedida"
+      >
+      <label for="unidad-medida-eka" class="active">Unidad de
         Medida</label>
     </div>
 
@@ -72,8 +96,12 @@
 
     <div class="md-form md-outline">
       <i class="fas fa-boxes prefix"></i>
-      <input type="text" id="cantidad-eka" class="form-control">
-      <label for="cantidad-eka">Cantidad</label>
+      <input type="text"
+             id="cantidad-eka"
+             class="form-control"
+             [(ngModel)]="itemPedidoActual.cantidad"
+      >
+      <label for="cantidad-eka" class="active">Cantidad</label>
     </div>
 
   </div>
@@ -83,43 +111,50 @@
 
 
 <div class="row mb-5 d-flex justify-content-center">
-  <button class="btn btn-success btn-rounded" style="min-width: 270px"><i class="fas fa-plus"></i> Agregar ítem</button>
+  <button class="btn btn-success btn-rounded"
+          style="min-width: 270px"
+          [disabled]="itemPedidoActual.cantidad<1"
+          (click)="agregarItem()"
+  ><i class="fas fa-plus"></i>
+    Agregar ítem
+  </button>
 </div>
 
 
-<div class="table-responsive table-striped table-hover ">
+<div class="table-responsive table-striped table-hover" *ngIf="listaInputItemPedidoSelect.length>0">
   <table class="table">
+
     <thead>
     <tr>
-      <th scope="col">Código del ítem</th>
-      <th scope="col">Código EKA</th>
-      <th scope="col">Descripción</th>
-      <th scope="col">Extensión 1</th>
-      <th scope="col">Extensión 2</th>
-      <th scope="col">Cantidad</th>
-      <th scope="col">U. Medida</th>
+      <th scope="col" class="font-weight-bold">Código del ítem</th>
+      <th scope="col" class="font-weight-bold">Código EKA</th>
+      <th scope="col" class="font-weight-bold">Descripción</th>
+      <th scope="col" class="font-weight-bold">Extensión 1</th>
+      <th scope="col" class="font-weight-bold">Extensión 2</th>
+      <th scope="col" class="font-weight-bold">Cantidad</th>
+      <th scope="col" class="font-weight-bold">U. Medida</th>
+      <th scope="col" class="font-weight-bold"></th>
     </tr>
     </thead>
-    <tbody>
-    <tr>
-      <th scope="row">785644</th>
-      <td>2584</td>
-      <td>POLYESTER 50</td>
-      <td>VERDE</td>
-      <td>20</td>
-      <td>3</td>
-      <td>CMS</td>
-    </tr>
-    <tr>
-      <th scope="row">785644</th>
-      <td>2584</td>
-      <td>POLYESTER 50</td>
-      <td>VERDE</td>
-      <td>20</td>
-      <td>3</td>
-      <td>CMS</td>
-    </tr>
 
+
+    <tbody>
+    <tr *ngFor="let item of listaInputItemPedidoSelect">
+      <th scope="row">{{item.codCliente}}</th>
+      <td>{{item.codItem}}</td>
+      <td>{{item.descripcion}}</td>
+      <td>{{item.descripcionExt1}}</td>
+      <td>{{item.descripcionExt2}}</td>
+      <td>{{item.cantidad}}</td>
+      <td>{{item.unidadMedida}}</td>
+      <td><a (click)="removerItem(item)"><i class="fas fa-trash"></i></a></td>
+    </tr>
     </tbody>
+
   </table>
+</div>
+
+
+<div class="mt-3 mb-4 text-center" *ngIf="listaInputItemPedidoSelect.length==0">
+  <h5 class="p-1 font-weight-bold">Aún no has añadido ítems</h5>
 </div>
