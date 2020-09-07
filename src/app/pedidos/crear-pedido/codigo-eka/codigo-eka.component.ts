@@ -289,21 +289,21 @@ export class CodigoEkaComponent implements OnInit {
 
     // Buscar en la lista
     // @ts-ignore
-    const index = this.listaItemPedidoSelect.findIndex(obj => {
+    const index = this.listaInputItemPedidoSelect.findIndex(obj => {
       if (obj === item) {
         nombreItemEliminar = obj.descripcion;
         return obj;
       }
     });
 
-    this.listaItemPedidoSelect.splice(index, 1);  // borrar elemento
+    this.listaInputItemPedidoSelect.splice(index, 1);  // borrar elemento
 
     // Mostrar mensaje satisfactorio de elemento eliminado
     swal('Correcto', `Se ha eliminado el item ${nombreItemEliminar} exitosamente`, 'success');
-    console.log(this.listaItemPedidoSelect);
+    console.log(this.listaInputItemPedidoSelect);
 
     // Guardar en el session storage
-    this.pedidosService.guardarListaItemPedidoSelectStorage(this.listaItemPedidoSelect);
+    this.pedidosService.guardarListaItemPedidoSelectStorage(this.listaInputItemPedidoSelect);
   }
 
 

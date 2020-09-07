@@ -113,8 +113,95 @@
     </div>
 
 
+
     <!-- Gird column -->
-    <div class="col-md-12 mt-4">
+    <div class="col-md-12 mt-4" *ngIf="habilitaVerificacionPedido">
+
+
+    <div class="card card-cascade mt-4">
+
+      <!-- Card image -->
+      <div class="view view-cascade gradient-card-header primary-color-dark">
+        <h5 class="card-header-title" style="margin-bottom: 0px !important;">
+          <i class="fas fa-luggage-cart"></i>
+          Ítems del Pedido
+        </h5>
+      </div>
+
+      <!-- Card content -->
+      <div class="card-body card-body-cascade text-center">
+
+        <div class="row">
+
+          <div class="table-responsive table-striped table-hover ">
+            <table class="table">
+              <thead>
+              <tr>
+                <th scope="col" class="font-weight-bold">Código del ítem</th>
+                <th scope="col" class="font-weight-bold">Código EKA</th>
+                <th scope="col" class="font-weight-bold">Descripción</th>
+                <th scope="col" class="font-weight-bold">Extensión 1</th>
+                <th scope="col" class="font-weight-bold">Extensión 2</th>
+                <th scope="col" class="font-weight-bold">Cantidad</th>
+                <th scope="col" class="font-weight-bold">U. Medida</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let item of listaItemPedidoSelect">
+                <th scope="row">{{item.codCliente}}</th>
+                <td>{{item.codItem}}</td>
+                <td>{{item.descripcion}}</td>
+                <td>{{item.descripcionExt1}}</td>
+                <td>{{item.descripcionExt2}}</td>
+                <td>{{item.cantidad}}</td>
+                <td>{{item.unidadMedida}}</td>
+              </tr>
+
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+
+
+
+      </div>
+
+    </div>
+    <!-- Card -->
+
+
+      <div class="text-center mt-3">
+
+        <button class="btn btn-rounded btn-danger"
+                (click)="volverAEditar()"
+        >
+          Volver a Editar
+        </button>
+
+        <button class="btn btn-rounded btn-success"
+                (click)="confirmarPedidoCrear()"
+        >
+          Guardar Borrador
+        </button>
+
+        <button class="btn btn-rounded btn-primary"
+                [routerLink]="['/panel-clientes']"
+                (click)="cancelarPedido()"
+        >
+          Aprobar Pedido
+        </button>
+      </div>
+
+    </div>
+
+
+
+
+
+
+    <!-- Gird column -->
+    <div class="col-md-12 mt-4" *ngIf="!habilitaVerificacionPedido">
 
 
       <ul class="nav nav-tabs nav-justified md-tabs light-blue darken-3" id="myTabJust" role="tablist">
@@ -179,6 +266,7 @@
         <button class="btn btn-rounded btn-primary"
                 [disabled]="pedidoActual.contacto.length<1 || pedidoActual.direccion.length<1 ||
                 pedidoActual.terceroVendedor.length<1 || notas.length<1 || numeroOcOp.length<1 || listaItemPedidoSelect.length<1"
+                (click)="confirmarPedidoCrear()"
         >
           Verificar Datos del Pedido
         </button>

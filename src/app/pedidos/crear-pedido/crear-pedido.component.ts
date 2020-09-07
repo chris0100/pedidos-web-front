@@ -19,10 +19,16 @@ export class CrearPedidoComponent implements OnInit {
 
   pedidoActual: Pedido = new Pedido();
   usuario: Usuario;
-  contarItemMostrarPanel: number;
-  numeroOcOp: string;
-  notas: string;
-  listaItemPedidoSelect: ItemPedido[] = [];  // Listado de items que van siendo añadidos
+  contarItemMostrarPanel: number; // cuenta para saber si muestra el panel 2
+  numeroOcOp: string; // numero de compra
+  notas: string;  // campo de notas
+  listaItemPedidoSelect: ItemPedido[];  // Listado de items que van siendo añadidos
+
+
+
+  // Indicacdor de ventana para habilitar panel pos verificacion datos del pedido
+  habilitaVerificacionPedido = false;
+
 
 
   constructor(private pedidosService: PedidoService, private authService: AuthService) {
@@ -33,17 +39,21 @@ export class CrearPedidoComponent implements OnInit {
 
 
 
+  // Recibe datos de las listas que se estan modificando cada que se añaden o eliminan items
   onTuCodigo(listaOutputItemPedidoSelect: ItemPedido[]): void {
     this.listaItemPedidoSelect = listaOutputItemPedidoSelect;
     console.log('se trae lista a padre desde tu codigo');
     console.log(this.listaItemPedidoSelect);
   }
 
+
+  // Recibe datos de las listas que se estan modificando cada que se añaden o eliminan items
   onCodigoEka(listaOutputItemPedidoSelect: ItemPedido[]): void {
     this.listaItemPedidoSelect = listaOutputItemPedidoSelect;
     console.log('se trae lista a padre desde codigo EKA');
     console.log(this.listaItemPedidoSelect);
   }
+
 
 
 
@@ -86,9 +96,26 @@ export class CrearPedidoComponent implements OnInit {
   }
 
 
+  // Se da click en el boton cancelar el pedido
   cancelarPedido(): void {
     sessionStorage.removeItem('listaItemPedidoSelect');
   }
+
+
+  // Se inicia una confirmacion de pedido
+  confirmarPedidoCrear(): void {
+    console.log('se ha iniciado una confirmacion de pedido crear');
+    this.habilitaVerificacionPedido = true;
+  }
+
+
+  // Se retorna a una ventana de volver a editar
+  volverAEditar(): void {
+    console.log('se retorn a la ventana de volver a editar');
+    this.habilitaVerificacionPedido = false;
+  }
+
+
 
 
 }
