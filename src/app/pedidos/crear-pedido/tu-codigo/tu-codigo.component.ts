@@ -119,7 +119,7 @@ export class TuCodigoComponent implements OnInit {
     this.itemPedidoActual.descripcionCompletaItem = this.itemPatron;
     this.itemPedidoActual.codCliente = this.codigoCliente;  // en esta pestaña no hay funcionalidad sobre este
     this.itemPedidoActual.unoeeItem = 0;
-    this.itemPedidoActual.unoeeListaMateriales = 0;
+    this.itemPedidoActual.unoeeListasMateriales = 0;
     this.itemPedidoActual.unoeePortafolio = 0;
     this.itemPedidoActual.unoeePrecios = 0;
 

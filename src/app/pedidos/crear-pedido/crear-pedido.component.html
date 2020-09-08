@@ -188,8 +188,9 @@
         </button>
 
         <button class="btn btn-rounded btn-primary"
-                [routerLink]="['/panel-clientes']"
-                (click)="cancelarPedido()"
+                (click)="aprobarPedido()"
+                [disabled]="pedidoActual.contacto.trim().length<1 || pedidoActual.direccion.trim().length<1 ||
+                pedidoActual.terceroVendedor.trim().length<1 || notas.trim().length<1 || numeroOcOp.trim().length<1 || listaItemPedidoSelect.length<1"
         >
           Aprobar Pedido
         </button>

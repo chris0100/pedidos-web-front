@@ -119,8 +119,6 @@ export class CrearPedidoComponent implements OnInit {
     console.log('se procede a añadir el pedido como borrador');
     this.pedidoActual.estado = 0;
     this.pedidoActual.listaItemPedido = this.listaItemPedidoSelect;
-
-
     this.pedidoActual.nota = this.notas;
     this.pedidoActual.oc = this.numeroOcOp;
 
@@ -130,16 +128,56 @@ export class CrearPedidoComponent implements OnInit {
 
     console.log(this.pedidoActual);
 
-    // Se guarda el pedido en la base de datos
+    // Se guarda el borrador del pedido en la base de datos
     this.pedidosService.crearPedidoBorrador(this.pedidoActual).subscribe(
       obj => {
         console.log(obj);
+        // Se asigna el id para luego sobreescribir si se quiere pasar de ser borrador
+        // this.pedidoActual.id = parseInt(obj.nuevoId, 0);
+
         swal('Correcto', 'El Borrador ha sido creado con exito', 'success');
-        this.router.navigate(['/panel-clientes']);
+        this.router.navigate(['/pedidos-borrador']);
 
         this.pedidoActual.idUsuario.roles = roles;
-      }
-    );
+      });
+  }
+
+
+  // Realizar la aprobacion del pedido
+  aprobarPedido(): void {
+    this.pedidosService.obtenerDatosAsesorUnoEEJava(this.usuario.id_sucursal, this.usuario.nit).subscribe(
+      obj => {
+        console.log(obj);
+        this.pedidoActual.estado = 0;
+        this.pedidoActual.terceroAsesor = obj[2];
+        this.pedidoActual.listaItemPedido = this.listaItemPedidoSelect;
+        this.pedidoActual.nota = this.notas;
+        this.pedidoActual.oc = this.numeroOcOp;
+
+        // Eliminar la parte de los roles
+        const roles = this.pedidoActual.idUsuario.roles;
+        this.pedidoActual.idUsuario.roles = [];
+
+        console.log(this.pedidoActual);
+
+        // Se guarda el borrador del pedido en la base de datos
+        this.pedidosService.crearPedidoBorrador(this.pedidoActual).subscribe(
+          obj => {
+            console.log(obj);
+            // Se asigna el id para luego sobreescribir si se quiere pasar de ser borrador
+            // this.pedidoActual.id = parseInt(obj.nuevoId, 0);
+
+            // swal('Correcto', 'El Pedido ha sido creado con exito', 'success');
+            // this.router.navigate(['/panel-clientes']);
+
+            this.pedidoActual.idUsuario.roles = roles;
+          });
+
+        // FALTA AGREGAR LOS DATOS DE CONECTOR
+      });
+
+
+
   }
 
 

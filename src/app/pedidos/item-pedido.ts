@@ -19,6 +19,6 @@ export class ItemPedido {
   unoeeItem: number;
   unoeePrecios: number;
   unoeePortafolio: number;
-  unoeeListaMateriales: number;
+  unoeeListasMateriales: number;
   cantidad: number;
 }

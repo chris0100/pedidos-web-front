@@ -285,6 +285,28 @@ export class PedidoService {
   }
 
 
+  // Obtener datos asesor unoEE
+  obtenerDatosAsesorUnoEEJava(idSucursal: string, nit: string): Observable<string[]> {
+    const urlEndPoint = 'http://localhost:8082/obtener-datos-asesor-unoee';
+    return this.http.get<string[]>(`${urlEndPoint}/${idSucursal}/${nit}`).pipe(
+      catchError(e => {
+        if (e.status != 401 && e.error.mensaje) {
+          this.router.navigate(['/panel-clientes']);
+          console.log(e.error.mensaje);
+        }
+        return throwError(e);
+      })
+    );
+  }
+
+
+
+
+
+  // ***********************************
+  // SESSION STORAGE
+  // ***********************************
+
   // Se guarda el pedido en el sessionStorage para historial de pedidos
   guardarPedidosUnoEESessionStorage(pedidosUnoEE: PedidoUnoEE[]): void {
     sessionStorage.setItem('pedidosUnoEEHistorial', JSON.stringify(pedidosUnoEE));
