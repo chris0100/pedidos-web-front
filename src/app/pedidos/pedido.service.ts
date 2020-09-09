@@ -218,6 +218,7 @@ export class PedidoService {
   }
 
 
+
   // Consulta la descripcion del label Ext1
   consultarDescripcionLabelExt1(ext1: string): Observable<string[]> {
     const urlEndPoint = 'http://localhost:8082/consulta-descripcion-label-ext1';
@@ -231,6 +232,7 @@ export class PedidoService {
       })
     );
   }
+
 
 
   // Consulta la descripcion del label Ext2
@@ -248,6 +250,7 @@ export class PedidoService {
   }
 
 
+
   // Consulta la bodega del item
   obtenerBodegaItemJava(codigoItem: string): Observable<string[]> {
     const urlEndPoint = 'http://localhost:8082/obtener-bodega-item';
@@ -261,6 +264,7 @@ export class PedidoService {
       })
     );
   }
+
 
 
   // Localiza el item homologado para el cliente con el codigoitem asignado
@@ -298,6 +302,16 @@ export class PedidoService {
       })
     );
   }
+
+
+  webServiceProcess(pedido: Pedido): Observable<string> {
+    const urlEndPoint = 'http://localhost:8082/obtener-conector';
+    return this.http.post<string>(urlEndPoint, pedido);
+  }
+
+
+
+
 
 
 

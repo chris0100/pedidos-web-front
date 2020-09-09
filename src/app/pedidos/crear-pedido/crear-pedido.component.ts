@@ -160,24 +160,27 @@ export class CrearPedidoComponent implements OnInit {
 
         console.log(this.pedidoActual);
 
-        // Se guarda el borrador del pedido en la base de datos
+        // Se guarda el pedido en la base de datos
         this.pedidosService.crearPedidoBorrador(this.pedidoActual).subscribe(
-          obj => {
-            console.log(obj);
+          obj2 => {
+            console.log(obj2);
             // Se asigna el id para luego sobreescribir si se quiere pasar de ser borrador
             // this.pedidoActual.id = parseInt(obj.nuevoId, 0);
 
             // swal('Correcto', 'El Pedido ha sido creado con exito', 'success');
             // this.router.navigate(['/panel-clientes']);
 
+            this.pedidoActual.id = parseInt(obj2.nuevoId, 0);
+
+            this.pedidosService.webServiceProcess(this.pedidoActual).subscribe(
+              obj3 => console.log(obj3));
+
             this.pedidoActual.idUsuario.roles = roles;
           });
-
         // FALTA AGREGAR LOS DATOS DE CONECTOR
+        // SE ENVIA EL PEDIDO ACTUAL PARA CREAR CONECTOR.
+        // this.pedidosService.obtenerConectorJava(this.pedidoActual.id);
       });
-
-
-
   }
 
 
