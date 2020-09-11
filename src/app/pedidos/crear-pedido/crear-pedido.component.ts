@@ -55,6 +55,16 @@ export class CrearPedidoComponent implements OnInit {
   }
 
 
+  // Recibe datos de las listas que se estan modificando cada que se añaden o eliminan items
+  onHojaCalculo(listaOutputItemPedidoSelect: ItemPedido[]): void {
+    this.listaItemPedidoSelect = listaOutputItemPedidoSelect;
+    console.log('se trae lista a padre desde codigo EKA');
+    console.log(this.listaItemPedidoSelect);
+  }
+
+
+
+
   ngOnInit(): void {
 
     // Cargar la lista de los items añadidos
@@ -145,14 +155,17 @@ export class CrearPedidoComponent implements OnInit {
 
   // Realizar la aprobacion del pedido
   aprobarPedido(): void {
+    // Se obtienen datos del asesor
     this.pedidosService.obtenerDatosAsesorUnoEEJava(this.usuario.id_sucursal, this.usuario.nit).subscribe(
       obj => {
-        console.log(obj);
         this.pedidoActual.estado = 0;
         this.pedidoActual.terceroAsesor = obj[2];
         this.pedidoActual.listaItemPedido = this.listaItemPedidoSelect;
         this.pedidoActual.nota = this.notas;
         this.pedidoActual.oc = this.numeroOcOp;
+
+        // Probar obtener email asesor
+        this.pedidoActual.emailAsesor = obj[1];
 
         // Eliminar la parte de los roles
         const roles = this.pedidoActual.idUsuario.roles;
@@ -164,22 +177,15 @@ export class CrearPedidoComponent implements OnInit {
         this.pedidosService.crearPedidoBorrador(this.pedidoActual).subscribe(
           obj2 => {
             console.log(obj2);
-            // Se asigna el id para luego sobreescribir si se quiere pasar de ser borrador
-            // this.pedidoActual.id = parseInt(obj.nuevoId, 0);
+            // Se asigna el id para luego sobreescribir para crear conector que se envia ws
+            this.pedidoActual.id = parseInt(obj2, 0);
 
-            // swal('Correcto', 'El Pedido ha sido creado con exito', 'success');
-            // this.router.navigate(['/panel-clientes']);
-
-            this.pedidoActual.id = parseInt(obj2.nuevoId, 0);
-
+            // Envia el pedido con el id ya asignado
             this.pedidosService.webServiceProcess(this.pedidoActual).subscribe(
               obj3 => console.log(obj3));
-
+            // Asigna nuevamente los roles que fueron quitados
             this.pedidoActual.idUsuario.roles = roles;
           });
-        // FALTA AGREGAR LOS DATOS DE CONECTOR
-        // SE ENVIA EL PEDIDO ACTUAL PARA CREAR CONECTOR.
-        // this.pedidosService.obtenerConectorJava(this.pedidoActual.id);
       });
   }
 

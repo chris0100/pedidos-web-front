@@ -63,6 +63,14 @@ body {
   background-color: #fff;
 }
 
+input #file-upload-button {
+  font-size: 0.8rem;
+  border-radius: 4px;
+  background-color: red;
+  padding: 0 !important;
+}
+
+
 [tabindex="-1"]:focus {
   outline: 0 !important;
 }

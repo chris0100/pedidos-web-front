@@ -32,6 +32,7 @@
     "popper.js": "^1.14.3",
     "rxjs": "^6.2.2",
     "sweetalert2": "^7.26.9",
+    "xlsx": "^0.16.7",
     "zone.js": "^0.8.26"
   },
   "devDependencies": {

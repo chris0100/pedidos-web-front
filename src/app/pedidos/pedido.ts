@@ -23,4 +23,5 @@ export class Pedido {
   mensajeWB: string;
   puntoEnvio: string;
   listaItemPedido: Array<ItemPedido> = [];
+  emailAsesor: string;
 }

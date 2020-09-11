@@ -7,3 +7,14 @@ body{
 html::-webkit-scrollbar {
   display: none;
 }
+
+
+.label-pago {
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+
+
+

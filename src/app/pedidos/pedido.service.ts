@@ -4,7 +4,7 @@ import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {Observable, throwError} from 'rxjs';
 import {any} from 'codelyzer/util/function';
-import {catchError} from 'rxjs/operators';
+import {catchError, map} from 'rxjs/operators';
 import {PedidoUnoEE} from './pedido-uno-ee';
 import {ItemPedidoUnoEE} from './item-pedido-uno-ee';
 import {ItemPedido} from './item-pedido';
@@ -285,7 +285,20 @@ export class PedidoService {
   // Crea el pedido como borrador.
   crearPedidoBorrador(pedido: Pedido): Observable<string> {
     const urlEndPoint = 'http://localhost:8082/add-pedido-borrador';
-    return this.http.post<string>(urlEndPoint, pedido);
+    return this.http.post(urlEndPoint, pedido).pipe(
+      map((response: any) => response.nuevoId as string),
+      catchError(e => {
+
+        if (e.status === 400) {
+          return throwError(e);
+        }
+
+        if (e.error.mensaje){
+          console.error(e.error.mensaje);
+        }
+        return throwError(e);
+      })
+    );
   }
 
 
