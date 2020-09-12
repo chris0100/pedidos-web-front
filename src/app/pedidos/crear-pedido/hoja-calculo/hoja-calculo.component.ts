@@ -3,6 +3,7 @@ import {ItemPedido} from '../../item-pedido';
 import {PedidoService} from '../../pedido.service';
 import {AuthService} from '../../../login/auth.service';
 import * as XLSX from 'xlsx';
+import swal from 'sweetalert2';
 
 
 @Component({
@@ -23,6 +24,9 @@ export class HojaCalculoComponent implements OnInit {
   // area de texto
   areaHoja: string;
 
+  // Error encontrado
+  errorLectura: boolean;
+
   @Input() listaInputItemPedidoSelect: ItemPedido[];
 
   @Output() listaOutputItemPedidoSelect = new EventEmitter<ItemPedido[]>();
@@ -35,6 +39,7 @@ export class HojaCalculoComponent implements OnInit {
 
   ngOnInit(): void {
     this.areaHoja = ' ';
+    this.errorLectura = true;
   }
 
 
@@ -46,6 +51,9 @@ export class HojaCalculoComponent implements OnInit {
 
   // Añadir archivo de Excel para mostrar en el area de texto
   addFile(event) {
+    // Se inicializa el contenido en el areaHoja
+    this.areaHoja = '';
+
     this.file = event.target.files[0];
     const fileReader = new FileReader();
     fileReader.readAsArrayBuffer(this.file);
@@ -68,44 +76,47 @@ export class HojaCalculoComponent implements OnInit {
       let contador = 0;
 
 
+      // Lectura de contenido organizandolo para mostrar en textarea.
       arre.forEach(obj => {
         if (obj.includes('CÓDIGO') && contador === 0) {
-          this.areaHoja += 'CODIGO ITEM\t | \t';
+          this.areaHoja += 'CÓDIGO ITEM\t | \t';
           contador++;
         }
         if (obj.includes('CANTIDAD') && contador === 1) {
           this.areaHoja += 'CANTIDAD\n-------------------------\n';
           contador++;
         }
+        // tslint:disable-next-line:one-line
         else{
           if (contador >= 2 && obj.includes('=\'')) {
             this.areaHoja += obj.split('\'')[1] + ' \t\t | \t ';
+            contador++;
             console.log(this.areaHoja);
           }
           if (contador >= 2 && !obj.includes('=\'')) {
             this.areaHoja += obj.split('=')[1] + '\n';
+            contador++;
             console.log(this.areaHoja);
           }
+        }
+        // Si en la primera vuelta no tiene capturada las cabeceras, genera error
+        // tslint:disable-next-line:one-line max-line-length
+        if ((contador < 1 && !obj.includes('CÓDIGO') || (contador === 2 && !obj.includes('CANTIDAD'))
+          || (contador === 1 && !obj.includes('CÓDIGO') && this.areaHoja.includes('CÓDIGO')))) {
+          swal('Error de archivo', 'El archivo cargado contiene errores, verificalo por favor', 'error');
+          this.errorLectura = true;
+          return;
+        }
+        else{
+          // Si llega aqui significa que todo esta bien
+          this.errorLectura = false;
         }
       });
 
       console.log(this.areaHoja);
 
-      const arraylist = XLSX.utils.sheet_to_json(worksheet, {raw: true});
 
 
-      arraylist.forEach(obj => {
-        console.log(obj);
-      });
-
-      const convertidoArreglo = JSON.stringify(arraylist);
-
-      // Extraer los datos del arraylist
-      console.log(convertidoArreglo);
-
-
-      // this.filelist = [];
-      // console.log(this.filelist);
     };
   }
 

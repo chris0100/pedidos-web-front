@@ -13,17 +13,25 @@
 <div class="md-form md-outline">
   <textarea type="text"
             id="areaHoja"
-            class="md-textarea form-control disabled bg-light"
-            rows="10"
+            class="md-textarea form-control bg-light"
+            rows="20"
             name="areaHoja"
             [(ngModel)]="areaHoja"
+            readonly
+            style="overflow-y: scroll;height: 300px;resize: none;"
   ></textarea>
 </div>
 
 
 
 <div class="text-center mb-5">
-  <button class="btn btn-success btn-rounded" style="min-width: 270px"><i class="fas fa-plus"></i> Procesar Archivo</button>
+  <button class="btn btn-success btn-rounded"
+          style="min-width: 270px"
+          [disabled]="errorLectura"
+  >
+    <i class="fas fa-plus"></i>
+    Procesar Archivo
+  </button>
 </div>
 
 </form>
