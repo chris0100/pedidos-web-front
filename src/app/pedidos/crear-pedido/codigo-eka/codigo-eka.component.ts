@@ -60,12 +60,23 @@ export class CodigoEkaComponent implements OnInit {
     // Se carga la lista del local storage
     this.listaItemPedidoSelect = this.pedidosService.obtenerListaItemPedidoSelectStoragee();
 
+    // Si ya hay datos de los itemPatron los trae del sessionstorage
+    this.listaItemPatron = this.pedidosService.obtenerListaItemPatronStorage();
+
     // Consulta la BD para cargar los items Patron cuando realice busquedas
-    this.pedidosService.obtenerListaItemPatronJava().subscribe(
-      obj => {
-        this.listaItemPatron = obj;
-        console.log(this.listaItemPatron);
-      });
+    if (this.listaItemPatron.length === 0) {
+      this.pedidosService.obtenerListaItemPatronJava().subscribe(
+        obj => {
+          this.listaItemPatron = obj;
+          console.log(this.listaItemPatron);
+
+          // Guarda lo recopilado en el session storage
+          this.pedidosService.guardarListaItemPatronStorage(this.listaItemPatron);
+        });
+    }
+
+
+
 
   }
 

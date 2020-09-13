@@ -50,13 +50,7 @@ export class HojaCalculoComponent implements OnInit {
   }
 
 
-  // Permite remover un item de la tabla
-  removerItem(item: ItemPedido): void {
-    console.log('se ha removido un item');
-  }
-
-
-  // Añadir archivo de Excel para mostrar en el area de texto
+  // Añadir archivo de Excel para mostrar en el area de texto, se habilita cuando se selecciona un archivo de excel
   addFile(event) {
     // Se inicializa el contenido en el areaHoja
     this.areaHoja = '';
@@ -83,10 +77,14 @@ export class HojaCalculoComponent implements OnInit {
       const arre = XLSX.utils.sheet_to_formulae(worksheet);
       let contador = 0;
       let repiteTipo = false;
+      let derecha = false;
 
 
       // Lectura de contenido organizandolo para mostrar en textarea.
       arre.forEach(obj => {
+        // reestablece el valor de derecha
+        derecha = false;
+
         if (obj.includes('CÓDIGO') && contador === 0) {
           this.areaHoja += 'CÓDIGO ITEM\t | \t';
           contador++;
@@ -99,6 +97,27 @@ export class HojaCalculoComponent implements OnInit {
 
         // tslint:disable-next-line:one-line
         else {
+
+          // Para cuando se envian cod barras digitados a la derecha
+          if (contador >= 2 && obj.includes('=') && !repiteTipo && !obj.includes('\'')) {
+            const cadena = obj.split('=')[1];
+            if (cadena.trim().length === 10) {
+              this.areaHoja += obj.split('=')[1] + ' \t\t | \t ';
+              contador++;
+              this.listaEx.push(cadena);
+              repiteTipo = true;
+              derecha = true;
+            } else {
+              this.areaHoja += 'ERROR COD. \t\t | \t ';
+              contador++;
+              this.listaEx.push('error cod.');
+              repiteTipo = true;
+              derecha = true;
+            }
+            console.log('DERECHA');
+          }
+
+          // Para cuando se envian cod barras digitados a la izquierda
           if (contador >= 2 && obj.includes('=\'') && !repiteTipo) {
             const cadena = obj.split('\'')[1];
             if (cadena.trim().length === 10) {
@@ -115,7 +134,7 @@ export class HojaCalculoComponent implements OnInit {
           }
 
 
-          // Significa que hay un dato erroneo donde deberia de existir un numero
+            // Significa que hay un dato erroneo donde deberia de existir un numero
           // tslint:disable-next-line:one-line
           else if (contador >= 2 && obj.includes('=\'') && repiteTipo) {
             const cadena = obj.split('\'')[1];
@@ -132,7 +151,7 @@ export class HojaCalculoComponent implements OnInit {
               repiteTipo = true;
             }
           }
-          if (contador >= 2 && !obj.includes('=\'')) {
+          if (contador >= 2 && !obj.includes('=\'') && !derecha) {
             if (repiteTipo) {
               this.areaHoja += obj.split('=')[1] + '\n';
               contador++;
@@ -165,12 +184,19 @@ export class HojaCalculoComponent implements OnInit {
   }
 
 
-  // Revisar datos
+
+
+
+
+
+  // Revisar datos, se activa cuando se da clic en el boton procesar archivo
   procesarArchivo(): void {
     let count = 0;
     let itemExcel = new ItemExcel();
 
     try {
+
+      // Se guarda ordenadamente cada item en el array(listaItemsExcel) que luego se envia a java para buscar homologado
       this.listaEx.forEach(obj => {
 
         if (count === 0 && obj.length <= 10) {
@@ -186,17 +212,126 @@ export class HojaCalculoComponent implements OnInit {
 
       // Se envia la lista de items Excel
       this.pedidosService.tratamientoListaItemsExcelJava(this.listaItemsExcel).subscribe(
-        obj => console.log(obj)
-      );
+        obj => {
+          console.log(obj);
+          // Se valida que la cantidad que salio sea la misma que entro
+          if (obj.length === this.listaItemsExcel.length) {
+
+            // Se itera sobre el arreglo recibido
+            for (let i = 0; i < obj.length; i++) {
+
+              // Se recibe el array de items
+              const itemPedidoActual: ItemPedido = new ItemPedido();
+              itemPedidoActual.codCliente = this.listaItemsExcel[i].codigoItem;
+              itemPedidoActual.descripcionCompletaItem = obj[i].substring(0, 54);
+              itemPedidoActual.descripcionExt1 = obj[i].substring(54, 100);
+              itemPedidoActual.descripcionExt2 = obj[i].substring(100, 147);
+              itemPedidoActual.unidadMedida = obj[i].substring(147, 151);
+              itemPedidoActual.cantidad = this.listaItemsExcel[i].cantidad;
+              itemPedidoActual.codItem = parseInt(itemPedidoActual.descripcionCompletaItem.substring(0, 7), 0);
+              itemPedidoActual.descripcion = itemPedidoActual.descripcionCompletaItem.substring(10, 50);
+              itemPedidoActual.idExt1Detalle = itemPedidoActual.descripcionExt1.substring(0, 4);
+              itemPedidoActual.idExt2Detalle = itemPedidoActual.descripcionExt2.substring(0, 5);
+              itemPedidoActual.unoeeItem = 0;
+              itemPedidoActual.unoeeListasMateriales = 0;
+              itemPedidoActual.unoeePortafolio = 0;
+              itemPedidoActual.unoeePrecios = 0;
+
+              // Busca la bodega del item
+              this.pedidosService.obtenerBodegaItemJava(itemPedidoActual.codItem + '').subscribe(
+                obj2 => {
+                  console.log(obj2);
+                  itemPedidoActual.idBodega = obj2[0];
+
+                  if (this.authService.usuario.nit.trim() === '1792196841001') {
+                    itemPedidoActual.idMotivo = '02';
+                  }
+                  // tslint:disable-next-line:one-line
+                  else {
+                    itemPedidoActual.idMotivo = '01';
+                  }
+
+                  // Muestra el itemPedido Actual
+                  console.log(itemPedidoActual);
+
+                  // Se agrega a la lista de itempedido
+                  this.listaItemPedidoSelect = this.pedidosService.obtenerListaItemPedidoSelectStoragee();
+                  this.listaItemPedidoSelect.push(itemPedidoActual);
+
+                  // Se debe de guardar en el sessionStorage
+                  this.pedidosService.guardarListaItemPedidoSelectStorage(this.listaItemPedidoSelect);
+
+                  // Se carga nuevamente session storage para evitar conflictos de nueva escritra la lista del local storage
+                  this.listaItemPedidoSelect = this.pedidosService.obtenerListaItemPedidoSelectStoragee();
+
+                  // Prueba para emitir lista.
+                  this.listaOutputItemPedidoSelect.emit(this.listaItemPedidoSelect);
+                });
+            }
+            // Mostrar mensaje de exito
+            swal('Correcto', `Se han añadido los items exitosamente`, 'success');
+          }
+
+          // Si existen errores en algun codigo de barras, se cancela la agregacion de items
+          // tslint:disable-next-line:one-line
+          else {
+            // Toma los codigo de barras con errores
+            let listaErroresCodBarras = '';
+            let countErr = 0;
+
+            obj.forEach(x => {
+              if (x.includes('vacio')) {
+                listaErroresCodBarras += ' - ' + x.substring(6, x.length);
+                countErr++;
+              }
+            });
+
+            // Evalua si hay un solo error o varios errores
+            if (countErr === 1) {
+              swal('Error', 'No se encuentra el siguiente codigo de barras: ' + listaErroresCodBarras, 'error');
+            } else {
+              swal('Error', 'No se encuentran los siguientes codigos de barras: ' + listaErroresCodBarras, 'error');
+            }
+            // Se reestablece inactivacion de boton procesar archivo
+            this.errorLectura = true;
+          }
+        });
 
     } catch (e) {
       swal('Error', 'Ha ocurrido un error en el procesamiento');
+      // Se reestablece inactivacion de boton procesar archivo
+      this.errorLectura = true;
     }
-
-
-
-
     console.log(this.listaItemsExcel);
+
+    // Se reestablece inactivacion de boton procesar archivo en la espera de mas datos
+    this.errorLectura = true;
+  }
+
+
+
+  // Se elimina un item de la lista seleccionada
+  removerItem(item: ItemPedido): void {
+    console.log(item);
+    let nombreItemEliminar = '';
+
+    // Buscar en la lista
+    // @ts-ignore
+    const index = this.listaInputItemPedidoSelect.findIndex(obj => {
+      if (obj === item) {
+        nombreItemEliminar = obj.descripcion;
+        return obj;
+      }
+    });
+
+    this.listaInputItemPedidoSelect.splice(index, 1);  // borrar elemento
+
+    // Mostrar mensaje satisfactorio de elemento eliminado
+    swal('Correcto', `Se ha eliminado el item ${nombreItemEliminar} exitosamente`, 'success');
+    console.log(this.listaInputItemPedidoSelect);
+
+    // Guardar en el session storage
+    this.pedidosService.guardarListaItemPedidoSelectStorage(this.listaInputItemPedidoSelect);
   }
 
 }

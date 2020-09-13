@@ -327,9 +327,9 @@ export class PedidoService {
 
 
   // Se envia listado de items de excel para realizar respectiva comparacion
-  tratamientoListaItemsExcelJava(listaItemsExcel: ItemExcel[]): Observable<string> {
+  tratamientoListaItemsExcelJava(listaItemsExcel: ItemExcel[]): Observable<string[]> {
     const urlEndPoint = 'http://localhost:8082/tratamiento-lista-items-excel';
-    return this.http.post<string>(urlEndPoint, listaItemsExcel);
+    return this.http.post<string[]>(urlEndPoint, listaItemsExcel);
   }
 
 
@@ -372,6 +372,21 @@ export class PedidoService {
       return [];
     }
     return listaItemsPedidoSelect;
+  }
+
+
+  // Se obtiene la lista de itempatron
+  obtenerListaItemPatronStorage(): string[] {
+    const listaItemPatron: string[] = JSON.parse(sessionStorage.getItem('listaItemPatron')) as string[];
+    if (listaItemPatron == null) {
+      return [];
+    }
+    return listaItemPatron;
+  }
+
+  // Se guarda la lista de item patron en la primera visita a la pagina de crear pedido
+  guardarListaItemPatronStorage(listaItemPatron: string[]): void {
+    sessionStorage.setItem('listaItemPatron', JSON.stringify(listaItemPatron));
   }
 
 

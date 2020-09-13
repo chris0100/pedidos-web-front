@@ -99,6 +99,10 @@ export class CrearPedidoComponent implements OnInit {
       }
     );
 
+
+
+
+
     // Ejecutar script js
     new pedidos();
   }
@@ -187,6 +191,8 @@ export class CrearPedidoComponent implements OnInit {
             this.pedidoActual.idUsuario.roles = roles;
           });
       });
+    swal('Correcto', 'Su solicitud de pedido ha sido creada exitosamente, en breve recibirá un correo electrónico', 'success');
+    this.router.navigate(['/panel-clientes']);
   }
 
 
