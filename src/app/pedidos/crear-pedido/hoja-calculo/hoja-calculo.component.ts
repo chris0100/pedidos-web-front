@@ -101,7 +101,7 @@ export class HojaCalculoComponent implements OnInit {
           // Para cuando se envian cod barras digitados a la derecha
           if (contador >= 2 && obj.includes('=') && !repiteTipo && !obj.includes('\'')) {
             const cadena = obj.split('=')[1];
-            if (cadena.trim().length === 10) {
+            if (cadena.trim().length <= 10) {
               this.areaHoja += obj.split('=')[1] + ' \t\t | \t ';
               contador++;
               this.listaEx.push(cadena);
@@ -120,7 +120,7 @@ export class HojaCalculoComponent implements OnInit {
           // Para cuando se envian cod barras digitados a la izquierda
           if (contador >= 2 && obj.includes('=\'') && !repiteTipo) {
             const cadena = obj.split('\'')[1];
-            if (cadena.trim().length === 10) {
+            if (cadena.trim().length <= 10) {
               this.areaHoja += obj.split('\'')[1] + ' \t\t | \t ';
               contador++;
               this.listaEx.push(cadena);
