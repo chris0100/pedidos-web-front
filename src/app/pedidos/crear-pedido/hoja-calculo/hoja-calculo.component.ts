@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {ItemPedido} from '../../item-pedido';
 import {PedidoService} from '../../pedido.service';
 import {AuthService} from '../../../login/auth.service';
@@ -29,6 +29,9 @@ export class HojaCalculoComponent implements OnInit {
 
   // Error encontrado
   errorLectura: boolean;
+
+  // Input del file
+  @ViewChild('inputFile') myInputVariable: ElementRef;
 
 
   // Array de itemsExcel leidos
@@ -72,7 +75,6 @@ export class HojaCalculoComponent implements OnInit {
       const workbook = XLSX.read(bstr, {type: 'binary'});
       const first_sheet_name = workbook.SheetNames[0];
       const worksheet = workbook.Sheets[first_sheet_name];
-      console.log(XLSX.utils.sheet_to_formulae(worksheet));
 
       const arre = XLSX.utils.sheet_to_formulae(worksheet);
       let contador = 0;
@@ -101,26 +103,25 @@ export class HojaCalculoComponent implements OnInit {
           // Para cuando se envian cod barras digitados a la derecha
           if (contador >= 2 && obj.includes('=') && !repiteTipo && !obj.includes('\'')) {
             const cadena = obj.split('=')[1];
-            if (cadena.trim().length <= 10) {
+            if (cadena.trim().length <= 10 && cadena.trim().length > 6) {
               this.areaHoja += obj.split('=')[1] + ' \t\t | \t ';
               contador++;
               this.listaEx.push(cadena);
               repiteTipo = true;
               derecha = true;
             } else {
-              this.areaHoja += 'ERROR COD. \t\t | \t ';
+              this.areaHoja += 'ERROR COD. \t\t | \t ' + cadena;
               contador++;
               this.listaEx.push('error cod.');
               repiteTipo = true;
               derecha = true;
             }
-            console.log('DERECHA');
           }
 
           // Para cuando se envian cod barras digitados a la izquierda
           if (contador >= 2 && obj.includes('=\'') && !repiteTipo) {
             const cadena = obj.split('\'')[1];
-            if (cadena.trim().length <= 10) {
+            if (cadena.trim().length <= 10 && cadena.trim().length > 6) {
               this.areaHoja += obj.split('\'')[1] + ' \t\t | \t ';
               contador++;
               this.listaEx.push(cadena);
@@ -151,6 +152,7 @@ export class HojaCalculoComponent implements OnInit {
               repiteTipo = true;
             }
           }
+          // Tratamiento numeros col
           if (contador >= 2 && !obj.includes('=\'') && !derecha) {
             const numero = parseInt(obj.split('=')[1], 0);
             if (repiteTipo && numero < 1) {
@@ -204,6 +206,11 @@ export class HojaCalculoComponent implements OnInit {
   procesarArchivo(): void {
     let count = 0;
     let itemExcel = new ItemExcel();
+
+    // Limpio el file y el text area
+    this.myInputVariable.nativeElement.value = '';
+    this.areaHoja = '';
+
 
     try {
 
@@ -287,6 +294,9 @@ export class HojaCalculoComponent implements OnInit {
             }
             // Mostrar mensaje de exito
             swal('Correcto', `Los items se han añadido exitosamente`, 'success');
+
+            // Se inicializa la lista de excel
+            this.listaItemsExcel = [];
           }
 
           // Si existen errores en algun codigo de barras, se cancela la agregacion de items
@@ -311,6 +321,9 @@ export class HojaCalculoComponent implements OnInit {
             }
             // Se reestablece inactivacion de boton procesar archivo
             this.errorLectura = true;
+
+            // Se inicializa la lista de excel
+            this.listaItemsExcel = [];
           }
         });
 
