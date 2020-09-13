@@ -8,6 +8,7 @@ import {catchError, map} from 'rxjs/operators';
 import {PedidoUnoEE} from './pedido-uno-ee';
 import {ItemPedidoUnoEE} from './item-pedido-uno-ee';
 import {ItemPedido} from './item-pedido';
+import {ItemExcel} from './item-excel';
 
 @Injectable({
   providedIn: 'root'
@@ -317,10 +318,22 @@ export class PedidoService {
   }
 
 
+  // Se hace el respectivo tratamiento con el webservice
   webServiceProcess(pedido: Pedido): Observable<string> {
     const urlEndPoint = 'http://localhost:8082/obtener-conector';
     return this.http.post<string>(urlEndPoint, pedido);
   }
+
+
+
+  // Se envia listado de items de excel para realizar respectiva comparacion
+  tratamientoListaItemsExcelJava(listaItemsExcel: ItemExcel[]): Observable<string> {
+    const urlEndPoint = 'http://localhost:8082/tratamiento-lista-items-excel';
+    return this.http.post<string>(urlEndPoint, listaItemsExcel);
+  }
+
+
+
 
 
 
