@@ -20,6 +20,10 @@ export class ListaUsuariosComponent implements OnInit {
 
   ngOnInit(): void {
 
+    // Remover la busqueda del historial de pedidos, y listaItemProductosSelect
+    sessionStorage.removeItem('pedidosUnoEEHistorial');
+    sessionStorage.removeItem('listaItemPedidoSelect');
+
     // Inicializacion para cargar js
     // new tablas();
 

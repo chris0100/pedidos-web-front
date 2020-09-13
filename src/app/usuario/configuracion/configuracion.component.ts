@@ -28,6 +28,11 @@ export class ConfiguracionComponent implements OnInit {
 
 
   ngOnInit(): void {
+
+    // Remover la busqueda del historial de pedidos, y listaItemProductosSelect
+    sessionStorage.removeItem('pedidosUnoEEHistorial');
+    sessionStorage.removeItem('listaItemPedidoSelect');
+
     this.nombreUsuario = this.authService.usuario.nombre;
     this.emailUsuario = this.authService.usuario.email;
     this.usuarioModificado = new Usuario();

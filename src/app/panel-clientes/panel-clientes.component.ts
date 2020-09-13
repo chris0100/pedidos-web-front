@@ -22,8 +22,10 @@ export class PanelClientesComponent implements OnInit {
     // Ejecucion del script
     new tablas();
 
-    // Remover la busqueda del historial de pedidos
+    // Remover la busqueda del historial de pedidos, y listaItemProductosSelect
     sessionStorage.removeItem('pedidosUnoEEHistorial');
+    sessionStorage.removeItem('listaItemPedidoSelect');
+
 
   }
 

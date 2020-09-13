@@ -27,13 +27,13 @@
         </div>
 
         <div class="md-form md-outline">
-          <input type="text" id="num-oc-op" class="form-control" [(ngModel)]="numeroOcOp">
+          <input type="text" id="num-oc-op" class="form-control" [(ngModel)]="pedidoActual.oc">
           <label for="num-oc-op" class="">Número OC/OP</label>
         </div>
 
         <!-- Basic textarea -->
         <div class="md-form md-outline">
-          <textarea type="text" id="notas" class="md-textarea form-control" rows="6" [(ngModel)]="notas"></textarea>
+          <textarea type="text" id="notas" class="md-textarea form-control" rows="6" [(ngModel)]="pedidoActual.nota"></textarea>
           <label for="notas">Notas</label>
         </div>
 
@@ -182,7 +182,7 @@
         <button class="btn btn-rounded btn-success"
                 (click)="addPedidoBorrador()"
                 [disabled]="pedidoActual.contacto.trim().length<1 || pedidoActual.direccion.trim().length<1 ||
-                pedidoActual.terceroVendedor.trim().length<1 || notas.trim().length<1 || numeroOcOp.trim().length<1 || listaItemPedidoSelect.length<1"
+                pedidoActual.terceroVendedor.trim().length<1 || pedidoActual.nota.trim().length<1 || pedidoActual.oc.trim().length<1 || listaItemPedidoSelect.length<1"
         >
           Guardar Borrador
         </button>
@@ -190,7 +190,7 @@
         <button class="btn btn-rounded btn-primary"
                 (click)="aprobarPedido()"
                 [disabled]="pedidoActual.contacto.trim().length<1 || pedidoActual.direccion.trim().length<1 ||
-                pedidoActual.terceroVendedor.trim().length<1 || notas.trim().length<1 || numeroOcOp.trim().length<1 || listaItemPedidoSelect.length<1"
+                pedidoActual.terceroVendedor.trim().length<1 || pedidoActual.nota.trim().length<1 || pedidoActual.oc.trim().length<1 || listaItemPedidoSelect.length<1"
         >
           Aprobar Pedido
         </button>
@@ -271,7 +271,7 @@
 
         <button class="btn btn-rounded btn-primary"
                 [disabled]="pedidoActual.contacto.trim().length<1 || pedidoActual.direccion.trim().length<1 ||
-                pedidoActual.terceroVendedor.trim().length<1 || notas.trim().length<1 || numeroOcOp.trim().length<1 || listaItemPedidoSelect.length<1"
+                pedidoActual.terceroVendedor.trim().length<1 || pedidoActual.nota.trim().length<1 || pedidoActual.oc.trim().length<1 || listaItemPedidoSelect.length<1"
                 (click)="confirmarPedidoCrear()"
         >
           Verificar Datos del Pedido

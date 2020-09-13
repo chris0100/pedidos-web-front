@@ -152,17 +152,28 @@ export class HojaCalculoComponent implements OnInit {
             }
           }
           if (contador >= 2 && !obj.includes('=\'') && !derecha) {
-            if (repiteTipo) {
-              this.areaHoja += obj.split('=')[1] + '\n';
+            const numero = parseInt(obj.split('=')[1], 0);
+            if (repiteTipo && numero < 1) {
+              this.areaHoja += 'ERROR CANTIDAD CERO\n';
               contador++;
               this.listaEx.push(obj.split('=')[1]);
               repiteTipo = false;
-            } else {
-              this.areaHoja += 'ERROR COD. \t\t | \t ' + obj.split('=')[1] + '\n';
-              contador++;
-              this.listaEx.push('error cod.');
-              this.listaEx.push(obj.split('=')[1]);
-              repiteTipo = false;
+            }
+            // si no se cumple
+            // tslint:disable-next-line:one-line
+            else{
+              if (repiteTipo && numero > 0) {
+                this.areaHoja += obj.split('=')[1] + '\n';
+                contador++;
+                this.listaEx.push(obj.split('=')[1]);
+                repiteTipo = false;
+              } else {
+                this.areaHoja += 'ERROR COD. \t\t | \t ' + obj.split('=')[1] + '\n';
+                contador++;
+                this.listaEx.push('error cod.');
+                this.listaEx.push(obj.split('=')[1]);
+                repiteTipo = false;
+              }
             }
           }
 
@@ -210,12 +221,18 @@ export class HojaCalculoComponent implements OnInit {
         }
       });
 
+      // Agregar el nit en el ultimo campo
+      const nit: ItemExcel = new ItemExcel();
+      nit.codigoItem = this.authService.usuario.nit;
+      nit.cantidad = -1;
+      this.listaItemsExcel.push(nit);
+
       // Se envia la lista de items Excel
       this.pedidosService.tratamientoListaItemsExcelJava(this.listaItemsExcel).subscribe(
         obj => {
           console.log(obj);
           // Se valida que la cantidad que salio sea la misma que entro
-          if (obj.length === this.listaItemsExcel.length) {
+          if (this.listaItemsExcel.length - obj.length === 1) {
 
             // Se itera sobre el arreglo recibido
             for (let i = 0; i < obj.length; i++) {
@@ -269,7 +286,7 @@ export class HojaCalculoComponent implements OnInit {
                 });
             }
             // Mostrar mensaje de exito
-            swal('Correcto', `Se han añadido los items exitosamente`, 'success');
+            swal('Correcto', `Los items se han añadido exitosamente`, 'success');
           }
 
           // Si existen errores en algun codigo de barras, se cancela la agregacion de items

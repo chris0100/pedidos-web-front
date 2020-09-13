@@ -25,6 +25,10 @@ export class PedidosVerificacionComponent implements OnInit {
 
   ngOnInit(): void {
 
+    // Remover la busqueda del historial de pedidos, y listaItemProductosSelect
+    sessionStorage.removeItem('pedidosUnoEEHistorial');
+    sessionStorage.removeItem('listaItemPedidoSelect');
+
     // Obtener el listado de pedidos en verificacion
     this.pedidosService.listarPedidosVerificacionJava(this.authService.usuario.nit).subscribe(
       obj => {

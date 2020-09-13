@@ -22,8 +22,8 @@ export class CrearPedidoComponent implements OnInit {
   pedidoActual: Pedido = new Pedido();
   usuario: Usuario;
   contarItemMostrarPanel: number; // cuenta para saber si muestra el panel 2
-  numeroOcOp: string; // numero de compra
-  notas: string;  // campo de notas
+  // numeroOcOp: string; // numero de compra
+  // notas: string;  // campo de notas
   listaItemPedidoSelect: ItemPedido[];  // Listado de items que van siendo añadidos
 
 
@@ -34,8 +34,8 @@ export class CrearPedidoComponent implements OnInit {
   constructor(private pedidosService: PedidoService, private authService: AuthService,
               private router: Router) {
     this.usuario = this.authService.usuario;
-    this.numeroOcOp = '';
-    this.notas = '';
+    this.pedidoActual.nota = '';
+    this.pedidoActual.oc = '';
   }
 
 
@@ -66,6 +66,10 @@ export class CrearPedidoComponent implements OnInit {
 
 
   ngOnInit(): void {
+
+    // Remover la busqueda del historial de pedidos, y listaItemProductosSelect
+    sessionStorage.removeItem('pedidosUnoEEHistorial');
+
 
     // Cargar la lista de los items añadidos
     this.listaItemPedidoSelect = this.pedidosService.obtenerListaItemPedidoSelectStoragee();
@@ -133,8 +137,8 @@ export class CrearPedidoComponent implements OnInit {
     console.log('se procede a añadir el pedido como borrador');
     this.pedidoActual.estado = 0;
     this.pedidoActual.listaItemPedido = this.listaItemPedidoSelect;
-    this.pedidoActual.nota = this.notas;
-    this.pedidoActual.oc = this.numeroOcOp;
+    // this.pedidoActual.nota = this.notas;
+    // this.pedidoActual.oc = this.numeroOcOp;
 
     // Eliminar la parte de los roles
     const roles = this.pedidoActual.idUsuario.roles;
@@ -165,8 +169,8 @@ export class CrearPedidoComponent implements OnInit {
         this.pedidoActual.estado = 0;
         this.pedidoActual.terceroAsesor = obj[2];
         this.pedidoActual.listaItemPedido = this.listaItemPedidoSelect;
-        this.pedidoActual.nota = this.notas;
-        this.pedidoActual.oc = this.numeroOcOp;
+        // this.pedidoActual.nota = this.notas;
+        // this.pedidoActual.oc = this.numeroOcOp;
 
         // Probar obtener email asesor
         this.pedidoActual.emailAsesor = obj[1];
@@ -174,8 +178,6 @@ export class CrearPedidoComponent implements OnInit {
         // Eliminar la parte de los roles
         const roles = this.pedidoActual.idUsuario.roles;
         this.pedidoActual.idUsuario.roles = [];
-
-        console.log(this.pedidoActual);
 
         // Se guarda el pedido en la base de datos
         this.pedidosService.crearPedidoBorrador(this.pedidoActual).subscribe(

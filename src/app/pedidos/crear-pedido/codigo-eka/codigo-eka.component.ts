@@ -74,10 +74,6 @@ export class CodigoEkaComponent implements OnInit {
           this.pedidosService.guardarListaItemPatronStorage(this.listaItemPatron);
         });
     }
-
-
-
-
   }
 
 
