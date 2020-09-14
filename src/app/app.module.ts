@@ -31,6 +31,7 @@ import localeES from '@angular/common/locales/es';
 import { DetalleHistorialPedidosComponent } from './pedidos/historial-pedidos/detalle-historial-pedidos/detalle-historial-pedidos.component';
 import { DetallePedidosVerificacionComponent } from './pedidos/pedidos-verificacion/detalle-pedidos-verificacion/detalle-pedidos-verificacion.component';
 import { DetallePedidosBorradorComponent } from './pedidos/pedidos-borrador/detalle-pedidos-borrador/detalle-pedidos-borrador.component';
+import { ValidacionItemsComponent } from './usuario/validacion-items/validacion-items.component';
 
 
 registerLocaleData(localeES, 'es');
@@ -58,7 +59,8 @@ registerLocaleData(localeES, 'es');
     PedidosVerificacionComponent,
     DetalleHistorialPedidosComponent,
     DetallePedidosVerificacionComponent,
-    DetallePedidosBorradorComponent
+    DetallePedidosBorradorComponent,
+    ValidacionItemsComponent
   ],
   imports: [
     BrowserModule,

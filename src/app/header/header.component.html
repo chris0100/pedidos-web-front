@@ -24,7 +24,7 @@
       <li class="nav-item dropdown mr-2">
         <a class="nav-link dropdown-toggle waves-effect"  id="userDropdown" data-toggle="dropdown"
            aria-haspopup="true" aria-expanded="false">
-          <i class="fas fa-user"></i> {{authService.usuario.nombre}} | {{authService.usuario.cliente}}
+          <i class="fas fa-user"></i> {{authService.usuario.id_punto_envio}}  | {{authService.usuario.nombre}} | {{authService.usuario.cliente}}
         </a>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
           <a class="dropdown-item"  (click)="logout()">Cerrar Sesión</a>

@@ -3,6 +3,7 @@ import {Pedido} from '../pedido';
 import {PedidoService} from '../pedido.service';
 import {Router} from '@angular/router';
 import {AuthService} from '../../login/auth.service';
+import swal from 'sweetalert2';
 
 // carga de archivo js para mdbootstrap
 // declare var tablas: any;
@@ -36,4 +37,49 @@ export class PedidosBorradorComponent implements OnInit {
       });
   }
 
+
+
+  eliminarPedidoBorrador(pedidoBorrador: Pedido): void {
+    swal({
+      title: 'Eliminar Borrador',
+      text: `¿Desea eliminar el Borrador con código ${pedidoBorrador.id}?`,
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, eliminar!',
+      cancelButtonText: 'No, cancelar!',
+      confirmButtonClass: 'btn btn-primary',
+      cancelButtonClass: 'btn btn-danger',
+      buttonsStyling: false,
+      reverseButtons: true
+    }).then(result => {
+      if (result.value) {
+        this.pedidosService.eliminarBorradorJava(pedidoBorrador.id).subscribe(
+          () => {
+            this.pedidos = this.pedidos.filter(obj => obj !== pedidoBorrador);
+            swal('Borrador Eliminado!',
+              `El borrador con código ${pedidoBorrador.id} ha sido eliminado con éxito`,
+              'success');
+          });
+      }
+    });
+  }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

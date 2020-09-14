@@ -28,8 +28,11 @@
 
     <div class="md-form md-outline">
       <i class="fas fa-balance-scale-left prefix"></i>
-      <input type="text" id="unidad-medida-ce" class="form-control" [value]="itemPedidoActual.unidadMedida"
-             style="background-color: #e7e7e5" disabled>
+      <input type="text" id="unidad-medida-ce"
+             class="form-control border-primary"
+             [value]="itemPedidoActual.unidadMedida"
+             disabled
+      >
       <label for="unidad-medida-ce" class="active">Unidad de
         Medida</label>
     </div>
@@ -37,10 +40,12 @@
   </div>
 
   <div class="col-md-4">
-    <label class="small">{{descripcionLabelExt1}}</label>
+    <label class="small"
+           style="margin-top: 9px; margin-left: 10px;z-index: 100"
+    >{{descripcionLabelExt1}}</label>
     <select class="form-control"
             [(ngModel)]="itemPedidoActual.descripcionExt1"
-            style="margin-top: -6px"
+            style="margin-top: -12px"
     >
       <option value="" disabled selected>Seleccionar</option>
       <option [value]="item" *ngFor="let item of listaExt1">{{item}}</option>

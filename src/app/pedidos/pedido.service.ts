@@ -333,6 +333,19 @@ export class PedidoService {
   }
 
 
+  // Eliminar borrador a traves del id
+  eliminarBorradorJava(id: number): Observable<Pedido> {
+    const urlEndPoint = 'http://localhost:8082/eliminar-pedido-borrador';
+    return this.http.delete<Pedido>(`${urlEndPoint}/${id}`).pipe(
+      catchError(e => {
+        if ( e.error.mensaje) {
+          console.log(e.error.mensaje);
+        }
+        return throwError(e);
+      })
+    );
+  }
+
 
 
 

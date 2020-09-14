@@ -187,8 +187,11 @@ export class HojaCalculoComponent implements OnInit {
           swal('Error de carga', 'El archivo cargado contiene errores, verificalo por favor', 'error');
           this.errorLectura = true;
           this.listaEx = [];
+
+          // Limpio el file y el text area
+          this.myInputVariable.nativeElement.value = '';
           return;
-        } else {
+        } else if (this.myInputVariable.nativeElement.value !== '') {
           // Si llega aqui significa que todo esta bien
           this.errorLectura = false;
         }
@@ -237,7 +240,6 @@ export class HojaCalculoComponent implements OnInit {
       // Se envia la lista de items Excel
       this.pedidosService.tratamientoListaItemsExcelJava(this.listaItemsExcel).subscribe(
         obj => {
-          console.log(obj);
           // Se valida que la cantidad que salio sea la misma que entro
           if (this.listaItemsExcel.length - obj.length === 1) {
 
@@ -264,7 +266,6 @@ export class HojaCalculoComponent implements OnInit {
               // Busca la bodega del item
               this.pedidosService.obtenerBodegaItemJava(itemPedidoActual.codItem + '').subscribe(
                 obj2 => {
-                  console.log(obj2);
                   itemPedidoActual.idBodega = obj2[0];
 
                   if (this.authService.usuario.nit.trim() === '1792196841001') {
@@ -274,9 +275,6 @@ export class HojaCalculoComponent implements OnInit {
                   else {
                     itemPedidoActual.idMotivo = '01';
                   }
-
-                  // Muestra el itemPedido Actual
-                  console.log(itemPedidoActual);
 
                   // Se agrega a la lista de itempedido
                   this.listaItemPedidoSelect = this.pedidosService.obtenerListaItemPedidoSelectStoragee();
@@ -332,7 +330,6 @@ export class HojaCalculoComponent implements OnInit {
       // Se reestablece inactivacion de boton procesar archivo
       this.errorLectura = true;
     }
-    console.log(this.listaItemsExcel);
 
     // Se reestablece inactivacion de boton procesar archivo en la espera de mas datos
     this.errorLectura = true;
@@ -342,7 +339,6 @@ export class HojaCalculoComponent implements OnInit {
 
   // Se elimina un item de la lista seleccionada
   removerItem(item: ItemPedido): void {
-    console.log(item);
     let nombreItemEliminar = '';
 
     // Buscar en la lista
@@ -358,7 +354,6 @@ export class HojaCalculoComponent implements OnInit {
 
     // Mostrar mensaje satisfactorio de elemento eliminado
     swal('Correcto', `Se ha eliminado el item ${nombreItemEliminar} exitosamente`, 'success');
-    console.log(this.listaInputItemPedidoSelect);
 
     // Guardar en el session storage
     this.pedidosService.guardarListaItemPedidoSelectStorage(this.listaInputItemPedidoSelect);
