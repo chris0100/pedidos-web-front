@@ -363,6 +363,100 @@ export class PedidoService {
 
 
 
+  // Consultar lista ext1(tamaño)
+  consultarListaExt1Java(codItem: number): Observable<string[]> {
+    const urlEndPoint = 'http://localhost:8082/obtener-lista-ext1';
+    return this.http.get<string[]>(`${urlEndPoint}/${codItem}`).pipe(
+      catchError(e => {
+        if (e.status != 401 && e.error.mensaje) {
+          this.router.navigate(['/panel-clientes']);
+          console.log(e.error.mensaje);
+        }
+        return throwError(e);
+      })
+    );
+  }
+
+
+
+  // Consultar lista ext2(color)
+  consultarListaExt2Java(codItem: number): Observable<string[]> {
+    const urlEndPoint = 'http://localhost:8082/obtener-lista-ext2';
+    return this.http.get<string[]>(`${urlEndPoint}/${codItem}`).pipe(
+      catchError(e => {
+        if (e.status != 401 && e.error.mensaje) {
+          this.router.navigate(['/panel-clientes']);
+          console.log(e.error.mensaje);
+        }
+        return throwError(e);
+      })
+    );
+  }
+
+
+
+  // Obtener datos item completo
+  obtenerDatosItemCompleto(codItem: number, ext1: string, ext2: string): Observable<string[]> {
+    const urlEndPoint = 'http://localhost:8082/obtener-datos-item';
+    return this.http.get<string[]>(`${urlEndPoint}/${codItem}/${ext1}/${ext2}`).pipe(
+      catchError(e => {
+        if (e.status != 401 && e.error.mensaje) {
+          this.router.navigate(['/panel-clientes']);
+          console.log(e.error.mensaje);
+        }
+        return throwError(e);
+      })
+    );
+  }
+
+
+  // Obtener disponible item completo
+  obtenerDisponibleItemCompleto(codItem: number, ext1: string, ext2: string): Observable<string[]> {
+    const urlEndPoint = 'http://localhost:8082/obtener-disponible-item';
+    return this.http.get<string[]>(`${urlEndPoint}/${codItem}/${ext1}/${ext2}`).pipe(
+      catchError(e => {
+        if (e.status != 401 && e.error.mensaje) {
+          this.router.navigate(['/panel-clientes']);
+          console.log(e.error.mensaje);
+        }
+        return throwError(e);
+      })
+    );
+  }
+
+
+
+  // Obtener datos item
+  obtenerDatosItem(codItem: number): Observable<string[]> {
+    const urlEndPoint = 'http://localhost:8082/obtener-datos-item';
+    return this.http.get<string[]>(`${urlEndPoint}/${codItem}`).pipe(
+      catchError(e => {
+        if (e.status != 401 && e.error.mensaje) {
+          this.router.navigate(['/panel-clientes']);
+          console.log(e.error.mensaje);
+        }
+        return throwError(e);
+      })
+    );
+  }
+
+
+  // Obtener disponible item completo
+  obtenerDisponibleItem(codItem: number): Observable<string[]> {
+    const urlEndPoint = 'http://localhost:8082/obtener-disponible-item';
+    return this.http.get<string[]>(`${urlEndPoint}/${codItem}`).pipe(
+      catchError(e => {
+        if (e.status != 401 && e.error.mensaje) {
+          this.router.navigate(['/panel-clientes']);
+          console.log(e.error.mensaje);
+        }
+        return throwError(e);
+      })
+    );
+  }
+
+
+
 
 
 

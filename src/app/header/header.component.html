@@ -104,6 +104,11 @@
 
           </ul>
         </li>
+
+        <li class="nav-item" *ngIf="authService.hasRole('ROLE_ADMIN')">
+          <a class="nav-link" [routerLink]="['/validacion-items']">Validar Item Creado</a>
+        </li>
+
       </ul>
     </div>
   </div>
