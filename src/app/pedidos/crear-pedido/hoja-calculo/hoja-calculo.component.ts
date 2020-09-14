@@ -359,6 +359,33 @@ export class HojaCalculoComponent implements OnInit {
     this.pedidosService.guardarListaItemPedidoSelectStorage(this.listaInputItemPedidoSelect);
   }
 
+
+  // Elimina item de la BD
+  removerItemBD(item: ItemPedido): void {
+    this.pedidosService.eliminarItemBorradorJava(item.idItem).subscribe(
+      () => {
+        let nombreItemEliminar = '';
+
+        // Buscar en la lista
+        // @ts-ignore
+        const index = this.listaInputItemPedidoSelect.findIndex(obj => {
+          if (obj === item) {
+            nombreItemEliminar = obj.descripcion;
+            return obj;
+          }
+        });
+
+        this.listaInputItemPedidoSelect.splice(index, 1);  // borrar elemento
+
+        // Mostrar mensaje satisfactorio de elemento eliminado
+        swal('Correcto', `Se ha eliminado el item ${nombreItemEliminar} exitosamente`, 'success');
+        console.log(this.listaInputItemPedidoSelect);
+
+        // Guardar en el session storage
+        this.pedidosService.guardarListaItemPedidoSelectStorage(this.listaInputItemPedidoSelect);
+      });
+  }
+
 }
 
 

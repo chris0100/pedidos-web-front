@@ -4,9 +4,15 @@
 <!-- CARD DE CONTENIDO SEGUN PAGINA-->
 <div class="card mx-auto" style="width: 90%; margin-top: 200px">
 
-  <div class="card-header warning-color-dark">
+  <div class="card-header warning-color-dark" *ngIf="!pedidoActual.id else elseBlock">
     <h5 class="font-weight-bold text-black"><i class="fas fa-shopping-cart"></i> Crear Pedido</h5>
   </div>
+
+  <ng-template #elseBlock>
+  <div class="card-header warning-color-dark">
+    <h5 class="font-weight-bold text-black"><i class="fas fa-shopping-cart"></i> Editar Pedido</h5>
+  </div>
+  </ng-template>
 
 
   <div class="card-body">
@@ -28,13 +34,13 @@
 
         <div class="md-form md-outline">
           <input type="text" id="num-oc-op" class="form-control" [(ngModel)]="pedidoActual.oc">
-          <label for="num-oc-op" class="">Número OC/OP</label>
+          <label for="num-oc-op" class="active">Número OC/OP</label>
         </div>
 
         <!-- Basic textarea -->
         <div class="md-form md-outline">
           <textarea type="text" id="notas" class="md-textarea form-control" rows="6" [(ngModel)]="pedidoActual.nota"></textarea>
-          <label for="notas">Notas</label>
+          <label for="notas" class="active">Notas</label>
         </div>
 
       </div>
@@ -183,13 +189,28 @@
           Volver a Editar
         </button>
 
+        <!--PARTE GUARDAR BORRADOR-->
         <button class="btn btn-rounded btn-success"
                 (click)="addPedidoBorrador()"
+                [disabled]="pedidoActual.contacto.trim().length<1 || pedidoActual.direccion.trim().length<1 ||
+                pedidoActual.terceroVendedor.trim().length<1 || pedidoActual.nota.trim().length<1 || pedidoActual.oc.trim().length<1 || listaItemPedidoSelect.length<1"
+                *ngIf="!pedidoActual.id else elseBlock3"
+        >
+          Guardar Borrador
+        </button>
+
+        <ng-template #elseBlock3>
+        <button class="btn btn-rounded btn-success"
+                (click)="addPedidoBorradorExistente()"
                 [disabled]="pedidoActual.contacto.trim().length<1 || pedidoActual.direccion.trim().length<1 ||
                 pedidoActual.terceroVendedor.trim().length<1 || pedidoActual.nota.trim().length<1 || pedidoActual.oc.trim().length<1 || listaItemPedidoSelect.length<1"
         >
           Guardar Borrador
         </button>
+        </ng-template>
+        <!--PARTE GUARDAR BORRADOR-->
+
+
 
         <button class="btn btn-rounded btn-primary"
                 (click)="aprobarPedido()"
@@ -283,11 +304,22 @@
 
         <button class="btn btn-rounded btn-danger"
                 style="min-width: 270px"
+                *ngIf="!pedidoActual.id else elseBlock2"
                 [routerLink]="['/panel-clientes']"
                 (click)="cancelarPedido()"
         >
           Cancelar
         </button>
+
+        <ng-template #elseBlock2>
+          <button class="btn btn-rounded btn-danger"
+                  style="min-width: 270px"
+                  [routerLink]="['/pedidos-borrador']"
+                  (click)="cancelarPedido()"
+          >
+            Cancelar
+          </button>
+        </ng-template>
       </div>
 
 

@@ -21,4 +21,5 @@ export class ItemPedido {
   unoeePortafolio: number;
   unoeeListasMateriales: number;
   cantidad: number;
+  idItem: number;
 }

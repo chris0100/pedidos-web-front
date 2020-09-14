@@ -134,7 +134,15 @@
       <td>{{item.descripcionExt2}}</td>
       <td>{{item.cantidad}}</td>
       <td>{{item.unidadMedida}}</td>
-      <td><a (click)="removerItem(item)"><i class="fas fa-trash" style="color: #bd2130"></i></a></td>
+      <td *ngIf="!item.idItem else elseBlock">
+        <a (click)="removerItem(item)"><i class="fas fa-trash" style="color: #bd2130"></i></a>
+      </td>
+
+      <ng-template #elseBlock>
+      <td>
+        <a (click)="removerItemBD(item)"><i class="fas fa-trash" style="color: #bd2130"></i></a>
+      </td>
+      </ng-template>
     </tr>
 
     </tbody>
