@@ -56,11 +56,15 @@
           <td>{{pedido.estado? 'NO BORRADOR':'EN BORRADOR'}}</td>
           <td class="d-flex">
             <button class="btn btn-sm btn-warning btn-rounded"
-                    [routerLink]="['/detalle-pedidos-borrador',pedido.id]"
+                    [routerLink]="['/detalle-pedido-borrador',pedido.id]"
             >
               <i class="fas fa-search"></i>
             </button>
-            <button class="btn btn-sm btn-primary btn-rounded"><i class="fas fa-edit"></i></button>
+            <button class="btn btn-sm btn-primary btn-rounded"
+                    [routerLink]="['/editar-pedido', pedido.id]"
+            >
+              <i class="fas fa-edit"></i>
+            </button>
             <button class="btn btn-sm btn-danger btn-rounded" (click)="eliminarPedidoBorrador(pedido)"><i class="far fa-trash-alt"></i></button>
           </td>
         </tr>

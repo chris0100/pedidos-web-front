@@ -5,7 +5,7 @@ import {AuthService} from '../../login/auth.service';
 import {Usuario} from '../../usuario/usuario';
 import {ItemPedido} from '../item-pedido';
 import swal from 'sweetalert2';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 
 // carga de archivo js para mdbootstrap
@@ -32,7 +32,7 @@ export class CrearPedidoComponent implements OnInit {
 
 
   constructor(private pedidosService: PedidoService, private authService: AuthService,
-              private router: Router) {
+              private router: Router, private activatedRoute: ActivatedRoute) {
     this.usuario = this.authService.usuario;
     this.pedidoActual.nota = '';
     this.pedidoActual.oc = '';
@@ -66,6 +66,9 @@ export class CrearPedidoComponent implements OnInit {
 
 
   ngOnInit(): void {
+
+    // Si es para ediion carga
+    this.cargarPedidoEditar();
 
     // Remover la busqueda del historial de pedidos, y listaItemProductosSelect
     sessionStorage.removeItem('pedidosUnoEEHistorial');
@@ -104,12 +107,34 @@ export class CrearPedidoComponent implements OnInit {
     );
 
 
-
-
-
     // Ejecutar script js
     new pedidos();
   }
+
+
+
+  // Carga a traves de la ruta variable idpedido
+  cargarPedidoEditar(): void {
+    this.activatedRoute.params.subscribe(
+      params => {
+        const id = params['id'];
+        if (id) {
+          this.pedidosService.obtenerPedidoVBJava(id).subscribe(
+            obj => {
+              // Pasar los datos al pedido
+              this.pedidoActual = obj;
+              console.log(this.pedidoActual);
+
+              this.listaItemPedidoSelect = obj.listaItemPedido;
+              this.pedidosService.guardarListaItemPedidoSelectStorage(this.listaItemPedidoSelect);
+              console.log(this.listaItemPedidoSelect);
+            });
+        }
+      });
+  }
+
+
+
 
 
   // Se da click en el boton cancelar el pedido

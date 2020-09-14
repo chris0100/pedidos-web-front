@@ -27,12 +27,11 @@ export class HistorialPedidosComponent implements OnInit {
 
   ngOnInit(): void {
 
-    // Remover la busqueda del historial de pedidos, y listaItemProductosSelect
-    sessionStorage.removeItem('pedidosUnoEEHistorial');
-    sessionStorage.removeItem('listaItemPedidoSelect');
-
     // Si se encuentra el historial aun en el session storage
     this.pedidosUnoEE = this.pedidosService.obtenerPedidoUnoEEGuardadoSessionStorage();
+
+    // Remover la busqueda del historial de pedidos, y listaItemProductosSelect
+    sessionStorage.removeItem('listaItemPedidoSelect');
   }
 
 
