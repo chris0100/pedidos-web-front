@@ -328,7 +328,7 @@ export class PedidoService {
           return throwError(e);
         }
 
-        if (e.error.mensaje){
+        if (e.error.mensaje) {
           console.error(e.error.mensaje);
         }
         return throwError(e);
@@ -358,6 +358,12 @@ export class PedidoService {
     return this.http.post<string>(urlEndPoint, pedido);
   }
 
+
+  // Se hace el respectivo tratamiento con el webservice con el pedido que esta en error
+  webServiceProcessError(pedido: Pedido): Observable<string> {
+    const urlEndPoint = 'http://localhost:8082/obtener-conector-error';
+    return this.http.post<string>(urlEndPoint, pedido);
+  }
 
 
   // Se envia listado de items de excel para realizar respectiva comparacion

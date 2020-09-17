@@ -100,15 +100,25 @@ export class PrepareVerErrorComponent implements OnInit {
         // tslint:disable-next-line:no-shadowed-variable
         this.pedidoError.listaItemPedido.forEach(obj1 => {
           this.pedidosService.sincronizarBodegaItemsJava(obj1.idItem, obj1.codItem.toString()).subscribe(
-            obj2 => {
-              if (this.pedidoError.idUsuario.nit === '1792196841001') {
-                // Se sincroniza el precio con ecuador
-                this.pedidosService.sincronizarPrecioEcuadorJava(obj1.idItem).subscribe(obj3 => obj3);
-              }
-            }
-          );
+            obj2 => obj2);
         });
+      });
+  }
 
+
+
+  // Funcionalidad para cuando se da clic en el boton volver a enviar pedido
+  enviarPedidoAgain(): void {
+    console.log('se ha dado clic en el boton enviar pedido nuevamente');
+    console.log(this.pedidoError);
+    this.pedidosService.webServiceProcessError(this.pedidoError).subscribe(
+      obj => {
+        console.log(obj);
+        if (obj[0].includes('no')) {
+          swal('Error', obj[0], 'error');
+        } else {
+          swal('Correcto', obj[0], 'success');
+        }
       });
   }
 
