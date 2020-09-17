@@ -39,7 +39,8 @@
               "src/resources/js/tablas.js",
               "src/resources/js/login.js",
               "src/resources/js/pedidos.js",
-              "src/resources/js/historial.js"
+              "src/resources/js/historial.js",
+              "src/resources/js/tooltip.js"
             ]
           },
           "configurations": {

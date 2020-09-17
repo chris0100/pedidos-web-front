@@ -19,7 +19,7 @@ export class HeaderComponent implements OnInit {
 
   // Cerrar sesion
   logout(): void {
-    swal('Logout', `Correcto, ${this.authService.usuario.username}, has cerrado sesion correctamente`, 'success');
+    swal('Hasta Pronto', `${this.authService.usuario.nombre}, has cerrado sesion correctamente. Gracias por usar nuestros servicios`, 'success');
     this.authService.logout();
     this.router.navigate(['/login']);
   }

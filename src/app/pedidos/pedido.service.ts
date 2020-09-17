@@ -267,6 +267,40 @@ export class PedidoService {
   }
 
 
+  // Sincronizar la bodega del item
+  sincronizarBodegaItemsJava(idItem: number, codigoItem: string): Observable<string[]> {
+    const urlEndPoint = 'http://localhost:8082/sincronizar-bodega-item';
+    return this.http.get<string[]>(`${urlEndPoint}/${idItem}/${codigoItem}`).pipe(
+      catchError(e => {
+        if (e.status != 401 && e.error.mensaje) {
+          this.router.navigate(['/panel-clientes']);
+          console.log(e.error.mensaje);
+        }
+        return throwError(e);
+      })
+    );
+  }
+
+
+
+  // Sincronizar precio ecuador
+  sincronizarPrecioEcuadorJava(idItem: number): Observable<string[]> {
+    const urlEndPoint = 'http://localhost:8082/sincronizar-precio-ecuador';
+    return this.http.get<string[]>(`${urlEndPoint}/${idItem}`).pipe(
+      catchError(e => {
+        if (e.status != 401 && e.error.mensaje) {
+          this.router.navigate(['/panel-clientes']);
+          console.log(e.error.mensaje);
+        }
+        return throwError(e);
+      })
+    );
+  }
+
+
+
+
+
 
   // Localiza el item homologado para el cliente con el codigoitem asignado
   contarHomologarItemDuplicado(nit: string, codigoItem: string): Observable<string[]> {
@@ -455,6 +489,51 @@ export class PedidoService {
     );
   }
 
+
+
+  // Listar pedidos error completo
+  listarPedidosErrorCompletoJava(): Observable<Pedido[]> {
+    const urlEndPoint = 'http://localhost:8082/obtener-lista-pedido-error';
+    return this.http.get<Pedido[]>(`${urlEndPoint}`).pipe(
+      catchError(e => {
+        if (e.status != 401 && e.error.mensaje) {
+          this.router.navigate(['/panel-clientes']);
+          console.log(e.error.mensaje);
+        }
+        return throwError(e);
+      })
+    );
+  }
+
+
+  // Listar pedidos error asesor
+  listarPedidosErrorAsesorJava(nit: string): Observable<Pedido[]> {
+    const urlEndPoint = 'http://localhost:8082/obtener-lista-pedido-error-asesor';
+    return this.http.get<Pedido[]>(`${urlEndPoint}/${nit}`).pipe(
+      catchError(e => {
+        if (e.status != 401 && e.error.mensaje) {
+          this.router.navigate(['/panel-clientes']);
+          console.log(e.error.mensaje);
+        }
+        return throwError(e);
+      })
+    );
+  }
+
+
+  // Sincronizacion de items del pedido con error
+  sincronizarItemsJava(idPedido: string, nit: string): Observable<string> {
+    const urlEndPoint = 'http://localhost:8082/sincronizar-items';
+    return this.http.get<string>(`${urlEndPoint}/${idPedido}/${nit}`).pipe(
+      catchError(e => {
+        if (e.status != 401 && e.error.mensaje) {
+          this.router.navigate(['/panel-clientes']);
+          console.log(e.error.mensaje);
+        }
+        return throwError(e);
+      })
+    );
+  }
 
 
 

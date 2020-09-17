@@ -1,0 +1,278 @@
+<app-header></app-header>
+
+<!-- CARD DE CONTENIDO SEGUN PAGINA-->
+<div class="card mx-auto" style="width: 90%; margin-top: 200px">
+
+  <div class="card-header warning-color-dark">
+    <h5 class="font-weight-bold text-black">Detalle del pedido</h5>
+  </div>
+
+
+  <div class="jumbotron jumbotron-fluid p-1 m-3 danger-color-dark text-white">
+    <div class="container">
+      <h2 class="display-5 ">Error al procesar pedido</h2>
+      <p class="lead text-left">El pedido no fue creado debido a problemas técnicos</p>
+      <p class="lead text-left">Código del error:</p>
+      <p class="lead text-left">{{pedidoError.mensajeWB}}</p>
+    </div>
+  </div>
+
+
+  <div class="card-body">
+
+    <div class="row">
+
+
+      <!--Columna izquierda-->
+      <div class="col-sm-4">
+
+        <div class="md-form md-outline">
+          <input type="text" id="codPedido" class="form-control" disabled [value]="pedidoError.id">
+          <label for="codPedido" class="active">Código del pedido</label>
+        </div>
+
+        <div class="md-form md-outline">
+          <input type="text" id="responsable" class="form-control" disabled [value]="pedidoError.idUsuario.nombre">
+          <label for="responsable" class="active">Responsable del pedido</label>
+        </div>
+
+        <div class="md-form md-outline">
+          <input type="text" id="numOc" class="form-control" disabled [value]="pedidoError.oc">
+          <label for="numOc" class="active">Número OC/OP</label>
+        </div>
+
+        <!-- Basic textarea -->
+        <div class="md-form md-outline">
+          <textarea type="text" id="notas" class="md-textarea form-control" rows="4"
+                    disabled [value]="pedidoError.nota">
+          </textarea>
+          <label for="notas" class="active">Notas</label>
+        </div>
+
+      </div>
+
+
+      <!--Columna de la derecha-->
+      <div class="col-sm-8">
+
+        <div class="card card-cascade mt-4">
+
+          <!-- Card image -->
+          <div class="view view-cascade gradient-card-header primary-color-dark">
+            <h5 class="card-header-title" style="margin-bottom: 0px !important;">
+              <i class="fas fa-truck"></i>
+              Datos de envío del Pedido
+            </h5>
+          </div>
+
+          <!-- Card content -->
+          <div class="card-body card-body-cascade text-center">
+
+            <div class="row">
+
+              <div class="col-sm-6">
+                <div class="md-form md-outline">
+                  <input type="text" id="sucursal-fac" class="form-control border-primary"
+                         [value]="pedidoError.sucursalFacturar" disabled>
+                  <label for="sucursal-fac" class="active">Sucursal a Facturar</label>
+                </div>
+
+                <div class="md-form md-outline">
+                  <input type="text" id="punto-envio" class="form-control border-primary"
+                         [value]="pedidoError.puntoEnvio" disabled>
+                  <label for="punto-envio" class="active">Punto de Envío</label>
+                </div>
+
+                <div class="md-form md-outline">
+                  <input type="text" id="vendedor" class="form-control border-primary"
+                         [value]="pedidoError.terceroVendedor" disabled>
+                  <label for="vendedor" class="active">Vendedor</label>
+                </div>
+
+              </div>
+
+              <div class="col-sm-6">
+
+                <div class="md-form md-outline">
+                  <input type="text" id="sucursal-rem" class="form-control border-primary"
+                         [value]="pedidoError.sucursalRemisionar" disabled>
+                  <label for="sucursal-rem" class="active">Sucursal a Remisionar</label>
+                </div>
+
+                <div class="md-form md-outline">
+                  <input type="text" id="direccion-envio" class="form-control border-primary"
+                         [value]="pedidoError.direccion" disabled>
+                  <label for="direccion-envio" class="active">Dirección de Envío</label>
+                </div>
+
+                <div class="md-form md-outline">
+                  <input type="text" id="contacto" class="form-control border-primary"
+                         [value]="pedidoError.contacto" disabled>
+                  <label for="contacto" class="active">Contacto</label>
+                </div>
+
+
+              </div>
+
+            </div>
+
+
+          </div>
+
+        </div>
+        <!-- Card -->
+
+      </div>
+
+    </div>
+
+
+    <!--Columna de la derecha-->
+    <div class="col-sm-12">
+
+      <div class="card card-cascade mt-4">
+
+        <!-- Card image -->
+        <div class="view view-cascade gradient-card-header primary-color-dark">
+          <h5 class="card-header-title" style="margin-bottom: 0px !important;">
+            <i class="fas fa-luggage-cart"></i>
+            Ítems del Pedido
+          </h5>
+        </div>
+
+        <!-- Card content -->
+        <div class="card-body card-body-cascade text-center">
+
+
+
+          <div class="mt-1 mb-2 text-left" *ngIf="itemsPedidoError">
+            <h5 class="p-1 text-primary font-weight-bold">Total Items: {{itemsPedidoError.length}}</h5>
+          </div>
+
+
+          <div class="row">
+
+            <div class="table-responsive table-striped table-hover ">
+              <table class="table">
+                <thead>
+                <tr>
+                  <th scope="col" class="font-weight-bold">Código del ítem del cliente</th>
+                  <th scope="col" class="font-weight-bold">Código EKA</th>
+                  <th scope="col" class="font-weight-bold">Descripción</th>
+                  <th scope="col" class="font-weight-bold">Extensión 1</th>
+                  <th scope="col" class="font-weight-bold">Extensión 2</th>
+                  <th scope="col" class="font-weight-bold">Cantidad</th>
+                  <th scope="col" class="font-weight-bold">U. Medida</th>
+                  <th scope="col" class="font-weight-bold">BOD</th>
+                  <th scope="col" class="font-weight-bold">LM</th>
+                  <th scope="col" class="font-weight-bold">LP</th>
+                  <th scope="col" class="font-weight-bold">POR</th>
+                  <th scope="col" class="font-weight-bold">IE</th>
+                  <th></th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr *ngFor="let item of itemsPedidoError">
+                  <th scope="row" style="vertical-align: middle">{{item.codCliente}}</th>
+                  <td style="vertical-align: middle">{{item.codItem}}</td>
+                  <td style="vertical-align: middle">{{item.descripcion}}</td>
+                  <td style="vertical-align: middle">{{item.descripcionExt1}}</td>
+                  <td style="vertical-align: middle">{{item.descripcionExt2}}</td>
+                  <td style="vertical-align: middle">{{item.cantidad}}</td>
+                  <td style="vertical-align: middle">{{item.unidadMedida}}</td>
+                  <td style="vertical-align: middle">{{item.idBodega}}</td>
+
+                  <td *ngIf="item.unoeeListasMateriales==0 else elseBlock2" style="vertical-align: middle">
+                    <i class="fas fa-times-circle text-danger fa-3x"></i>
+                  </td>
+                  <ng-template #elseBlock2>
+                    <td style="vertical-align: middle"><i class="fas fa-check-circle text-success fa-3x"></i></td>
+                  </ng-template>
+
+                  <td *ngIf="item.unoeePrecios==0 else elseBlock3" style="vertical-align: middle">
+                    <i class="fas fa-times-circle text-danger fa-3x"></i>
+                  </td>
+                  <ng-template #elseBlock3>
+                    <td style="vertical-align: middle"><i class="fas fa-check-circle text-success fa-3x" style="vertical-align: middle"></i></td>
+                  </ng-template>
+
+                  <td *ngIf="item.unoeePortafolio==0 else elseBlock4" style="vertical-align: middle">
+                    <i class="fas fa-times-circle text-danger fa-3x" style="vertical-align: middle"></i>
+                  </td>
+                  <ng-template #elseBlock4>
+                    <td style="vertical-align: middle"><i class="fas fa-check-circle text-success fa-3x" style="vertical-align: middle"></i></td>
+                  </ng-template>
+
+                  <td *ngIf="item.unoeeItem==0 else elseBlock5" style="vertical-align: middle">
+                    <i class="fas fa-times-circle text-danger fa-3x"></i>
+                  </td>
+                  <ng-template #elseBlock5>
+                    <td style="vertical-align: middle"><i class="fas fa-check-circle text-success fa-3x" style="vertical-align: middle"></i></td>
+                  </ng-template>
+
+                  <td>
+                    <div class="d-flex flex-column">
+                      <a class="p-1" data-toggle="tooltip" data-placement="left" title="Editar Ítem">
+                        <i class="fas fa-edit text-primary"></i>
+                      </a>
+
+                      <a class="p-1" data-toggle="tooltip" data-placement="left" title="Borrar">
+                        <i class="fas fa-trash-alt text-primary"></i>
+                      </a>
+
+                      <a class="p-1" data-toggle="tooltip" data-placement="left" title="Solicitar creación de ítem">
+                        <i class="fas fa-paper-plane text-primary"></i>
+                      </a>
+                    </div>
+
+                  </td>
+                </tr>
+
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+      <!-- Card -->
+
+      <!--GRUPO DE BOTONES-->
+      <div class="text-center mt-3">
+
+          <button class="btn btn-rounded btn-danger" style="min-width: 270px"
+                  [routerLink]="['/lista-errores']" *ngIf="comeback=='le' else elseBlock">
+            Regresar
+          </button>
+
+        <ng-template #elseBlock>
+            <button class="btn btn-rounded btn-danger" style="min-width: 270px"
+                    [routerLink]="['/lista-errores-completo']">Regresar
+            </button>
+        </ng-template>
+
+          <button class="btn btn-rounded btn-warning"
+                  style="min-width: 270px"
+                  (click)="sincronizar()"
+          >
+            Sincronizar ítems
+          </button>
+
+        <button class="btn btn-rounded btn-primary" style="min-width: 270px">
+          Volver a enviar pedido
+        </button>
+
+      </div>
+
+
+
+    </div>
+
+
+  </div>
+
+</div>
+

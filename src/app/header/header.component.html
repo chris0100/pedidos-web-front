@@ -109,6 +109,15 @@
           <a class="nav-link" [routerLink]="['/validacion-items']">Validar Item Creado</a>
         </li>
 
+
+        <li class="nav-item" *ngIf="authService.hasRole('ROLE_ADMIN')">
+          <a class="nav-link" [routerLink]="['/lista-errores']">Lista Errores</a>
+        </li>
+
+        <li class="nav-item" *ngIf="authService.hasRole('ROLE_ADMIN')">
+          <a class="nav-link" [routerLink]="['/lista-errores-completo']">Lista Errores Completo</a>
+        </li>
+
       </ul>
     </div>
   </div>

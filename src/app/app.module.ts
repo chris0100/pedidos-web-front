@@ -32,6 +32,9 @@ import { DetalleHistorialPedidosComponent } from './pedidos/historial-pedidos/de
 import { DetallePedidosVerificacionComponent } from './pedidos/pedidos-verificacion/detalle-pedidos-verificacion/detalle-pedidos-verificacion.component';
 import { DetallePedidosBorradorComponent } from './pedidos/pedidos-borrador/detalle-pedidos-borrador/detalle-pedidos-borrador.component';
 import { ValidacionItemsComponent } from './usuario/validacion-items/validacion-items.component';
+import { ListaErroresComponent } from './admin/lista-errores/lista-errores.component';
+import { ListaErroresCompletoComponent } from './admin/lista-errores-completo/lista-errores-completo.component';
+import { PrepareVerErrorComponent } from './admin/prepare-ver-error/prepare-ver-error.component';
 
 
 registerLocaleData(localeES, 'es');
@@ -60,7 +63,10 @@ registerLocaleData(localeES, 'es');
     DetalleHistorialPedidosComponent,
     DetallePedidosVerificacionComponent,
     DetallePedidosBorradorComponent,
-    ValidacionItemsComponent
+    ValidacionItemsComponent,
+    ListaErroresComponent,
+    ListaErroresCompletoComponent,
+    PrepareVerErrorComponent
   ],
   imports: [
     BrowserModule,

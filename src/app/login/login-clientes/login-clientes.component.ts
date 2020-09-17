@@ -118,7 +118,7 @@ export class LoginClientesComponent implements OnInit {
           const usuario = this.authService.usuario;
 
           // Redirecciona a la pagina principal con mensaje de bienvenida
-          swal('Login', `Bienvenido ${usuario.username}, has iniciado sesión correctamente`, 'success');
+          swal('Bienvenido', `${usuario.nombre}, has iniciado sesión correctamente`, 'success');
           this.router.navigate(['/panel-clientes']);
         },
         error => {
