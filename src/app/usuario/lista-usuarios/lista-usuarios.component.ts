@@ -16,9 +16,13 @@ export class ListaUsuariosComponent implements OnInit {
 
   usuarios: Usuario[];
 
+  // Spinner
+  showSpinner: boolean;
+
   constructor(private usuariosService: UsuariosService, private router: Router) {}
 
   ngOnInit(): void {
+    this.showSpinner = false;
 
     // Remover la busqueda del historial de pedidos, y listaItemProductosSelect
     sessionStorage.removeItem('pedidosUnoEEHistorial');
@@ -34,8 +38,9 @@ export class ListaUsuariosComponent implements OnInit {
         this.usuarios = obj;
         console.log(this.usuarios);
         console.log(obj);
-      }
-    );
+        this.showSpinner = false;
+      });
+    this.showSpinner = true;
   }
 
 }

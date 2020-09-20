@@ -8,6 +8,11 @@
     <h5 class="font-weight-bold text-black">Historial de Pedidos</h5>
   </div>
 
+  <!--pantalla trasera de carga-->
+  <div *ngIf="showSpinner">
+    <app-loading-spinner></app-loading-spinner>
+  </div>
+
 
   <div class="d-flex pt-5 pl-5">
     <div class="md-form mr-5">
@@ -30,16 +35,13 @@
 
 
 
-
   <!-- Tab panels -->
   <div class="card-body" *ngIf="pedidosUnoEE?.length>0">
 
     <!-- Gird column -->
     <div class="col-md-12">
 
-
       <hr>
-
 
       <h5 class="font-weight-bold my-4">Total Pedidos: {{pedidosUnoEE.length}}</h5>
 

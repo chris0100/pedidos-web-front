@@ -20,12 +20,16 @@ export class HistorialPedidosComponent implements OnInit {
 
   pedidoSelect: PedidoUnoEE;
 
+  // Spinner
+  showSpinner: boolean;
+
   constructor(private pedidosService: PedidoService, private router: Router,
               private authService: AuthService) {
   }
 
 
   ngOnInit(): void {
+    this.showSpinner = false;
 
     // Si se encuentra el historial aun en el session storage
     this.pedidosUnoEE = this.pedidosService.obtenerPedidoUnoEEGuardadoSessionStorage();
@@ -48,8 +52,9 @@ export class HistorialPedidosComponent implements OnInit {
 
         // Se guarda el listado de pedidosUNOEE encontrado en la busqueda
         this.pedidosService.guardarPedidosUnoEESessionStorage(this.pedidosUnoEE);
-
+        this.showSpinner = false;
       });
+    this.showSpinner = true;
   }
 
 

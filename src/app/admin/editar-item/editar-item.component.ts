@@ -3,7 +3,9 @@ import {Pedido} from '../../pedidos/pedido';
 import {PedidoService} from '../../pedidos/pedido.service';
 import {AuthService} from '../../login/auth.service';
 import {ItemPedido} from '../../pedidos/item-pedido';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Usuario} from '../../usuario/usuario';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-editar-item',
@@ -41,11 +43,29 @@ export class EditarItemComponent implements OnInit {
 
   idPedidoActual: number;
   idItemActual: number;
+  comeback: string;
 
-  constructor(private pedidosService: PedidoService, private authService: AuthService, private activatedRoute: ActivatedRoute) { }
+  constructor(private pedidosService: PedidoService, private authService: AuthService, private activatedRoute: ActivatedRoute,
+              private router: Router) {
+  }
 
   ngOnInit() {
     this.cargarPedidoEditarItem();
+
+    // Si ya hay datos de los itemPatron los trae del sessionstorage
+    this.listaItemPatron = this.pedidosService.obtenerListaItemPatronStorage();
+
+    // Consulta la BD para cargar los items Patron cuando realice busquedas
+    if (this.listaItemPatron.length === 0) {
+      this.pedidosService.obtenerListaItemPatronJava().subscribe(
+        obj => {
+          this.listaItemPatron = obj;
+          console.log(this.listaItemPatron);
+
+          // Guarda lo recopilado en el session storage
+          this.pedidosService.guardarListaItemPatronStorage(this.listaItemPatron);
+        });
+    }
   }
 
 
@@ -55,17 +75,30 @@ export class EditarItemComponent implements OnInit {
       params => {
         this.idPedidoActual = params['idPedido'];
         this.idItemActual = params['idItem'];
+        this.comeback = params['otr'];
 
         console.log('idPedido: ' + this.idPedidoActual + ' : idItem: ' + this.idItemActual);
-
-        if (this.idPedidoActual) {
-          this.pedidosService.obtenerPedidoVBJava(this.idPedidoActual).subscribe(
+        this.pedidosService.obtenerPedidoVBJava(this.idPedidoActual).subscribe(
             obj => {
               // Pasar los datos al pedido
               this.pedidoActual = obj;
               console.log(this.pedidoActual);
+
+              // Se localiza el itemPedidoActual
+              this.pedidoActual.listaItemPedido.forEach(obj2 => {
+                if (obj2.idItem == this.idItemActual) {
+                  this.itemPedidoActual = obj2;
+                  console.log(this.itemPedidoActual);
+                }
+              });
+
+              // Se cargan valores en los input
+              this.coditemPatronBuscado = this.itemPedidoActual.descripcionCompletaItem.trim();
+              this.itemPedidoActual.descripcionExt2 = this.itemPedidoActual.descripcionExt2.trim();
+
+              // Realiza la consulta para valores restantes
+              this.consultarTipoExt();
             });
-        }
       });
   }
 
@@ -182,7 +215,10 @@ export class EditarItemComponent implements OnInit {
 
 
       // Setear la cantidad a cero
-      this.itemPedidoActual.cantidad = 0;
+      if (this.itemPedidoActual.cantidad <= 0 || this.itemPedidoActual.cantidad == null) {
+        this.itemPedidoActual.cantidad = 0;
+      }
+
 
       this.pedidosService.obtenerBodegaItemJava(this.codigoItem).subscribe(
         obj => {
@@ -208,5 +244,43 @@ export class EditarItemComponent implements OnInit {
         console.log('descripcion label ext2: ' + this.descripcionLabelExt2);
       });
   }
+
+
+
+  // Editar Item del pedido
+  agregarItem(): void {
+    this.itemPedidoActual.codItem = parseInt(this.codigoItem, 0);
+    this.itemPedidoActual.descripcion = this.coditemPatronBuscado.substring(10, 50);
+    this.itemPedidoActual.idExt1Detalle = this.itemPedidoActual.descripcionExt1.substring(0, 4);
+    this.itemPedidoActual.idExt2Detalle = this.itemPedidoActual.descripcionExt2.substring(0, 5);
+    this.itemPedidoActual.descripcionCompletaItem = this.coditemPatronBuscado;
+    this.itemPedidoActual.codCliente = '';  // en esta pestaña no hay funcionalidad sobre este
+    this.itemPedidoActual.unoeeItem = 0;
+    this.itemPedidoActual.unoeeListasMateriales = 0;
+    this.itemPedidoActual.unoeePortafolio = 0;
+    this.itemPedidoActual.unoeePrecios = 0;
+
+    if (this.authService.usuario.nit === '1792196841001') {
+      this.itemPedidoActual.idMotivo = '02';
+    }
+    // tslint:disable-next-line:one-line
+    else {
+      this.itemPedidoActual.idMotivo = '01';
+    }
+
+    console.log(this.itemPedidoActual);
+
+
+    this.pedidosService.editarItemPedidoError(this.itemPedidoActual).subscribe(
+      obj => {
+        console.log(obj);
+        // Mostrar mensaje de exito
+        swal('Correcto', `Se ha editado el item ${this.itemPedidoActual.descripcion} exitosamente`, 'success');
+
+      });
+  }
+
+
+
 
 }

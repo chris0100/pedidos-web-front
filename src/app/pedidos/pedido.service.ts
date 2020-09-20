@@ -337,6 +337,26 @@ export class PedidoService {
   }
 
 
+  // Editar Item pedido Error
+  editarItemPedidoError(itemPedido: ItemPedido): Observable<string> {
+    const urlEndPoint = 'http://localhost:8082/editar-item-pedido-error';
+    return this.http.post(urlEndPoint, itemPedido).pipe(
+      map((response: any) => response.mensaje as string),
+      catchError(e => {
+
+        if (e.status === 400) {
+          return throwError(e);
+        }
+
+        if (e.error.mensaje) {
+          console.error(e.error.mensaje);
+        }
+        return throwError(e);
+      })
+    );
+  }
+
+
   // Obtener datos asesor unoEE
   obtenerDatosAsesorUnoEEJava(idSucursal: string, nit: string): Observable<string[]> {
     const urlEndPoint = 'http://localhost:8082/obtener-datos-asesor-unoee';

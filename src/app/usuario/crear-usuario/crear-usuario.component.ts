@@ -21,12 +21,16 @@ export class CrearUsuarioComponent implements OnInit {
 
   errores: string[];
 
+  // Spinner
+  showSpinner: boolean;
+
 
   constructor(private usuariosService: UsuariosService, private router: Router,
               private activatedRoute: ActivatedRoute) {
   }
 
   ngOnInit(): void {
+    this.showSpinner = false;
     // Remover la busqueda del historial de pedidos, y listaItemProductosSelect
     sessionStorage.removeItem('pedidosUnoEEHistorial');
     sessionStorage.removeItem('listaItemPedidoSelect');
@@ -63,7 +67,9 @@ export class CrearUsuarioComponent implements OnInit {
       obj => {
         swal('Correcto', `${obj.mensaje}`, 'success');
         this.router.navigate(['/lista-usuarios']);
+        this.showSpinner = false;
       });
+    this.showSpinner = true;
   }
 
 
@@ -79,7 +85,9 @@ export class CrearUsuarioComponent implements OnInit {
         this.errores = err.error.errors as string[];
         console.error('Codigo del error desde el backend: ' + err.status);
         console.error(err.error.errors);
+        this.showSpinner = false;
       });
+    this.showSpinner = true;
   }
 
 

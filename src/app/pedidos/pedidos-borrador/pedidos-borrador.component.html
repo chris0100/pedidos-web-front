@@ -1,12 +1,16 @@
 <app-header></app-header>
 
 <!-- CARD DE CONTENIDO SEGUN PAGINA-->
-<div class="card mx-auto" style="width: 90%; margin-top: 200px">
+<div class="card mx-auto" style="width: 90%; margin-top: 200px;min-height: 70vh">
 
   <div class="card-header warning-color-dark">
     <h5 class="font-weight-bold text-black">Lista de Pedidos Borrador</h5>
   </div>
 
+  <!--pantalla trasera de carga-->
+  <div *ngIf="showSpinner">
+    <app-loading-spinner></app-loading-spinner>
+  </div>
 
   <!-- Tab panels -->
 

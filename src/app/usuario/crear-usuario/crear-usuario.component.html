@@ -4,6 +4,11 @@
 <!-- CARD DE CONTENIDO SEGUN PAGINA-->
 <div class="card mx-auto" style="width: 90%; margin-top: 200px; margin-bottom: 280px">
 
+  <!--pantalla trasera de carga-->
+  <div *ngIf="showSpinner">
+    <app-loading-spinner></app-loading-spinner>
+  </div>
+
   <div class="card-header warning-color-dark  d-flex justify-content-start align-items-center">
     <div *ngIf="!usuario.id else elseBlock" class="d-flex align-items-center">
       <i class="fas fa-user-plus fa-2x text-black-50"></i>

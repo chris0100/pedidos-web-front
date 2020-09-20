@@ -18,6 +18,9 @@ export class PedidosBorradorComponent implements OnInit {
 
   pedidos: Pedido[];
 
+  // Spinner
+  showSpinner: boolean;
+
   constructor(private pedidosService: PedidoService, private router: Router,
               private authService: AuthService) {
   }
@@ -34,7 +37,9 @@ export class PedidosBorradorComponent implements OnInit {
       obj => {
         this.pedidos = obj;
         console.log(this.pedidos);
+        this.showSpinner = false;
       });
+    this.showSpinner = true;
   }
 
 

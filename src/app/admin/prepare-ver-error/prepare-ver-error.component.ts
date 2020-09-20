@@ -35,8 +35,8 @@ export class PrepareVerErrorComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.showSpinner = true;
     this.cargarPedidoError();
-    this.showSpinner = false;
     new tooltip();
   }
 
@@ -100,6 +100,12 @@ export class PrepareVerErrorComponent implements OnInit {
           swal('Error', obj[0], 'error');
         } else {
           swal('Correcto', obj[0], 'success');
+          // Redireccionamiento correcto
+          if (this.comeback == 'le') {
+            this.router.navigate(['/lista-errores']);
+          } else {
+            this.router.navigate(['/lista-errores-completo']);
+          }
         }
         this.showSpinner = false;
       });
@@ -119,7 +125,9 @@ export class PrepareVerErrorComponent implements OnInit {
 
         this.textoConvertido = this.pedidoError.mensajeWB;
         console.log(this.textoConvertido);
+        this.showSpinner = false;
       });
+    this.showSpinner = true;
   }
 
 
