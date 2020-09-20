@@ -35,6 +35,7 @@ import { ValidacionItemsComponent } from './usuario/validacion-items/validacion-
 import { ListaErroresComponent } from './admin/lista-errores/lista-errores.component';
 import { ListaErroresCompletoComponent } from './admin/lista-errores-completo/lista-errores-completo.component';
 import { PrepareVerErrorComponent } from './admin/prepare-ver-error/prepare-ver-error.component';
+import { LoadingSpinnerComponent } from './ui/loading-spinner/loading-spinner.component';
 
 
 registerLocaleData(localeES, 'es');
@@ -66,7 +67,8 @@ registerLocaleData(localeES, 'es');
     ValidacionItemsComponent,
     ListaErroresComponent,
     ListaErroresCompletoComponent,
-    PrepareVerErrorComponent
+    PrepareVerErrorComponent,
+    LoadingSpinnerComponent
   ],
   imports: [
     BrowserModule,

@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Pedido} from '../../pedidos/pedido';
 import {ItemPedido} from '../../pedidos/item-pedido';
 import {PedidoService} from '../../pedidos/pedido.service';
-import {ActivatedRoute} from '@angular/router';
-import * as converter from 'xml-js';
+import {ActivatedRoute, Router} from '@angular/router';
 import swal from 'sweetalert2';
 
 
 // carga de archivo tooltip
 declare var tooltip: any;
+
 
 @Component({
   selector: 'app-prepare-ver-error',
@@ -16,23 +16,28 @@ declare var tooltip: any;
 })
 
 
-
 export class PrepareVerErrorComponent implements OnInit {
 
   pedidoError: Pedido;
   itemsPedidoError: ItemPedido[];
   comeback: string;
+  idLocal: number;
   textoConvertido: string;
 
-  constructor(private pedidosService: PedidoService, private activatedRoute: ActivatedRoute) {
+
+  // Spinner
+  showSpinner: boolean;
+
+
+  constructor(private pedidosService: PedidoService, private activatedRoute: ActivatedRoute,
+              private router: Router) {
 
   }
 
   ngOnInit() {
     this.cargarPedidoError();
-
+    this.showSpinner = false;
     new tooltip();
-
   }
 
 
@@ -40,43 +45,15 @@ export class PrepareVerErrorComponent implements OnInit {
   cargarPedidoError(): void {
     this.activatedRoute.params.subscribe(
       params => {
-        const id = params['id'];
+        this.idLocal = params['id'];
         this.comeback = params['otr'];
 
-        if (id) {
-          this.pedidosService.obtenerPedidoVBJava(id).subscribe(
-            obj => {
-              this.pedidoError = obj;
-              console.log(this.pedidoError);
-
-              this.itemsPedidoError = obj.listaItemPedido;
-              console.log(this.itemsPedidoError);
-
-              this.textoConvertido = this.pedidoError.mensajeWB;
-              console.log(this.textoConvertido);
-              // console.log(parse.toJSON(this.textoConvertido));
-
-
-              let text, parser, xmlDoc;
-
-              text = '<bookstore><book>' +
-                '<title>Everyday Italian</title>' +
-                '<author>Giada De Laurentiis</author>' +
-                '<year>2005</year>' +
-                '</book></bookstore>';
-
-              parser = new DOMParser();
-              xmlDoc = parser.parseFromString(this.textoConvertido, 'text/xml');
-              console.log(xmlDoc);
-            });
+        if (this.idLocal) {
+          this.recargarPedidoError();
         }
       }
     );
   }
-
-
-
-
 
 
   // Funcionalidad para boton de sincronizar items
@@ -100,17 +77,22 @@ export class PrepareVerErrorComponent implements OnInit {
         // tslint:disable-next-line:no-shadowed-variable
         this.pedidoError.listaItemPedido.forEach(obj1 => {
           this.pedidosService.sincronizarBodegaItemsJava(obj1.idItem, obj1.codItem.toString()).subscribe(
-            obj2 => obj2);
+            obj2 => {
+              // aqui se debe de recargar la pagina
+              this.recargarPedidoError();
+              this.showSpinner = false;
+            });
         });
       });
+    this.showSpinner = true;
   }
-
 
 
   // Funcionalidad para cuando se da clic en el boton volver a enviar pedido
   enviarPedidoAgain(): void {
     console.log('se ha dado clic en el boton enviar pedido nuevamente');
     console.log(this.pedidoError);
+
     this.pedidosService.webServiceProcessError(this.pedidoError).subscribe(
       obj => {
         console.log(obj);
@@ -119,15 +101,32 @@ export class PrepareVerErrorComponent implements OnInit {
         } else {
           swal('Correcto', obj[0], 'success');
         }
+        this.showSpinner = false;
+      });
+    this.showSpinner = true;
+  }
+
+
+  // Llamado para obtener pedido error
+  private recargarPedidoError(): void {
+    this.pedidosService.obtenerPedidoVBJava(this.idLocal).subscribe(
+      obj => {
+        this.pedidoError = obj;
+        console.log(this.pedidoError);
+
+        this.itemsPedidoError = obj.listaItemPedido;
+        console.log(this.itemsPedidoError);
+
+        this.textoConvertido = this.pedidoError.mensajeWB;
+        console.log(this.textoConvertido);
       });
   }
 
 
-
-
-
-
-
+  // Redireccionar a otra pagina
+  redireccionar(idItem: number): void {
+    window.location.href = 'http://eureka:8080/intranet/faces/procesarItemPedidoWeb.xhtml?id=' + idItem;
+  }
 
 
 }

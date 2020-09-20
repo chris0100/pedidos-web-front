@@ -1,7 +1,9 @@
 <app-header></app-header>
 
+
 <!-- CARD DE CONTENIDO SEGUN PAGINA-->
 <div class="card mx-auto" style="width: 90%; margin-top: 200px">
+
 
   <div class="card-header warning-color-dark">
     <h5 class="font-weight-bold text-black">Detalle del pedido</h5>
@@ -16,6 +18,13 @@
       <p class="lead text-left">{{pedidoError.mensajeWB}}</p>
     </div>
   </div>
+
+
+  <!--pantalla trasera de carga-->
+  <div *ngIf="showSpinner">
+    <app-loading-spinner></app-loading-spinner>
+  </div>
+
 
 
   <div class="card-body">
@@ -130,6 +139,7 @@
     <!--Columna de la derecha-->
     <div class="col-sm-12">
 
+
       <div class="card card-cascade mt-4">
 
         <!-- Card image -->
@@ -140,9 +150,9 @@
           </h5>
         </div>
 
+
         <!-- Card content -->
         <div class="card-body card-body-cascade text-center">
-
 
 
           <div class="mt-1 mb-2 text-left" *ngIf="itemsPedidoError">
@@ -194,21 +204,24 @@
                     <i class="fas fa-times-circle text-danger fa-3x"></i>
                   </td>
                   <ng-template #elseBlock3>
-                    <td style="vertical-align: middle"><i class="fas fa-check-circle text-success fa-3x" style="vertical-align: middle"></i></td>
+                    <td style="vertical-align: middle"><i class="fas fa-check-circle text-success fa-3x"
+                                                          style="vertical-align: middle"></i></td>
                   </ng-template>
 
                   <td *ngIf="item.unoeePortafolio==0 else elseBlock4" style="vertical-align: middle">
                     <i class="fas fa-times-circle text-danger fa-3x" style="vertical-align: middle"></i>
                   </td>
                   <ng-template #elseBlock4>
-                    <td style="vertical-align: middle"><i class="fas fa-check-circle text-success fa-3x" style="vertical-align: middle"></i></td>
+                    <td style="vertical-align: middle"><i class="fas fa-check-circle text-success fa-3x"
+                                                          style="vertical-align: middle"></i></td>
                   </ng-template>
 
                   <td *ngIf="item.unoeeItem==0 else elseBlock5" style="vertical-align: middle">
                     <i class="fas fa-times-circle text-danger fa-3x"></i>
                   </td>
                   <ng-template #elseBlock5>
-                    <td style="vertical-align: middle"><i class="fas fa-check-circle text-success fa-3x" style="vertical-align: middle"></i></td>
+                    <td style="vertical-align: middle"><i class="fas fa-check-circle text-success fa-3x"
+                                                          style="vertical-align: middle"></i></td>
                   </ng-template>
 
                   <td>
@@ -221,7 +234,12 @@
                         <i class="fas fa-trash-alt text-primary"></i>
                       </a>
 
-                      <a class="p-1" data-toggle="tooltip" data-placement="left" title="Solicitar creación de ítem">
+                      <a class="p-1"
+                         data-toggle="tooltip"
+                         data-placement="left"
+                         title="Solicitar creación de ítem"
+                         (click)="redireccionar(item.idItem)"
+                      >
                         <i class="fas fa-paper-plane text-primary"></i>
                       </a>
                     </div>
@@ -243,27 +261,29 @@
       <!--GRUPO DE BOTONES-->
       <div class="text-center mt-3">
 
-          <button class="btn btn-rounded btn-danger" style="min-width: 270px"
-                  [routerLink]="['/lista-errores']" *ngIf="comeback=='le' else elseBlock">
-            Regresar
-          </button>
+        <button class="btn btn-rounded btn-danger" style="min-width: 270px"
+                [routerLink]="['/lista-errores']" *ngIf="comeback=='le' else elseBlock">
+          Regresar
+        </button>
 
         <ng-template #elseBlock>
-            <button class="btn btn-rounded btn-danger" style="min-width: 270px"
-                    [routerLink]="['/lista-errores-completo']">Regresar
-            </button>
+          <button class="btn btn-rounded btn-danger" style="min-width: 270px"
+                  [routerLink]="['/lista-errores-completo']">Regresar
+          </button>
         </ng-template>
 
-          <button class="btn btn-rounded btn-warning"
-                  style="min-width: 270px"
-                  (click)="sincronizar()"
-          >
-            Sincronizar ítems
-          </button>
+        <button class="btn btn-rounded btn-warning"
+                style="min-width: 270px"
+                (click)="sincronizar()"
+        >
+          Sincronizar ítems
+        </button>
 
         <button class="btn btn-rounded btn-primary"
                 style="min-width: 270px"
                 (click)="enviarPedidoAgain()"
+                data-toggle="modal"
+                data-target="#exampleModal"
         >
           Volver a enviar pedido
         </button>
@@ -271,11 +291,15 @@
       </div>
 
 
-
     </div>
 
 
   </div>
 
+
 </div>
+
+
+
+
 

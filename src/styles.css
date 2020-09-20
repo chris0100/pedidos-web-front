@@ -1,8 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
-body{
+body, html{
   overflow-x: hidden;
   overflow-y: hidden;
+  height:100% !important;
+  margin: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
 }
+
 
 html::-webkit-scrollbar {
   display: none;
@@ -14,6 +19,8 @@ html::-webkit-scrollbar {
   font-weight: 700;
   text-transform: uppercase;
 }
+
+
 
 
 
