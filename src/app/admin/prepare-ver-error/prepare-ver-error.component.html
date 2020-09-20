@@ -226,14 +226,30 @@
 
                   <td>
                     <div class="d-flex flex-column">
-                      <a class="p-1" data-toggle="tooltip" data-placement="left" title="Editar Ítem">
+
+                      <!--BOTON EDITAR ITEM-->
+                      <a class="p-1"
+                         data-toggle="tooltip"
+                         data-placement="left"
+                         title="Editar Ítem"
+                         [routerLink]="['/editar-item', pedidoError.id, item.idItem]"
+                      >
                         <i class="fas fa-edit text-primary"></i>
                       </a>
 
-                      <a class="p-1" data-toggle="tooltip" data-placement="left" title="Borrar">
+
+                      <!--BOTON BORRAR ITEM-->
+                      <a class="p-1"
+                         data-toggle="tooltip"
+                         data-placement="left"
+                         title="Borrar"
+                         (click)="borrarItem(item)"
+                      >
                         <i class="fas fa-trash-alt text-primary"></i>
                       </a>
 
+
+                      <!--BOTON SOLICITAR CREAR ITEM-->
                       <a class="p-1"
                          data-toggle="tooltip"
                          data-placement="left"
@@ -275,6 +291,7 @@
         <button class="btn btn-rounded btn-warning"
                 style="min-width: 270px"
                 (click)="sincronizar()"
+                [disabled]="itemsPedidoError.length==0"
         >
           Sincronizar ítems
         </button>
@@ -284,6 +301,7 @@
                 (click)="enviarPedidoAgain()"
                 data-toggle="modal"
                 data-target="#exampleModal"
+                [disabled]="itemsPedidoError.length==0"
         >
           Volver a enviar pedido
         </button>

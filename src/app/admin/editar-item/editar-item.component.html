@@ -1,0 +1,270 @@
+<app-header></app-header>
+
+
+<!-- CARD DE CONTENIDO SEGUN PAGINA-->
+<div class="card mx-auto" style="width: 90%; margin-top: 200px">
+
+  <div class="card-header warning-color-dark">
+    <h5 class="font-weight-bold text-black"><i class="fas fa-shopping-cart"></i> Editar ítem del pedido</h5>
+  </div>
+
+
+  <div class="card-body">
+
+
+    <div class="row">
+
+
+      <!--Columna izquierda-->
+      <div class="col-sm-4">
+
+        <div class="md-form md-outline">
+          <input type="text" id="cod-pedido" class="form-control" disabled [value]="pedidoActual.id">
+          <label for="cod-pedido" class="active">Código pedido</label>
+        </div>
+
+        <div class="md-form md-outline">
+          <input type="text" id="responsable" class="form-control" disabled [value]="pedidoActual.idUsuario.nombre">
+          <label for="responsable" class="active">Responsable del pedido</label>
+        </div>
+
+        <div class="md-form md-outline">
+          <input type="text" id="num-oc-op" class="form-control" [value]="pedidoActual.oc" disabled>
+          <label for="num-oc-op" class="active">Número OC/OP</label>
+        </div>
+
+        <!-- Basic textarea -->
+        <div class="md-form md-outline">
+          <textarea type="text" id="notas" class="md-textarea form-control" rows="4"
+                    [value]="pedidoActual.nota" disabled></textarea>
+          <label for="notas" class="active">Notas</label>
+        </div>
+
+      </div>
+
+
+      <!--Columna de la derecha-->
+      <div class="col-sm-8">
+
+        <div class="card card-cascade mt-4">
+
+          <!-- Card image -->
+          <div class="view view-cascade gradient-card-header primary-color-dark">
+            <h5 class="card-header-title" style="margin-bottom: 0px !important;">
+              <i class="fas fa-truck"></i>
+              Datos de envío del Pedido
+            </h5>
+          </div>
+
+          <!-- Card content -->
+          <div class="card-body card-body-cascade text-center">
+
+            <div class="row">
+
+              <div class="col-sm-6">
+                <div class="md-form md-outline">
+                  <input type="text" id="sucursal-fac" class="form-control border-primary"
+                         disabled [value]="pedidoActual.sucursalFacturar">
+                  <label for="sucursal-fac" class="active">Sucursal a Facturar</label>
+                </div>
+
+                <div class="md-form md-outline">
+                  <input type="text" id="punto-envio" class="form-control border-primary"
+                         [value]="pedidoActual.puntoEnvio" disabled>
+                  <label for="punto-envio" class="active">Punto de Envío</label>
+                </div>
+
+                <div class="md-form md-outline">
+                  <input type="text" id="vendedor" class="form-control border-primary"
+                         [value]="pedidoActual.terceroVendedor" disabled>
+                  <label for="vendedor" class="active">Vendedor</label>
+                </div>
+              </div>
+
+              <div class="col-sm-6">
+
+                <div class="md-form md-outline">
+                  <input type="text" id="sucursal-rem" class="form-control border-primary"
+                         [value]="pedidoActual.sucursalRemisionar" disabled>
+                  <label for="sucursal-rem" class="active">Sucursal a Remisionar</label>
+                </div>
+
+                <div class="md-form md-outline">
+                  <input type="text" id="direccion-envio" class="form-control border-primary"
+                         [value]="pedidoActual.direccion" disabled>
+                  <label for="direccion-envio" class="active">Dirección de Envío</label>
+                </div>
+
+                <div class="md-form md-outline">
+                  <input type="text" id="contacto" class="form-control border-primary"
+                         [value]="pedidoActual.contacto" disabled>
+                  <label for="contacto" class="active">Contacto</label>
+                </div>
+
+              </div>
+
+            </div>
+
+
+          </div>
+
+        </div>
+        <!-- Card -->
+
+      </div>
+
+    </div>
+
+
+
+
+
+    <!-- Gird column -->
+    <div class="col-md-12 mt-4">
+
+
+      <div class="card card-cascade mt-4">
+
+        <!-- Card image -->
+        <div class="view view-cascade gradient-card-header primary-color-dark">
+          <h5 class="card-header-title" style="margin-bottom: 0px !important;">
+            <i class="fas fa-luggage-cart"></i>
+            Ingresa los ítems del Pedido
+          </h5>
+        </div>
+
+
+        <!-- Card content -->
+        <div class="card-body card-body-cascade text-center">
+
+          <!-- Grid row -->
+          <div class="row">
+
+
+            <!-- Grid column -->
+            <div class="col-md-4">
+
+              <div class="md-form md-outline">
+                <i class="fas fa-search prefix"></i>
+                <input type="text"
+                       (keyup)="getUserIdsFirstWay($event)"
+                       id="buscar"
+                       list="dynmicUserIds"
+                       class="form-control"
+                       style="margin-bottom: 0px !important;"
+                       [(ngModel)]="coditemPatronBuscado"
+                       (change)="consultarTipoExt()"
+                >
+                <datalist id="dynmicUserIds">
+                  <option *ngFor="let item of userList1">{{item}}</option>
+                </datalist>
+                <label for="buscar">Código del ítem</label>
+              </div>
+            </div>
+
+
+            <div class="col-md-4">
+
+              <div class="md-form md-outline">
+                <i class="fas fa-balance-scale-left prefix"></i>
+                <input type="text" id="unidad-medida-ce"
+                       class="form-control border-primary"
+                       [value]="itemPedidoActual.unidadMedida"
+                       disabled
+                >
+                <label for="unidad-medida-ce" class="active">Unidad de
+                  Medida</label>
+              </div>
+
+            </div>
+
+
+            <div class="col-md-4">
+              <label class="small"
+                     style="margin-top: 9px; margin-left: 10px;z-index: 100"
+              >{{descripcionLabelExt1}}</label>
+              <select class="form-control"
+                      [(ngModel)]="itemPedidoActual.descripcionExt1"
+                      style="margin-top: -12px"
+              >
+                <option value="" disabled selected>Seleccionar</option>
+                <option [value]="item" *ngFor="let item of listaExt1">{{item}}</option>
+              </select>
+            </div>
+
+
+          </div>
+
+
+          <div class="row" style="margin-top: -30px">
+
+            <div class="col-md-4">
+
+              <div class="md-form md-outline">
+                <i class="fas fa-tint prefix"></i>
+                <input type="text"
+                       (keyup)="getUserIdsFirstWay2($event)"
+                       id="buscar-color"
+                       list="dynmicUserIds2"
+                       class="form-control"
+                       style="margin-bottom: 0px !important;"
+                       [(ngModel)]="itemPedidoActual.descripcionExt2"
+                >
+                <datalist id="dynmicUserIds2">
+                  <option *ngFor="let item of userList2">{{item}}</option>
+                </datalist>
+                <label for="buscar-color">{{descripcionLabelExt2}}</label>
+              </div>
+
+            </div>
+
+
+            <div class="col-md-4">
+
+              <div class="md-form md-outline">
+                <i class="fas fa-boxes prefix"></i>
+                <input type="text" id="cantidad" class="form-control" [(ngModel)]="itemPedidoActual.cantidad">
+                <label for="cantidad" class="active">Cantidad</label>
+              </div>
+
+            </div>
+
+
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+
+
+
+
+    <!-- Gird column -->
+    <div class="col-md-12 mt-4">
+
+      <div class="text-center mt-3">
+
+        <button class="btn btn-rounded btn-primary"
+                [disabled]="pedidoActual.contacto.trim().length<1 || pedidoActual.direccion.trim().length<1 ||
+                pedidoActual.terceroVendedor.trim().length<1 || pedidoActual.nota.trim().length<1 || pedidoActual.oc.trim().length<1"
+                style="min-width: 270px"
+        >
+          Editar Ítem
+        </button>
+
+        <button class="btn btn-rounded btn-danger"
+                style="min-width: 270px"
+                [routerLink]="['/panel-clientes']"
+        >
+          Cancelar
+        </button>
+
+      </div>
+
+    </div>
+
+
+  </div>
+
+</div>

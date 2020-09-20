@@ -19,6 +19,7 @@ import {ValidacionItemsComponent} from './usuario/validacion-items/validacion-it
 import {ListaErroresComponent} from './admin/lista-errores/lista-errores.component';
 import {ListaErroresCompletoComponent} from './admin/lista-errores-completo/lista-errores-completo.component';
 import {PrepareVerErrorComponent} from './admin/prepare-ver-error/prepare-ver-error.component';
+import {EditarItemComponent} from './admin/editar-item/editar-item.component';
 
 
 
@@ -41,7 +42,8 @@ const routes: Routes = [
   {path: 'validacion-items', component: ValidacionItemsComponent, canActivate: [RoleGuard, AuthGuard], data: {role: 'ROLE_ADMIN'}},
   {path: 'lista-errores', component: ListaErroresComponent, canActivate: [RoleGuard, AuthGuard], data: {role: 'ROLE_ADMIN'}},
   {path: 'lista-errores-completo', component: ListaErroresCompletoComponent, canActivate: [RoleGuard, AuthGuard], data: {role: 'ROLE_ADMIN'}},
-  {path: 'prepare-ver-error/:id/:otr', component: PrepareVerErrorComponent, canActivate: [RoleGuard, AuthGuard], data: {role: 'ROLE_ADMIN'}}
+  {path: 'prepare-ver-error/:id/:otr', component: PrepareVerErrorComponent, canActivate: [RoleGuard, AuthGuard], data: {role: 'ROLE_ADMIN'}},
+  {path: 'editar-item/:idPedido/:idItem', component: EditarItemComponent, canActivate: [RoleGuard, AuthGuard], data: {role: 'ROLE_ADMIN'}}
 ];
 
 

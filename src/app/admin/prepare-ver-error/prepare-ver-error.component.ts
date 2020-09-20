@@ -125,7 +125,33 @@ export class PrepareVerErrorComponent implements OnInit {
 
   // Redireccionar a otra pagina
   redireccionar(idItem: number): void {
-    window.location.href = 'http://eureka:8080/intranet/faces/procesarItemPedidoWeb.xhtml?id=' + idItem;
+    window.open('http://eureka:8080/intranet/faces/procesarItemPedidoWeb.xhtml?id=' + idItem, '_blank');
+  }
+
+
+  // Borrar item de la lista pedido error
+  borrarItem(item: ItemPedido): void {
+    console.log('se ha dado clic en borrar el item: ' + item.idItem);
+
+    this.pedidosService.eliminarItemBorradorJava(item.idItem).subscribe(
+      () => {
+        let nombreItemEliminar = '';
+
+        // Buscar en la lista
+        // @ts-ignore
+        const index = this.itemsPedidoError.findIndex(obj => {
+          if (obj === item) {
+            nombreItemEliminar = obj.descripcion;
+            return obj;
+          }
+        });
+
+        this.itemsPedidoError.splice(index, 1);  // borrar elemento
+
+        // Mostrar mensaje satisfactorio de elemento eliminado
+        swal('Correcto', `Se ha eliminado el item ${nombreItemEliminar} exitosamente`, 'success');
+        console.log(this.itemsPedidoError);
+      });
   }
 
 
