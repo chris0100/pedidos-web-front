@@ -67,9 +67,7 @@ export class CrearUsuarioComponent implements OnInit {
       obj => {
         swal('Correcto', `${obj.mensaje}`, 'success');
         this.router.navigate(['/lista-usuarios']);
-        this.showSpinner = false;
       });
-    this.showSpinner = true;
   }
 
 
@@ -78,16 +76,14 @@ export class CrearUsuarioComponent implements OnInit {
     console.log(this.usuario);
     this.usuariosService.editarUsuarioJava(this.usuario).subscribe(
       json => {
-        this.router.navigate(['/lista-usuarios']);
         swal('Usuario actualizado', `${json.mensaje}: ${json.usuario.nombre}`, 'success');
+        this.router.navigate(['/lista-usuarios']);
       },
       err => {
         this.errores = err.error.errors as string[];
         console.error('Codigo del error desde el backend: ' + err.status);
         console.error(err.error.errors);
-        this.showSpinner = false;
       });
-    this.showSpinner = true;
   }
 
 

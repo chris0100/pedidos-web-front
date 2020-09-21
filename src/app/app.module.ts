@@ -36,6 +36,7 @@ import { PrepareVerErrorComponent } from './admin/prepare-ver-error/prepare-ver-
 import { LoadingSpinnerComponent } from './ui/loading-spinner/loading-spinner.component';
 import { EditarItemComponent } from './admin/editar-item/editar-item.component';
 import { LoginAdminComponent } from './admin/login-admin/login-admin.component';
+import { CertificadoProveedorComponent } from './proveedor/certificado-proveedor/certificado-proveedor.component';
 
 
 
@@ -71,7 +72,8 @@ registerLocaleData(localeES, 'es');
     PrepareVerErrorComponent,
     LoadingSpinnerComponent,
     EditarItemComponent,
-    LoginAdminComponent
+    LoginAdminComponent,
+    CertificadoProveedorComponent
   ],
   imports: [
     BrowserModule,

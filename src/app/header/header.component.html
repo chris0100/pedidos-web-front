@@ -118,6 +118,11 @@
           <a class="nav-link" [routerLink]="['/lista-errores-completo']">Lista Errores Completo</a>
         </li>
 
+        <li class="nav-item" *ngIf="authService.hasRole('ROLE_ADMIN')">
+          <a class="nav-link" [routerLink]="['/certificados-proveedores']">Certificados Proveedores</a>
+        </li>
+
+
       </ul>
     </div>
   </div>

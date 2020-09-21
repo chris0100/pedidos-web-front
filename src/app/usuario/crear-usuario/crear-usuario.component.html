@@ -162,19 +162,20 @@
                      required
                      *ngIf="!usuario.id else elseBlock3"
               >
+              <label for="password" class="active">Contraseña</label>
 
               <ng-template #elseBlock3>
               <input type="password"
-                     id="password"
-                     name="password"
+                     id="pass"
+                     name="pass"
                      class="form-control form-control-sm"
-                     [value]="xx"
+                     value="xxxxxx"
                      required
                      disabled
               >
+                <label for="pass" class="active">Contraseña</label>
               </ng-template>
 
-              <label for="password" class="active">Contraseña</label>
             </div>
           </div>
 
@@ -187,11 +188,12 @@
             <fieldset class="form-check" style="padding: 0px !important;">
               <input class="form-check-input"
                      type="checkbox"
-                     id="primerLogin"
-                     name="primerLogin"
+                     id="primer_login"
+                     name="primer_login"
                      [(ngModel)]="usuario.primerLogin"
+                     [value]="usuario.primerLogin"
               >
-              <label class="form-check-label" for="primerLogin">Solicitar cambio al ingresar</label>
+              <label class="form-check-label" for="primer_login">Solicitar cambio al ingresar</label>
             </fieldset>
           </div>
 
