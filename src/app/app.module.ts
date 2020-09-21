@@ -24,8 +24,6 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {TokenInterceptor} from './login/interceptors/token.interceptor';
 import {AuthInterceptor} from './login/interceptors/auth.interceptor';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatAutocompleteModule, MatDatepickerModule, MatFormFieldModule, MatInputModule, MatSelectModule} from '@angular/material';
-import {MatMomentDateModule} from '@angular/material-moment-adapter';
 import {registerLocaleData} from '@angular/common';
 import localeES from '@angular/common/locales/es';
 import { DetalleHistorialPedidosComponent } from './pedidos/historial-pedidos/detalle-historial-pedidos/detalle-historial-pedidos.component';
@@ -37,6 +35,8 @@ import { ListaErroresCompletoComponent } from './admin/lista-errores-completo/li
 import { PrepareVerErrorComponent } from './admin/prepare-ver-error/prepare-ver-error.component';
 import { LoadingSpinnerComponent } from './ui/loading-spinner/loading-spinner.component';
 import { EditarItemComponent } from './admin/editar-item/editar-item.component';
+import { LoginAdminComponent } from './admin/login-admin/login-admin.component';
+
 
 
 registerLocaleData(localeES, 'es');
@@ -70,21 +70,16 @@ registerLocaleData(localeES, 'es');
     ListaErroresCompletoComponent,
     PrepareVerErrorComponent,
     LoadingSpinnerComponent,
-    EditarItemComponent
+    EditarItemComponent,
+    LoginAdminComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    MatDatepickerModule,
-    MatMomentDateModule,
-    MatFormFieldModule,
     ReactiveFormsModule,
-    MatAutocompleteModule,
-    MatInputModule,
-    BrowserAnimationsModule,
-    MatSelectModule,
+    BrowserAnimationsModule
   ],
   providers: [ { provide: LOCALE_ID, useValue: 'es' },
     {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},

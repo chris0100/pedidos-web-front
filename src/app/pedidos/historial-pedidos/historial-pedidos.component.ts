@@ -30,6 +30,8 @@ export class HistorialPedidosComponent implements OnInit {
 
   ngOnInit(): void {
     this.showSpinner = false;
+    this.fechaParametro1 = '';
+    this.fechaParametro2 = '';
 
     // Si se encuentra el historial aun en el session storage
     this.pedidosUnoEE = this.pedidosService.obtenerPedidoUnoEEGuardadoSessionStorage();

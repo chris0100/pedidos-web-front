@@ -28,9 +28,6 @@ export class ListaUsuariosComponent implements OnInit {
     sessionStorage.removeItem('pedidosUnoEEHistorial');
     sessionStorage.removeItem('listaItemPedidoSelect');
 
-    // Inicializacion para cargar js
-    // new tablas();
-
 
     // Obtener listado de clientes
     this.usuariosService.listarUsuariosJava().subscribe(
@@ -41,6 +38,10 @@ export class ListaUsuariosComponent implements OnInit {
         this.showSpinner = false;
       });
     this.showSpinner = true;
+
+    // Inicializacion para cargar js
+    new tablas();
   }
+
 
 }

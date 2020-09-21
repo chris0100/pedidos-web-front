@@ -440,6 +440,21 @@ small,
   font-weight: 400;
 }
 
+th{
+  font-size: 90%!important;
+  font-weight: 400!important;
+}
+
+tr{
+  font-size: 90%!important;
+  font-weight: 400!important;
+}
+
+td{
+  font-size: 90%!important;
+  font-weight: 400!important;
+}
+
 mark,
 .mark {
   padding: 0.2em;

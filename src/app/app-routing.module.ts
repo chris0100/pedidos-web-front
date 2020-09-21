@@ -20,12 +20,14 @@ import {ListaErroresComponent} from './admin/lista-errores/lista-errores.compone
 import {ListaErroresCompletoComponent} from './admin/lista-errores-completo/lista-errores-completo.component';
 import {PrepareVerErrorComponent} from './admin/prepare-ver-error/prepare-ver-error.component';
 import {EditarItemComponent} from './admin/editar-item/editar-item.component';
+import {LoginAdminComponent} from './admin/login-admin/login-admin.component';
 
 
 
 const routes: Routes = [
   {path: '', redirectTo: '/login', pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
+  {path: 'login-admin', component: LoginAdminComponent},
   {path: 'panel-clientes', component: PanelClientesComponent, canActivate: [RoleGuard, AuthGuard], data: {role: 'ROLE_ADMIN'}},
   {path: 'configuracion', component: ConfiguracionComponent, canActivate: [RoleGuard, AuthGuard], data: {role: 'ROLE_ADMIN'}},
   {path: 'lista-usuarios', component: ListaUsuariosComponent, canActivate: [RoleGuard, AuthGuard], data: {role: 'ROLE_ADMIN'}},

@@ -26,7 +26,8 @@
               "src/resources/css/mdb.css",
               "src/resources/css/modules/animations-extended.css",
               "src/resources/css/addons/datatables-select.min.css",
-              "src/resources/css/addons/datatables.min.css"
+              "src/resources/css/addons/datatables.min.css",
+              "node_modules/animate.css/animate.css"
             ],
             "scripts": [
               "src/resources/js/jquery-3.4.1.min.js",
@@ -35,6 +36,8 @@
               "src/resources/js/mdb.min.js",
               "src/resources/js/addons/datatables.min.js",
               "src/resources/js/addons/datatables-select.min.js",
+              "node_modules/chart.js/dist/Chart.js",
+              "node_modules/hammerjs/hammer.min.js",
               "src/resources/js/lista.js",
               "src/resources/js/tablas.js",
               "src/resources/js/login.js",
