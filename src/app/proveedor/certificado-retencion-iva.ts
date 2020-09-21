@@ -1,0 +1,45 @@
+import {Usuario} from '../usuario/usuario';
+
+export class CertificadoRetencionIVA {
+  dircia: string;
+  ciudadcia: string;
+  razon: string;
+  tipoid: string;
+  ident: string;
+  dirtercero: string;
+  ciudadtercero: string;
+  auxiliar: string;
+  idaux: string;
+  tasa: number;
+  tasabase: number;
+  base: number;
+  neto: number;
+  bimestre: number;
+  desde: string;
+  hasta: string;
+  firma: string;
+  cargo: string;
+  totalNeto: number;
+  agruparpor: number;
+  ciudad_practica: string;
+  ciudad_consigna: string;
+  f_email: string;
+  f_nombre_archivo: string;
+  totalabonocta: number;
+  total_monto: number;
+  total_base: number;
+  total_retenido: number;
+  fechaExpedicion: string;
+  numero_letras: string;
+  anioGrabable: number;
+  mesInicio: string;
+  mesFin: string;
+  tipoCertificado: string;
+  ciudadPracticoParam: string;
+  ciudadConsignoParam: string;
+  tituloCertificado: string;
+  rowid_tercero: number;
+  usuarioActual: Usuario;
+
+
+}

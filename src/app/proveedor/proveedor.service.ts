@@ -1,0 +1,51 @@
+import { Injectable } from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Router} from '@angular/router';
+import {Observable, throwError} from 'rxjs';
+import {catchError, map} from 'rxjs/operators';
+import {CertificadoRetencionIVA} from './certificado-retencion-iva';
+
+@Injectable({
+  providedIn: 'root'
+})
+
+
+export class ProveedorService {
+
+  constructor(private http: HttpClient, private router: Router) { }
+
+
+  // Obtener el row id del tercero
+  obtenerRowIdTercero(nit: string): Observable<string[]> {
+    const urlEndPoint = 'http://localhost:8082/obtener-row-id-tercero';
+    return this.http.get<string[]>(`${urlEndPoint}/${nit}`).pipe(
+      catchError(e => {
+        if (e.status != 401 && e.error.mensaje) {
+          this.router.navigate(['/panel-clientes']);
+          console.log(e.error.mensaje);
+        }
+        return throwError(e);
+      })
+    );
+  }
+
+
+
+  // crear PDF despues de seleccionar tipo certificado PCI
+  crearPDFIva(mesInicio: string, mesFin: string,
+              anioGrabable: string, nit: string, rowIdTercero: number): Observable<CertificadoRetencionIVA[]> {
+    const urlEndPoint = 'http://localhost:8082/crear-pdf-iva';
+    return this.http.get<CertificadoRetencionIVA[]>(`${urlEndPoint}/${mesInicio}/${mesFin}/${anioGrabable}/${nit}/${rowIdTercero}`).pipe(
+      catchError(e => {
+        if (e.status != 401 && e.error.mensaje) {
+          this.router.navigate(['/panel-clientes']);
+          console.log(e.error.mensaje);
+        }
+        return throwError(e);
+      })
+    );
+  }
+
+
+
+}

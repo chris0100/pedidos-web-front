@@ -30,9 +30,12 @@
         >Tipo Certificado</label>
         <select class="form-control"
                 style="margin-top: -10px"
+                [(ngModel)]="tipoCertificado"
         >
-          <option value="" disabled selected>Seleccionar</option>
-          <option [value]="item" *ngFor="let item of tipoCertificado">{{item}}</option>
+          <option value="PCI">CERTIFICADO DE RETENCIÓN POR IVA</option>
+          <option value="PCC">CERTIFICADO DE RETENCIÓN EN LA FUENTE</option>
+          <option value="PIC">CERTIFICADO DE RETENCIÓN EN LA FUENTE POR ICA - CALI</option>
+          <option value="PIY">CERTIFICADO DE RETENCIÓN EN LA FUENTE POR ICA - YUMBO</option>
         </select>
       </div>
 
@@ -44,9 +47,10 @@
         <input class="form-control"
                 style="margin-top: -10px"
                type="number"
-               min="2010"
+               min="2017"
                max="2030"
                value="2020"
+               [(ngModel)]="anioGrabable"
         >
       </div>
 
@@ -57,9 +61,15 @@
         >Periodo</label>
         <select class="form-control"
                 style="margin-top: -10px"
+                [(ngModel)]="mesInicio"
         >
           <option value="" disabled selected>Seleccionar</option>
-          <option [value]="item" *ngFor="let item of periodo">{{item}}</option>
+          <option value="1">BIMESTRE ENERO - FEBRERO</option>
+          <option value="3">BIMESTRE MARZO - ABRIL</option>
+          <option value="5">BIMESTRE MAYO - JUNIO</option>
+          <option value="7">BIMESTRE JULIO - AGOSTO</option>
+          <option value="9">BIMESTRE SEPTIEMBRE - OCTUBRE</option>
+          <option value="11">BIMESTRE NOVIEMBRE - DICIEMBRE</option>
         </select>
       </div>
 
