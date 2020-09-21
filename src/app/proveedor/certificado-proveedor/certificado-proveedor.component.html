@@ -1,3 +1,87 @@
-<p>
-  certificado-proveedor works!
-</p>
+<app-header></app-header>
+
+
+<!-- CARD DE CONTENIDO SEGUN PAGINA-->
+<div class="card mx-auto" style="width: 90%; margin-top: 200px; margin-bottom: 280px">
+
+  <div class="card-header warning-color-dark d-flex justify-content-start align-items-center">
+    <div class="d-flex align-items-center">
+      <i class="fas fa-check-double text-black-50 fa-2x"></i>
+      <h5 class="font-weight-bold text-black ml-2">Generación de certificados EKA</h5>
+    </div>
+
+  </div>
+
+
+  <div class="card-body">
+
+
+    <div class="alert alert-primary" role="alert">
+      Por seguridad de la información tu certificado será cifrado con tu <span class="font-weight-bold">NIT</span>.
+    </div>
+
+    <div class="row">
+
+
+      <!-- Grid column -->
+      <div class="col-md-4">
+        <label class="small"
+               style="margin-top: 7px; margin-left: 10px;z-index: 100"
+        >Tipo Certificado</label>
+        <select class="form-control"
+                style="margin-top: -10px"
+        >
+          <option value="" disabled selected>Seleccionar</option>
+          <option [value]="item" *ngFor="let item of tipoCertificado">{{item}}</option>
+        </select>
+      </div>
+
+
+      <div class="col-md-4">
+        <label class="small"
+               style="margin-top: 7px; margin-left: 10px;z-index: 100"
+        >Año Grabable</label>
+        <input class="form-control"
+                style="margin-top: -10px"
+               type="number"
+               min="2010"
+               max="2030"
+               value="2020"
+        >
+      </div>
+
+
+      <div class="col-md-4">
+        <label class="small"
+               style="margin-top: 7px; margin-left: 10px;z-index: 100"
+        >Periodo</label>
+        <select class="form-control"
+                style="margin-top: -10px"
+        >
+          <option value="" disabled selected>Seleccionar</option>
+          <option [value]="item" *ngFor="let item of periodo">{{item}}</option>
+        </select>
+      </div>
+
+
+    </div>
+
+
+
+    <!--          [disabled]="itemPedidoActual.cantidad<1"
+          (click)="agregarItem()"-->
+    <div class="row mb-5 d-flex justify-content-center mt-5">
+      <button class="btn btn-success btn-rounded"
+              style="min-width: 270px"
+              (click)="generarPDF()"
+      ><i class="far fa-file-pdf fa-2x"></i>
+        Generar PDF
+      </button>
+    </div>
+
+
+
+
+
+
+

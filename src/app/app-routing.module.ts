@@ -21,6 +21,7 @@ import {ListaErroresCompletoComponent} from './admin/lista-errores-completo/list
 import {PrepareVerErrorComponent} from './admin/prepare-ver-error/prepare-ver-error.component';
 import {EditarItemComponent} from './admin/editar-item/editar-item.component';
 import {LoginAdminComponent} from './admin/login-admin/login-admin.component';
+import {CertificadoProveedorComponent} from './proveedor/certificado-proveedor/certificado-proveedor.component';
 
 
 
@@ -45,7 +46,8 @@ const routes: Routes = [
   {path: 'lista-errores', component: ListaErroresComponent, canActivate: [RoleGuard, AuthGuard], data: {role: 'ROLE_ADMIN'}},
   {path: 'lista-errores-completo', component: ListaErroresCompletoComponent, canActivate: [RoleGuard, AuthGuard], data: {role: 'ROLE_ADMIN'}},
   {path: 'prepare-ver-error/:id/:otr', component: PrepareVerErrorComponent, canActivate: [RoleGuard, AuthGuard], data: {role: 'ROLE_ADMIN'}},
-  {path: 'editar-item/:idPedido/:idItem/:otr', component: EditarItemComponent, canActivate: [RoleGuard, AuthGuard], data: {role: 'ROLE_ADMIN'}}
+  {path: 'editar-item/:idPedido/:idItem/:otr', component: EditarItemComponent, canActivate: [RoleGuard, AuthGuard], data: {role: 'ROLE_ADMIN'}},
+  {path: 'certificados-proveedor', component: CertificadoProveedorComponent, canActivate: [RoleGuard, AuthGuard], data: {role: 'ROLE_ADMIN'}}
 ];
 
 
