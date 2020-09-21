@@ -91,7 +91,7 @@ export class LoginClientesComponent implements OnInit {
   loginCliente(): void {
 
     // Revisa que no esten vacios los campos
-    if (this.usuario.username == null || this.usuario.password == null) {
+    if (this.usuario.username.trim() === '' || this.usuario.password.trim() === '' ) {
       swal('Error de ingreso', 'Username o Password vacios', 'error');
       return;
     }

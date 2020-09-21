@@ -51,20 +51,21 @@
 
                   <!--INPUT USUARIO-->
                   <div class="md-form md-outline font-weight-bold">
-                    <input type="text" id="nit-proveedor" class="form-control">
+                    <input type="text" id="nit-proveedor" class="form-control" [(ngModel)]="usuario.username">
                     <label for="nit-proveedor">Usuario</label>
                   </div>
 
                   <!--INPUT CONTRASEÑA-->
                   <div class="md-form md-outline font-weight-bold">
-                    <input type="password" id="password-proveedor" class="form-control">
+                    <input type="password" id="password-proveedor" class="form-control" [(ngModel)]="usuario.password">
                     <label for="password-proveedor">Contraseña</label>
                   </div>
 
                   <div class="text-center form-sm mt-2">
                     <button class="btn btn-primary btn-rounded"
                             type="submit"
-                            value="loginA"
+                            (click)="loginAdmin()"
+                            [disabled]="usuario.username.length==0 || usuario.password.length==0"
                     >
                       Ingresar <i class="fas fa-sign-in-alt ml-1"></i>
                     </button>
