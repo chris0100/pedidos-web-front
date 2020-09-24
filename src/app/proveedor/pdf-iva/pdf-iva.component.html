@@ -1,0 +1,208 @@
+<div class="row mb-3">
+
+  <div class="col-sm-6">
+    <div style="width: 540px; display:inline-block; vertical-align: top">
+      <div
+        style="width: 480px; display: inline-block;padding: 0px; vertical-align: top; text-align: left;margin-top: 2px;">
+        <span style="font-weight: bold">EKA Corporación S.A.</span>
+      </div>
+      <div
+        style="width: 480px; display: inline-block;padding: 0px; vertical-align: top; text-align: left;margin-top: 2px;">
+        805025631-6
+      </div>
+      <div
+        style="width: 480px; display: inline-block;padding: 0px; vertical-align: top; text-align: left;margin-top: 2px;">
+        CL 46 a 1 61
+      </div>
+      <div
+        style="width: 480px; display: inline-block;padding: 0px; vertical-align: top; text-align: left;margin-top: 2px;">
+        Cali
+      </div>
+    </div>
+  </div>
+
+
+  <div class="col-sm-6">
+    <div class="float-right">
+      <img alt="Logo" src="resources/img/logos/logo-eka.png" class="img-fluid"
+           style="width: 200px; margin-top: 10px; margin-left: 5px"/>
+    </div>
+  </div>
+
+</div>
+
+
+<div class="text-center mx-auto" style="border-bottom: 1px solid black; padding-bottom: 2em">
+  <div>
+    <span style="font-weight: bold; font-size: 1.1em">CERTIFICADO DE RETENCIÓN POR IVA</span>
+  </div>
+  <div>
+    PERIODO {{mesInicio}}-{{anioGrabable}} A {{mesFin}}-{{anioGrabable}}
+  </div>
+</div>
+
+<!--Despues de la linea -->
+<div class="row">
+  <div class="col-sm-7">
+    <div>
+      <div>
+        <div
+          style="width: 300px; display: inline-block;padding: 0px;text-align: left;margin-top: 2px;vertical-align: top">
+          Retendido:
+        </div>
+        <div style="width: 300px; display: inline-block;padding: 0px;text-align: left;margin-top: 2px;">
+          <span>{{certificadoController.razon}}</span>
+          <br>
+          <span>{{certificadoController.tipoid}}</span> - <span>{{certificadoController.ident}}</span>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div>
+        <div
+          style="width: 300px; display: inline-block;padding: 0px;text-align: left;margin-top: 2px;vertical-align: top">
+          Dirección:
+        </div>
+        <div style="width: 300px; display: inline-block;padding: 0px;text-align: left;margin-top: 2px;">
+          {{certificadoController.dirtercero}}
+          <br>
+          {{certificadoController.ciudadtercero}}
+        </div>
+      </div>
+    </div>
+    <div>
+
+
+      <div class="mt-2">
+        <div style="width: 450px; display: inline-block;padding: 0px;text-align: left;margin-top: 2px;">
+          Ciudad donde se practicó la retención:
+        </div>
+        <div style="width: 300px; display: inline-block;padding: 0px;text-align: left;margin-top: 2px;">
+          {{certificadoController.ciudad_practica}}
+        </div>
+      </div>
+
+      <div class="mt-1">
+        <div style="width: 450px; display: inline-block;padding: 0px;text-align: left;margin-top: 2px;">
+          Ciudad donde se consignó la retención:
+        </div>
+        <div style="width: 300px; display: inline-block;padding: 0px;text-align: left;margin-top: 2px;">
+          {{certificadoController.ciudad_consigna}}
+        </div>
+      </div>
+
+      <div class="mt-2">
+        <div
+          style="width: 350px; display: inline-block;padding: 0px;text-align: left;margin-top: 2px;font-weight: bold">
+          {{certificadoController.auxiliar}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div style="margin-top:10px;">
+
+  <table class="table table-bordered">
+    <thead>
+    <tr>
+      <th class="font-weight-bold">CONCEPTO</th>
+      <th class="font-weight-bold">TASA %</th>
+      <th class="font-weight-bold">TASA BASE</th>
+      <th class="font-weight-bold">MONTO TOTAL</th>
+      <th class="font-weight-bold">VR. BASE</th>
+      <th class="font-weight-bold">VR. RETENIDO</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr *ngFor="let obj of listaCertificadoRetencionIva">
+      <td>Bimestre del <span>{{obj.desde | date:"dd/MM/yyyy"}}</span> al <span>{{obj.hasta | date:"dd/MM/yyyy"}}</span></td>
+      <td>{{obj.tasa}}</td>
+      <td>{{obj.tasabase}}</td>
+      <td><span>$ </span>{{obj.base | currency: 0 : ""}}</td>
+      <td><span>$ </span>{{obj.base | currency: 0 : ""}}</td>
+      <td><span>$ </span>{{obj.neto | currency: 0 : ""}}</td>
+
+    </tr>
+
+    <tr>
+      <td></td>
+      <td></td>
+      <td class="font-weight-bold">TOTAL CONCEPTO</td>
+
+      <td>
+        <div class="font-weight-bold">
+          $ <span>{{certificadoController.total_monto | currency: 0 : ""}}</span>
+        </div>
+      </td>
+
+      <td>
+        <div class="font-weight-bold">
+          $ <span>{{certificadoController.total_base | currency: 0 : ""}}</span>
+        </div>
+      </td>
+
+      <td>
+        <div class="font-weight-bold">
+          $ <span>{{certificadoController.total_retenido | currency: 0 : ""}}</span>
+        </div>
+      </td>
+
+    </tr>
+
+    <tr>
+      <td></td>
+      <td></td>
+      <td class="font-weight-bold">TOTAL</td>
+
+      <td>
+        <div class="font-weight-bold">
+          $ <span>{{certificadoController.total_monto | currency: 0 : ""}}</span>
+        </div>
+      </td>
+
+      <td>
+        <div class="font-weight-bold">
+          $ <span>{{certificadoController.total_base | currency: 0 : ""}}</span>
+        </div>
+      </td>
+
+      <td>
+        <div class="font-weight-bold">
+          $ <span>{{certificadoController.total_retenido | currency: 0 : ""}}</span>
+        </div>
+      </td>
+
+    </tr>
+    </tbody>
+  </table>
+
+
+  <div class="mt-4">
+    <div style="display: block;">
+      Notas: Forma Continua Impresa por Computador no necesita Firma Autógrafa (Art. 10 D.R. 836/91).
+    </div>
+  </div>
+  <div style="margin-top: 50px">
+    <div style="display: block;">
+      Fecha de expedición: <span>{{certificadoController.fechaExpedicion | date:"EEEE dd, MMMM yyyy HH:mm"}}</span>
+    </div>
+  </div>
+
+
+  <div class="text-center">
+    <div style="margin-top: 50px">
+      <div style="display: block;padding: 0px;text-align: center;">
+        {{certificadoController.firma}}
+      </div>
+
+      <div style="display: block;padding: 0px;text-align: center;margin-top: 2px;">
+        {{certificadoController.cargo}}
+      </div>
+    </div>
+  </div>
+
+</div>

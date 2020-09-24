@@ -73,7 +73,6 @@
         </select>
       </div>
 
-
     </div>
 
 
@@ -88,6 +87,43 @@
         Generar PDF
       </button>
     </div>
+
+
+
+    <div class="my-5">
+      <hr>
+    </div>
+
+
+
+
+    <!--SE PASAN LAS VARIABLES AL HIJO PARA LA GENERACION DEL PDF-->
+    <div *ngIf="consultado">
+      <app-pdf-iva
+        [listaCertificadoRetencionIva]="listaCertificadoRetencionIva"
+        [certificadoController]="certificadoController"
+        [anioGrabable]="anioGrabable"
+        [mesFin]="mesFin"
+        [mesInicio] = "mesInicio"
+      >
+      </app-pdf-iva>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

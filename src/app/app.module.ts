@@ -37,6 +37,7 @@ import { LoadingSpinnerComponent } from './ui/loading-spinner/loading-spinner.co
 import { EditarItemComponent } from './admin/editar-item/editar-item.component';
 import { LoginAdminComponent } from './admin/login-admin/login-admin.component';
 import { CertificadoProveedorComponent } from './proveedor/certificado-proveedor/certificado-proveedor.component';
+import { PdfIvaComponent } from './proveedor/pdf-iva/pdf-iva.component';
 
 
 
@@ -73,7 +74,8 @@ registerLocaleData(localeES, 'es');
     LoadingSpinnerComponent,
     EditarItemComponent,
     LoginAdminComponent,
-    CertificadoProveedorComponent
+    CertificadoProveedorComponent,
+    PdfIvaComponent
   ],
   imports: [
     BrowserModule,

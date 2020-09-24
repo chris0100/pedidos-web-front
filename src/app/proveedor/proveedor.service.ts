@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import {Observable, throwError} from 'rxjs';
 import {catchError, map} from 'rxjs/operators';
 import {CertificadoRetencionIVA} from './certificado-retencion-iva';
+import swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root'
@@ -38,7 +39,7 @@ export class ProveedorService {
     return this.http.get<CertificadoRetencionIVA[]>(`${urlEndPoint}/${mesInicio}/${mesFin}/${anioGrabable}/${nit}/${rowIdTercero}`).pipe(
       catchError(e => {
         if (e.status != 401 && e.error.mensaje) {
-          this.router.navigate(['/panel-clientes']);
+          swal('Error', e.error.mensaje, 'error');
           console.log(e.error.mensaje);
         }
         return throwError(e);

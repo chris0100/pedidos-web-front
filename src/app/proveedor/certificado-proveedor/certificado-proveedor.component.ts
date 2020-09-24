@@ -17,6 +17,8 @@ export class CertificadoProveedorComponent implements OnInit {
   mesInicio: string;
   mesFin: string;
   listaCertificadoRetencionIva: CertificadoRetencionIVA[];
+  certificadoController: CertificadoRetencionIVA;
+  consultado: boolean;
 
 
   constructor(private proveedorService: ProveedorService, private authService: AuthService) {
@@ -26,6 +28,10 @@ export class CertificadoProveedorComponent implements OnInit {
     this.tipoCertificado = 'PCI';
     this.anioGrabable = 2020;
     this.listaCertificadoRetencionIva = [];
+    this.certificadoController = new CertificadoRetencionIVA();
+    this.mesInicio = '';
+    this.mesFin = '';
+    this.consultado = false;
   }
 
 
@@ -57,6 +63,8 @@ export class CertificadoProveedorComponent implements OnInit {
               console.log(obj2);
               this.listaCertificadoRetencionIva = obj2;
               console.log(this.listaCertificadoRetencionIva);
+              this.certificadoController = this.listaCertificadoRetencionIva[0];
+              this.consultado = true;
             });
         }
       });
