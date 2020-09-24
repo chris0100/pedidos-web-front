@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {ProveedorService} from '../proveedor.service';
 import {AuthService} from '../../login/auth.service';
 import {CertificadoRetencionIVA} from '../certificado-retencion-iva';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 
 @Component({
   selector: 'app-certificado-proveedor',
@@ -18,7 +20,8 @@ export class CertificadoProveedorComponent implements OnInit {
   mesFin: string;
   listaCertificadoRetencionIva: CertificadoRetencionIVA[];
   certificadoController: CertificadoRetencionIVA;
-  consultado: boolean;
+  consultado: boolean; // se habilita para mostrar el contenido del pdf
+  after: boolean; // oculta lo que se muestra al inicio con inputs de consulta
 
 
   constructor(private proveedorService: ProveedorService, private authService: AuthService) {
@@ -32,6 +35,7 @@ export class CertificadoProveedorComponent implements OnInit {
     this.mesInicio = '';
     this.mesFin = '';
     this.consultado = false;
+    this.after = true;
   }
 
 
@@ -65,9 +69,18 @@ export class CertificadoProveedorComponent implements OnInit {
               console.log(this.listaCertificadoRetencionIva);
               this.certificadoController = this.listaCertificadoRetencionIva[0];
               this.consultado = true;
+              this.after = false;
             });
         }
       });
+  }
+
+
+
+
+  onOperacionRegreso(regresar: boolean): void {
+    this.after = true;
+    this.consultado = false;
   }
 
 

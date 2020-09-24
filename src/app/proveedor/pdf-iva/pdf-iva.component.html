@@ -1,3 +1,27 @@
+
+<div class="row">
+  <div class="row mb-5 d-flex justify-content-left mx-2" *ngIf="hide">
+    <button class="btn btn-primary btn-rounded btn-sm"
+            (click)="printTest()"
+    ><i class="far fa-file-pdf mr-1"></i>
+      Descargar PDF
+    </button>
+  </div>
+
+  <div class="row mb-5 d-flex justify-content-left mx-2" *ngIf="hide">
+    <button class="btn btn-danger btn-rounded btn-sm"
+            style="min-width: 150px"
+            (click)="retornar()"
+    ><i class="fas fa-long-arrow-alt-left mr-1"></i>
+      Regresar
+    </button>
+  </div>
+</div>
+
+
+
+<div id="contentToConvert">
+
 <div class="row mb-3">
 
   <div class="col-sm-6">
@@ -22,12 +46,15 @@
   </div>
 
 
-  <div class="col-sm-6">
-    <div class="float-right">
-      <img alt="Logo" src="resources/img/logos/logo-eka.png" class="img-fluid"
-           style="width: 200px; margin-top: 10px; margin-left: 5px"/>
-    </div>
+
+<div class="col-sm-6">
+  <div class="float-right">
+    <img alt="Logo" src="resources/img/logos/logo-eka.png"
+         style="width: 200px; margin-top: 10px; margin-left: 5px"/>
   </div>
+</div>
+
+
 
 </div>
 
@@ -37,13 +64,13 @@
     <span style="font-weight: bold; font-size: 1.1em">CERTIFICADO DE RETENCIÓN POR IVA</span>
   </div>
   <div>
-    PERIODO {{mesInicio}}-{{anioGrabable}} A {{mesFin}}-{{anioGrabable}}
+    PERIODO {{ajustarMes(mesInicio)}}-{{anioGrabable}} A {{ajustarMes(mesFin)}}-{{anioGrabable}}
   </div>
 </div>
 
 <!--Despues de la linea -->
 <div class="row">
-  <div class="col-sm-7">
+  <div class="col-sm-12">
     <div>
       <div>
         <div
@@ -108,70 +135,71 @@
   <table class="table table-bordered">
     <thead>
     <tr>
-      <th class="font-weight-bold">CONCEPTO</th>
-      <th class="font-weight-bold">TASA %</th>
-      <th class="font-weight-bold">TASA BASE</th>
-      <th class="font-weight-bold">MONTO TOTAL</th>
-      <th class="font-weight-bold">VR. BASE</th>
-      <th class="font-weight-bold">VR. RETENIDO</th>
+      <th class="font-weight-bold small text-center" style="padding-top: 5px!important;padding-bottom: 5px!important;">CONCEPTO</th>
+      <th class="font-weight-bold small text-center" style="padding-top: 5px!important;padding-bottom: 5px!important;">TASA %</th>
+      <th class="font-weight-bold small text-center" style="padding-top: 5px!important;padding-bottom: 5px!important;">TASA BASE</th>
+      <th class="font-weight-bold small text-center" style="padding-top: 5px!important;padding-bottom: 5px!important;">MONTO TOTAL</th>
+      <th class="font-weight-bold small text-center" style="padding-top: 5px!important;padding-bottom: 5px!important;">VR. BASE</th>
+      <th class="font-weight-bold small text-center" style="padding-top: 5px!important;padding-bottom: 5px!important;">VR. RETENIDO</th>
     </tr>
     </thead>
 
     <tbody>
     <tr *ngFor="let obj of listaCertificadoRetencionIva">
-      <td>Bimestre del <span>{{obj.desde | date:"dd/MM/yyyy"}}</span> al <span>{{obj.hasta | date:"dd/MM/yyyy"}}</span></td>
-      <td>{{obj.tasa}}</td>
-      <td>{{obj.tasabase}}</td>
-      <td><span>$ </span>{{obj.base | currency: 0 : ""}}</td>
-      <td><span>$ </span>{{obj.base | currency: 0 : ""}}</td>
-      <td><span>$ </span>{{obj.neto | currency: 0 : ""}}</td>
+      <td class="small" style="padding-top: 3px!important;padding-bottom: 3px!important;">Bimestre del <span>{{obj.desde | date:"dd/MM/yyyy"}}</span> al <span>{{obj.hasta | date:"dd/MM/yyyy"}}</span></td>
+      <td class="small text-right" style="padding-top: 1px!important;padding-bottom: 1px!important;">{{obj.tasa}}</td>
+      <td class="small text-right" style="padding-top: 1px!important;padding-bottom: 1px!important;">{{obj.tasabase}}</td>
+      <td class="small text-right" style="padding-top: 1px!important;padding-bottom: 1px!important;"><span>$ </span>{{obj.base | currency: 0 : ""}}</td>
+      <td class="small text-right" style="padding-top: 1px!important;padding-bottom: 1px!important;"><span>$ </span>{{obj.base | currency: 0 : ""}}</td>
+      <td class="small text-right" style="padding-top: 1px!important;padding-bottom: 1px!important;"><span>$ </span>{{obj.neto | currency: 0 : ""}}</td>
 
     </tr>
 
-    <tr>
-      <td></td>
-      <td></td>
-      <td class="font-weight-bold">TOTAL CONCEPTO</td>
+    <tr style="background-color: #f8f9fa !important;">
+      <td style="padding-top: 10px!important;padding-bottom: 10px!important;"></td>
+      <td style="padding-top: 10px!important;padding-bottom: 10px!important;"></td>
+      <td class="font-weight-bold" style="padding-top: 10px!important;padding-bottom: 10px!important;">TOTAL CONCEPTO</td>
 
-      <td>
-        <div class="font-weight-bold">
+      <td style="padding-top: 10px!important;padding-bottom: 10px!important;">
+        <div class="font-weight-bold text-right">
           $ <span>{{certificadoController.total_monto | currency: 0 : ""}}</span>
         </div>
       </td>
 
-      <td>
-        <div class="font-weight-bold">
+      <td style="padding-top: 10px!important;padding-bottom: 10px!important;">
+        <div class="font-weight-bold text-right">
           $ <span>{{certificadoController.total_base | currency: 0 : ""}}</span>
         </div>
       </td>
 
-      <td>
-        <div class="font-weight-bold">
+      <td style="padding-top: 10px!important;padding-bottom: 10px!important;">
+        <div class="font-weight-bold text-right">
           $ <span>{{certificadoController.total_retenido | currency: 0 : ""}}</span>
         </div>
       </td>
 
     </tr>
 
-    <tr>
-      <td></td>
-      <td></td>
-      <td class="font-weight-bold">TOTAL</td>
 
-      <td>
-        <div class="font-weight-bold">
+    <tr style="background-color: #f8f9fa !important;">
+      <td style="padding-top: 10px!important;padding-bottom: 10px!important;"></td>
+      <td style="padding-top: 10px!important;padding-bottom: 10px!important;"></td>
+      <td class="font-weight-bold" style="padding-top: 10px!important;padding-bottom: 10px!important;">TOTAL</td>
+
+      <td style="padding-top: 10px!important;padding-bottom: 10px!important;">
+        <div class="font-weight-bold text-right">
           $ <span>{{certificadoController.total_monto | currency: 0 : ""}}</span>
         </div>
       </td>
 
-      <td>
-        <div class="font-weight-bold">
+      <td style="padding-top: 10px!important;padding-bottom: 10px!important;">
+        <div class="font-weight-bold text-right">
           $ <span>{{certificadoController.total_base | currency: 0 : ""}}</span>
         </div>
       </td>
 
-      <td>
-        <div class="font-weight-bold">
+      <td style="padding-top: 10px!important;padding-bottom: 10px!important;">
+        <div class="font-weight-bold text-right">
           $ <span>{{certificadoController.total_retenido | currency: 0 : ""}}</span>
         </div>
       </td>
@@ -188,21 +216,23 @@
   </div>
   <div style="margin-top: 50px">
     <div style="display: block;">
-      Fecha de expedición: <span>{{certificadoController.fechaExpedicion | date:"EEEE dd, MMMM yyyy HH:mm"}}</span>
+      Fecha de expedición: <span>{{certificadoController.fechaExpedicion | date:"EEEE dd, MMMM yyyy"}}</span>
     </div>
   </div>
 
 
   <div class="text-center">
     <div style="margin-top: 50px">
-      <div style="display: block;padding: 0px;text-align: center;">
+      <div style="display: block;padding: 0px;text-align: center;" class="font-weight-bold">
         {{certificadoController.firma}}
       </div>
 
-      <div style="display: block;padding: 0px;text-align: center;margin-top: 2px;">
+      <div style="display: block;padding: 0px;text-align: center;margin-top: 2px;" class="font-weight-bold">
         {{certificadoController.cargo}}
       </div>
     </div>
   </div>
+
+</div>
 
 </div>
