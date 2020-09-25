@@ -22,6 +22,7 @@ import {PrepareVerErrorComponent} from './admin/prepare-ver-error/prepare-ver-er
 import {EditarItemComponent} from './admin/editar-item/editar-item.component';
 import {LoginAdminComponent} from './admin/login-admin/login-admin.component';
 import {CertificadoProveedorComponent} from './proveedor/certificado-proveedor/certificado-proveedor.component';
+import {ReestablecerPasswordComponent} from './login/reestablecer-password/reestablecer-password.component';
 
 
 
@@ -29,6 +30,7 @@ const routes: Routes = [
   {path: '', redirectTo: '/login', pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
   {path: 'login-admin', component: LoginAdminComponent},
+  {path: 'reestablecer-password', component: ReestablecerPasswordComponent},
   {path: 'panel-clientes', component: PanelClientesComponent, canActivate: [RoleGuard, AuthGuard], data: {role: 'ROLE_ADMIN'}},
   {path: 'configuracion', component: ConfiguracionComponent, canActivate: [RoleGuard, AuthGuard], data: {role: 'ROLE_ADMIN'}},
   {path: 'lista-usuarios', component: ListaUsuariosComponent, canActivate: [RoleGuard, AuthGuard], data: {role: 'ROLE_ADMIN'}},

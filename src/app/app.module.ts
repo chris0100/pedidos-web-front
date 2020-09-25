@@ -39,6 +39,9 @@ import { LoginAdminComponent } from './admin/login-admin/login-admin.component';
 import { CertificadoProveedorComponent } from './proveedor/certificado-proveedor/certificado-proveedor.component';
 import { PdfIvaComponent } from './proveedor/pdf-iva/pdf-iva.component';
 import { PdfRetencionComponent } from './proveedor/pdf-retencion/pdf-retencion.component';
+import { ReestablecerPasswordComponent } from './login/reestablecer-password/reestablecer-password.component';
+import { ReestablecerClientesComponent } from './login/reestablecer-password/reestablecer-clientes/reestablecer-clientes.component';
+import { ReestablecerProveedoresComponent } from './login/reestablecer-password/reestablecer-proveedores/reestablecer-proveedores.component';
 
 
 
@@ -77,7 +80,10 @@ registerLocaleData(localeES, 'es');
     LoginAdminComponent,
     CertificadoProveedorComponent,
     PdfIvaComponent,
-    PdfRetencionComponent
+    PdfRetencionComponent,
+    ReestablecerPasswordComponent,
+    ReestablecerClientesComponent,
+    ReestablecerProveedoresComponent
   ],
   imports: [
     BrowserModule,
