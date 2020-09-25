@@ -38,6 +38,7 @@ import { EditarItemComponent } from './admin/editar-item/editar-item.component';
 import { LoginAdminComponent } from './admin/login-admin/login-admin.component';
 import { CertificadoProveedorComponent } from './proveedor/certificado-proveedor/certificado-proveedor.component';
 import { PdfIvaComponent } from './proveedor/pdf-iva/pdf-iva.component';
+import { PdfRetencionComponent } from './proveedor/pdf-retencion/pdf-retencion.component';
 
 
 
@@ -75,7 +76,8 @@ registerLocaleData(localeES, 'es');
     EditarItemComponent,
     LoginAdminComponent,
     CertificadoProveedorComponent,
-    PdfIvaComponent
+    PdfIvaComponent,
+    PdfRetencionComponent
   ],
   imports: [
     BrowserModule,

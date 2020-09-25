@@ -34,9 +34,28 @@ export class ProveedorService {
 
   // crear PDF despues de seleccionar tipo certificado PCI
   crearPDFIva(mesInicio: string, mesFin: string,
-              anioGrabable: string, nit: string, rowIdTercero: number): Observable<CertificadoRetencionIVA[]> {
+              anioGrabable: string, rowIdTercero: number): Observable<CertificadoRetencionIVA[]> {
     const urlEndPoint = 'http://localhost:8082/crear-pdf-iva';
-    return this.http.get<CertificadoRetencionIVA[]>(`${urlEndPoint}/${mesInicio}/${mesFin}/${anioGrabable}/${nit}/${rowIdTercero}`).pipe(
+    return this.http.get<CertificadoRetencionIVA[]>(`${urlEndPoint}/${mesInicio}/${mesFin}/${anioGrabable}/${rowIdTercero}`).pipe(
+      catchError(e => {
+        if (e.status != 401 && e.error.mensaje) {
+          swal('Error', e.error.mensaje, 'error');
+          console.log(e.error.mensaje);
+        }
+        return throwError(e);
+      })
+    );
+  }
+
+
+  // Crea el pdf despues de seleccionar PCC
+  crearPDFRetencion(anioGrabable: string, rowIdTercero: number,
+                    ciudadConsignoParam: string, ciudadPracticoParam: string,
+                    tipoCertificado: string): Observable<CertificadoRetencionIVA[]> {
+    const urlEndPoint = 'http://localhost:8082/crear-pdf-retencion';
+    // tslint:disable-next-line:max-line-length
+    return this.http.get<CertificadoRetencionIVA[]>(`${urlEndPoint}/${anioGrabable}
+    /${rowIdTercero}/${ciudadConsignoParam}/${ciudadPracticoParam}/${tipoCertificado}`).pipe(
       catchError(e => {
         if (e.status != 401 && e.error.mensaje) {
           swal('Error', e.error.mensaje, 'error');

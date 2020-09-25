@@ -1,12 +1,14 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {CertificadoRetencionIVA} from '../certificado-retencion-iva';
 import html2canvas from 'html2canvas';
-import jsPDF from 'jspdf';
+// import jsPDF from 'jspdf';
 import * as html2pdf from 'html2pdf.js';
 // @ts-ignore
 import printJS from 'print-js';
 import * as es6printJS from 'print-js';
 import {startTimeRange} from '@angular/core/src/profile/wtf_impl';
+
+ declare var jsPDF: any;
 
 @Component({
   selector: 'app-pdf-iva',
@@ -25,6 +27,7 @@ export class PdfIvaComponent implements OnInit {
   // Variable de salida
   @Output() regresar = new EventEmitter<boolean>();
 
+
   constructor() {
   }
 
@@ -33,14 +36,13 @@ export class PdfIvaComponent implements OnInit {
   }
 
 
-
   // Actual forma para realizar la impresion pdf
   printTest(): void {
 
     // es6printJS('contentToConvert', 'html');
     function print() {
       printJS({
-        printable: 'contentToConvert',
+        printable: 'content',
         type: 'html',
         targetStyles: ['*']
       });
@@ -73,49 +75,8 @@ export class PdfIvaComponent implements OnInit {
 
 
 
-  // ******************************************************************************
-  // *****************************************************************************
-
-  // NO SE ESTA UTILIZANDO EN ESTE MOMENTO
-  // Prueba de impresion 2
-  descargarPDF(): void {
-    // Realizar la generacion del pdf
-    const data = document.getElementById('contentToConvert');
-    html2canvas(data).then(canvas => {
-      const imgWidth = 208;
-      const pageHeight = 295;
-      const imgHeight = canvas.height * imgWidth / canvas.width;
-      const heightLeft = imgHeight;
-
-      const contentDataURL = canvas.toDataURL('image/png');
-
-      let pdf: jsPDF;
-      pdf = new jsPDF('p', 'mm', 'a4'); // A4 size of PDF
-      const position = 0;
-      pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight);
-
-      pdf.save('documento.pdf'); // Generated PDF
-    });
-  }
 
 
-  // NO SE ESTA UTILIZANDO ACTUALMENTE
-  // Prueba de impresion 1
-  downloadPDF(): void {
-    const options = {
-      filename: 'example.pdf',
-      image: {type: 'jpeg'},
-      html2canvas: {},
-      jsPDF: {orientation: 'landscape', unit: 'mm', format: 'a4'}
-    };
-
-    const content: Element = document.getElementById('contentToConvert');
-
-    html2pdf()
-      .from(content)
-      .set(options)
-      .save();
-  }
 
 
 }

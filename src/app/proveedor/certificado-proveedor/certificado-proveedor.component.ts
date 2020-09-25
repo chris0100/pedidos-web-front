@@ -3,7 +3,7 @@ import {ProveedorService} from '../proveedor.service';
 import {AuthService} from '../../login/auth.service';
 import {CertificadoRetencionIVA} from '../certificado-retencion-iva';
 import html2canvas from 'html2canvas';
-import jsPDF from 'jspdf';
+
 
 @Component({
   selector: 'app-certificado-proveedor',
@@ -20,8 +20,14 @@ export class CertificadoProveedorComponent implements OnInit {
   mesFin: string;
   listaCertificadoRetencionIva: CertificadoRetencionIVA[];
   certificadoController: CertificadoRetencionIVA;
-  consultado: boolean; // se habilita para mostrar el contenido del pdf
+  consultadoIva: boolean; // se habilita para mostrar el contenido del pdf IVA
   after: boolean; // oculta lo que se muestra al inicio con inputs de consulta
+
+  // PCC
+  tituloCertificado: string;
+  ciudadConsignoParam: string;
+  ciudadPraticoParam: string;
+  consultadoRetencion: boolean;  // Se habilita para mostrar el contenido de retencion pdf
 
 
   constructor(private proveedorService: ProveedorService, private authService: AuthService) {
@@ -34,8 +40,14 @@ export class CertificadoProveedorComponent implements OnInit {
     this.certificadoController = new CertificadoRetencionIVA();
     this.mesInicio = '';
     this.mesFin = '';
-    this.consultado = false;
+    this.consultadoIva = false;
     this.after = true;
+
+    // PCC
+    this.tituloCertificado = '';
+    this.ciudadConsignoParam = '';
+    this.ciudadPraticoParam = '';
+    this.consultadoRetencion = false;
   }
 
 
@@ -53,23 +65,76 @@ export class CertificadoProveedorComponent implements OnInit {
         this.rowIdTercero = parseInt(obj[0], 0);
         console.log(this.rowIdTercero);
 
-        // Evalua si la seleccion fue PCI
-        if (this.tipoCertificado === 'PCI') {
+        // Se transforman tipos de datos y se suma 1 al fin
+        const fin = parseInt(this.mesInicio, 0) + 1;
+        this.mesFin = fin + '';
 
-          // Se transforman tipos de datos y se suma 1 al fin
-          const fin = parseInt(this.mesInicio, 0) + 1;
-          this.mesFin = fin + '';
+        // Evalua si la seleccion fue PCI(CERTIFICADO RETENCION POR IVA)
+        if (this.tipoCertificado === 'PCI') {
 
           // tslint:disable-next-line:max-line-length
           this.proveedorService.crearPDFIva(this.mesInicio, this.mesFin, this.anioGrabable.toString(),
-            this.authService.usuario.nit, this.rowIdTercero).subscribe(
+             this.rowIdTercero).subscribe(
             obj2 => {
               console.log(obj2);
               this.listaCertificadoRetencionIva = obj2;
-              console.log(this.listaCertificadoRetencionIva);
               this.certificadoController = this.listaCertificadoRetencionIva[0];
-              this.consultado = true;
+              this.consultadoIva = true;
               this.after = false;
+            });
+        }
+
+        // PCC
+        else if (this.tipoCertificado === 'PCC') {
+          this.tituloCertificado = 'CERTIFICADO DE RENTENCIÓN EN LA FUENTE';
+          this.ciudadConsignoParam = 'Cali';
+          this.ciudadPraticoParam = 'Cali';
+
+          // Crear pdf retencion
+          this.proveedorService.crearPDFRetencion(this.anioGrabable.toString(),
+            this.rowIdTercero, this.ciudadConsignoParam, this.ciudadPraticoParam, this.tipoCertificado).subscribe(
+              obj3 => {
+                console.log(obj3);
+                this.listaCertificadoRetencionIva = obj3;
+                this.certificadoController = this.listaCertificadoRetencionIva[0];
+                this.after = false;
+                this.consultadoRetencion = true;
+              });
+        }
+
+        // PPI
+        else if (this.tipoCertificado === 'PIC') {
+          this.tituloCertificado = 'CERTIFICADO DE RENTENCIÓN EN LA FUENTE - CALI';
+          this.ciudadConsignoParam = 'Cali';
+          this.ciudadPraticoParam = 'Cali';
+
+          // Crear pdf retencion
+          this.proveedorService.crearPDFRetencion(this.anioGrabable.toString(),
+            this.rowIdTercero, this.ciudadConsignoParam, this.ciudadPraticoParam, this.tipoCertificado).subscribe(
+            obj3 => {
+              console.log(obj3);
+              this.listaCertificadoRetencionIva = obj3;
+              this.certificadoController = this.listaCertificadoRetencionIva[0];
+              this.after = false;
+              this.consultadoRetencion = true;
+            });
+        }
+
+        // PIY
+        else if (this.tipoCertificado === 'PIY') {
+          this.tituloCertificado = 'CERTIFICADO DE RENTENCIÓN EN LA FUENTE - YUMBO';
+          this.ciudadConsignoParam = 'Yumbo';
+          this.ciudadPraticoParam = 'Yumbo';
+
+          // Crear pdf retencion
+          this.proveedorService.crearPDFRetencion(this.anioGrabable.toString(),
+            this.rowIdTercero, this.ciudadConsignoParam, this.ciudadPraticoParam, this.tipoCertificado).subscribe(
+            obj3 => {
+              console.log(obj3);
+              this.listaCertificadoRetencionIva = obj3;
+              this.certificadoController = this.listaCertificadoRetencionIva[0];
+              this.after = false;
+              this.consultadoRetencion = true;
             });
         }
       });
@@ -80,7 +145,7 @@ export class CertificadoProveedorComponent implements OnInit {
 
   onOperacionRegreso(regresar: boolean): void {
     this.after = true;
-    this.consultado = false;
+    this.consultadoIva = false;
   }
 
 

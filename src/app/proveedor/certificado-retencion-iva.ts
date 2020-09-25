@@ -40,6 +40,5 @@ export class CertificadoRetencionIVA {
   tituloCertificado: string;
   rowid_tercero: number;
   usuarioActual: Usuario;
-
-
+  convertirNumero: string;
 }

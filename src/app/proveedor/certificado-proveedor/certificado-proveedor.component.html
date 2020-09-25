@@ -2,120 +2,130 @@
   <app-header></app-header>
 
 
+  <!-- CARD DE CONTENIDO SEGUN PAGINA-->
+  <div class="card mx-auto" style="width: 90%; margin-top: 200px; margin-bottom: 280px">
 
 
-<!-- CARD DE CONTENIDO SEGUN PAGINA-->
-<div class="card mx-auto" style="width: 90%; margin-top: 200px; margin-bottom: 280px">
-
-
-  <div class="card-header warning-color-dark d-flex justify-content-start align-items-center">
-    <div class="d-flex align-items-center">
-      <i class="fas fa-check-double text-black-50 fa-2x"></i>
-      <h5 class="font-weight-bold text-black ml-2">Generación de certificados EKA</h5>
-    </div>
-  </div>
-
-
-  <div class="card-body">
-
-    <div class="alert alert-primary" role="alert" hidden>
-      Por seguridad de la información tu certificado será cifrado con tu <span class="font-weight-bold">NIT</span>.
+    <div class="card-header warning-color-dark d-flex justify-content-start align-items-center">
+      <div class="d-flex align-items-center">
+        <i class="fas fa-check-double text-black-50 fa-2x"></i>
+        <h5 class="font-weight-bold text-black ml-2">Generación de certificados EKA</h5>
+      </div>
     </div>
 
-    <div class="row">
+
+    <div class="card-body">
+
+      <div class="alert alert-primary" role="alert" hidden>
+        Por seguridad de la información tu certificado será cifrado con tu <span class="font-weight-bold">NIT</span>.
+      </div>
+
+      <div class="row">
 
 
-      <!-- Grid column -->
-      <div class="col-md-4">
-        <label class="small"
-               style="margin-top: 7px; margin-left: 10px;z-index: 100"
-        >Tipo Certificado</label>
-        <select class="form-control"
-                style="margin-top: -10px"
-                [(ngModel)]="tipoCertificado"
-        >
-          <option value="PCI">CERTIFICADO DE RETENCIÓN POR IVA</option>
-          <option value="PCC">CERTIFICADO DE RETENCIÓN EN LA FUENTE</option>
-          <option value="PIC">CERTIFICADO DE RETENCIÓN EN LA FUENTE POR ICA - CALI</option>
-          <option value="PIY">CERTIFICADO DE RETENCIÓN EN LA FUENTE POR ICA - YUMBO</option>
-        </select>
+        <!-- Grid column -->
+        <div class="col-md-4">
+          <label class="small"
+                 style="margin-top: 7px; margin-left: 10px;z-index: 100"
+          >Tipo Certificado</label>
+          <select class="form-control"
+                  style="margin-top: -10px"
+                  [(ngModel)]="tipoCertificado"
+          >
+            <option value="PCI">CERTIFICADO DE RETENCIÓN POR IVA</option>
+            <option value="PCC">CERTIFICADO DE RETENCIÓN EN LA FUENTE</option>
+            <option value="PIC">CERTIFICADO DE RETENCIÓN EN LA FUENTE POR ICA - CALI</option>
+            <option value="PIY">CERTIFICADO DE RETENCIÓN EN LA FUENTE POR ICA - YUMBO</option>
+          </select>
+        </div>
+
+
+        <div class="col-md-4">
+          <label class="small"
+                 style="margin-top: 7px; margin-left: 10px;z-index: 100"
+          >Año Grabable</label>
+          <input class="form-control"
+                 style="margin-top: -10px"
+                 type="number"
+                 min="2017"
+                 max="2030"
+                 value="2020"
+                 [(ngModel)]="anioGrabable"
+          >
+        </div>
+
+
+        <div class="col-md-4" [hidden]="tipoCertificado=='PCC' || tipoCertificado=='PIC' || tipoCertificado=='PIY'">
+          <label class="small"
+                 style="margin-top: 7px; margin-left: 10px;z-index: 100"
+          >Periodo</label>
+          <select class="form-control"
+                  style="margin-top: -10px"
+                  [(ngModel)]="mesInicio"
+          >
+            <option value="" disabled selected>Seleccionar</option>
+            <option value="1">BIMESTRE ENERO - FEBRERO</option>
+            <option value="3">BIMESTRE MARZO - ABRIL</option>
+            <option value="5">BIMESTRE MAYO - JUNIO</option>
+            <option value="7">BIMESTRE JULIO - AGOSTO</option>
+            <option value="9">BIMESTRE SEPTIEMBRE - OCTUBRE</option>
+            <option value="11">BIMESTRE NOVIEMBRE - DICIEMBRE</option>
+          </select>
+        </div>
+
       </div>
 
 
-      <div class="col-md-4">
-        <label class="small"
-               style="margin-top: 7px; margin-left: 10px;z-index: 100"
-        >Año Grabable</label>
-        <input class="form-control"
-                style="margin-top: -10px"
-               type="number"
-               min="2017"
-               max="2030"
-               value="2020"
-               [(ngModel)]="anioGrabable"
-        >
+      <div class="row mb-5 d-flex justify-content-center mt-5">
+        <button class="btn btn-success btn-rounded"
+                style="min-width: 270px"
+                (click)="generarPDF()"
+        ><i class="far fa-file-pdf fa-2x"></i>
+          Generar PDF
+        </button>
       </div>
 
-
-      <div class="col-md-4">
-        <label class="small"
-               style="margin-top: 7px; margin-left: 10px;z-index: 100"
-        >Periodo</label>
-        <select class="form-control"
-                style="margin-top: -10px"
-                [(ngModel)]="mesInicio"
-        >
-          <option value="" disabled selected>Seleccionar</option>
-          <option value="1">BIMESTRE ENERO - FEBRERO</option>
-          <option value="3">BIMESTRE MARZO - ABRIL</option>
-          <option value="5">BIMESTRE MAYO - JUNIO</option>
-          <option value="7">BIMESTRE JULIO - AGOSTO</option>
-          <option value="9">BIMESTRE SEPTIEMBRE - OCTUBRE</option>
-          <option value="11">BIMESTRE NOVIEMBRE - DICIEMBRE</option>
-        </select>
+      <div class="my-5">
+        <hr>
       </div>
 
     </div>
-
-
-    <div class="row mb-5 d-flex justify-content-center mt-5">
-      <button class="btn btn-success btn-rounded"
-              style="min-width: 270px"
-              (click)="generarPDF()"
-      ><i class="far fa-file-pdf fa-2x"></i>
-        Generar PDF
-      </button>
-    </div>
-
-
-    <div class="my-5">
-      <hr>
-    </div>
-
-  </div>
   </div>
 
 </div>
 
 
+<!--SE PASAN LAS VARIABLES AL HIJO PARA LA GENERACION DEL PDF POR IVA-->
+<div *ngIf="consultadoIva" class="card">
+  <div class="card-body">
+    <app-pdf-iva
+      [listaCertificadoRetencionIva]="listaCertificadoRetencionIva"
+      [certificadoController]="certificadoController"
+      [anioGrabable]="anioGrabable"
+      [mesFin]="mesFin"
+      [mesInicio]="mesInicio"
+      (regresar)="onOperacionRegreso($event)"
+    >
+    </app-pdf-iva>
+  </div>
+</div>
 
 
-
-    <!--SE PASAN LAS VARIABLES AL HIJO PARA LA GENERACION DEL PDF-->
-    <div *ngIf="consultado" class="card">
-      <div class="card-body">
-        <app-pdf-iva
-          [listaCertificadoRetencionIva]="listaCertificadoRetencionIva"
-          [certificadoController]="certificadoController"
-          [anioGrabable]="anioGrabable"
-          [mesFin]="mesFin"
-          [mesInicio] = "mesInicio"
-          (regresar)="onOperacionRegreso($event)"
-        >
-        </app-pdf-iva>
-      </div>
-    </div>
-
+<!--SE PASAN LAS VARIABLES AL HIJO PARA LA GENERACION DEL PDF POR RETENCION EN LA FUENTE-->
+<div *ngIf="consultadoRetencion" class="card">
+  <div class="card-body">
+    <app-pdf-retencion
+      [listaCertificadoRetencionIva]="listaCertificadoRetencionIva"
+      [certificadoController]="certificadoController"
+      [anioGrabable]="anioGrabable"
+      [mesFin]="mesFin"
+      [mesInicio]="mesInicio"
+      [tituloCertificado]="tituloCertificado"
+      (regresar)="onOperacionRegreso($event)"
+    >
+    </app-pdf-retencion>
+  </div>
+</div>
 
 
 
