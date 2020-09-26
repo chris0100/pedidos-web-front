@@ -153,4 +153,19 @@ export class UsuariosService {
     );
   }
 
+
+  // Procesar el token
+  procesarTokenJava(token: string): Observable<string[]> {
+    const urlEndPoint = 'http://localhost:8082/procesar-token';
+    return this.http.get<string[]>(`${urlEndPoint}/${token}`).pipe(
+      catchError(e => {
+        if (e.status != 401 && e.error.mensaje) {
+          this.router.navigate(['/clientes']);
+          console.log(e.error.mensaje);
+        }
+        return throwError(e);
+      })
+    );
+  }
+
 }
