@@ -42,6 +42,7 @@ import { PdfRetencionComponent } from './proveedor/pdf-retencion/pdf-retencion.c
 import { ReestablecerPasswordComponent } from './login/reestablecer-password/reestablecer-password.component';
 import { ReestablecerClientesComponent } from './login/reestablecer-password/reestablecer-clientes/reestablecer-clientes.component';
 import { ReestablecerProveedoresComponent } from './login/reestablecer-password/reestablecer-proveedores/reestablecer-proveedores.component';
+import { ProcesarTokenComponent } from './login/reestablecer-password/procesar-token/procesar-token.component';
 
 
 
@@ -83,7 +84,8 @@ registerLocaleData(localeES, 'es');
     PdfRetencionComponent,
     ReestablecerPasswordComponent,
     ReestablecerClientesComponent,
-    ReestablecerProveedoresComponent
+    ReestablecerProveedoresComponent,
+    ProcesarTokenComponent
   ],
   imports: [
     BrowserModule,

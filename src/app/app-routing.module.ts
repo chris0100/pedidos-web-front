@@ -23,6 +23,7 @@ import {EditarItemComponent} from './admin/editar-item/editar-item.component';
 import {LoginAdminComponent} from './admin/login-admin/login-admin.component';
 import {CertificadoProveedorComponent} from './proveedor/certificado-proveedor/certificado-proveedor.component';
 import {ReestablecerPasswordComponent} from './login/reestablecer-password/reestablecer-password.component';
+import {ProcesarTokenComponent} from './login/reestablecer-password/procesar-token/procesar-token.component';
 
 
 
@@ -31,6 +32,7 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'login-admin', component: LoginAdminComponent},
   {path: 'reestablecer-password', component: ReestablecerPasswordComponent},
+  {path: 'procesar-token/:id', component: ProcesarTokenComponent},
   {path: 'panel-clientes', component: PanelClientesComponent, canActivate: [RoleGuard, AuthGuard], data: {role: 'ROLE_ADMIN'}},
   {path: 'configuracion', component: ConfiguracionComponent, canActivate: [RoleGuard, AuthGuard], data: {role: 'ROLE_ADMIN'}},
   {path: 'lista-usuarios', component: ListaUsuariosComponent, canActivate: [RoleGuard, AuthGuard], data: {role: 'ROLE_ADMIN'}},
@@ -50,6 +52,7 @@ const routes: Routes = [
   {path: 'prepare-ver-error/:id/:otr', component: PrepareVerErrorComponent, canActivate: [RoleGuard, AuthGuard], data: {role: 'ROLE_ADMIN'}},
   {path: 'editar-item/:idPedido/:idItem/:otr', component: EditarItemComponent, canActivate: [RoleGuard, AuthGuard], data: {role: 'ROLE_ADMIN'}},
   {path: 'certificados-proveedor', component: CertificadoProveedorComponent, canActivate: [RoleGuard, AuthGuard], data: {role: 'ROLE_ADMIN'}}
+
 ];
 
 

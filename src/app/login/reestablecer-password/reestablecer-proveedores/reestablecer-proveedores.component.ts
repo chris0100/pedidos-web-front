@@ -13,6 +13,7 @@ import {UsuariosService} from '../../../usuario/usuarios.service';
 export class ReestablecerProveedoresComponent implements OnInit {
 
   usuario: Usuario;
+  showSpinner: boolean;
 
   constructor(private router: Router, private authService: AuthService,
               private usuarioService: UsuariosService) {
@@ -22,6 +23,7 @@ export class ReestablecerProveedoresComponent implements OnInit {
   ngOnInit() {
     this.usuario.username = '';
     this.usuario.email = '';
+    this.showSpinner = false;
 
     // Revisa si el usuario esta autenticado, para redireccionar
     if (this.authService.isAuthenticated()) {
@@ -32,7 +34,7 @@ export class ReestablecerProveedoresComponent implements OnInit {
 
 
 
-  // Clic en recuperar
+  // Clic en recuperar contraseña
   recuperarPassword(): void {
     console.log('clic en el boton de recuperar');
 
@@ -47,9 +49,11 @@ export class ReestablecerProveedoresComponent implements OnInit {
     this.usuarioService.generarTokenUsuarioJava(this.usuario.email, this.usuario.username).subscribe(
       obj => {
         console.log(obj);
+        this.router.navigate(['/panel-clientes']);
+        swal('Correcto', 'Revisa tu bandeja de email para reestablecer la contraseña', 'success');
+        this.showSpinner = false;
       });
-
-
+    this.showSpinner = true;
   }
 
 
