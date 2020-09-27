@@ -6,14 +6,14 @@ import {Usuario} from '../../../usuario/usuario';
 
 @Component({
   selector: 'app-procesar-token',
-  templateUrl: './procesar-token.component.html',
-  styleUrls: ['./procesar-token.component.css']
+  templateUrl: './procesar-token.component.html'
 })
 export class ProcesarTokenComponent implements OnInit {
 
   usuario: Usuario;
   password: string;
   repetirPassword: string;
+  token: string;
 
   constructor(private activatedRoute: ActivatedRoute, private router: Router,
               private usuariosService: UsuariosService) { }
@@ -30,8 +30,8 @@ export class ProcesarTokenComponent implements OnInit {
   recibeToken(): void {
     this.activatedRoute.params.subscribe(
       params => {
-        const elToken = params['id'];
-        this.procesarToken(elToken);
+        this.token = params['id'];
+        this.procesarToken(this.token);
       });
   }
 
@@ -61,9 +61,27 @@ export class ProcesarTokenComponent implements OnInit {
   }
 
 
-  // Se da clic en procesar token
+  // Se da clic en el boton que actualiza la contraseña
   guardarPassword(): void {
     console.log('el password a guardar es: ' + this.password);
+    // Se realiza verificacion del password
+    if (this.password.trim().length == 0 || this.repetirPassword.trim().length == 0) {
+      swal('Error', 'La contraseña no debe contener espacios en blanco', 'error');
+      return;
+    }
+
+    // tslint:disable-next-line:one-line
+    else {
+      // Se envia la contraseña para que se actualicen los datos al nuevo usuario
+      this.usuariosService.reestablecerPasswordJava(this.password, this.token).subscribe(
+        json => {
+          swal('Contraseña Actualizada', `${json.mensaje}`, 'success');
+          this.router.navigate(['/login']);
+        },
+        err => {
+          swal('Error', 'Ha ocurrido un error, revisa que los datos ingresados sean validos', 'error');
+        });
+    }
   }
 
 }

@@ -93,7 +93,7 @@ export class CrearUsuarioComponent implements OnInit {
     if (this.passwordNuevo.trim() == '') {
       swal('Error', 'Revisa que los campos esten diligenciados correctamente', 'error');
     } else {
-      this.usuariosService.updatePasswordOtroUsuarioJava(this.passwordNuevo, this.usuario.id)
+      this.usuariosService.updatePasswordOtroUsuarioJava(this.passwordNuevo, this.usuario.id, this.usuario.primerLogin)
         .subscribe(
           json => {
             swal('Contraseña Actualizada', `${json.mensaje}`, 'success');

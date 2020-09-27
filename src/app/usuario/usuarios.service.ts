@@ -72,11 +72,32 @@ export class UsuariosService {
   }
 
 
-  updatePasswordOtroUsuarioJava(passwordNuevo: string, id): Observable<any> {
+  updatePasswordOtroUsuarioJava(passwordNuevo: string, id, primerLogin: boolean): Observable<any> {
     const urlEndPoint = 'http://localhost:8082/update-pass-otro-usuario';
 
     // Retorna lo que se obtiene de la peticion
-    return this.http.put(`${urlEndPoint}/${id}`, passwordNuevo)
+    return this.http.put(`${urlEndPoint}/${id}/${primerLogin}`, passwordNuevo)
+      .pipe(
+        catchError(e => {
+          if (e.status === 400) {
+            return throwError(e);
+          }
+
+          if (e.error.mensaje) {
+            console.error(e.error.mensaje);
+          }
+
+          return throwError(e);
+        })
+      );
+  }
+
+
+  reestablecerPasswordJava(password: string, token: string): Observable<any> {
+    const urlEndPoint = 'http://localhost:8082/reestablecer-password';
+
+    // Retorna lo que se obtiene de la peticion
+    return this.http.put(`${urlEndPoint}/${token}`, password)
       .pipe(
         catchError(e => {
           if (e.status === 400) {

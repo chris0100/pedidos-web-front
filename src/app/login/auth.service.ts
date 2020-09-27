@@ -95,6 +95,7 @@ export class AuthService {
     this._usuario.descripcion_sucursal = objPayload.descripcion_sucursal;
     this._usuario.id = objPayload.id_usuario;
     this._usuario.id_punto_envio = objPayload.id_punto_envio;
+    this._usuario.primerLogin = objPayload.primerLogin;
 
     // Se guarda en el session como un string
     sessionStorage.setItem('usuario', JSON.stringify(this._usuario));
@@ -114,6 +115,7 @@ export class AuthService {
     this._usuario.descripcion_sucursal = objPayload.descripcion_sucursal;
     this._usuario.id = objPayload.id_usuario;
     this._usuario.id_punto_envio = objPayload.id_punto_envio;
+    this._usuario.primerLogin = objPayload.primerLogin;
 
     // Se guarda en el session como un string
     sessionStorage.setItem('usuario', JSON.stringify(this._usuario));
