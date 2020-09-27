@@ -3,9 +3,6 @@ import swal from 'sweetalert2';
 import {Router} from '@angular/router';
 import {Usuario} from '../../usuario/usuario';
 import {AuthService} from '../auth.service';
-import {FormControl} from '@angular/forms';
-import {Observable, throwError} from 'rxjs';
-import {flatMap, map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-login-clientes',
@@ -57,7 +54,7 @@ export class LoginClientesComponent implements OnInit {
   // Funcion que muestra la lista de sucursales enviada desde java.
   obtenerSucursal(): void {
     this.listadoSucursal = [];
-    this.authService.obtenerSucursalJava(this.usuario.username).subscribe(
+    this.authService.obtenerSucursalJava(this.usuario.nit).subscribe(
       obj => this.listadoSucursal.push(...obj)
     );
   }
@@ -66,7 +63,7 @@ export class LoginClientesComponent implements OnInit {
   // Obtiene la lista de puntos de envio
   obtenerPuntoEnvio(): void {
     this.listadoPuntoEnvio = [];
-    this.authService.obtenerPuntoEnvioJava(this.usuario.username, this.sucursalSeleccionada).subscribe(
+    this.authService.obtenerPuntoEnvioJava(this.usuario.nit, this.sucursalSeleccionada).subscribe(
       obj => this.listadoPuntoEnvio.push(...obj)
     );
     console.log(this.listadoPuntoEnvio);
@@ -75,7 +72,7 @@ export class LoginClientesComponent implements OnInit {
 
 
   validarEntidadDinamica(): void {
-    this.authService.validarEntidadDinamicaJava(this.usuario.username, this.sucursalSeleccionada).subscribe(
+    this.authService.validarEntidadDinamicaJava(this.usuario.nit, this.sucursalSeleccionada).subscribe(
       obj => {
         if (obj[0] === 'Si') {
           this.validaEntidad = true;
@@ -91,7 +88,7 @@ export class LoginClientesComponent implements OnInit {
   loginCliente(): void {
 
     // Revisa que no esten vacios los campos
-    if (this.usuario.username.trim() === '' || this.usuario.password.trim() === '' ) {
+    if (this.usuario.nit.trim() === '' || this.usuario.password.trim() === '' ) {
       swal('Error de ingreso', 'Username o Password vacios', 'error');
       return;
     }
@@ -103,41 +100,72 @@ export class LoginClientesComponent implements OnInit {
 
 
     if (this.validaEntidad) {
+      console.log('usuario que se va a loguear');
+      console.log(this.usuario);
+      this.usuario.username = this.sucursalSeleccionada.substring(0, 3) + this.puntoEnvioSeleccionado.substring(0, 3) + this.usuario.nit;
 
-      // Se llama al servicio para realizar el login
-      this.authService.login(this.usuario).subscribe(
-        response => {
 
-          // Guardar el usuario
-          this.authService.guardarUsuario(response.access_token);
-
-          // Guardar el token
-          this.authService.guardarToken(response.access_token);
-
-          // Se crea la variable usuario
-          const usuario = this.authService.usuario;
-
-          // Revisa si tiene el primer Login en true, sino lo envia al panel clientes
-          if (usuario.primerLogin) {
-            this.router.navigate(['/actualizar-password']);
-            return;
-          } else {
-            // Redirecciona a la pagina principal con mensaje de bienvenida
-            swal('Bienvenido', `${usuario.nombre}, has iniciado sesión correctamente`, 'success');
-            this.router.navigate(['/panel-clientes']);
-          }
-        },
-        error => {
-          if (error.status === 400) {
-            swal('Error Login', 'Username o Password incorrectos', 'error');
-          }
-        }
-      );
+      // Revisamos primero si hay posibilidad de que sea un usuario nuevo
+      if (this.usuario.nit === this.usuario.password) {
+        this.authService.validaUsuarioNuevoHabilitado(this.usuario.nit, this.usuario.password, this.usuario.username).subscribe(
+          obj => {
+            console.log(obj);
+            // si en la posicion 1 trae error significa que es un usuario nuevo
+            if (obj[1].includes('error')) {
+              // Se redirecciona a la pagina de registro nuevo usuario
+              swal('Correcto', 'Diligencia la siguiente información para completar tu usuario', 'success');
+              this.router.navigate(['..']);
+              return;
+            }
+            else {
+              this.loginNormal();
+            }
+          });
+      }
+      else{
+        this.loginNormal();
+      }
     }
     // tslint:disable-next-line:one-line
     else{
       // Redirecciona a la pagina login con mensaje
       swal('Error', `Su cuenta no se encuentra habilitada`, 'error');
     }
+
   }
+
+
+  loginNormal(): void {
+    // Se llama al servicio para realizar el login
+    this.authService.login(this.usuario).subscribe(
+      response => {
+
+        // Guardar el usuario
+        this.authService.guardarUsuario(response.access_token);
+
+        // Guardar el token
+        this.authService.guardarToken(response.access_token);
+
+        // Se crea la variable usuario
+        const usuario = this.authService.usuario;
+
+        // Revisa si tiene el primer Login en true, sino lo envia al panel clientes
+        if (usuario.primerLogin) {
+          this.router.navigate(['/actualizar-password']);
+          return;
+        } else {
+          // Redirecciona a la pagina principal con mensaje de bienvenida
+          swal('Bienvenido', `${usuario.nombre}, has iniciado sesión correctamente`, 'success');
+          this.router.navigate(['/panel-clientes']);
+        }
+      },
+      error => {
+        if (error.status === 400 || error.status === 401) {
+          swal('Error Login', 'Username o Password incorrectos', 'error');
+        }
+      }
+    );
+  }
+
+
 }

@@ -1,7 +1,8 @@
 import {Injectable} from '@angular/core';
 import {Usuario} from '../usuario/usuario';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {Observable, throwError} from 'rxjs';
+import {catchError} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -76,6 +77,21 @@ export class AuthService {
     console.log('estos son los parametros de ingreso: ' + params);
 
     return this.http.post<any>(urlEndPoint, params.toString(), {headers: httpHeaders});
+  }
+
+
+  // Valida si es un usuario nuevo el que intenta ingresar.
+  validaUsuarioNuevoHabilitado(nit: string, password: string, username: string): Observable<string[]> {
+    const urlEndPoint = 'http://localhost:8082/nit-password-usuario-nuevo';
+    return this.http.get<string[]>(`${urlEndPoint}/${nit}/${password}/${username}`).pipe(
+      catchError(e => {
+        if (e.status != 401 && e.error.mensaje) {
+          console.log('error encontrado');
+          console.log(e.error.mensaje);
+        }
+        return throwError(e);
+      })
+    );
   }
 
 
