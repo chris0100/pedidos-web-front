@@ -25,6 +25,8 @@ export class PanelClientesComponent implements OnInit {
     // Remover la busqueda del historial de pedidos, y listaItemProductosSelect
     sessionStorage.removeItem('pedidosUnoEEHistorial');
     sessionStorage.removeItem('listaItemPedidoSelect');
+    // Destruir el usuarioTemp
+    sessionStorage.removeItem('usuarioTemp');
 
 
   }

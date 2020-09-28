@@ -31,6 +31,7 @@ export class CrearUsuarioComponent implements OnInit {
 
   ngOnInit(): void {
     this.showSpinner = false;
+    this.usuario.primerLogin = false;
     // Remover la busqueda del historial de pedidos, y listaItemProductosSelect
     sessionStorage.removeItem('pedidosUnoEEHistorial');
     sessionStorage.removeItem('listaItemPedidoSelect');

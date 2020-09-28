@@ -112,20 +112,20 @@ export class LoginClientesComponent implements OnInit {
           obj => {
             console.log(obj);
             // si en la posicion 1 trae error significa que es un usuario nuevo
-            if (!obj[1].includes('error')) {
+            if (obj[1].includes('error')) {
 
               // Pasar datos importantes al usuario
               /// REVISAR LOS CMAPOS DE USUARIO PARA SER MODIFICADOS Y ENVIARLOS CORRECTAMENTE A SPRING.
               this.usuario.cliente = obj[0];
               this.usuario.rolesPrincipal.push('CLI');
-              this.usuario.id_sucursal = this.sucursalSeleccionada.substring(0, 3);
+              this.usuario.idSucursal = this.sucursalSeleccionada.substring(0, 3);
               this.usuario.descripcionSucursal = this.sucursalSeleccionada.substring(6, this.sucursalSeleccionada.length);
-              this.usuario.id_punto_envio = this.puntoEnvioSeleccionado.substring(0, 3);
-              this.usuario.descripcion_punto_envio = this.puntoEnvioSeleccionado.substring(6, this.puntoEnvioSeleccionado.length);
+              this.usuario.idPuntoEnvio = this.puntoEnvioSeleccionado.substring(0, 3);
+              this.usuario.descripcionPuntoEnvio = this.puntoEnvioSeleccionado.substring(6, this.puntoEnvioSeleccionado.length);
               this.usuario.nombre = '';
               this.usuario.email = '';
               this.usuario.password = '';
-              // recordar colocar intentos bloqueos 3 en java spring
+              this.usuario.primerLogin = false;
 
               this.data.storage = this.usuario;
 

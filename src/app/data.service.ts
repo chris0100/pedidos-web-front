@@ -7,6 +7,6 @@ export class DataService {
 
   public storage: any;
 
-  public constructor() { this.storage = Injectable();
+  public constructor() {
   }
 }

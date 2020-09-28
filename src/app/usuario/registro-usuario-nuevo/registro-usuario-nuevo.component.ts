@@ -23,10 +23,14 @@ export class RegistroUsuarioNuevoComponent implements OnInit {
 
 
   ngOnInit() {
+    this.condicionesRestricciones = false;
+
+    // Revisa si el data storage de servicio tiene datos
     if (this.data.storage === undefined) {
       console.log('toma del session storage');
       this.usuario = JSON.parse(sessionStorage.getItem('usuarioTemp'));
     }
+
     // sino encuentra los datos previamente cargados, va al session storage.
     else {
       console.log('guarda en el session storage');
@@ -37,7 +41,6 @@ export class RegistroUsuarioNuevoComponent implements OnInit {
 
     this.showSpinner = false;
     this.repetirPassword = '';
-    console.log(this.usuario);
   }
 
 
