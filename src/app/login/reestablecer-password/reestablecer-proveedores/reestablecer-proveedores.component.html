@@ -11,7 +11,7 @@
   </div>
 
   <div class="md-form md-outline font-weight-bold">
-    <input type="text" id="nit-proveedor" class="form-control" [(ngModel)]="usuario.username">
+    <input type="text" id="nit-proveedor" class="form-control" [(ngModel)]="usuario.nit">
     <label for="nit-proveedor">Nit</label>
   </div>
 
@@ -24,7 +24,7 @@
     <button class="btn btn-primary btn-rounded"
             (click)="recuperarPassword()"
             type="submit"
-            [disabled]="usuario.username.length==0 || usuario.email.length==0"
+            [disabled]="usuario.nit.length==0 || usuario.email.length==0"
     >
       Recuperar <i class="fas fa-sign-in-alt ml-1"></i>
     </button>

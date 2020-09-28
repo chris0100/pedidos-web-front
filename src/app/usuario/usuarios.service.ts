@@ -160,19 +160,36 @@ export class UsuariosService {
   }
 
 
-  // Encontrar usuario por correo y email
-  generarTokenUsuarioJava(email: string, nit: string): Observable<any> {
-    const urlEndPoint = 'http://localhost:8082/generar-token-usuario';
+  // Encontrar proveddor por nit y email
+  generarTokenProveedorJava(email: string, nit: string): Observable<any> {
+    const urlEndPoint = 'http://localhost:8082/generar-token-proveedor';
     return this.http.get<Usuario>(`${urlEndPoint}/${email}/${nit}`).pipe(
       catchError(e => {
         if (e.status != 401 && e.error.mensaje) {
-          this.router.navigate(['/clientes']);
           console.log(e.error.mensaje);
         }
         return throwError(e);
       })
     );
   }
+
+
+  // Encontrar cliente por email, nit, sucursal, punto de envio
+  generarTokenClienteJava(email: string, nit: string, sucursal: string, puntoEnvio: string): Observable<any> {
+    const urlEndPoint = 'http://localhost:8082/generar-token-cliente';
+    return this.http.get<Usuario>(`${urlEndPoint}/${email}/${nit}/${sucursal}/${puntoEnvio}`).pipe(
+      catchError(e => {
+        if (e.status != 401 && e.error.mensaje) {
+          console.log(e.error.mensaje);
+        }
+        return throwError(e);
+      })
+    );
+  }
+
+
+
+
 
 
   // Procesar el token

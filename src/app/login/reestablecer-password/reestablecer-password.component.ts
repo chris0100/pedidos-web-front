@@ -6,9 +6,10 @@ declare var login: any;
 
 @Component({
   selector: 'app-reestablecer-password',
-  templateUrl: './reestablecer-password.component.html',
-  styleUrls: ['./reestablecer-password.component.css']
+  templateUrl: './reestablecer-password.component.html'
 })
+
+
 export class ReestablecerPasswordComponent implements OnInit {
 
   usuario: Usuario;

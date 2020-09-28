@@ -44,6 +44,7 @@ import { ReestablecerClientesComponent } from './login/reestablecer-password/ree
 import { ReestablecerProveedoresComponent } from './login/reestablecer-password/reestablecer-proveedores/reestablecer-proveedores.component';
 import { ProcesarTokenComponent } from './login/reestablecer-password/procesar-token/procesar-token.component';
 import { ActualizarPasswordComponent } from './login/actualizar-password/actualizar-password.component';
+import { RegistroUsuarioNuevoComponent } from './usuario/registro-usuario-nuevo/registro-usuario-nuevo.component';
 
 
 
@@ -87,7 +88,8 @@ registerLocaleData(localeES, 'es');
     ReestablecerClientesComponent,
     ReestablecerProveedoresComponent,
     ProcesarTokenComponent,
-    ActualizarPasswordComponent
+    ActualizarPasswordComponent,
+    RegistroUsuarioNuevoComponent
   ],
   imports: [
     BrowserModule,
