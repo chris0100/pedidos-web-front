@@ -3,6 +3,7 @@ import swal from 'sweetalert2';
 import {Router} from '@angular/router';
 import {Usuario} from '../../usuario/usuario';
 import {AuthService} from '../auth.service';
+import {DataService} from '../../data.service';
 
 @Component({
   selector: 'app-login-clientes',
@@ -32,7 +33,7 @@ export class LoginClientesComponent implements OnInit {
   validaEntidad: boolean;
 
 
-  constructor(private router: Router, private authService: AuthService) {
+  constructor(private router: Router, private authService: AuthService, private data: DataService) {
     this.usuario = new Usuario();
     this.listadoSucursal = [];
     this.listadoPuntoEnvio = [];
@@ -111,10 +112,26 @@ export class LoginClientesComponent implements OnInit {
           obj => {
             console.log(obj);
             // si en la posicion 1 trae error significa que es un usuario nuevo
-            if (obj[1].includes('error')) {
+            if (!obj[1].includes('error')) {
+
+              // Pasar datos importantes al usuario
+              /// REVISAR LOS CMAPOS DE USUARIO PARA SER MODIFICADOS Y ENVIARLOS CORRECTAMENTE A SPRING.
+              this.usuario.cliente = obj[0];
+              this.usuario.rolesPrincipal.push('CLI');
+              this.usuario.id_sucursal = this.sucursalSeleccionada.substring(0, 3);
+              this.usuario.descripcionSucursal = this.sucursalSeleccionada.substring(6, this.sucursalSeleccionada.length);
+              this.usuario.id_punto_envio = this.puntoEnvioSeleccionado.substring(0, 3);
+              this.usuario.descripcion_punto_envio = this.puntoEnvioSeleccionado.substring(6, this.puntoEnvioSeleccionado.length);
+              this.usuario.nombre = '';
+              this.usuario.email = '';
+              this.usuario.password = '';
+              // recordar colocar intentos bloqueos 3 en java spring
+
+              this.data.storage = this.usuario;
+
               // Se redirecciona a la pagina de registro nuevo usuario
               swal('Correcto', 'Diligencia la siguiente información para completar tu usuario', 'success');
-              this.router.navigate(['..']);
+              this.router.navigate(['registro-usuario-nuevo']);
               return;
             }
             else {

@@ -15,6 +15,9 @@ export class LoginComponent implements OnInit {
 
 
   ngOnInit(): void {
+    // Destruir el usuarioTemp
+    sessionStorage.removeItem('usuarioTemp');
+
     // Ejecuta el script
     new login();
   }

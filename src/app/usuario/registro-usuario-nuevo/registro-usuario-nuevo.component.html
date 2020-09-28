@@ -1,3 +1,158 @@
-<p>
-  registro-usuario-nuevo works!
-</p>
+<div class="row" style="height: 100vh">
+
+  <div class="col-sm-4 sn-bg-4" style="border-right: 5px solid #025f97">
+
+    <div class="text-center mt-2">
+      <a class="pl-0"><img src="resources/img/logos/logo-eka.png" [routerLink]="['/login']"></a>
+    </div>
+
+  </div>
+
+
+  <div class="col-sm-8 d-flex align-items-center flex-column"
+       style="background: url(resources/img/demo8/bg-10.jpg); background-position: center; background-size: cover">
+
+    <div class="alert bg-primary text-white mb-2 mx-auto mt-5">
+      <p>Diligencia el siguiente formulario para finalizar la creación del usuario </p>
+    </div>
+
+    <!-- Grid column -->
+    <div class="col-md-6 mb-4 mx-auto">
+
+
+      <!-- Modal: Login cliente / proveedor tabs -->
+      <div class="modal-dialog cascading-modal" role="document">
+
+
+        <!-- Content -->
+        <div class="modal-content">
+
+          <!-- Modal con tabs -->
+          <div class="modal-c-tabs">
+
+            <!-- Nav tabs -->
+            <ul class="nav md-tabs tabs-2 light-blue darken-3" role="tablist">
+              <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#panel1" role="tab">
+                  <i class="fas fa-user text-white"></i> Registro de usuario</a>
+              </li>
+            </ul>
+
+            <!-- Tab panels -->
+            <div class="tab-content">
+
+              <!--Panel 1 clientes login-->
+              <div class="tab-pane fade in show active" id="panel1" role="tabpanel">
+
+                <div class="modal-body">
+
+
+                  <!--pantalla trasera de carga-->
+                  <div *ngIf="showSpinner">
+                    <app-loading-spinner></app-loading-spinner>
+                  </div>
+
+
+                  <form method="post">
+
+
+                    <div class="md-form md-outline font-weight-bold" style="margin-top: 5px">
+                      <input type="text"
+                             id="nombre"
+                             class="form-control"
+                             name="nombre"
+                             [(ngModel)]="usuario.nombre"
+                      >
+                      <label for="nombre">Nombre del responsable</label>
+                    </div>
+
+
+                    <div class="md-form md-outline font-weight-bold" style="margin-top: 5px">
+                      <input type="email"
+                             id="email"
+                             class="form-control"
+                             name="email"
+                             [(ngModel)]="usuario.email"
+                      >
+                      <label for="email">Correo corporativo del responsable</label>
+                    </div>
+
+
+                    <div class="md-form md-outline font-weight-bold" style="margin-top: 5px">
+                      <input type="password"
+                             id="password"
+                             class="form-control"
+                             name="password"
+                             [(ngModel)]="usuario.password"
+                      >
+                      <label for="password">Contraseña de ingreso</label>
+                    </div>
+
+
+                    <div class="md-form md-outline font-weight-bold" style="margin-top: 5px">
+                      <input type="password"
+                             id="repetirPassword"
+                             class="form-control"
+                             name="repetirPassword"
+                             [(ngModel)]="repetirPassword"
+                      >
+                      <label for="repetirPassword">Repetir contraseña</label>
+                    </div>
+
+
+                    <div class="row my-4 ml-1">
+                        <fieldset class="form-check" style="padding: 0px !important;">
+                          <input class="form-check-input"
+                                 type="checkbox"
+                                 id="condicionesRestricciones"
+                                 name="condicionesRestricciones"
+                                 [(ngModel)]="condicionesRestricciones"
+                                 [value]="condicionesRestricciones"
+                          >
+                          <label class="form-check-label" for="condicionesRestricciones">¿Aceptas Términos y condiciones?</label>
+                        </fieldset>
+                    </div>
+
+
+                    <div class="text-center">
+                      <button class="btn btn-primary btn-rounded"
+                              type="submit"
+                              (click)="enviarDatos()"
+                              [disabled]="usuario.email.length==0 || usuario.nombre.length==0
+                              || usuario.password.length==0 || repetirPassword.length==0 || !condicionesRestricciones"
+                      >
+                        Aceptar <i class="fas fa-sign-in-alt ml-1"></i>
+                      </button>
+                    </div>
+
+
+                  </form>
+
+                </div>
+
+
+              </div>
+              <!--FIN Panel 1 -->
+
+
+            </div>
+
+          </div>
+
+
+        </div>
+        <!-- Content -->
+
+
+
+      </div>
+      <!-- Modal: Login & Register tabs -->
+
+
+    </div>
+    <!-- Grid column -->
+
+
+  </div>
+
+</div>

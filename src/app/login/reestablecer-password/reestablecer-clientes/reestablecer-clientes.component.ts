@@ -111,6 +111,13 @@ export class ReestablecerClientesComponent implements OnInit {
         this.router.navigate(['/panel-clientes']);
         swal('Correcto', 'Revisa tu bandeja de email para reestablecer la contraseña', 'success');
         this.showSpinner = false;
+      },
+      error => {
+        if (error.status === 404) {
+          swal('Error', 'Verifica los datos ingresados', 'error');
+          this.showSpinner = false;
+          return;
+        }
       });
     this.showSpinner = true;
   }

@@ -7,6 +7,7 @@ export class Usuario {
   id_sucursal: string;
   descripcion_punto_envio: string;
   descripcion_sucursal: string;
+  descripcionSucursal: string;
   cliente: string;
   email: string;
   primerLogin: boolean;
