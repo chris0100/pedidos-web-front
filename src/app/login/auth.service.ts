@@ -95,6 +95,23 @@ export class AuthService {
   }
 
 
+  // Valida si es un proveedor nuevo el que intenta ingresar (username = nit para proveedor)
+  validarProveedorNuevoHabilitado(nit: string, password: string): Observable<string[]> {
+    const urlEndPoint = 'http://localhost:8082/nit-password-proveedor-nuevo';
+    return this.http.get<string[]>(`${urlEndPoint}/${nit}/${password}`).pipe(
+      catchError(e => {
+        if (e.status != 401 && e.error.mensaje) {
+          console.log('error encontrado');
+          console.log(e.error.mensaje);
+        }
+        return throwError(e);
+      })
+    );
+  }
+
+
+
+
   // Se guarda el usuario en el sessionStorage
   guardarUsuario(accessToken: string): void {
     const objPayload = this.obtenerDatosToken(accessToken);

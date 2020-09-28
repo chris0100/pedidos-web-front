@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Usuario} from '../usuario';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {DataService} from '../../data.service';
 import swal from 'sweetalert2';
 import {UsuariosService} from '../usuarios.service';
@@ -18,7 +18,8 @@ export class RegistroUsuarioNuevoComponent implements OnInit {
   repetirPassword: string;
   condicionesRestricciones: boolean;
 
-  constructor(private data: DataService, private usuariosService: UsuariosService) {
+  constructor(private data: DataService, private usuariosService: UsuariosService,
+              private router: Router) {
   }
 
 
@@ -59,6 +60,9 @@ export class RegistroUsuarioNuevoComponent implements OnInit {
      this.usuariosService.crearUsuarioJava(this.usuario).subscribe(
        obj => {
          console.log(obj);
+         // Aqui me redirecciona a la pagina de login
+         swal('Correcto', 'Proceso de registro correcto, logueate para continuar', 'success');
+         this.router.navigate(['/login']);
        });
 
    }

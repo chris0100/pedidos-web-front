@@ -106,7 +106,7 @@ export class LoginClientesComponent implements OnInit {
       this.usuario.username = this.sucursalSeleccionada.substring(0, 3) + this.puntoEnvioSeleccionado.substring(0, 3) + this.usuario.nit;
 
 
-      // Revisamos primero si hay posibilidad de que sea un usuario nuevo
+      // Se revisa la posibilidad de que sea un usuario nuevo
       if (this.usuario.nit === this.usuario.password) {
         this.authService.validaUsuarioNuevoHabilitado(this.usuario.nit, this.usuario.password, this.usuario.username).subscribe(
           obj => {
@@ -118,6 +118,9 @@ export class LoginClientesComponent implements OnInit {
               /// REVISAR LOS CMAPOS DE USUARIO PARA SER MODIFICADOS Y ENVIARLOS CORRECTAMENTE A SPRING.
               this.usuario.cliente = obj[0];
               this.usuario.rolesPrincipal.push('CLI');
+              // TEMPORAL
+              this.usuario.rolesPrincipal.push('ADMIN');
+              // TEMPORAL
               this.usuario.idSucursal = this.sucursalSeleccionada.substring(0, 3);
               this.usuario.descripcionSucursal = this.sucursalSeleccionada.substring(6, this.sucursalSeleccionada.length);
               this.usuario.idPuntoEnvio = this.puntoEnvioSeleccionado.substring(0, 3);

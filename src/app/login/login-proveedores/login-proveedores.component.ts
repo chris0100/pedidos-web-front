@@ -3,6 +3,7 @@ import swal from 'sweetalert2';
 import {Router} from '@angular/router';
 import {Usuario} from '../../usuario/usuario';
 import {AuthService} from '../auth.service';
+import {DataService} from '../../data.service';
 
 @Component({
   selector: 'app-login-proveedores',
@@ -15,7 +16,7 @@ export class LoginProveedoresComponent implements OnInit {
   // Objeto Usuario
   usuario: Usuario;
 
-  constructor(private router: Router, private authService: AuthService) {
+  constructor(private router: Router, private authService: AuthService, private data: DataService) {
     this.usuario = new Usuario();
   }
 
@@ -40,6 +41,47 @@ export class LoginProveedoresComponent implements OnInit {
       return;
     }
 
+    // Se revisa la posibilidad de que sea un usuario nuevo
+    if (this.usuario.username === this.usuario.password) {
+      this.authService.validarProveedorNuevoHabilitado(this.usuario.username, this.usuario.password).subscribe(
+        obj => {
+          console.log(obj);
+          // Si en la posicion 1 tiene error, significa que es un usuario nuevo
+          if (obj[1].includes('error')) {
+
+            // Se pasan datos importantes al usuario (idSucursal,descsucursal,idPuntoEnvio,desPuntoEnv = null)
+            this.usuario.cliente = obj[0];
+            this.usuario.rolesPrincipal.push('PRO');
+            // TEMPORAL
+            this.usuario.rolesPrincipal.push('ADMIN');
+            // TEMPORAL
+            this.usuario.nombre = '';
+            this.usuario.email = '';
+            this.usuario.password = '';
+            this.usuario.primerLogin = false;
+            this.usuario.nit = this.usuario.username;
+
+            this.data.storage = this.usuario;
+
+            // Se redirecciona a la pagina de registro nuevo usuario
+            swal('Correcto', 'Diligencia la siguiente información para completar tu usuario', 'success');
+            this.router.navigate(['registro-usuario-nuevo']);
+            return;
+          }
+          else {
+            this.loginNormal();
+          }
+        });
+    }
+    else {
+      this.loginNormal();
+    }
+  }
+
+
+
+  // Login normal
+  loginNormal(): void {
     // Se llama al servicio para realizar el login
     this.authService.login(this.usuario).subscribe(
       response => {
@@ -66,7 +108,7 @@ export class LoginProveedoresComponent implements OnInit {
         }
       },
       error => {
-        if (error.status === 400) {
+        if (error.status === 400 || error.status === 401) {
           swal('Error Login', 'Username o Password incorrectos', 'error');
         }
       });
