@@ -18,23 +18,23 @@
       <!--Columna izquierda-->
       <div class="col-sm-4">
 
-        <div class="md-form md-outline">
+        <div class="md-form md-outline shadow-sm">
           <input type="text" id="cod-pedido" class="form-control" disabled [value]="pedidoActual.id">
           <label for="cod-pedido" class="active">Código pedido</label>
         </div>
 
-        <div class="md-form md-outline">
+        <div class="md-form md-outline shadow-sm">
           <input type="text" id="responsable" class="form-control" disabled [value]="pedidoActual.idUsuario.nombre">
           <label for="responsable" class="active">Responsable del pedido</label>
         </div>
 
-        <div class="md-form md-outline">
+        <div class="md-form md-outline shadow-sm">
           <input type="text" id="num-oc-op" class="form-control" [value]="pedidoActual.oc" disabled>
           <label for="num-oc-op" class="active">Número OC/OP</label>
         </div>
 
         <!-- Basic textarea -->
-        <div class="md-form md-outline">
+        <div class="md-form md-outline shadow-sm">
           <textarea type="text" id="notas" class="md-textarea form-control" rows="4"
                     [value]="pedidoActual.nota" disabled></textarea>
           <label for="notas" class="active">Notas</label>
@@ -145,7 +145,7 @@
             <div class="col-md-4">
 
               <div class="md-form md-outline">
-                <i class="fas fa-search prefix"></i>
+                <i class="fas fa-search prefix" (dblclick)="habilitarInputBuscar()"></i>
                 <input type="text"
                        (keyup)="getUserIdsFirstWay($event)"
                        id="buscar"
@@ -154,6 +154,7 @@
                        style="margin-bottom: 0px !important;"
                        [(ngModel)]="coditemPatronBuscado"
                        (change)="consultarTipoExt()"
+                       [disabled]="afterConsulta"
                 >
                 <datalist id="dynmicUserIds">
                   <option *ngFor="let item of userList1">{{item}}</option>
@@ -256,10 +257,13 @@
 
         <button class="btn btn-rounded btn-primary"
                 [disabled]="pedidoActual.contacto.trim().length<1 || pedidoActual.direccion.trim().length<1 ||
-                pedidoActual.terceroVendedor.trim().length<1 || pedidoActual.nota.trim().length<1 || pedidoActual.oc.trim().length<1"
+                pedidoActual.terceroVendedor.trim().length<1 || pedidoActual.nota.trim().length<1 || pedidoActual.oc.trim().length<1 ||
+                coditemPatronBuscado.length==0 || itemPedidoActual.unidadMedida.length==0 ||
+                itemPedidoActual.descripcionExt1.length==0 || itemPedidoActual.descripcionExt2.length==0
+                || itemPedidoActual.cantidad<1"
                 style="min-width: 270px"
                 [routerLink]="['/prepare-ver-error/', pedidoActual.id, comeback]"
-                (click)="agregarItem()"
+                (click)="editarItem()"
         >
           Editar Ítem
         </button>

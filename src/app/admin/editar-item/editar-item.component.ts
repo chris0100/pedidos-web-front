@@ -45,11 +45,17 @@ export class EditarItemComponent implements OnInit {
   idItemActual: number;
   comeback: string;
 
+  afterConsulta: boolean;
+
   constructor(private pedidosService: PedidoService, private authService: AuthService, private activatedRoute: ActivatedRoute,
               private router: Router) {
   }
 
+
+
   ngOnInit() {
+    this.afterConsulta = true;
+
     this.cargarPedidoEditarItem();
 
     // Si ya hay datos de los itemPatron los trae del sessionstorage
@@ -224,6 +230,7 @@ export class EditarItemComponent implements OnInit {
         obj => {
           this.itemPedidoActual.idBodega = obj[0];
         });
+      this.afterConsulta = true;
     }
   }
 
@@ -248,36 +255,67 @@ export class EditarItemComponent implements OnInit {
 
 
   // Editar Item del pedido
-  agregarItem(): void {
-    this.itemPedidoActual.codItem = parseInt(this.codigoItem, 0);
-    this.itemPedidoActual.descripcion = this.coditemPatronBuscado.substring(10, 50);
-    this.itemPedidoActual.idExt1Detalle = this.itemPedidoActual.descripcionExt1.substring(0, 4);
-    this.itemPedidoActual.idExt2Detalle = this.itemPedidoActual.descripcionExt2.substring(0, 5);
-    this.itemPedidoActual.descripcionCompletaItem = this.coditemPatronBuscado;
-    this.itemPedidoActual.codCliente = '';  // en esta pestaña no hay funcionalidad sobre este
-    this.itemPedidoActual.unoeeItem = 0;
-    this.itemPedidoActual.unoeeListasMateriales = 0;
-    this.itemPedidoActual.unoeePortafolio = 0;
-    this.itemPedidoActual.unoeePrecios = 0;
-
-    if (this.authService.usuario.nit === '1792196841001') {
-      this.itemPedidoActual.idMotivo = '02';
+  editarItem(): void {
+    // Validar que los campos esten diligenciados
+    if (this.coditemPatronBuscado.trim() === '' || this.itemPedidoActual.unidadMedida.trim() === '' ||
+    this.itemPedidoActual.descripcionExt1.trim() === '' || this.itemPedidoActual.descripcionExt2.trim() === ''
+    || this.itemPedidoActual.cantidad < 1) {
+      swal('Error', 'Ha ocurrido un error al editar el ítem, verifica que todos los datos esten diligenciados correctamente', 'error');
+      return;
     }
     // tslint:disable-next-line:one-line
-    else {
-      this.itemPedidoActual.idMotivo = '01';
+    else{
+      this.itemPedidoActual.codItem = parseInt(this.codigoItem, 0);
+      this.itemPedidoActual.descripcion = this.coditemPatronBuscado.substring(10, 50);
+      this.itemPedidoActual.idExt1Detalle = this.itemPedidoActual.descripcionExt1.substring(0, 4);
+      this.itemPedidoActual.idExt2Detalle = this.itemPedidoActual.descripcionExt2.substring(0, 5);
+      this.itemPedidoActual.descripcionCompletaItem = this.coditemPatronBuscado;
+      this.itemPedidoActual.codCliente = '';  // en esta pestaña no hay funcionalidad sobre este
+      this.itemPedidoActual.unoeeItem = 0;
+      this.itemPedidoActual.unoeeListasMateriales = 0;
+      this.itemPedidoActual.unoeePortafolio = 0;
+      this.itemPedidoActual.unoeePrecios = 0;
+
+      if (this.authService.usuario.nit === '1792196841001') {
+        this.itemPedidoActual.idMotivo = '02';
+      }
+      // tslint:disable-next-line:one-line
+      else {
+        this.itemPedidoActual.idMotivo = '01';
+      }
+
+      console.log(this.itemPedidoActual);
+
+
+      this.pedidosService.editarItemPedidoError(this.itemPedidoActual).subscribe(
+        obj => {
+          console.log(obj);
+          // Mostrar mensaje de exito
+          swal('Correcto', `Se ha editado el item ${this.itemPedidoActual.descripcion} exitosamente`, 'success');
+        },
+        error => {
+          swal('Error', 'Ha ocurrido un error al editar el ítem', 'error');
+          return;
+        });
     }
+  }
 
-    console.log(this.itemPedidoActual);
 
 
-    this.pedidosService.editarItemPedidoError(this.itemPedidoActual).subscribe(
-      obj => {
-        console.log(obj);
-        // Mostrar mensaje de exito
-        swal('Correcto', `Se ha editado el item ${this.itemPedidoActual.descripcion} exitosamente`, 'success');
+  habilitarInputBuscar(): void {
+    this.afterConsulta = false;
+    this.limpiarCamposItem();
+  }
 
-      });
+  // Metodo para limpiar campos del item.
+  limpiarCamposItem(): void {
+    this.coditemPatronBuscado = '';
+    this.itemPedidoActual.unidadMedida = '';
+    this.itemPedidoActual.descripcionExt1 = '';
+    this.descripcionLabelExt1 = 'Tamaño';
+    this.itemPedidoActual.descripcionExt2 = '';
+    this.descripcionLabelExt2 = 'Color';
+    this.itemPedidoActual.cantidad = 0;
   }
 
 
