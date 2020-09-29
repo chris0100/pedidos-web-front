@@ -26,6 +26,7 @@ import {ReestablecerPasswordComponent} from './login/reestablecer-password/reest
 import {ProcesarTokenComponent} from './login/reestablecer-password/procesar-token/procesar-token.component';
 import {ActualizarPasswordComponent} from './login/actualizar-password/actualizar-password.component';
 import {RegistroUsuarioNuevoComponent} from './usuario/registro-usuario-nuevo/registro-usuario-nuevo.component';
+import {AyudaComponent} from './ayuda/ayuda.component';
 
 
 
@@ -37,6 +38,7 @@ const routes: Routes = [
   {path: 'procesar-token/:id', component: ProcesarTokenComponent},
   {path: 'actualizar-password', component: ActualizarPasswordComponent},
   {path: 'registro-usuario-nuevo', component: RegistroUsuarioNuevoComponent},
+  {path: 'ayuda', component: AyudaComponent},
   {path: 'panel-clientes', component: PanelClientesComponent, canActivate: [RoleGuard, AuthGuard], data: {role: 'ROLE_ADMIN'}},
   {path: 'configuracion', component: ConfiguracionComponent, canActivate: [RoleGuard, AuthGuard], data: {role: 'ROLE_ADMIN'}},
   {path: 'lista-usuarios', component: ListaUsuariosComponent, canActivate: [RoleGuard, AuthGuard], data: {role: 'ROLE_ADMIN'}},

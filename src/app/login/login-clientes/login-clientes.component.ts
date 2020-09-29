@@ -42,6 +42,8 @@ export class LoginClientesComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.usuario.nit = '';
+    this.usuario.password = '';
 
     // Revisa si el usuario esta autenticado, para redireccionar
     if (this.authService.isAuthenticated()) {

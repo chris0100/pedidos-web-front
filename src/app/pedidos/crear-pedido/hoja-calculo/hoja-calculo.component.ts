@@ -386,6 +386,20 @@ export class HojaCalculoComponent implements OnInit {
       });
   }
 
+
+
+  // Descarga de archivo de excel
+  downloadFile(): void {
+    console.log('se ha dado clic en el boton de descargar estructura');
+    const link = document.createElement('a');
+    link.setAttribute('target', '_blank');
+    link.setAttribute('href', 'http://localhost:4200/resources/estructura-pedido.xlsx');
+    link.setAttribute('download', `estructura-pedido.xlsx`);
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+  }
+
 }
 
 

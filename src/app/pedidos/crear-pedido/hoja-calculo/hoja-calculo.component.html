@@ -1,14 +1,68 @@
 
 <form>
-  <div class="campo d-flex justify-content-start align-items-center mb-4 mt-1">
-    <i class="fas fa-upload mr-2"></i>
-    <input type="file"
-           name="file"
-           width="200px"
-           #inputFile
-           (change)="addFile($event)"
-           accept=".csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+
+  <div class="row d-flex justify-content-between mx-2">
+    <div class="campo align-items-center mb-4 mt-1">
+      <i class="fas fa-upload mr-2"></i>
+      <input type="file"
+             name="file"
+             width="200px"
+             #inputFile
+             (change)="addFile($event)"
+             accept=".csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+    </div>
+
+    <!--MODAL DATA PARA ARCHIVO XLSX-->
+    <div class="campo float-right align-items-center mb-4 mt-1">
+      <button class="btn btn-warning btn-rounded btn-sm"
+              data-toggle="modal" data-target="#basicExampleModal">
+       Información <span>  </span><i class="fas fa-exclamation"></i>
+      </button>
+    </div>
   </div>
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="basicExampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+       aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Agregar Productos</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div style="font-size: 1.2em">
+            Para agregar productos por medio de hoja de calculo .xlsx, debes:
+            <div style="margin-left: 10px">
+              <strong>1. </strong>Descargar estructura dando clic en el botón:
+              <br>
+              <button class="btn btn-danger btn-rounded btn-sm"
+                      (click)="downloadFile()">
+                <i class="fas fa-file-download"></i> Descargar Estructura
+              </button>
+              <br>
+              <strong>2. </strong> Abrir la estructura descargada.
+              <br>
+              <strong>3. </strong><strong>Código del ítem: </strong> Ingresar tu código del ítem.
+              <br>
+              <strong>4. </strong><strong>Cantidad requerida: </strong> Ingresar la cantidad requerida.
+              <br>
+              <strong>5. </strong>Haz clic en el botón
+              <strong>Seleccionar archivo</strong>.
+              <br>
+              <strong>7. </strong>Haz clic en
+              <strong>procesar archivo</strong>.
+            </div>
+            <br>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 
 
 

@@ -3,6 +3,7 @@ import {ProveedorService} from '../proveedor.service';
 import {AuthService} from '../../login/auth.service';
 import {CertificadoRetencionIVA} from '../certificado-retencion-iva';
 import html2canvas from 'html2canvas';
+import swal from 'sweetalert2';
 
 
 @Component({
@@ -63,7 +64,7 @@ export class CertificadoProveedorComponent implements OnInit {
     this.proveedorService.obtenerRowIdTercero(this.authService.usuario.nit).subscribe(
       obj => {
         this.rowIdTercero = parseInt(obj[0], 0);
-        console.log(this.rowIdTercero);
+        console.log(this.rowIdTercero + ' este es el rowIdTercero');
 
         // Se transforman tipos de datos y se suma 1 al fin
         const fin = parseInt(this.mesInicio, 0) + 1;
@@ -81,6 +82,12 @@ export class CertificadoProveedorComponent implements OnInit {
               this.certificadoController = this.listaCertificadoRetencionIva[0];
               this.consultadoIva = true;
               this.after = false;
+            },
+            error => {
+              if (error.status === 500) {
+                swal('Error', 'Verifica los datos seleccionados', 'error');
+                return;
+              }
             });
         }
 
@@ -99,7 +106,13 @@ export class CertificadoProveedorComponent implements OnInit {
                 this.certificadoController = this.listaCertificadoRetencionIva[0];
                 this.after = false;
                 this.consultadoRetencion = true;
-              });
+              },
+            error => {
+              if (error.status === 500) {
+                swal('Error', 'No se han encontrado datos en la consulta', 'error');
+                return;
+              }
+            });
         }
 
         // PPI
@@ -117,6 +130,12 @@ export class CertificadoProveedorComponent implements OnInit {
               this.certificadoController = this.listaCertificadoRetencionIva[0];
               this.after = false;
               this.consultadoRetencion = true;
+            },
+            error => {
+              if (error.status === 500) {
+                swal('Error', 'No se han encontrado datos en la consulta', 'error');
+                return;
+              }
             });
         }
 
@@ -135,6 +154,12 @@ export class CertificadoProveedorComponent implements OnInit {
               this.certificadoController = this.listaCertificadoRetencionIva[0];
               this.after = false;
               this.consultadoRetencion = true;
+            },
+            error => {
+              if (error.status === 500) {
+                swal('Error', 'No se han encontrado datos en la consulta', 'error');
+                return;
+              }
             });
         }
       });
@@ -146,6 +171,7 @@ export class CertificadoProveedorComponent implements OnInit {
   onOperacionRegreso(regresar: boolean): void {
     this.after = true;
     this.consultadoIva = false;
+    this.consultadoRetencion = false;
   }
 
 
