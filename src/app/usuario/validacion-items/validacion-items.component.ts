@@ -163,6 +163,10 @@ export class ValidacionItemsComponent implements OnInit {
               this.limpiarCampos();
               swal('Ítem no encontrado', 'El ítem no fue encontrado en la base de datos del UnoEE', 'error');
             }
+          }, error => {
+            if (error.status === 500) {
+              swal('Error', 'Se deben suministrar mas datos para la busqueda', 'error');
+            }
           }
         );
 

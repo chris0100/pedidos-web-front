@@ -115,7 +115,7 @@
         <div class="mt-4">
           <button class="btn-primary btn btn-rounded"
                   (click)="update()"
-                  [disabled]="!clienteForm.form.valid"
+                  [disabled]="!clienteForm.form.valid || nombreUsuario.length==0 || emailUsuario.length==0"
           >Aceptar Cambios</button>
         </div>
 
@@ -124,7 +124,6 @@
             Cambiar Contraseña
           </button>
         </div>
-
 
       </div>
 
@@ -163,19 +162,19 @@
         <div class="md-form mb-4">
           <i class="fas fa-key prefix grey-text"></i>
           <input type="password" id="passwordActual" class="form-control validate" [(ngModel)]="passwordActual">
-          <label data-error="wrong" data-success="right" for="passwordActual">Contraseña Actual</label>
+          <label for="passwordActual">Contraseña Actual</label>
         </div>
 
         <div class="md-form mb-4">
           <i class="fas fa-lock-open prefix grey-text"></i>
           <input type="password" id="passwordNuevo" class="form-control validate" [(ngModel)]="passwordNuevo">
-          <label data-error="wrong" data-success="right" for="passwordNuevo">Nueva Contraseña</label>
+          <label for="passwordNuevo">Nueva Contraseña</label>
         </div>
 
         <div class="md-form mb-4">
           <i class="fas fa-lock prefix grey-text"></i>
-          <input type="password" id="passwordNuevoRepetir" class="form-control validate">
-          <label data-error="wrong" data-success="right" for="passwordNuevoRepetir">Repetir Contraseña</label>
+          <input type="password" id="repetirPasswordNuevo"  [(ngModel)]="repetirPasswordNuevo" class="form-control validate">
+          <label for="repetirPasswordNuevo">Repetir Contraseña</label>
         </div>
 
       </div>
@@ -183,6 +182,8 @@
         <button
           class="btn btn-primary btn-rounded"
           (click)="cambiarPassword()"
+          [disabled]="passwordNuevo!=repetirPasswordNuevo || passwordNuevo.length==0 || repetirPasswordNuevo.length==0
+                      || passwordActual.length==0"
           data-dismiss="modal"
           aria-label="Close"
         >Aceptar Cambios

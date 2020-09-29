@@ -198,6 +198,7 @@ export class HojaCalculoComponent implements OnInit {
           // Si llega aqui significa que todo esta bien
           this.errorLectura = false;
 
+          // Si no hay contenido leido entonces hay un error.
           if (this.listaEx.length === 0) {
             this.errorLectura = true;
             return;

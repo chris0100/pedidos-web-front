@@ -18,8 +18,10 @@ export class ConfiguracionComponent implements OnInit {
   nombreUsuario: string;
   emailUsuario: string;
   errores: string[];
+
   passwordNuevo: string;
   passwordActual: string;
+  repetirPasswordNuevo: string;
 
 
   constructor(private authService: AuthService, private usuariosService: UsuariosService,
@@ -38,6 +40,7 @@ export class ConfiguracionComponent implements OnInit {
     this.usuarioModificado = new Usuario();
     this.passwordNuevo = '';
     this.passwordActual = '';
+    this.repetirPasswordNuevo = '';
   }
 
 
@@ -48,7 +51,7 @@ export class ConfiguracionComponent implements OnInit {
     this.usuarioModificado.email = this.emailUsuario;
 
     // Valida que los campos no esten vacios
-    if (this.usuarioModificado.nombre.trim() == '' || this.usuarioModificado.email.trim() == '') {
+    if (this.usuarioModificado.nombre.trim() === '' || this.usuarioModificado.email.trim() === '') {
       swal('Error de Cambios', 'Revisa que los campos esten diligenciados correctamente', 'error');
     } else {
       this.usuariosService.updateUsuarioJava(this.usuarioModificado)
@@ -81,22 +84,31 @@ export class ConfiguracionComponent implements OnInit {
 
   // Se actualiza la contraseña
   cambiarPassword(): void {
-    if (this.passwordActual.trim() == '' || this.passwordNuevo.trim() == '') {
+    if (this.passwordActual.trim() === '' || this.passwordNuevo.trim() === '' || this.repetirPasswordNuevo.trim() === '') {
       swal('Error', 'Revisa que los campos esten diligenciados correctamente', 'error');
     } else {
       this.usuariosService.cambiarPasswordJava(this.passwordActual, this.passwordNuevo)
         .subscribe(
           json => {
             swal('Contraseña Actualizada', `${json.mensaje}`, 'success');
+            this.limpiarPasswords();
           },
           err => {
             swal('Error', 'Ha ocurrido un error, revisa que los datos ingresados sean validos', 'error');
+            this.limpiarPasswords();
             this.errores = err.error.errors as string[];
             console.error('Codigo de error desde backend' + err.status);
             console.error(err.error.errors);
           }
         );
     }
+  }
+
+
+  limpiarPasswords(): void {
+    this.passwordActual = '';
+    this.passwordNuevo = '';
+    this.repetirPasswordNuevo = '';
   }
 
 }
