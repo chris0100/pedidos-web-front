@@ -18,6 +18,7 @@ export class CrearUsuarioComponent implements OnInit {
 
   public usuario: Usuario = new Usuario();
   passwordNuevo: string;
+  repetirPasswordNuevo: string;
 
   errores: string[];
 
@@ -36,6 +37,15 @@ export class CrearUsuarioComponent implements OnInit {
     sessionStorage.removeItem('pedidosUnoEEHistorial');
     sessionStorage.removeItem('listaItemPedidoSelect');
 
+    // En caso de que el usuario sea nuevo
+    this.usuario.nombre = '';
+    this.usuario.nit = '';
+    this.usuario.username = '';
+    this.usuario.rolesPrincipal = [];
+    this.usuario.email = '';
+    this.usuario.password = '';
+
+
 
     // Ejecuta el script
     new lista();
@@ -43,6 +53,7 @@ export class CrearUsuarioComponent implements OnInit {
     // Se carga el usuario cuando es el caso de editar
     this.cargarUsuario();
     this.passwordNuevo = '';
+    this.repetirPasswordNuevo = '';
   }
 
 
@@ -54,6 +65,12 @@ export class CrearUsuarioComponent implements OnInit {
           this.usuariosService.obtenerUsuarioJava(id).subscribe(
             obj => {
               this.usuario = obj;
+              // Recorrer los roles
+              this.usuario.rolesPrincipal = [];
+              this.usuario.roles.forEach(obj2 => {
+                this.usuario.rolesPrincipal.push(obj2);
+              });
+              console.log(this.usuario);
               return this.usuario;
             });
         }
@@ -64,6 +81,16 @@ export class CrearUsuarioComponent implements OnInit {
   // Crear usuario
   crearUsuario(): void {
     console.log(this.usuario);
+
+    // Realiza validacion de campos vacios
+    if (this.usuario.nombre.trim().length === 0 || this.usuario.nit.trim().length === 0 ||
+    this.usuario.username.trim().length === 0 || this.usuario.rolesPrincipal.length === 0 ||
+    this.usuario.email.trim().length === 0 || this.usuario.password.trim().length === 0 ) {
+      swal('Error', 'Verifica que todos los campos estén correctamente diligenciados', 'error');
+      return;
+    }
+
+
     this.usuariosService.crearUsuarioJava(this.usuario).subscribe(
       obj => {
         swal('Correcto', `${obj.mensaje}`, 'success');
@@ -75,6 +102,16 @@ export class CrearUsuarioComponent implements OnInit {
   // Editar Usuario
   updateUsuario(): void {
     console.log(this.usuario);
+
+    // Realiza validacion de campos vacios
+    if (this.usuario.nombre.trim().length === 0 || this.usuario.nit.trim().length === 0 ||
+      this.usuario.username.trim().length === 0 || this.usuario.rolesPrincipal.length === 0 ||
+      this.usuario.email.trim().length === 0 || this.usuario.password.trim().length === 0 ) {
+      swal('Error', 'Verifica que todos los campos estén correctamente diligenciados', 'error');
+      return;
+    }
+
+
     this.usuariosService.editarUsuarioJava(this.usuario).subscribe(
       json => {
         swal('Usuario actualizado', `${json.mensaje}: ${json.usuario.nombre}`, 'success');
@@ -91,7 +128,7 @@ export class CrearUsuarioComponent implements OnInit {
   // Se actualiza la contraseña
   cambiarPasswordOtroUsuario(): void {
     console.log(this.usuario.id);
-    if (this.passwordNuevo.trim() == '') {
+    if (this.passwordNuevo.trim() === '' || this.repetirPasswordNuevo.trim() === '') {
       swal('Error', 'Revisa que los campos esten diligenciados correctamente', 'error');
     } else {
       this.usuariosService.updatePasswordOtroUsuarioJava(this.passwordNuevo, this.usuario.id, this.usuario.primerLogin)

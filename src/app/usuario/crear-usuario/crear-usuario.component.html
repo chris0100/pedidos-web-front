@@ -113,6 +113,7 @@
 
             <select class="mdb-select colorful-select dropdown-primary md-form" multiple
                     searchable="Filtrar.." name="roles" [(ngModel)]="usuario.rolesPrincipal" required
+                    [value]="usuario.rolesPrincipal"
             >
               <option value="" disabled selected>Seleccionar Roles</option>
               <option value="ADMIN">Admin - ROLE_ADMIN</option>
@@ -213,12 +214,16 @@
             <button class="btn-primary btn btn-rounded"
                     (click)="crearUsuario()"
                     *ngIf="!usuario.id else elseBlock2"
+                    [disabled]="usuario.nombre.length==0 || usuario.nit.length==0 || usuario.username.length==0 ||
+                                usuario.rolesPrincipal.length==0 || usuario.email.length==0 || usuario.password.length == 0"
             >Crear
             </button>
 
             <ng-template #elseBlock2>
               <button class="btn-primary btn btn-rounded"
                       (click)="updateUsuario()"
+                      [disabled]="usuario.nombre.length==0 || usuario.nit.length==0 || usuario.username.length==0 ||
+                                usuario.rolesPrincipal.length==0 || usuario.email.length==0 || usuario.password.length == 0"
               >Editar
               </button>
             </ng-template>
@@ -267,13 +272,13 @@
         <div class="md-form mb-4">
           <i class="fas fa-lock-open prefix grey-text"></i>
           <input type="password" id="passwordNuevo" class="form-control validate" [(ngModel)]="passwordNuevo">
-          <label data-error="wrong" data-success="right" for="passwordNuevo">Nueva Contraseña</label>
+          <label for="passwordNuevo">Nueva Contraseña</label>
         </div>
 
         <div class="md-form mb-4">
           <i class="fas fa-lock prefix grey-text"></i>
-          <input type="password" id="passwordNuevoRepetir" class="form-control validate">
-          <label data-error="wrong" data-success="right" for="passwordNuevoRepetir">Repetir Contraseña</label>
+          <input type="password" id="passwordNuevoRepetir" class="form-control validate" [(ngModel)]="repetirPasswordNuevo">
+          <label for="passwordNuevoRepetir">Repetir Contraseña</label>
         </div>
 
       </div>
@@ -281,6 +286,7 @@
         <button
           class="btn btn-primary btn-rounded"
           (click)="cambiarPasswordOtroUsuario()"
+          [disabled]="passwordNuevo!=repetirPasswordNuevo || passwordNuevo.length==0 || repetirPasswordNuevo.length==0"
           data-dismiss="modal"
           aria-label="Close"
         >Aceptar Cambios
