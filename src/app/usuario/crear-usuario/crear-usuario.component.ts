@@ -128,6 +128,11 @@ export class CrearUsuarioComponent implements OnInit {
   // Se actualiza la contraseña
   cambiarPasswordOtroUsuario(): void {
     console.log(this.usuario.id);
+    // Si esta nula la seleccion de solicitar cambio al ingresar, se cambia a false.
+    if (this.usuario.primerLogin == null) {
+      this.usuario.primerLogin = false;
+    }
+
     if (this.passwordNuevo.trim() === '' || this.repetirPasswordNuevo.trim() === '') {
       swal('Error', 'Revisa que los campos esten diligenciados correctamente', 'error');
     } else {
@@ -140,10 +145,16 @@ export class CrearUsuarioComponent implements OnInit {
             swal('Error', 'Ha ocurrido un error, revisa que los datos ingresados sean validos', 'error');
             this.errores = err.error.errors as string[];
             console.error('Codigo de error desde backend' + err.status);
-            console.error(err.error.errors);
           }
         );
     }
+  }
+
+
+  // Se limpian campos de contraseña despues de ser modificada
+  limpiarCamposPassword(): void {
+    this.passwordNuevo = '';
+    this.repetirPasswordNuevo = '';
   }
 
 

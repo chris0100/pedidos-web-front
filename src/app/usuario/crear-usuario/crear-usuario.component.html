@@ -197,18 +197,18 @@
             <fieldset class="form-check" style="padding: 0px !important;">
               <input class="form-check-input"
                      type="checkbox"
-                     id="primer_login"
-                     name="primer_login"
+                     id="primerLogin"
+                     name="primerLogin"
                      [(ngModel)]="usuario.primerLogin"
                      [value]="usuario.primerLogin"
               >
-              <label class="form-check-label" for="primer_login">Solicitar cambio al ingresar</label>
+              <label class="form-check-label" for="primerLogin">Solicitar cambio al ingresar</label>
             </fieldset>
           </div>
 
 
           <div class="mt-4" *ngIf="usuario.id">
-            <button class="btn-dark-green btn btn-rounded" data-toggle="modal" data-target="#modalLoginForm">
+            <button class="btn-dark-green btn btn-rounded" data-toggle="modal" data-target="#modalLoginForm" (click)="limpiarCamposPassword()">
               Cambiar Contraseña
             </button>
           </div>
@@ -239,7 +239,7 @@
 
           <div class="mt-4">
             <button class="btn-danger btn btn-rounded" [routerLink]="['/lista-usuarios']"
-            >Cancelar
+            >Regresar
             </button>
           </div>
 
