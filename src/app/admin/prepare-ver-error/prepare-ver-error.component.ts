@@ -98,6 +98,8 @@ export class PrepareVerErrorComponent implements OnInit {
         console.log(obj);
         if (obj[0].includes('no')) {
           swal('Error', obj[0], 'error');
+          // aqui se debe de recargar la pagina para que se actualice el mensajewb nuevo que se ha generado.
+          this.recargarPedidoError();
         } else {
           swal('Correcto', obj[0], 'success');
           // Redireccionamiento correcto
