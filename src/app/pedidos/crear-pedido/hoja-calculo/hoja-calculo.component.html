@@ -1,6 +1,11 @@
 
 <form>
 
+  <!--pantalla trasera de carga-->
+  <div *ngIf="showSpinner">
+    <app-loading-spinner></app-loading-spinner>
+  </div>
+
   <div class="row d-flex justify-content-between mx-2">
     <div class="campo align-items-center mb-4 mt-1">
       <i class="fas fa-upload mr-2"></i>
@@ -28,7 +33,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Agregar Productos</h5>
+          <h5 class="modal-title font-weight-bold text-primary" id="exampleModalLabel">Agregar Productos</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>

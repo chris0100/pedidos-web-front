@@ -41,6 +41,8 @@ export class HojaCalculoComponent implements OnInit {
 
   @Output() listaOutputItemPedidoSelect = new EventEmitter<ItemPedido[]>();
 
+  showSpinner: boolean;
+
 
   // Constructor
   constructor(private pedidosService: PedidoService, private authService: AuthService) {
@@ -50,6 +52,7 @@ export class HojaCalculoComponent implements OnInit {
   ngOnInit(): void {
     this.areaHoja = ' ';
     this.errorLectura = true;
+    this.showSpinner = false;
   }
 
 
@@ -194,6 +197,11 @@ export class HojaCalculoComponent implements OnInit {
         } else if (this.myInputVariable.nativeElement.value !== '') {
           // Si llega aqui significa que todo esta bien
           this.errorLectura = false;
+
+          if (this.listaEx.length === 0) {
+            this.errorLectura = true;
+            return;
+          }
         }
       });
     };
@@ -213,6 +221,8 @@ export class HojaCalculoComponent implements OnInit {
     // Limpio el file y el text area
     this.myInputVariable.nativeElement.value = '';
     this.areaHoja = '';
+
+    console.log(this.listaEx.length + ' tam');
 
 
     try {
@@ -323,7 +333,9 @@ export class HojaCalculoComponent implements OnInit {
             // Se inicializa la lista de excel
             this.listaItemsExcel = [];
           }
+          this.showSpinner = false;
         });
+      this.showSpinner = true;
 
     } catch (e) {
       swal('Error', 'Ha ocurrido un error en el procesamiento');

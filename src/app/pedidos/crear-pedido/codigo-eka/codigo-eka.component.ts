@@ -47,12 +47,18 @@ export class CodigoEkaComponent implements OnInit {
   @Output() listaOutputItemPedidoSelect = new EventEmitter<ItemPedido[]>();
 
 
+  // Habilitacion y deshabilitacion de input luego de busqueda
+  afterConsulta: boolean;
+  afterConsultaColor: boolean;
+
 
   constructor(private pedidosService: PedidoService, private authService: AuthService) {
   }
 
 
   ngOnInit(): void {
+    this.afterConsulta = false;
+    this.afterConsultaColor = false;
 
     // Se unicializan campos
     this.limpiarCampos();
@@ -97,6 +103,8 @@ export class CodigoEkaComponent implements OnInit {
     this.itemPedidoActual.unidadMedida = '';
     this.itemPedidoActual.cantidad = 0;
     this.itemPedidoActual.descripcionExt2 = '';
+
+    this.afterConsultaColor = false;
   }
 
 
@@ -217,8 +225,10 @@ export class CodigoEkaComponent implements OnInit {
           this.itemPedidoActual.idBodega = obj[0];
         });
     }
-  }
 
+    // se deshabilita input temporalmente
+    this.afterConsulta = true;
+  }
 
 
 
@@ -243,6 +253,7 @@ export class CodigoEkaComponent implements OnInit {
 
   // Agregar Item a la lista
   agregarItem(): void {
+
     this.itemPedidoActual.codItem = parseInt(this.codigoItem, 0);
     this.itemPedidoActual.descripcion = this.coditemPatronBuscado.substring(10, 50);
     this.itemPedidoActual.idExt1Detalle = this.itemPedidoActual.descripcionExt1.substring(0, 4);
@@ -278,11 +289,13 @@ export class CodigoEkaComponent implements OnInit {
     // Mostrar mensaje de exito
     swal('Correcto', `Se ha añadido el item ${this.itemPedidoActual.descripcion} exitosamente`, 'success');
 
-    // Se unicializan campos
+    // Se inicializan campos
     this.limpiarCampos();
 
     // Prueba para emitir lista.
     this.listaOutputItemPedidoSelect.emit(this.listaItemPedidoSelect);
+
+    this.afterConsulta = false;
   }
 
 
@@ -340,6 +353,24 @@ export class CodigoEkaComponent implements OnInit {
         this.pedidosService.guardarListaItemPedidoSelectStorage(this.listaInputItemPedidoSelect);
       });
   }
+
+
+
+
+  // Se habilita el input de la primera consulta.
+  habilitarInputBuscar(): void {
+    this.afterConsulta = false;
+    this.limpiarCampos();
+  }
+
+  // Se habilita el input de la consulta del color.
+  toggleInputBuscarColor(): void {
+    this.afterConsultaColor = !this.afterConsultaColor;
+    if (!this.afterConsultaColor) {
+      this.itemPedidoActual.descripcionExt2 = '';
+    }
+  }
+
 
 
 }

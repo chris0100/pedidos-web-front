@@ -5,13 +5,14 @@
   <div class="col-md-4">
 
     <div class="md-form md-outline">
-      <i class="fas fa-search prefix"></i>
+      <i class="fas fa-search prefix" (dblclick)="habilitarInputBuscar()"></i>
       <input type="text"
              id="cod-item-cliente"
              class="form-control"
              style="margin-bottom: 0px !important;"
              [(ngModel)]="codigoCliente"
              (change)="consultarItemHomologado()"
+             [disabled]="afterConsulta"
       >
       <label for="cod-item-cliente" data-error="wrong" data-success="right">Código del
         cliente del ítem</label>
@@ -109,7 +110,8 @@
 <div class="row mb-5 d-flex justify-content-center">
   <button class="btn btn-success btn-rounded"
           style="min-width: 270px"
-          [disabled]="itemPedidoActual.cantidad<1"
+          [disabled]="itemPedidoActual.cantidad<1 || codigoCliente.length==0 || itemPatron.length==0 ||
+                      ext1.length==0 || ext2.length==0 || itemPedidoActual.unidadMedida.length==0"
           (click)="agregarItem()"
   ><i class="fas fa-plus"></i>
     Agregar ítem

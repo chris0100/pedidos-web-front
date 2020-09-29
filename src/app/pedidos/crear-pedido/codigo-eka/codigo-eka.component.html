@@ -6,7 +6,7 @@
   <div class="col-md-4">
 
     <div class="md-form md-outline">
-      <i class="fas fa-search prefix"></i>
+      <i class="fas fa-search prefix" (dblclick)="habilitarInputBuscar()"></i>
       <input type="text"
              (keyup)="getUserIdsFirstWay($event)"
              id="buscar"
@@ -15,6 +15,7 @@
              style="margin-bottom: 0px !important;"
              [(ngModel)]="coditemPatronBuscado"
              (change)="consultarTipoExt()"
+             [disabled]="afterConsulta"
       >
       <datalist id="dynmicUserIds">
         <option *ngFor="let item of userList1">{{item}}</option>
@@ -61,7 +62,7 @@
   <div class="col-md-4">
 
     <div class="md-form md-outline">
-      <i class="fas fa-tint prefix"></i>
+      <i class="fas fa-tint prefix" (dblclick)="toggleInputBuscarColor()"></i>
       <input type="text"
              (keyup)="getUserIdsFirstWay2($event)"
              id="buscar-color"
@@ -69,6 +70,8 @@
              class="form-control"
              style="margin-bottom: 0px !important;"
              [(ngModel)]="itemPedidoActual.descripcionExt2"
+             [disabled]="afterConsultaColor"
+             (change)="toggleInputBuscarColor()"
       >
       <datalist id="dynmicUserIds2">
         <option *ngFor="let item of userList2">{{item}}</option>
@@ -98,7 +101,8 @@
   <button class="btn btn-success btn-rounded"
           style="min-width: 270px"
           (click)="agregarItem()"
-          [disabled]="itemPedidoActual.cantidad<1"
+          [disabled]="itemPedidoActual.cantidad<1 || itemPedidoActual.descripcionExt1.length==0 || itemPedidoActual.descripcionExt2.length==0 ||
+                      coditemPatronBuscado.length==0"
   >
     <i class="fas fa-plus"></i> Agregar
     ítem
