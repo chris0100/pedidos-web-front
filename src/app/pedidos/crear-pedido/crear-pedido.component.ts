@@ -254,4 +254,13 @@ export class CrearPedidoComponent implements OnInit {
   }
 
 
+  // Prevenir el enter
+  pulsarEnter(event): void {
+    if (event.which === 13 && !event.shiftKey) {
+      event.preventDefault();
+      return;
+    }
+  }
+
+
 }

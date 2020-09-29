@@ -39,7 +39,7 @@
 
         <!-- Basic textarea -->
         <div class="md-form md-outline shadow-sm">
-          <textarea type="text" id="notas" class="md-textarea form-control" rows="6" [(ngModel)]="pedidoActual.nota"></textarea>
+          <textarea type="text" id="notas" class="md-textarea form-control" rows="6" [(ngModel)]="pedidoActual.nota" (keydown.enter)="pulsarEnter($event)"></textarea>
           <label for="notas" class="active">Notas</label>
         </div>
 
