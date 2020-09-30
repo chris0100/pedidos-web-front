@@ -77,12 +77,12 @@
           </a>
         </li>
 
-        <li class="nav-item" *ngIf="authService.hasRole('ROLE_ADMIN')">
+        <li class="nav-item" *ngIf="authService.hasRole('ADMIN')">
           <a class="nav-link" [routerLink]="['/lista-usuarios']">Lista de Usuarios</a>
         </li>
 
         <!-- Dropdown -->
-        <li class="nav-item dropdown multi-level-dropdown">
+        <li class="nav-item dropdown multi-level-dropdown" *ngIf="authService.hasRole('CLI')">
           <a href="#" id="menu" data-toggle="dropdown" class="nav-link dropdown-toggle w-100">Gestión de Pedidos</a>
           <ul class="dropdown-menu mt-2 rounded-0 primary-color-dark border-0 z-depth-1">
 
@@ -105,20 +105,20 @@
           </ul>
         </li>
 
-        <li class="nav-item" *ngIf="authService.hasRole('ROLE_ADMIN')">
+        <li class="nav-item" *ngIf="authService.hasRole('ADMIN')">
           <a class="nav-link" [routerLink]="['/validacion-items']">Validar Item Creado</a>
         </li>
 
 
-        <li class="nav-item" *ngIf="authService.hasRole('ROLE_ADMIN')">
+        <li class="nav-item" *ngIf="authService.hasRole('SER')">
           <a class="nav-link" [routerLink]="['/lista-errores']">Lista Errores</a>
         </li>
 
-        <li class="nav-item" *ngIf="authService.hasRole('ROLE_ADMIN')">
+        <li class="nav-item" *ngIf="authService.hasRole('JSER')">
           <a class="nav-link" [routerLink]="['/lista-errores-completo']">Lista Errores Completo</a>
         </li>
 
-        <li class="nav-item" *ngIf="authService.hasRole('ROLE_ADMIN')">
+        <li class="nav-item" *ngIf="authService.hasRole('PRO')">
           <a class="nav-link" [routerLink]="['/certificados-proveedor']">Certificados Proveedores</a>
         </li>
 

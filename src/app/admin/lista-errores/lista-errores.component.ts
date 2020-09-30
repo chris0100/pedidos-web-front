@@ -25,7 +25,7 @@ export class ListaErroresComponent implements OnInit {
     this.showSpinner = false;
 
     // Obtener el listado de pedidos error de asesor  RECORDAR CAMBIAR 66837958
-    this.pedidosService.listarPedidosErrorAsesorJava('66837958').subscribe(
+    this.pedidosService.listarPedidosErrorAsesorJava(this.authService.usuario.nit).subscribe(
       obj => {
         console.log(obj);
         this.listaPedidosErrorAsesor = obj;

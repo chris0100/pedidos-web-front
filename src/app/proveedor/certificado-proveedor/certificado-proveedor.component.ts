@@ -85,7 +85,7 @@ export class CertificadoProveedorComponent implements OnInit {
             },
             error => {
               if (error.status === 500) {
-                swal('Error', 'Verifica los datos seleccionados', 'error');
+                swal('Error', 'No se han encontrado datos en la consulta', 'error');
                 return;
               }
             });

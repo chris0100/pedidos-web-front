@@ -122,7 +122,7 @@
 
 
       <!-- TAB 3 -->
-      <div class="card">
+      <div class="card" *ngIf="authService.hasRole('CLI')">
 
         <!-- Card header -->
         <div class="card-header" role="tab" id="headingTwo3">
@@ -186,7 +186,7 @@
 
 
       <!-- TAB 4 -->
-      <div class="card">
+      <div class="card"  *ngIf="authService.hasRole('CLI')">
 
         <!-- Card header -->
         <div class="card-header" role="tab" id="headingTwo4">
@@ -223,7 +223,7 @@
 
 
       <!-- TAB 5-->
-      <div class="card">
+      <div class="card" *ngIf="authService.hasRole('CLI')">
 
         <!-- Card header -->
         <div class="card-header" role="tab" id="headingTwo5">
@@ -260,7 +260,7 @@
 
 
       <!-- TAB 6 -->
-      <div class="card">
+      <div class="card" *ngIf="authService.hasRole('PRO')">
 
         <!-- Card header -->
         <div class="card-header" role="tab" id="headingTwo6">
@@ -297,7 +297,7 @@
 
 
           <!-- tab 7 -->
-          <div class="card">
+          <div class="card" *ngIf="authService.hasRole('SER')">
 
             <!-- Card header -->
             <div class="card-header" role="tab" id="headingTwo7">

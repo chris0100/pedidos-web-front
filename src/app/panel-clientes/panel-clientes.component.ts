@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {AuthService} from '../login/auth.service';
 
 // carga de archivo js para mdbootstrap
 declare var tablas: any;
@@ -15,7 +16,7 @@ export class PanelClientesComponent implements OnInit {
 
   title = 'Panel Clientes';
 
-  constructor() { }
+  constructor(public authService: AuthService) { }
 
 
   ngOnInit(): void {

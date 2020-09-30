@@ -18,6 +18,7 @@ export class RoleGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
+
     // Revisa si esta autenticado
     if (!this.authService.isAuthenticated()) {
       this.router.navigate(['/login']);
@@ -33,11 +34,23 @@ export class RoleGuard implements CanActivate {
       return true;
     }
 
+    const roles = next.data['roles'] as Array<string>;
+    if (roles !== undefined) {
+      if (roles.indexOf('ADMIN') !== -1 || roles.indexOf('CLI') !== -1 || roles.indexOf('PRO') !== -1
+        || roles.indexOf('JSER') !== -1 || roles.indexOf('SER') !== -1) {
+        console.log('aqui retorna');
+        return true;
+      }
+    }
+    else {
+      // Si no tiene el permiso para estar en dicha pagina retorna mensaje de error
+      swal('Acceso Denegado', `${this.authService.usuario.nombre}, no tienes permiso para acceder a este recurso`, 'warning');
+      this.router.navigate(['/panel-clientes']);
+      return false;
+    }
 
-    // Si no tiene el permiso para estar en dicha pagina retorna mensaje de error
-    swal('Acceso Denegado', `${this.authService.usuario.username}, no tienes permiso para acceder a este recurso`, 'warning');
-    this.router.navigate(['/panel-clientes']);
-    return false;
+
+
   }
 
 }

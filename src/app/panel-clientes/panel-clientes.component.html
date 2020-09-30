@@ -2,7 +2,7 @@
 
 
 <!-- CARD DE CONTENIDO SEGUN PAGINA-->
-<div class="card mx-auto mb-4" style="width: 90%; margin-top: 200px">
+<div class="card mx-auto mb-4" style="width: 90%; margin-top: 200px" >
 
   <div class="card-header warning-color-dark">
     <h5 class="font-weight-bold text-black">Panel Principal</h5>
@@ -13,7 +13,7 @@
 
   <div class="card-body">
 
-    <section id="about">
+    <section id="about" *ngIf="authService.hasRole('PRO')">
 
       <div class="row about-container">
 
@@ -55,16 +55,17 @@
     </section>
 
 
-    <!--    &lt;!&ndash; Grid row &ndash;&gt;
-        <div class="row">
+    <div *ngIf="authService.hasRole('CLI')">
+        <!-- Grid row -->
+        <div class="row" >
 
-          &lt;!&ndash; Grid column &ndash;&gt;
+          <!-- Grid column -->
           <div class="col-xl-4 col-md-6 mb-xl-0 mb-4">
 
-            &lt;!&ndash; Card &ndash;&gt;
+            <!-- Card -->
             <div class="card card-cascade cascading-admin-card">
 
-              &lt;!&ndash; Card Data &ndash;&gt;
+              <!-- Card Data -->
               <div class="admin-up">
                 <i class="far fa-money-bill-alt primary-color mr-3 z-depth-2"></i>
                 <div class="data">
@@ -73,7 +74,7 @@
                 </div>
               </div>
 
-              &lt;!&ndash; Card content &ndash;&gt;
+              <!-- Card content -->
               <div class="card-body card-body-cascade">
                 <div class="progress mb-3">
                   <div class="progress-bar bg-primary" role="progressbar" style="width: 25%"
@@ -84,19 +85,19 @@
               </div>
 
             </div>
-            &lt;!&ndash; Card &ndash;&gt;
+            <!-- Card -->
 
           </div>
-          &lt;!&ndash; Grid column &ndash;&gt;
+          <!-- Grid column -->
 
 
-          &lt;!&ndash; Grid column &ndash;&gt;
+          <!-- Grid column -->
           <div class="col-xl-4 col-md-6 mb-xl-0 mb-4">
 
-            &lt;!&ndash; Card &ndash;&gt;
+            <!-- Card -->
             <div class="card card-cascade cascading-admin-card">
 
-              &lt;!&ndash; Card Data &ndash;&gt;
+              <!-- Card Data -->
               <div class="admin-up">
                 <i class="fas fa-chart-line warning-color mr-3 z-depth-2"></i>
                 <div class="data">
@@ -105,7 +106,7 @@
                 </div>
               </div>
 
-              &lt;!&ndash; Card content &ndash;&gt;
+              <!-- Card content -->
               <div class="card-body card-body-cascade">
                 <div class="progress mb-3">
                   <div class="progress-bar red accent-2" role="progressbar" style="width: 25%"
@@ -116,18 +117,18 @@
               </div>
 
             </div>
-            &lt;!&ndash; Card &ndash;&gt;
+            <!-- Card -->
 
           </div>
-          &lt;!&ndash; Grid column &ndash;&gt;
+          <!-- Grid column -->
 
-          &lt;!&ndash; Grid column &ndash;&gt;
+          <!-- Grid column -->
           <div class="col-xl-4 col-md-6 mb-md-0 mb-4">
 
-            &lt;!&ndash; Card &ndash;&gt;
+            <!-- Card -->
             <div class="card card-cascade cascading-admin-card">
 
-              &lt;!&ndash; Card Data &ndash;&gt;
+              <!-- Card Data -->
               <div class="admin-up">
                 <i class="fas fa-chart-pie success-color-dark lighten-1 mr-3 z-depth-2"></i>
                 <div class="data">
@@ -136,7 +137,7 @@
                 </div>
               </div>
 
-              &lt;!&ndash; Card content &ndash;&gt;
+              <!-- Card content -->
               <div class="card-body card-body-cascade">
                 <div class="progress mb-3">
                   <div class="progress-bar success-color accent-2" role="progressbar"
@@ -148,10 +149,10 @@
               </div>
 
             </div>
-            &lt;!&ndash; Card &ndash;&gt;
+            <!-- Card -->
 
           </div>
-          &lt;!&ndash; Grid column &ndash;&gt;
+          <!-- Grid column -->
         </div>
 
 
@@ -166,10 +167,10 @@
           </div>
 
 
-          &lt;!&ndash; Grid row &ndash;&gt;
+          <!-- Grid row -->
           <div class="row" style="z-index: -10">
 
-            &lt;!&ndash; Grid column &ndash;&gt;
+            <!-- Grid column -->
             <div class="col-xl-12 col-lg-12 mr-0 pb-2">
 
 
@@ -186,10 +187,10 @@
 
                 <div class="table-responsive">
 
-                  &lt;!&ndash;Table&ndash;&gt;
+                  <!--Table-->
                   <table class="table table-hover mb-0 table-striped">
 
-                    &lt;!&ndash; Table head &ndash;&gt;
+                    <!-- Table head -->
                     <thead>
                     <tr>
                       <th>
@@ -202,9 +203,9 @@
                       <th class="th-lg"><a>Total Compra<i class="fas fa-sort ml-1"></i></a></th>
                     </tr>
                     </thead>
-                    &lt;!&ndash; Table head &ndash;&gt;
+                    <!-- Table head -->
 
-                    &lt;!&ndash; Table body &ndash;&gt;
+                    <!-- Table body -->
                     <tbody>
                     <tr>
                       <th scope="row">
@@ -251,19 +252,19 @@
                     </tr>
 
                     </tbody>
-                    &lt;!&ndash; Table body &ndash;&gt;
+                    <!-- Table body -->
 
                   </table>
-                  &lt;!&ndash; Table &ndash;&gt;
+                  <!-- Table -->
 
                 </div>
 
                 <hr class="my-0">
 
-                &lt;!&ndash; Bottom Table UI &ndash;&gt;
+                <!-- Bottom Table UI -->
                 <div class="d-flex justify-content-between">
 
-                  &lt;!&ndash; Name &ndash;&gt;
+                  <!-- Name -->
                   <select class="mdb-select colorful-select dropdown-primary md-form hidden-md-down">
                     <option value="" disabled>Rows number</option>
                     <option value="1" selected>5 rows</option>
@@ -272,15 +273,15 @@
                     <option value="4">100 rows</option>
                   </select>
 
-                  &lt;!&ndash; Pagination &ndash;&gt;
+                  <!-- Pagination -->
                   <nav class="my-4">
                     <ul class="pagination pagination-circle pg-blue mb-0">
 
-                      &lt;!&ndash;First&ndash;&gt;
+                      <!--First-->
                       <li class="page-item disabled clearfix d-none d-md-block"><a
                         class="page-link">First</a></li>
 
-                      &lt;!&ndash; Arrow left &ndash;&gt;
+                      <!-- Arrow left -->
                       <li class="page-item disabled">
                         <a class="page-link" aria-label="Previous">
                           <span aria-hidden="true">&laquo;</span>
@@ -288,14 +289,14 @@
                         </a>
                       </li>
 
-                      &lt;!&ndash; Numbers &ndash;&gt;
+                      <!-- Numbers -->
                       <li class="page-item active"><a class="page-link">1</a></li>
                       <li class="page-item"><a class="page-link">2</a></li>
                       <li class="page-item"><a class="page-link">3</a></li>
                       <li class="page-item"><a class="page-link">4</a></li>
                       <li class="page-item"><a class="page-link">5</a></li>
 
-                      &lt;!&ndash; Arrow right &ndash;&gt;
+                      <!-- Arrow right -->
                       <li class="page-item">
                         <a class="page-link" aria-label="Next">
                           <span aria-hidden="true">&raquo;</span>
@@ -303,26 +304,26 @@
                         </a>
                       </li>
 
-                      &lt;!&ndash; First &ndash;&gt;
+                      <!-- First -->
                       <li class="page-item clearfix d-none d-md-block"><a
                         class="page-link">Last</a></li>
 
                     </ul>
                   </nav>
-                  &lt;!&ndash; Pagination &ndash;&gt;
+                  <!-- Pagination -->
 
                 </div>
-                &lt;!&ndash; Bottom Table UI &ndash;&gt;
+                <!-- Bottom Table UI -->
 
               </div>
 
 
             </div>
-            &lt;!&ndash; Grid column &ndash;&gt;
+            <!-- Grid column -->
 
 
 
-            &lt;!&ndash; Grid column &ndash;&gt;
+            <!-- Grid column -->
             <div class="col-xl-12 col-lg-12 mb-4 pb-2">
 
               <div class="d-flex justify-content-center">
@@ -331,17 +332,20 @@
                 </div>
               </div>
 
-              &lt;!&ndash; Chart &ndash;&gt;
+              <!-- Chart -->
               <div class="view view-cascade gradient-card-header blue-gradient mx-auto">
                 <canvas id="lineChart" height="160"></canvas>
               </div>
 
             </div>
-            &lt;!&ndash; Grid column &ndash;&gt;
+            <!-- Grid column -->
 
           </div>
 
-        </section>-->
+        </section>
+
+
+  </div>
 
 
   </div>
