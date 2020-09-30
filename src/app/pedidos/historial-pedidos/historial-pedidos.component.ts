@@ -3,6 +3,7 @@ import {PedidoUnoEE} from '../pedido-uno-ee';
 import {PedidoService} from '../pedido.service';
 import {Router} from '@angular/router';
 import {AuthService} from '../../login/auth.service';
+import swal from 'sweetalert2';
 
 
 @Component({
@@ -55,6 +56,11 @@ export class HistorialPedidosComponent implements OnInit {
         // Se guarda el listado de pedidosUNOEE encontrado en la busqueda
         this.pedidosService.guardarPedidosUnoEESessionStorage(this.pedidosUnoEE);
         this.showSpinner = false;
+
+        // Se envia mensaje sino encuentra resultados
+        if (this.pedidosUnoEE == null) {
+          swal('Advertencia', 'No se han encontrado resultados en la busqueda', 'warning');
+        }
       });
     this.showSpinner = true;
   }

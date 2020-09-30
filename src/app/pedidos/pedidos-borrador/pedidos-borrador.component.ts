@@ -38,6 +38,11 @@ export class PedidosBorradorComponent implements OnInit {
         this.pedidos = obj;
         console.log(this.pedidos);
         this.showSpinner = false;
+
+        // Se envia mensaje sino encuentra resultados
+        if (this.pedidos == null || this.pedidos.length === 0) {
+          swal('Advertencia', 'No se han encontrado resultados en la busqueda', 'warning');
+        }
       });
     this.showSpinner = true;
   }

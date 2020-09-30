@@ -15,6 +15,14 @@
 
   <div class="col-sm-8" style="padding-left: 0px!important;padding-right: 0px!important;">
 
+    <div class="text-center mt-2" *ngIf="!authService.isAuthenticated()">
+      <a class="p-2 btn btn-danger rounded" [routerLink]="['/login']">Regresar</a>
+    </div>
+
+    <div class="text-center mt-2" *ngIf="authService.isAuthenticated()">
+      <a class="p-2 btn btn-danger rounded" [routerLink]="['/panel-principal']">Regresar</a>
+    </div>
+
     <!--Accordion wrapper-->
     <div class="accordion md-accordion" id="accordionEx" role="tablist" aria-multiselectable="true">
 

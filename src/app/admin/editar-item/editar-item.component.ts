@@ -45,7 +45,7 @@ export class EditarItemComponent implements OnInit {
   idItemActual: number;
   comeback: string;
 
-  afterConsulta: boolean;
+  // afterConsulta: boolean;
 
   constructor(private pedidosService: PedidoService, private authService: AuthService, private activatedRoute: ActivatedRoute,
               private router: Router) {
@@ -54,7 +54,7 @@ export class EditarItemComponent implements OnInit {
 
 
   ngOnInit() {
-    this.afterConsulta = true;
+    // this.afterConsulta = true;
 
     this.cargarPedidoEditarItem();
 
@@ -230,7 +230,7 @@ export class EditarItemComponent implements OnInit {
         obj => {
           this.itemPedidoActual.idBodega = obj[0];
         });
-      this.afterConsulta = true;
+      // this.afterConsulta = true;
     }
   }
 
@@ -303,8 +303,8 @@ export class EditarItemComponent implements OnInit {
 
 
   habilitarInputBuscar(): void {
-    this.afterConsulta = false;
-    this.limpiarCamposItem();
+    // this.afterConsulta = false;
+    // this.limpiarCamposItem();
   }
 
   // Metodo para limpiar campos del item.

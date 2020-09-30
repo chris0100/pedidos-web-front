@@ -15,7 +15,6 @@
              style="margin-bottom: 0px !important;"
              [(ngModel)]="coditemPatronBuscado"
              (change)="consultarTipoExt()"
-             [disabled]="afterConsulta"
       >
       <datalist id="dynmicUserIds">
         <option *ngFor="let item of userList1">{{item}}</option>
@@ -70,7 +69,6 @@
              class="form-control"
              style="margin-bottom: 0px !important;"
              [(ngModel)]="itemPedidoActual.descripcionExt2"
-             [disabled]="afterConsultaColor"
              (change)="toggleInputBuscarColor()"
       >
       <datalist id="dynmicUserIds2">

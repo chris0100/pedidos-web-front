@@ -48,8 +48,8 @@ export class CodigoEkaComponent implements OnInit {
 
 
   // Habilitacion y deshabilitacion de input luego de busqueda
-  afterConsulta: boolean;
-  afterConsultaColor: boolean;
+  // afterConsulta: boolean;
+  // afterConsultaColor: boolean;
 
 
   constructor(private pedidosService: PedidoService, private authService: AuthService) {
@@ -57,8 +57,8 @@ export class CodigoEkaComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.afterConsulta = false;
-    this.afterConsultaColor = false;
+    // this.afterConsulta = false;
+    // this.afterConsultaColor = false;
 
     // Se unicializan campos
     this.limpiarCampos();
@@ -104,7 +104,7 @@ export class CodigoEkaComponent implements OnInit {
     this.itemPedidoActual.cantidad = 0;
     this.itemPedidoActual.descripcionExt2 = '';
 
-    this.afterConsultaColor = false;
+    // this.afterConsultaColor = false;
   }
 
 
@@ -227,7 +227,7 @@ export class CodigoEkaComponent implements OnInit {
     }
 
     // se deshabilita input temporalmente
-    this.afterConsulta = true;
+    // this.afterConsulta = true;
   }
 
 
@@ -295,7 +295,7 @@ export class CodigoEkaComponent implements OnInit {
     // Prueba para emitir lista.
     this.listaOutputItemPedidoSelect.emit(this.listaItemPedidoSelect);
 
-    this.afterConsulta = false;
+    // this.afterConsulta = false;
   }
 
 
@@ -359,16 +359,16 @@ export class CodigoEkaComponent implements OnInit {
 
   // Se habilita el input de la primera consulta.
   habilitarInputBuscar(): void {
-    this.afterConsulta = false;
-    this.limpiarCampos();
+    // this.afterConsulta = false;
+    // this.limpiarCampos();
   }
 
   // Se habilita el input de la consulta del color.
   toggleInputBuscarColor(): void {
-    this.afterConsultaColor = !this.afterConsultaColor;
-    if (!this.afterConsultaColor) {
-      this.itemPedidoActual.descripcionExt2 = '';
-    }
+    // this.afterConsultaColor = !this.afterConsultaColor;
+    // if (!this.afterConsultaColor) {
+      // this.itemPedidoActual.descripcionExt2 = '';
+   // }
   }
 
 

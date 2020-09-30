@@ -14,9 +14,9 @@
   </button>
 
 
+
   <!-- Collapsible content -->
   <div class="collapse navbar-collapse" id="basicExampleNav12">
-
 
     <!-- Navbar links -->
     <ul class="navbar-nav ml-auto">
@@ -35,7 +35,7 @@
         <a class="nav-link waves-effect" [routerLink]="['/ayuda']"><i class="fas fa-question-circle"></i> Ayuda</a>
       </li>
 
-      <li class="nav-item mr-5">
+      <li class="nav-item mr-5" [ngClass]="{'active' : router.url.includes('config')}">
         <a class="nav-link waves-effect" [routerLink]="['/configuracion']">
           <i class="fas fa-cog"></i> Configuración
         </a>
@@ -71,18 +71,16 @@
     <div class="collapse navbar-collapse" id="basicExampleNav">
       <!-- Links -->
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" [routerLink]="['/panel-principal']">Panel
-            <span class="sr-only">(current)</span>
-          </a>
+        <li class="nav-item" [ngClass]="{'active' : router.url.includes('panel')}">
+          <a class="nav-link" [routerLink]="['/panel-principal']">Panel</a>
         </li>
 
-        <li class="nav-item" *ngIf="authService.hasRole('ADMIN')">
+        <li class="nav-item" *ngIf="authService.hasRole('ADMIN')" [ngClass]="{'active' : router.url.includes('usuario')}">
           <a class="nav-link" [routerLink]="['/lista-usuarios']">Lista de Usuarios</a>
         </li>
 
         <!-- Dropdown -->
-        <li class="nav-item dropdown multi-level-dropdown" *ngIf="authService.hasRole('CLI')">
+        <li class="nav-item dropdown multi-level-dropdown" *ngIf="authService.hasRole('CLI')" [ngClass]="{'active' : router.url.includes('pedido')}">
           <a href="#" id="menu" data-toggle="dropdown" class="nav-link dropdown-toggle w-100">Gestión de Pedidos</a>
           <ul class="dropdown-menu mt-2 rounded-0 primary-color-dark border-0 z-depth-1">
 
@@ -105,20 +103,20 @@
           </ul>
         </li>
 
-        <li class="nav-item" *ngIf="authService.hasRole('ADMIN')">
+        <li class="nav-item" *ngIf="authService.hasRole('ADMIN')" [ngClass]="{'active' : router.url.includes('validacion')}">
           <a class="nav-link" [routerLink]="['/validacion-items']">Validar Item Creado</a>
         </li>
 
 
-        <li class="nav-item" *ngIf="authService.hasRole('SER')">
+        <li class="nav-item" *ngIf="authService.hasRole('SER')" [ngClass]="{'active' : router.url.includes('lista-errores')}">
           <a class="nav-link" [routerLink]="['/lista-errores']">Lista Errores</a>
         </li>
 
-        <li class="nav-item" *ngIf="authService.hasRole('JSER')">
+        <li class="nav-item" *ngIf="authService.hasRole('JSER')" [ngClass]="{'active' : router.url.includes('completo')}">
           <a class="nav-link" [routerLink]="['/lista-errores-completo']">Lista Errores Completo</a>
         </li>
 
-        <li class="nav-item" *ngIf="authService.hasRole('PRO')">
+        <li class="nav-item" *ngIf="authService.hasRole('PRO')" [ngClass]="{'active' : router.url.includes('certificado')}">
           <a class="nav-link" [routerLink]="['/certificados-proveedor']">Certificados Proveedores</a>
         </li>
 

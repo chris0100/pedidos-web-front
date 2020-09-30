@@ -11,8 +11,7 @@
 
   <div class="card-header warning-color-dark  d-flex justify-content-start align-items-center">
     <div *ngIf="!usuario.id else elseBlock" class="d-flex align-items-center">
-      <i class="fas fa-user-plus fa-2x text-black-50"></i>
-      <h5 class="font-weight-bold text-black ml-2"
+      <h5 class="font-weight-bold text-black"
           style="margin-bottom: 0px !important;"
       > Crear Usuario
       </h5>
@@ -20,8 +19,7 @@
 
 
     <ng-template #elseBlock>
-        <i class="fas fa-user-edit fa-2x text-black-50"></i>
-        <h5 class="font-weight-bold text-black ml-2"
+      <h5 class="font-weight-bold text-black"
             style="margin-bottom: 0px !important;"
         > Editar Usuario
         </h5>

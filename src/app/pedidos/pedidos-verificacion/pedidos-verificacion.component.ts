@@ -3,6 +3,7 @@ import {PedidoService} from '../pedido.service';
 import {Router} from '@angular/router';
 import {AuthService} from '../../login/auth.service';
 import {Pedido} from '../pedido';
+import swal from "sweetalert2";
 
 // carga de archivo para mdbootstrap
 // declare var historial: any;
@@ -40,6 +41,11 @@ export class PedidosVerificacionComponent implements OnInit {
         this.pedidos = obj;
         console.log(this.pedidos);
         this.showSpinner = false;
+
+        // Se envia mensaje sino encuentra resultados
+        if (this.pedidos == null || this.pedidos.length === 0) {
+          swal('Advertencia', 'No se han encontrado resultados en la busqueda', 'warning');
+        }
       });
     this.showSpinner = true;
   }

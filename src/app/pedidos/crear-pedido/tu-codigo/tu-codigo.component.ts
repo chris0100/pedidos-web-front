@@ -34,7 +34,7 @@ export class TuCodigoComponent implements OnInit {
   @Output() listaOutputItemPedidoSelect = new EventEmitter<ItemPedido[]>();
 
   // Habilitacion input para editar
-  afterConsulta: boolean;
+  // afterConsulta: boolean;
 
 
   constructor(private pedidosService: PedidoService, private authService: AuthService) {
@@ -48,7 +48,7 @@ export class TuCodigoComponent implements OnInit {
     // Cargar la lista de item pedido desde el session storage
     this.listaItemPedidoSelect = this.pedidosService.obtenerListaItemPedidoSelectStoragee();
 
-    this.afterConsulta = false;
+    // this.afterConsulta = false;
   }
 
 
@@ -95,7 +95,7 @@ export class TuCodigoComponent implements OnInit {
           return;
         }
       });
-    this.afterConsulta = true;
+    // this.afterConsulta = true;
   }
 
 
@@ -159,7 +159,7 @@ export class TuCodigoComponent implements OnInit {
     // Prueba para emitir lista.
     this.listaOutputItemPedidoSelect.emit(this.listaItemPedidoSelect);
 
-    this.afterConsulta = false;
+    // this.afterConsulta = false;
   }
 
 
@@ -237,8 +237,8 @@ export class TuCodigoComponent implements OnInit {
 
   // Habilitacion del input de busqueda
   habilitarInputBuscar(): void {
-    this.afterConsulta = false;
-    this.limpiarCampos();
+    // this.afterConsulta = false;
+    // this.limpiarCampos();
   }
 
 

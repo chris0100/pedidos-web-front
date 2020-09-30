@@ -5,7 +5,7 @@
 <div class="card mx-auto mb-5" style="width: 90%; margin-top: 200px">
 
   <div class="card-header warning-color-dark">
-    <h5 class="font-weight-bold text-black"><i class="fas fa-shopping-cart"></i> Editar ítem del pedido</h5>
+    <h5 class="font-weight-bold text-black">Editar ítem del pedido</h5>
   </div>
 
 
@@ -154,7 +154,6 @@
                        style="margin-bottom: 0px !important;"
                        [(ngModel)]="coditemPatronBuscado"
                        (change)="consultarTipoExt()"
-                       [disabled]="afterConsulta"
                 >
                 <datalist id="dynmicUserIds">
                   <option *ngFor="let item of userList1">{{item}}</option>
