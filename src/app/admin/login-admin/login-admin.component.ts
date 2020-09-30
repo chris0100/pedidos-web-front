@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import swal from "sweetalert2";
+import swal from 'sweetalert2';
 import {AuthService} from '../../login/auth.service';
 import {Router} from '@angular/router';
 import {Usuario} from '../../usuario/usuario';
@@ -35,7 +35,7 @@ export class LoginAdminComponent implements OnInit {
 
   // Login como Admin
   loginAdmin(): void {
-    console.log('se esta logueando');
+    console.log('se esta logueando como admin');
     // Revisa que no esten vacios los campos
     if (this.usuario.username.trim() === '' || this.usuario.password.trim() === '') {
       swal('Error de ingreso', 'Username o Password vacios', 'error');
@@ -66,8 +66,9 @@ export class LoginAdminComponent implements OnInit {
         }
       },
       error => {
-        if (error.status === 400) {
+        if (error.status === 400 || error.status === 401) {
           swal('Error Login', 'Username o Password incorrectos', 'error');
+          return;
         }
       });
   }

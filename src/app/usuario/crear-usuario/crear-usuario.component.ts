@@ -4,6 +4,7 @@ import {UsuariosService} from '../usuarios.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import swal from 'sweetalert2';
 
+
 // carga de archivo js para mdbootstrap
 declare var lista: any;
 
@@ -46,7 +47,6 @@ export class CrearUsuarioComponent implements OnInit {
     this.usuario.password = '';
 
 
-
     // Ejecuta el script
     new lista();
 
@@ -68,7 +68,8 @@ export class CrearUsuarioComponent implements OnInit {
               // Recorrer los roles
               this.usuario.rolesPrincipal = [];
               this.usuario.roles.forEach(obj2 => {
-                this.usuario.rolesPrincipal.push(obj2);
+                const rs = JSON.stringify(obj2);
+                this.usuario.rolesPrincipal.push(rs.split('"')[3]);
               });
               console.log(this.usuario);
               return this.usuario;
@@ -84,8 +85,8 @@ export class CrearUsuarioComponent implements OnInit {
 
     // Realiza validacion de campos vacios
     if (this.usuario.nombre.trim().length === 0 || this.usuario.nit.trim().length === 0 ||
-    this.usuario.username.trim().length === 0 || this.usuario.rolesPrincipal.length === 0 ||
-    this.usuario.email.trim().length === 0 || this.usuario.password.trim().length === 0 ) {
+      this.usuario.username.trim().length === 0 || this.usuario.rolesPrincipal.length === 0 ||
+      this.usuario.email.trim().length === 0 || this.usuario.password.trim().length === 0) {
       swal('Error', 'Verifica que todos los campos estén correctamente diligenciados', 'error');
       return;
     }
@@ -106,7 +107,7 @@ export class CrearUsuarioComponent implements OnInit {
     // Realiza validacion de campos vacios
     if (this.usuario.nombre.trim().length === 0 || this.usuario.nit.trim().length === 0 ||
       this.usuario.username.trim().length === 0 || this.usuario.rolesPrincipal.length === 0 ||
-      this.usuario.email.trim().length === 0 || this.usuario.password.trim().length === 0 ) {
+      this.usuario.email.trim().length === 0 || this.usuario.password.trim().length === 0) {
       swal('Error', 'Verifica que todos los campos estén correctamente diligenciados', 'error');
       return;
     }
