@@ -50,7 +50,7 @@ export class ReestablecerProveedoresComponent implements OnInit {
     this.usuarioService.generarTokenProveedorJava(this.usuario.email, this.usuario.nit).subscribe(
       obj => {
         console.log(obj);
-        this.router.navigate(['/panel-clientes']);
+        this.router.navigate(['/login']);
         swal('Correcto', 'Revisa tu bandeja de email para reestablecer la contraseña', 'success');
         this.showSpinner = false;
       },

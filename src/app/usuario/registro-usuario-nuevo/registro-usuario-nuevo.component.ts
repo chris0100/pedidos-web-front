@@ -61,7 +61,7 @@ export class RegistroUsuarioNuevoComponent implements OnInit {
        obj => {
          console.log(obj);
          // Aqui me redirecciona a la pagina de login
-         swal('Correcto', 'Proceso de registro correcto, logueate para continuar', 'success');
+         swal('Correcto', 'Proceso de registro correcto, ingresa para continuar', 'success');
          this.router.navigate(['/login']);
        });
 

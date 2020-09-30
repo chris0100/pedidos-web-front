@@ -74,7 +74,7 @@
                              name="email"
                              [(ngModel)]="usuario.email"
                       >
-                      <label for="email">Correo corporativo del responsable</label>
+                      <label for="email">Email del responsable</label>
                     </div>
 
 
@@ -85,7 +85,7 @@
                              name="password"
                              [(ngModel)]="usuario.password"
                       >
-                      <label for="password">Contraseña de ingreso</label>
+                      <label for="password">Contraseña</label>
                     </div>
 
 
@@ -119,7 +119,8 @@
                               type="submit"
                               (click)="enviarDatos()"
                               [disabled]="usuario.email.length==0 || usuario.nombre.length==0
-                              || usuario.password.length==0 || repetirPassword.length==0 || !condicionesRestricciones"
+                              || usuario.password.length==0 || repetirPassword.length==0 || !condicionesRestricciones ||
+                              usuario.password!=repetirPassword || !usuario.email.includes('@') || !usuario.email.includes('.')"
                       >
                         Aceptar <i class="fas fa-sign-in-alt ml-1"></i>
                       </button>

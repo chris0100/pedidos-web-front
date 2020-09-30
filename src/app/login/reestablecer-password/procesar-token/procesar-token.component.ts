@@ -49,7 +49,7 @@ export class ProcesarTokenComponent implements OnInit {
         }
         // Si la respuesta no co es porque no existe ese token
         else if (respuesta.includes('no co')) {
-          swal('Error', 'El token no se encuentra, por favor intenta nuevamente', 'error');
+          swal('Error', 'No se ha encontrado el token, por favor envia una nueva solicitud para reestablecer tu contraseña', 'error');
           this.router.navigate(['/reestablecer-password']);
         }
         // Sino el token es correcto
@@ -65,8 +65,8 @@ export class ProcesarTokenComponent implements OnInit {
   guardarPassword(): void {
     console.log('el password a guardar es: ' + this.password);
     // Se realiza verificacion del password
-    if (this.password.trim().length == 0 || this.repetirPassword.trim().length == 0) {
-      swal('Error', 'La contraseña no debe contener espacios en blanco', 'error');
+    if (this.password.trim().length === 0 || this.repetirPassword.trim().length === 0) {
+      swal('Error', 'La contraseña no debe contener solo espacios en blanco', 'error');
       return;
     }
 

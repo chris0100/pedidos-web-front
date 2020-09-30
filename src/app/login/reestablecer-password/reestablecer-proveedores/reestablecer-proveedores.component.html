@@ -24,7 +24,7 @@
     <button class="btn btn-primary btn-rounded"
             (click)="recuperarPassword()"
             type="submit"
-            [disabled]="usuario.nit.length==0 || usuario.email.length==0"
+            [disabled]="usuario.nit.length==0 || usuario.email.length==0 || !usuario.email.includes('@') || !usuario.email.includes('.')"
     >
       Recuperar <i class="fas fa-sign-in-alt ml-1"></i>
     </button>

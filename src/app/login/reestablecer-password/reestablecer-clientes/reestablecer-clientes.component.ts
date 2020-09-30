@@ -108,7 +108,7 @@ export class ReestablecerClientesComponent implements OnInit {
       this.sucursalSeleccionada.substring(0, 3), this.puntoEnvioSeleccionado.substring(0, 3)).subscribe(
       obj => {
         console.log(obj);
-        this.router.navigate(['/panel-clientes']);
+        this.router.navigate(['/login']);
         swal('Correcto', 'Revisa tu bandeja de email para reestablecer la contraseña', 'success');
         this.showSpinner = false;
       },

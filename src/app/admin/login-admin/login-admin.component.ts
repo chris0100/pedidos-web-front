@@ -54,9 +54,16 @@ export class LoginAdminComponent implements OnInit {
         // Se crea la variable usuario
         const usuario = this.authService.usuario;
 
-        // Redirecciona a la pagina principal con mensaje de bienvenida
-        swal('Bienvenido', `${usuario.nombre}, has iniciado sesión correctamente`, 'success');
-        this.router.navigate(['/panel-clientes']);
+        // Revisa si tiene el primer Login en true, sino lo envia al panel clientes
+        if (usuario.primerLogin) {
+          this.router.navigate(['/actualizar-password']);
+          return;
+        }
+        else {
+          // Redirecciona a la pagina principal con mensaje de bienvenida
+          swal('Bienvenido', `${usuario.nombre}, has iniciado sesión correctamente`, 'success');
+          this.router.navigate(['/panel-clientes']);
+        }
       },
       error => {
         if (error.status === 400) {
