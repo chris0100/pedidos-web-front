@@ -37,7 +37,7 @@ export class AuthInterceptor implements HttpInterceptor {
         // Si el error de status es 403
         if (err.status === 403) {
           swal('Acceso denegado', `${this.authService.usuario.username}, tienes permiso para acceder a este recurso`, 'warning');
-          this.router.navigate(['/panel-clientes']);
+          this.router.navigate(['/panel-principal']);
         }
         return throwError(err);
       })

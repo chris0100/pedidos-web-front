@@ -39,7 +39,7 @@ const routes: Routes = [
   {path: 'actualizar-password', component: ActualizarPasswordComponent, canActivate: [RoleGuard, AuthGuard], data: {roles: ['ADMIN', 'CLI', 'JSER', 'PRO', 'SER']}},
   {path: 'registro-usuario-nuevo', component: RegistroUsuarioNuevoComponent, canActivate: [RoleGuard, AuthGuard], data: {roles: ['ADMIN', 'CLI', 'JSER', 'PRO', 'SER']}},
   {path: 'ayuda', component: AyudaComponent},
-  {path: 'panel-clientes', component: PanelClientesComponent, canActivate: [RoleGuard, AuthGuard], data: {roles: ['ADMIN', 'CLI', 'JSER', 'PRO', 'SER']}},
+  {path: 'panel-principal', component: PanelClientesComponent, canActivate: [RoleGuard, AuthGuard], data: {roles: ['ADMIN', 'CLI', 'JSER', 'PRO', 'SER']}},
   {path: 'configuracion', component: ConfiguracionComponent, canActivate: [RoleGuard, AuthGuard], data: {roles: ['ADMIN', 'CLI', 'JSER', 'PRO', 'SER']}},
   {path: 'lista-usuarios', component: ListaUsuariosComponent, canActivate: [RoleGuard, AuthGuard], data: {role: 'ADMIN'}},
   {path: 'crear-usuario', component: CrearUsuarioComponent, canActivate: [RoleGuard, AuthGuard], data: {role: 'ADMIN'}},

@@ -30,7 +30,7 @@ export class PedidoService {
     return this.http.get<Pedido>(`${urlEndPoint}/${nit}`).pipe(
       catchError(e => {
         if (e.status != 401 && e.error.mensaje) {
-          this.router.navigate(['/panel-clientes']);
+          this.router.navigate(['/panel-principal']);
           console.log(e.error.mensaje);
         }
         return throwError(e);
@@ -45,7 +45,7 @@ export class PedidoService {
     return this.http.get<Pedido>(`${urlEndPoint}/${nit}`).pipe(
       catchError(e => {
         if (e.status != 401 && e.error.mensaje) {
-          this.router.navigate(['/panel-clientes']);
+          this.router.navigate(['/panel-principal']);
           console.log(e.error.mensaje);
         }
         return throwError(e);
@@ -60,7 +60,7 @@ export class PedidoService {
     return this.http.get<PedidoUnoEE>(`${urlEndPoint}/${nit}/${fechaParametro1}/${fechaParametro2}`).pipe(
       catchError(e => {
         if (e.status != 401 && e.error.mensaje) {
-          this.router.navigate(['/panel-clientes']);
+          this.router.navigate(['/panel-principal']);
           console.log(e.error.mensaje);
         }
         return throwError(e);
@@ -75,7 +75,7 @@ export class PedidoService {
     return this.http.get<ItemPedidoUnoEE[]>(`${urlEndPoint}/${id}`).pipe(
       catchError(e => {
         if (e.status != 401 && e.error.mensaje) {
-          this.router.navigate(['/panel-clientes']);
+          this.router.navigate(['/panel-principal']);
           console.log(e.error.mensaje);
         }
         return throwError(e);
@@ -90,7 +90,7 @@ export class PedidoService {
     return this.http.get<ItemPedidoUnoEE[]>(`${urlEndPoint}/${id}`).pipe(
       catchError(e => {
         if (e.status != 401 && e.error.mensaje) {
-          this.router.navigate(['/panel-clientes']);
+          this.router.navigate(['/panel-principal']);
           console.log(e.error.mensaje);
         }
         return throwError(e);
@@ -105,7 +105,7 @@ export class PedidoService {
     return this.http.get<string[]>(`${urlEndPoint}/${nit}/${idSucursal}/${idPuntoEnvio}`).pipe(
       catchError(e => {
         if (e.status != 401 && e.error.mensaje) {
-          this.router.navigate(['/panel-clientes']);
+          this.router.navigate(['/panel-principal']);
           console.log(e.error.mensaje);
         }
         return throwError(e);
@@ -120,7 +120,7 @@ export class PedidoService {
     return this.http.get<number[]>(`${urlEndPoint}/${nit}`).pipe(
       catchError(e => {
         if (e.status != 401 && e.error.mensaje) {
-          this.router.navigate(['/panel-clientes']);
+          this.router.navigate(['/panel-principal']);
           console.log(e.error.mensaje);
         }
         return throwError(e);
@@ -135,7 +135,7 @@ export class PedidoService {
     return this.http.get<string[]>(`${urlEndPoint}`).pipe(
       catchError(e => {
         if (e.status != 401 && e.error.mensaje) {
-          this.router.navigate(['/panel-clientes']);
+          this.router.navigate(['/panel-principal']);
           console.log(e.error.mensaje);
         }
         return throwError(e);
@@ -150,7 +150,7 @@ export class PedidoService {
     return this.http.get<string[]>(`${urlEndPoint}/${codigoItem}`).pipe(
       catchError(e => {
         if (e.status != 401 && e.error.mensaje) {
-          this.router.navigate(['/panel-clientes']);
+          this.router.navigate(['/panel-principal']);
           console.log(e.error.mensaje);
         }
         return throwError(e);
@@ -165,7 +165,7 @@ export class PedidoService {
     return this.http.get<string[]>(`${urlEndPoint}/${ext1}`).pipe(
       catchError(e => {
         if (e.status != 401 && e.error.mensaje) {
-          this.router.navigate(['/panel-clientes']);
+          this.router.navigate(['/panel-principal']);
           console.log(e.error.mensaje);
         }
         return throwError(e);
@@ -180,7 +180,7 @@ export class PedidoService {
     return this.http.get<string[]>(`${urlEndPoint}/${ext2}`).pipe(
       catchError(e => {
         if (e.status != 401 && e.error.mensaje) {
-          this.router.navigate(['/panel-clientes']);
+          this.router.navigate(['/panel-principal']);
           console.log(e.error.mensaje);
         }
         return throwError(e);
@@ -195,7 +195,7 @@ export class PedidoService {
     return this.http.get<string[]>(`${urlEndPoint}/${codigoItem}`).pipe(
       catchError(e => {
         if (e.status != 401 && e.error.mensaje) {
-          this.router.navigate(['/panel-clientes']);
+          this.router.navigate(['/panel-principal']);
           console.log(e.error.mensaje);
         }
         return throwError(e);
@@ -210,7 +210,7 @@ export class PedidoService {
     return this.http.get<string[]>(`${urlEndPoint}/${unidadMedida}`).pipe(
       catchError(e => {
         if (e.status != 401 && e.error.mensaje) {
-          this.router.navigate(['/panel-clientes']);
+          this.router.navigate(['/panel-principal']);
           console.log(e.error.mensaje);
         }
         return throwError(e);
@@ -226,7 +226,7 @@ export class PedidoService {
     return this.http.get<string[]>(`${urlEndPoint}/${ext1}`).pipe(
       catchError(e => {
         if (e.status != 401 && e.error.mensaje) {
-          this.router.navigate(['/panel-clientes']);
+          this.router.navigate(['/panel-principal']);
           console.log(e.error.mensaje);
         }
         return throwError(e);
@@ -242,7 +242,7 @@ export class PedidoService {
     return this.http.get<string[]>(`${urlEndPoint}/${ext2}`).pipe(
       catchError(e => {
         if (e.status != 401 && e.error.mensaje) {
-          this.router.navigate(['/panel-clientes']);
+          this.router.navigate(['/panel-principal']);
           console.log(e.error.mensaje);
         }
         return throwError(e);
@@ -258,7 +258,7 @@ export class PedidoService {
     return this.http.get<string[]>(`${urlEndPoint}/${codigoItem}`).pipe(
       catchError(e => {
         if (e.status != 401 && e.error.mensaje) {
-          this.router.navigate(['/panel-clientes']);
+          this.router.navigate(['/panel-principal']);
           console.log(e.error.mensaje);
         }
         return throwError(e);
@@ -273,7 +273,7 @@ export class PedidoService {
     return this.http.get<string[]>(`${urlEndPoint}/${idItem}/${codigoItem}`).pipe(
       catchError(e => {
         if (e.status != 401 && e.error.mensaje) {
-          this.router.navigate(['/panel-clientes']);
+          this.router.navigate(['/panel-principal']);
           console.log(e.error.mensaje);
         }
         return throwError(e);
@@ -289,7 +289,7 @@ export class PedidoService {
     return this.http.get<string[]>(`${urlEndPoint}/${idItem}`).pipe(
       catchError(e => {
         if (e.status != 401 && e.error.mensaje) {
-          this.router.navigate(['/panel-clientes']);
+          this.router.navigate(['/panel-principal']);
           console.log(e.error.mensaje);
         }
         return throwError(e);
@@ -308,7 +308,7 @@ export class PedidoService {
     return this.http.get<string[]>(`${urlEndPoint}/${nit}/${codigoItem}`).pipe(
       catchError(e => {
         if (e.status != 401 && e.error.mensaje) {
-          this.router.navigate(['/panel-clientes']);
+          this.router.navigate(['/panel-principal']);
           console.log(e.error.mensaje);
         }
         return throwError(e);
@@ -363,7 +363,7 @@ export class PedidoService {
     return this.http.get<string[]>(`${urlEndPoint}/${idSucursal}/${nit}`).pipe(
       catchError(e => {
         if (e.status != 401 && e.error.mensaje) {
-          this.router.navigate(['/panel-clientes']);
+          this.router.navigate(['/panel-principal']);
           console.log(e.error.mensaje);
         }
         return throwError(e);
@@ -429,7 +429,7 @@ export class PedidoService {
     return this.http.get<string[]>(`${urlEndPoint}/${codItem}`).pipe(
       catchError(e => {
         if (e.status != 401 && e.error.mensaje) {
-          this.router.navigate(['/panel-clientes']);
+          this.router.navigate(['/panel-principal']);
           console.log(e.error.mensaje);
         }
         return throwError(e);
@@ -445,7 +445,7 @@ export class PedidoService {
     return this.http.get<string[]>(`${urlEndPoint}/${codItem}`).pipe(
       catchError(e => {
         if (e.status != 401 && e.error.mensaje) {
-          this.router.navigate(['/panel-clientes']);
+          this.router.navigate(['/panel-principal']);
           console.log(e.error.mensaje);
         }
         return throwError(e);
@@ -461,7 +461,7 @@ export class PedidoService {
     return this.http.get<string[]>(`${urlEndPoint}/${codItem}/${ext1}/${ext2}`).pipe(
       catchError(e => {
         if (e.status != 401 && e.error.mensaje) {
-          this.router.navigate(['/panel-clientes']);
+          this.router.navigate(['/panel-principal']);
           console.log(e.error.mensaje);
         }
         return throwError(e);
@@ -476,7 +476,7 @@ export class PedidoService {
     return this.http.get<string[]>(`${urlEndPoint}/${codItem}/${ext1}/${ext2}`).pipe(
       catchError(e => {
         if (e.status != 401 && e.error.mensaje) {
-          this.router.navigate(['/panel-clientes']);
+          this.router.navigate(['/panel-principal']);
           console.log(e.error.mensaje);
         }
         return throwError(e);
@@ -492,7 +492,7 @@ export class PedidoService {
     return this.http.get<string[]>(`${urlEndPoint}/${codItem}`).pipe(
       catchError(e => {
         if (e.status != 401 && e.error.mensaje) {
-          this.router.navigate(['/panel-clientes']);
+          this.router.navigate(['/panel-principal']);
           console.log(e.error.mensaje);
         }
         return throwError(e);
@@ -507,7 +507,7 @@ export class PedidoService {
     return this.http.get<string[]>(`${urlEndPoint}/${codItem}`).pipe(
       catchError(e => {
         if (e.status != 401 && e.error.mensaje) {
-          this.router.navigate(['/panel-clientes']);
+          this.router.navigate(['/panel-principal']);
           console.log(e.error.mensaje);
         }
         return throwError(e);
@@ -523,7 +523,7 @@ export class PedidoService {
     return this.http.get<Pedido[]>(`${urlEndPoint}`).pipe(
       catchError(e => {
         if (e.status != 401 && e.error.mensaje) {
-          this.router.navigate(['/panel-clientes']);
+          this.router.navigate(['/panel-principal']);
           console.log(e.error.mensaje);
         }
         return throwError(e);
@@ -538,7 +538,7 @@ export class PedidoService {
     return this.http.get<Pedido[]>(`${urlEndPoint}/${nit}`).pipe(
       catchError(e => {
         if (e.status != 401 && e.error.mensaje) {
-          this.router.navigate(['/panel-clientes']);
+          this.router.navigate(['/panel-principal']);
           console.log(e.error.mensaje);
         }
         return throwError(e);
@@ -553,7 +553,7 @@ export class PedidoService {
     return this.http.get<string>(`${urlEndPoint}/${idPedido}/${nit}`).pipe(
       catchError(e => {
         if (e.status != 401 && e.error.mensaje) {
-          this.router.navigate(['/panel-clientes']);
+          this.router.navigate(['/panel-principal']);
           console.log(e.error.mensaje);
         }
         return throwError(e);

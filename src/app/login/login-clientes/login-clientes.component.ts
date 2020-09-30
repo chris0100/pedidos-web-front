@@ -48,7 +48,7 @@ export class LoginClientesComponent implements OnInit {
     // Revisa si el usuario esta autenticado, para redireccionar
     if (this.authService.isAuthenticated()) {
       swal('Acceso invalido', `Hola ${this.authService.usuario.nombre}, ya te encuentras logueado`, 'info');
-      this.router.navigate(['/panel-clientes']);
+      this.router.navigate(['/panel-principal']);
     }
   }
 
@@ -178,7 +178,7 @@ export class LoginClientesComponent implements OnInit {
         } else {
           // Redirecciona a la pagina principal con mensaje de bienvenida
           swal('Bienvenido', `${usuario.nombre}, has iniciado sesión correctamente`, 'success');
-          this.router.navigate(['/panel-clientes']);
+          this.router.navigate(['/panel-principal']);
         }
       },
       error => {

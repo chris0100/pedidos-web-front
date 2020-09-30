@@ -29,7 +29,7 @@ export class ReestablecerProveedoresComponent implements OnInit {
     // Revisa si el usuario esta autenticado, para redireccionar
     if (this.authService.isAuthenticated()) {
       swal('Acceso invalido', `Hola ${this.authService.usuario.nombre}, ya te encuentras logueado`, 'info');
-      this.router.navigate(['/panel-clientes']);
+      this.router.navigate(['/panel-principal']);
     }
   }
 

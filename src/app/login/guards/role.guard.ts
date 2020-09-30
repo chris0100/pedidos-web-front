@@ -45,7 +45,7 @@ export class RoleGuard implements CanActivate {
     else {
       // Si no tiene el permiso para estar en dicha pagina retorna mensaje de error
       swal('Acceso Denegado', `${this.authService.usuario.nombre}, no tienes permiso para acceder a este recurso`, 'warning');
-      this.router.navigate(['/panel-clientes']);
+      this.router.navigate(['/panel-principal']);
       return false;
     }
 

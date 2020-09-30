@@ -43,7 +43,7 @@ export class ActualizarPasswordComponent implements OnInit {
       this.usuariosService.updatePasswordOtroUsuarioJava(this.password, this.authService.usuario.id, false).subscribe(
         json => {
           swal('Contraseña Actualizada', `${json.mensaje}`, 'success');
-          this.router.navigate(['/panel-clientes']);
+          this.router.navigate(['/panel-principal']);
         },
         err => {
           swal('Error', 'Ha ocurrido un error, revisa que los datos ingresados sean validos', 'error');

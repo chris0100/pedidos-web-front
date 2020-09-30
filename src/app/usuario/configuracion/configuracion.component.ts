@@ -57,7 +57,7 @@ export class ConfiguracionComponent implements OnInit {
       this.usuariosService.updateUsuarioJava(this.usuarioModificado)
         .subscribe(
           json => {
-            this.router.navigate(['/panel-clientes']);
+            this.router.navigate(['/panel-principal']);
             swal('Usuario Actualizado', `${json.mensaje}: ${json.usuario.nombre}`, 'success');
 
             // Se modifica en el authService

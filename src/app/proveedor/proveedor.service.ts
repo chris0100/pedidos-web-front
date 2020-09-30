@@ -22,7 +22,7 @@ export class ProveedorService {
     return this.http.get<string[]>(`${urlEndPoint}/${nit}`).pipe(
       catchError(e => {
         if (e.status != 401 && e.error.mensaje) {
-          this.router.navigate(['/panel-clientes']);
+          this.router.navigate(['/panel-principal']);
           console.log(e.error.mensaje);
         }
         return throwError(e);

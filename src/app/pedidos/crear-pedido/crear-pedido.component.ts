@@ -250,7 +250,7 @@ export class CrearPedidoComponent implements OnInit {
           });
       });
     swal('Correcto', 'Su solicitud de pedido ha sido creada exitosamente, en breve recibirá un correo electrónico', 'success');
-    this.router.navigate(['/panel-clientes']);
+    this.router.navigate(['/panel-principal']);
   }
 
 
