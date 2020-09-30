@@ -372,25 +372,25 @@
 
           <h4>
             Este es un portal diseñado para el Administrador con el fin de facilitar la gestión de usuarios
-            y la revisión de los ítems creados
+            y la revisión de los ítems creados, aquí puedes encontrar:
           </h4>
 
 
           <br><br>
           <div class="icon-box wow fadeInUp">
-            <div class="icon"><i class="fa fa-file fa-2x"></i></div>
+            <div class="icon"><i class="fas fa-user-plus fa-2x"></i></div>
             <h4 class="title font-weight-bold">Creación de usuarios</h4>
-            <p class="description">Crea usuarios y asigna los roles que se deseen asignar para visualización de modulos</p>
+            <p class="description">Crea usuarios y asigna los roles que se deseen para la visualización de modulos</p>
           </div>
           <div class="icon-box wow fadeInUp">
-            <div class="icon"><i class="fa fa-file fa-2x"></i></div>
+            <div class="icon"><i class="fas fa-user-edit fa-2x"></i></div>
             <h4 class="title font-weight-bold">Edición de usuarios</h4>
             <p class="description">Edita usuarios por roles, nombre, correo electronico y modificación de contraseña</p>
           </div>
           <div class="icon-box wow fadeInUp">
-            <div class="icon"><i class="fa fa-file fa-2x"></i></div>
+            <div class="icon"><i class="fas fa-cart-plus fa-2x"></i></div>
             <h4 class="title font-weight-bold">Valida los ítem creados</h4>
-            <p class="description">Revisa a traves del filtro de busqueda los diferentes ítems que hayn sido creados</p>
+            <p class="description">Revisa a traves del filtro de busqueda los diferentes ítems que han sido creados</p>
           </div>
 
 
@@ -412,46 +412,95 @@
 
 
 
-    <!--SECCION PARA VISUALIZAR PANEL DE ADMIN-->
-    <section id="admin" *ngIf="authService.hasRole('ADMIN')">
+    <!--SECCION PARA VISUALIZAR PANEL DE SERVICIO AL CLIENTE-->
+    <section id="ser" *ngIf="authService.hasRole('SER')">
 
       <div class="row about-container">
 
         <div class="col-lg-6">
 
           <h4>
-            Este es un portal diseñado para el Administrador con el fin de facilitar la gestión de usuarios
-            y la revisión de los ítems creados
+            Este es un portal diseñado para Servicio al Cliente con el fin de facilitar la gestión y revisión de
+            lista de errores de solicitud de pedidos, aquí puedes encontrar:
           </h4>
 
 
           <br><br>
           <div class="icon-box wow fadeInUp">
             <div class="icon"><i class="fa fa-file fa-2x"></i></div>
-            <h4 class="title font-weight-bold">Creación de usuarios</h4>
-            <p class="description">Crea usuarios y asigna los roles que se deseen asignar para visualización de modulos</p>
+            <h4 class="title font-weight-bold">Listado de Pedidos con Errores asignados al asesor</h4>
+            <p class="description">Visualiza el listado de errores ordenados por fecha de adición</p>
           </div>
           <div class="icon-box wow fadeInUp">
-            <div class="icon"><i class="fa fa-file fa-2x"></i></div>
-            <h4 class="title font-weight-bold">Edición de usuarios</h4>
-            <p class="description">Edita usuarios por roles, nombre, correo electronico y modificación de contraseña</p>
+            <div class="icon"><i class="fas fa-times fa-2x"></i></div>
+            <h4 class="title font-weight-bold">Listado de errores de cada items</h4>
+            <p class="description">Visualiza y sincroniza el listado de items con posibilidad de editar, eliminar y borrar ítems del pedido</p>
           </div>
           <div class="icon-box wow fadeInUp">
-            <div class="icon"><i class="fa fa-file fa-2x"></i></div>
-            <h4 class="title font-weight-bold">Valida los ítem creados</h4>
-            <p class="description">Revisa a traves del filtro de busqueda los diferentes ítems que hayn sido creados</p>
+            <div class="icon"><i class="far fa-share-square fa-2x"></i></div>
+            <h4 class="title font-weight-bold">Envia pedidos para validación</h4>
+            <p class="description">Posterior a la sincronizacion envia el pedido para que sea procesado correctamente</p>
           </div>
 
 
         </div>
 
         <div class="col-lg-6 text-center">
-          <img alt="Logo" src="resources/img/admin-ppal.png" class="img-fluid"/>
+          <img alt="Logo" src="resources/img/asesor.png" class="img-fluid" width="60%"/>
         </div>
 
       </div>
 
     </section>
+    <!--SECCION PARA VISUALIZAR PANEL DE SERVICIO AL CLIENTE-->
+
+
+
+
+
+
+
+    <!--SECCION PARA VISUALIZAR PANEL DE  JEFE DE SERVICIO AL CLIENTE-->
+    <section id="jser" *ngIf="authService.hasRole('JSER')">
+
+      <div class="row about-container">
+
+        <div class="col-lg-6">
+
+          <h4>
+            Este es un portal diseñado para el Jefe de Servicio al Cliente con el fin de facilitar la gestión y revisión de
+            lista de errores completos de solicitud de pedidos, aquí puedes encontrar:
+          </h4>
+
+
+          <br><br>
+          <div class="icon-box wow fadeInUp">
+            <div class="icon"><i class="fa fa-file fa-2x"></i></div>
+            <h4 class="title font-weight-bold">Listado de Pedidos con Errores completos</h4>
+            <p class="description">Visualiza el listado de errores completos ordenados por fecha de adición</p>
+          </div>
+          <div class="icon-box wow fadeInUp">
+            <div class="icon"><i class="fas fa-times fa-2x"></i></div>
+            <h4 class="title font-weight-bold">Listado de errores de cada items</h4>
+            <p class="description">Visualiza y sincroniza el listado de items con posibilidad de editar, eliminar y borrar ítems del pedido</p>
+          </div>
+          <div class="icon-box wow fadeInUp">
+            <div class="icon"><i class="far fa-share-square fa-2x"></i></div>
+            <h4 class="title font-weight-bold">Envia pedidos para validación</h4>
+            <p class="description">Posterior a la sincronizacion envia el pedido para que sea procesado correctamente</p>
+          </div>
+
+
+        </div>
+
+        <div class="col-lg-6 text-center">
+          <img alt="Logo" src="resources/img/asesor.png" class="img-fluid" width="60%"/>
+        </div>
+
+      </div>
+
+    </section>
+    <!--SECCION PARA VISUALIZAR PANEL DE  JEFE DE SERVICIO AL CLIENTE-->
 
   </div>
 

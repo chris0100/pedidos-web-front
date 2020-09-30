@@ -2,8 +2,12 @@
 
   <div class="col-sm-4 sn-bg-4" style="border-right: 5px solid #025f97">
 
-    <div class="text-center mt-2">
+    <div class="text-center mt-2" *ngIf="!authService.isAuthenticated()">
       <a class="pl-0"><img src="resources/img/logos/logo-eka.png" alt="" [routerLink]="['/login']"></a>
+    </div>
+
+    <div class="text-center mt-2" *ngIf="authService.isAuthenticated()">
+      <a class="pl-0"><img src="resources/img/logos/logo-eka.png" alt="" [routerLink]="['/panel-principal']"></a>
     </div>
 
   </div>
