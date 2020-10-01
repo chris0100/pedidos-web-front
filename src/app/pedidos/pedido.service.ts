@@ -563,6 +563,22 @@ export class PedidoService {
 
 
 
+  // Obtener los items mas vendidos(LOS TOP 10)
+  recargarConsultaItemsPedidosUnoEE(nit: string, sucursal: string): Observable<ItemPedidoUnoEE[]> {
+    const urlEndPoint = 'http://localhost:8082/recargar-consulta-items-unoee';
+    return this.http.get<ItemPedidoUnoEE[]>(`${urlEndPoint}/${nit}/${sucursal}`).pipe(
+      catchError(e => {
+        if (e.status != 401 && e.error.mensaje) {
+          this.router.navigate(['/panel-principal']);
+          console.log(e.error.mensaje);
+        }
+        return throwError(e);
+      })
+    );
+  }
+
+
+
 
 
 

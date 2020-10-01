@@ -15,7 +15,7 @@
 
 
     <!--SECCION PARA VISUALIZAR PANEL DE PROVEEDORES-->
-    <section id="about" *ngIf="authService.hasRole('PRO')">
+<!--    <section id="about" *ngIf="authService.hasRole('PRO')">
 
       <div class="row about-container">
 
@@ -54,7 +54,7 @@
 
       </div>
 
-    </section>
+    </section>-->
     <!--SECCION PARA VISUALIZAR PANEL DE PROVEEDORES-->
 
 
@@ -69,7 +69,7 @@
       <div class="row">
 
         <!-- Grid column -->
-        <div class="col-xl-4 col-md-6 mb-xl-0 mb-4">
+        <div class="col-xl-6 col-md-6 mb-xl-0 mb-4">
 
           <!-- Card -->
           <div class="card card-cascade cascading-admin-card">
@@ -78,19 +78,20 @@
             <div class="admin-up">
               <i class="far fa-money-bill-alt primary-color mr-3 z-depth-2"></i>
               <div class="data">
-                <p class="text-uppercase">Total Compras</p>
-                <h4 class="font-weight-bold dark-grey-text">$ 2.000.000</h4>
+                <p class="text-uppercase">Total Compras este año</p>
+                <h4 class="font-weight-bold dark-grey-text">${{valornetoComprasEsteYear | currency: 0 : ""}}</h4>
               </div>
             </div>
 
             <!-- Card content -->
             <div class="card-body card-body-cascade">
               <div class="progress mb-3">
-                <div class="progress-bar bg-primary" role="progressbar" style="width: 25%"
-                     aria-valuenow="25"
+                <div class="progress-bar bg-primary" role="progressbar" [ngStyle]="{'width.%': porcentajeValorCompras}"
+                     attr.aria-valuenow="{{porcentajeValorCompras}}"
                      aria-valuemin="0" aria-valuemax="100"></div>
               </div>
-              <p class="card-text">Mas que el mes pasado (25%)</p>
+              <p class="card-text" *ngIf="masEsteYearTotal">Mas que el año pasado ({{porcentajeValorCompras | number}}%)</p>
+              <p class="card-text" *ngIf="masBeforeYearTotal">Menos que el año pasado ({{porcentajeValorCompras | number}}%)</p>
             </div>
 
           </div>
@@ -101,7 +102,7 @@
 
 
         <!-- Grid column -->
-        <div class="col-xl-4 col-md-6 mb-xl-0 mb-4">
+        <div class="col-xl-6 col-md-6 mb-xl-0 mb-4">
 
           <!-- Card -->
           <div class="card card-cascade cascading-admin-card">
@@ -110,19 +111,20 @@
             <div class="admin-up">
               <i class="fas fa-chart-line warning-color mr-3 z-depth-2"></i>
               <div class="data">
-                <p class="text-uppercase">Cantidad de compras</p>
-                <h4 class="font-weight-bold dark-grey-text">100</h4>
+                <p class="text-uppercase">Cantidad de compras este año</p>
+                <h4 class="font-weight-bold dark-grey-text">{{cantidadComprasEsteYear}}</h4>
               </div>
             </div>
 
             <!-- Card content -->
             <div class="card-body card-body-cascade">
               <div class="progress mb-3">
-                <div class="progress-bar red accent-2" role="progressbar" style="width: 25%"
-                     aria-valuenow="25"
+                <div class="progress-bar red accent-2" role="progressbar" [ngStyle]="{'width.%': porcentajeCantidadCompras}"
+                     attr.aria-valuenow="{{porcentajeCantidadCompras}}"
                      aria-valuemin="0" aria-valuemax="100"></div>
               </div>
-              <p class="card-text">Menos que el mes pasado (25%)</p>
+              <p class="card-text" *ngIf="masEsteYearTotal">Mas que el año pasado ({{porcentajeCantidadCompras | number}}%)</p>
+              <p class="card-text" *ngIf="masBeforeYearCantidad">Menos que el año pasado ({{porcentajeCantidadCompras | number}}%)</p>
             </div>
 
           </div>
@@ -131,22 +133,22 @@
         </div>
         <!-- Grid column -->
 
-        <!-- Grid column -->
+<!--         Grid column
         <div class="col-xl-4 col-md-6 mb-md-0 mb-4">
 
-          <!-- Card -->
+           Card
           <div class="card card-cascade cascading-admin-card">
 
-            <!-- Card Data -->
+             Card Data
             <div class="admin-up">
               <i class="fas fa-chart-pie success-color-dark lighten-1 mr-3 z-depth-2"></i>
               <div class="data">
-                <p class="text-uppercase">Producto mas comprado</p>
+                <p class="text-uppercase">Producto mas comprado este año</p>
                 <h4 class="font-weight-bold dark-grey-text">POLIESTER ALGODON</h4>
               </div>
             </div>
 
-            <!-- Card content -->
+             Card content
             <div class="card-body card-body-cascade">
               <div class="progress mb-3">
                 <div class="progress-bar success-color accent-2" role="progressbar"
@@ -158,10 +160,10 @@
             </div>
 
           </div>
-          <!-- Card -->
+           Card
 
         </div>
-        <!-- Grid column -->
+         Grid column -->
       </div>
 
 
@@ -179,160 +181,45 @@
         <!-- Grid row -->
         <div class="row" style="z-index: -10">
 
-          <!-- Grid column -->
-          <div class="col-xl-12 col-lg-12 mr-0 pb-2">
+          <table class="table table-striped table-hover">
+            <thead>
+            <tr>
+              <th scope="col" class="th-sm font-weight-bold ">Posición
+              </th>
+              <th scope="col" class="th-sm font-weight-bold">Código EKA
+              </th>
+              <th scope="col" class="th-sm font-weight-bold">Descripción
+              </th>
+              <th scope="col" class="th-sm font-weight-bold">Extensión 1
+              </th>
+              <th scope="col" class="th-sm font-weight-bold">Extensión 2
+              </th>
+              <th scope="col" class="th-sm font-weight-bold">Cantidad
+              </th>
+              <th scope="col" class="th-sm font-weight-bold">U. medida
+              </th>
+            </tr>
+            </thead>
 
+            <tbody>
 
-            <form class="form-inline mt-2 ml-2">
-              <div class="form-group md-form mt-2">
-                <input class="form-control w-100" type="text" placeholder="Buscar">
-              </div>
-              <button class="btn btn-sm btn-primary ml-2 mr-0 mb-md-0 mb-4 px-2"><i
-                class="fas fa-search"></i></button>
-            </form>
+            <tr *ngFor="let pedidoUnoEE of listaItemPedidosUnoee; let indexOfelement=index;">
+              <td>{{indexOfelement+1}}</td>
+              <td>{{pedidoUnoEE.codItem}}</td>
+              <td>{{pedidoUnoEE.descripcion}}</td>
+              <td>{{pedidoUnoEE.ext1}}</td>
+              <td>{{pedidoUnoEE.ext2}}</td>
+              <td>{{pedidoUnoEE.cantPedida | number}}</td>
+              <td>{{pedidoUnoEE.und}}</td>
+            </tr>
 
+            </tbody>
 
-            <div class="px-4">
-
-              <div class="table-responsive">
-
-                <!--Table-->
-                <table class="table table-hover mb-0 table-striped">
-
-                  <!-- Table head -->
-                  <thead>
-                  <tr>
-                    <th>
-                      <input class="form-check-input" type="checkbox" id="checkbox">
-                      <label for="checkbox" class="form-check-label mr-2 label-table"></label>
-                    </th>
-                    <th class="th-lg"><a>Producto <i class="fas fa-sort ml-1"></i></a></th>
-                    <th class="th-lg"><a>Descripcion<i class="fas fa-sort ml-1"></i></a></th>
-                    <th class="th-lg"><a>Cantidad<i class="fas fa-sort ml-1"></i></a></th>
-                    <th class="th-lg"><a>Total Compra<i class="fas fa-sort ml-1"></i></a></th>
-                  </tr>
-                  </thead>
-                  <!-- Table head -->
-
-                  <!-- Table body -->
-                  <tbody>
-                  <tr>
-                    <th scope="row">
-                      <input class="form-check-input" type="checkbox" id="checkbox1">
-                      <label for="checkbox1" class="label-table"></label>
-                    </th>
-                    <td>Hiladillo Poliester</td>
-                    <td>Cod: 22786</td>
-                    <td>20</td>
-                    <td>$ 250.000</td>
-                  </tr>
-
-                  <tr>
-                    <th scope="row">
-                      <input class="form-check-input" type="checkbox" id="checkbox2">
-                      <label for="checkbox1" class="label-table"></label>
-                    </th>
-                    <td>Hiladillo Poliester</td>
-                    <td>Cod: 22786</td>
-                    <td>20</td>
-                    <td>$ 250.000</td>
-                  </tr>
-
-                  <tr>
-                    <th scope="row">
-                      <input class="form-check-input" type="checkbox" id="checkbox3">
-                      <label for="checkbox1" class="label-table"></label>
-                    </th>
-                    <td>Hiladillo Poliester</td>
-                    <td>Cod: 22786</td>
-                    <td>20</td>
-                    <td>$ 250.000</td>
-                  </tr>
-
-                  <tr>
-                    <th scope="row">
-                      <input class="form-check-input" type="checkbox" id="checkbox4">
-                      <label for="checkbox1" class="label-table"></label>
-                    </th>
-                    <td>Hiladillo Poliester</td>
-                    <td>Cod: 22786</td>
-                    <td>20</td>
-                    <td>$ 250.000</td>
-                  </tr>
-
-                  </tbody>
-                  <!-- Table body -->
-
-                </table>
-                <!-- Table -->
-
-              </div>
-
-              <hr class="my-0">
-
-              <!-- Bottom Table UI -->
-              <div class="d-flex justify-content-between">
-
-                <!-- Name -->
-                <select class="mdb-select colorful-select dropdown-primary md-form hidden-md-down">
-                  <option value="" disabled>Rows number</option>
-                  <option value="1" selected>5 rows</option>
-                  <option value="2">25 rows</option>
-                  <option value="3">50 rows</option>
-                  <option value="4">100 rows</option>
-                </select>
-
-                <!-- Pagination -->
-                <nav class="my-4">
-                  <ul class="pagination pagination-circle pg-blue mb-0">
-
-                    <!--First-->
-                    <li class="page-item disabled clearfix d-none d-md-block"><a
-                      class="page-link">First</a></li>
-
-                    <!-- Arrow left -->
-                    <li class="page-item disabled">
-                      <a class="page-link" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                        <span class="sr-only">Previous</span>
-                      </a>
-                    </li>
-
-                    <!-- Numbers -->
-                    <li class="page-item active"><a class="page-link">1</a></li>
-                    <li class="page-item"><a class="page-link">2</a></li>
-                    <li class="page-item"><a class="page-link">3</a></li>
-                    <li class="page-item"><a class="page-link">4</a></li>
-                    <li class="page-item"><a class="page-link">5</a></li>
-
-                    <!-- Arrow right -->
-                    <li class="page-item">
-                      <a class="page-link" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                        <span class="sr-only">Next</span>
-                      </a>
-                    </li>
-
-                    <!-- First -->
-                    <li class="page-item clearfix d-none d-md-block"><a
-                      class="page-link">Last</a></li>
-
-                  </ul>
-                </nav>
-                <!-- Pagination -->
-
-              </div>
-              <!-- Bottom Table UI -->
-
-            </div>
-
-
-          </div>
-          <!-- Grid column -->
+          </table>          <!-- Grid column -->
 
 
           <!-- Grid column -->
-          <div class="col-xl-12 col-lg-12 mb-4 pb-2">
+<!--          <div class="col-xl-12 col-lg-12 mb-4 pb-2">
 
             <div class="d-flex justify-content-center">
               <div class="default-color-dark rounded-sm mt-5 mb-3 d-inline-flex">
@@ -340,12 +227,12 @@
               </div>
             </div>
 
-            <!-- Chart -->
+            &lt;!&ndash; Chart &ndash;&gt;
             <div class="view view-cascade gradient-card-header blue-gradient mx-auto">
               <canvas id="lineChart" height="160"></canvas>
             </div>
 
-          </div>
+          </div>-->
           <!-- Grid column -->
 
         </div>
@@ -364,7 +251,7 @@
 
 
     <!--SECCION PARA VISUALIZAR PANEL DE ADMIN-->
-    <section id="admin" *ngIf="authService.hasRole('ADMIN')">
+    <!--<section id="admin" *ngIf="authService.hasRole('ADMIN')">
 
       <div class="row about-container">
 
@@ -402,7 +289,7 @@
 
       </div>
 
-    </section>
+    </section>-->
     <!--SECCION PARA VISUALIZAR PANEL DE ADMIN-->
 
 
@@ -413,7 +300,7 @@
 
 
     <!--SECCION PARA VISUALIZAR PANEL DE SERVICIO AL CLIENTE-->
-    <section id="ser" *ngIf="authService.hasRole('SER')">
+    <!--<section id="ser" *ngIf="authService.hasRole('SER')">
 
       <div class="row about-container">
 
@@ -451,7 +338,7 @@
 
       </div>
 
-    </section>
+    </section>-->
     <!--SECCION PARA VISUALIZAR PANEL DE SERVICIO AL CLIENTE-->
 
 
@@ -461,7 +348,7 @@
 
 
     <!--SECCION PARA VISUALIZAR PANEL DE  JEFE DE SERVICIO AL CLIENTE-->
-    <section id="jser" *ngIf="authService.hasRole('JSER')">
+    <!--<section id="jser" *ngIf="authService.hasRole('JSER')">
 
       <div class="row about-container">
 
@@ -499,7 +386,7 @@
 
       </div>
 
-    </section>
+    </section>-->
     <!--SECCION PARA VISUALIZAR PANEL DE  JEFE DE SERVICIO AL CLIENTE-->
 
   </div>
