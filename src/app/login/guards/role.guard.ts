@@ -22,12 +22,10 @@ export class RoleGuard implements CanActivate {
     // Revisa si esta autenticado
     if (!this.authService.isAuthenticated()) {
       this.router.navigate(['/login']);
-      console.log('Redirecciona porque no esta autenticado');
       return false;
     }
 
     const role = next.data.role as string;
-    console.log('Role asignado: ' + role);
 
     // Si encuentra el role correspondiente retorna verdadero
     if (this.authService.hasRole(role)) {
@@ -38,7 +36,6 @@ export class RoleGuard implements CanActivate {
     if (roles !== undefined) {
       if (roles.indexOf('ADMIN') !== -1 || roles.indexOf('CLI') !== -1 || roles.indexOf('PRO') !== -1
         || roles.indexOf('JSER') !== -1 || roles.indexOf('SER') !== -1) {
-        console.log('aqui retorna');
         return true;
       }
     }

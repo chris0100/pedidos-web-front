@@ -39,66 +39,86 @@ export class PanelClientesComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.showSpinner = false;
+    // Localiza la ubicacion del rol cliente si este existe.
+    const rol = this.authService.usuario.roles.findIndex(obj => obj === 'CLI');
 
-    // Realiza la carga ventas y productos mas vendidos
-    // tslint:disable-next-line:max-line-length
-    this.pedidosService.listaHistorialPedidosJava(this.authService.usuario.nit, '20200101', this.datePipe.transform(this.fechaActual, 'yyyyMMdd')).subscribe(
-      obj => {
-        this.pedidosUnoEE = obj;
-        console.log(obj);
+    if (rol >= 0) {
+      // Realiza la carga ventas y productos mas vendidos
+      // tslint:disable-next-line:max-line-length
+      this.pedidosService.listaHistorialPedidosJava(this.authService.usuario.nit, '20200101', this.datePipe.transform(this.fechaActual, 'yyyyMMdd')).subscribe(
+        obj => {
+          this.pedidosUnoEE = obj;
+          console.log(obj);
 
-        // Calcular la cantidad de compras este año
-        this.cantidadComprasEsteYear = this.pedidosUnoEE.length;
-
-        // Obtener el total de compras de este año
-        this.pedidosUnoEE.forEach(vn => {
-          this.valornetoComprasEsteYear += vn.valorNetoDocumento;
-        });
-        console.log(this.valornetoComprasEsteYear);
-
-        this.pedidosService.listaHistorialPedidosJava(this.authService.usuario.nit, '20190101', '20191231').subscribe(
-          obj2 => {
-            this.pedidosUnoEE = obj2;
-
+          if (this.pedidosUnoEE == null) {
+            console.log('pedidos en cero');
+            this.cantidadComprasEsteYear = 0;
+          } else {
             // Calcular la cantidad de compras este año
-            this.cantidadComprasBeforeYear = this.pedidosUnoEE.length;
-            console.log(this.cantidadComprasBeforeYear);
+            this.cantidadComprasEsteYear = this.pedidosUnoEE.length;
 
-
-            // Obtener el total de compras de el año pasado
+            // Obtener el total de compras de este año
             this.pedidosUnoEE.forEach(vn => {
-              this.valornetoComprasBeforeYear += vn.valorNetoDocumento;
+              this.valornetoComprasEsteYear += vn.valorNetoDocumento;
             });
-            console.log(this.valornetoComprasBeforeYear);
+            console.log(this.valornetoComprasEsteYear);
 
-            // Comparar valores de este año con año pasado para establecer porcentaje
-            if (this.valornetoComprasEsteYear > this.valornetoComprasBeforeYear) {
-              const diferencial = (this.valornetoComprasEsteYear - this.valornetoComprasBeforeYear);
-              this.porcentajeValorCompras = Math.round(((diferencial / this.valornetoComprasEsteYear) * 100) * 10) / 10;
-              this.masEsteYearTotal = true;
-              this.masEsteYearCantidad = true;
-              this.porcentajeCantidadCompras = Math.round((((this.cantidadComprasEsteYear - this.cantidadComprasBeforeYear) / this.cantidadComprasEsteYear) * 100) * 10) / 10;
-            } else {
-              const diferencial = (this.valornetoComprasBeforeYear - this.valornetoComprasEsteYear);
-              this.porcentajeValorCompras = Math.round(((diferencial / this.valornetoComprasBeforeYear) * 100) * 10) / 10;
-              this.porcentajeCantidadCompras = Math.round((((this.cantidadComprasBeforeYear - this.cantidadComprasEsteYear) / this.cantidadComprasBeforeYear) * 100) * 10) / 10;
-              this.masBeforeYearTotal = true;
-              this.masBeforeYearCantidad = true;
-            }
-            this.showSpinner = false;
-          });
-      });
+            this.pedidosService.listaHistorialPedidosJava(this.authService.usuario.nit, '20190101', '20191231').subscribe(
+              obj2 => {
+                this.pedidosUnoEE = obj2;
+
+                if (this.pedidosUnoEE == null) {
+                  this.cantidadComprasBeforeYear = 0;
+                }
+                else {
+                  // Calcular la cantidad de compras este año
+                  this.cantidadComprasBeforeYear = this.pedidosUnoEE.length;
+                  console.log(this.cantidadComprasBeforeYear);
 
 
-    // Cargar la lista de los items mas solicitados
-    this.pedidosService.recargarConsultaItemsPedidosUnoEE(this.authService.usuario.nit, this.authService.usuario.id_sucursal).subscribe(
-      obj => {
-        this.listaItemPedidosUnoee = obj;
-        console.log(this.listaItemPedidosUnoee);
-      },
-      error => {
-        swal('Error', 'Ha ocurrido un error al generar el listado', 'error');
-      });
+                  // Obtener el total de compras de el año pasado
+                  this.pedidosUnoEE.forEach(vn => {
+                    this.valornetoComprasBeforeYear += vn.valorNetoDocumento;
+                  });
+                  console.log(this.valornetoComprasBeforeYear);
+
+                  // Comparar valores de este año con año pasado para establecer porcentaje
+                  if (this.valornetoComprasEsteYear > this.valornetoComprasBeforeYear) {
+                    const diferencial = (this.valornetoComprasEsteYear - this.valornetoComprasBeforeYear);
+                    this.porcentajeValorCompras = Math.round(((diferencial / this.valornetoComprasEsteYear) * 100) * 10) / 10;
+                    this.masEsteYearTotal = true;
+                    this.masEsteYearCantidad = true;
+                    this.porcentajeCantidadCompras = Math.round((((this.cantidadComprasEsteYear - this.cantidadComprasBeforeYear) / this.cantidadComprasEsteYear) * 100) * 10) / 10;
+                  } else {
+                    const diferencial = (this.valornetoComprasBeforeYear - this.valornetoComprasEsteYear);
+                    this.porcentajeValorCompras = Math.round(((diferencial / this.valornetoComprasBeforeYear) * 100) * 10) / 10;
+                    this.porcentajeCantidadCompras = Math.round((((this.cantidadComprasBeforeYear - this.cantidadComprasEsteYear) / this.cantidadComprasBeforeYear) * 100) * 10) / 10;
+                    this.masBeforeYearTotal = true;
+                    this.masBeforeYearCantidad = true;
+                  }
+                  this.showSpinner = false;
+                }
+                this.showSpinner = false;
+              });
+          }
+          this.showSpinner = false;
+        });
+
+
+      // Cargar la lista de los items mas solicitados
+      this.pedidosService.recargarConsultaItemsPedidosUnoEE(this.authService.usuario.nit, this.authService.usuario.id_sucursal).subscribe(
+        obj => {
+          this.listaItemPedidosUnoee = obj;
+          console.log(this.listaItemPedidosUnoee);
+        },
+        error => {
+          swal('Error', 'Ha ocurrido un error al generar el listado', 'error');
+        });
+      this.showSpinner = true;
+    }
+
+
 
     // Remover la busqueda del historial de pedidos, y listaItemProductosSelect
     sessionStorage.removeItem('pedidosUnoEEHistorial');
@@ -106,7 +126,7 @@ export class PanelClientesComponent implements OnInit {
     // Destruir el usuarioTemp
     sessionStorage.removeItem('usuarioTemp');
 
-    this.showSpinner = true;
+
   }
 
 

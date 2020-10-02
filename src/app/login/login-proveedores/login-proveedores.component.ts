@@ -53,7 +53,7 @@ export class LoginProveedoresComponent implements OnInit {
             this.usuario.cliente = obj[0];
             this.usuario.rolesPrincipal.push('PRO');
             // TEMPORAL
-            this.usuario.rolesPrincipal.push('ADMIN');
+            // this.usuario.rolesPrincipal.push('ADMIN');
             // TEMPORAL
             this.usuario.nombre = '';
             this.usuario.email = '';
@@ -65,7 +65,7 @@ export class LoginProveedoresComponent implements OnInit {
 
             // Se redirecciona a la pagina de registro nuevo usuario
             swal('Correcto', 'Diligencia la siguiente información para completar tu usuario', 'success');
-            this.router.navigate(['registro-usuario-nuevo']);
+            this.router.navigate(['/registro-usuario-nuevo']);
             return;
           }
           else {

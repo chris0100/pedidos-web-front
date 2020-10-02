@@ -76,7 +76,7 @@ export class AuthService {
     params.set('grant_type', 'password');
     params.set('username', usuario.username);
     params.set('password', usuario.password);
-    console.log('estos son los parametros de ingreso: ' + params);
+
 
     return this.http.post<any>(urlEndPoint, params.toString(), {headers: httpHeaders});
   }
@@ -199,7 +199,6 @@ export class AuthService {
 
   // Revisa si el usuario tiene un rol incluido
   hasRole(role: string): boolean {
-    console.log(this.usuario.roles + ' para hasrole');
     if (this.usuario.roles.includes(role)) {
       return true;
     }

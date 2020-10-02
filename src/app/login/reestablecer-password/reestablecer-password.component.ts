@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Usuario} from '../../usuario/usuario';
+import {ActivatedRoute} from '@angular/router';
 
 // carga de archivo js para mdbootstrap
 declare var login: any;
@@ -13,13 +14,26 @@ declare var login: any;
 export class ReestablecerPasswordComponent implements OnInit {
 
   usuario: Usuario;
+  idPage: number;
+  claseActiva: string;
+  claseInactiva: string;
 
-  constructor() { }
+  constructor(private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-
     // Ejecuta el script
     new login();
+    this.recibeId();
+  }
+
+
+  // Se carga el token a traves de la ruta
+  recibeId(): void {
+    this.activatedRoute.params.subscribe(
+      params => {
+        this.idPage = params['id'];
+        console.log(this.idPage);
+      });
   }
 
 }

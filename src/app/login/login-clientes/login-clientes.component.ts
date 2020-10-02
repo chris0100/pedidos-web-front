@@ -121,7 +121,7 @@ export class LoginClientesComponent implements OnInit {
               this.usuario.cliente = obj[0];
               this.usuario.rolesPrincipal.push('CLI');
               // TEMPORAL
-              this.usuario.rolesPrincipal.push('ADMIN');
+              // this.usuario.rolesPrincipal.push('ADMIN');
               // TEMPORAL
               this.usuario.idSucursal = this.sucursalSeleccionada.substring(0, 3);
               this.usuario.descripcionSucursal = this.sucursalSeleccionada.substring(6, this.sucursalSeleccionada.length);
@@ -136,7 +136,7 @@ export class LoginClientesComponent implements OnInit {
 
               // Se redirecciona a la pagina de registro nuevo usuario
               swal('Correcto', 'Diligencia la siguiente información para completar tu usuario', 'success');
-              this.router.navigate(['registro-usuario-nuevo']);
+              this.router.navigate(['/registro-usuario-nuevo']);
               return;
             }
             else {
