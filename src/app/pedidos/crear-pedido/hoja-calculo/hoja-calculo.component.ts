@@ -324,9 +324,9 @@ export class HojaCalculoComponent implements OnInit {
 
             // Evalua si hay un solo error o varios errores
             if (countErr === 1) {
-              swal('Error', 'No se encuentra el siguiente codigo de barras: ' + listaErroresCodBarras, 'error');
+              swal('Error', 'No se encuentra el siguiente codigo: ' + listaErroresCodBarras, 'error');
             } else {
-              swal('Error', 'No se encuentran los siguientes codigos de barras: ' + listaErroresCodBarras, 'error');
+              swal('Error', 'No se encuentran los siguientes codigos: ' + listaErroresCodBarras, 'error');
             }
             // Se reestablece inactivacion de boton procesar archivo
             this.errorLectura = true;
