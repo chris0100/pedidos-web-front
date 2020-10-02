@@ -31,7 +31,7 @@ export class CrearPedidoComponent implements OnInit {
   habilitaVerificacionPedido = false;
 
 
-  constructor(private pedidosService: PedidoService, private authService: AuthService,
+  constructor(private pedidosService: PedidoService, public authService: AuthService,
               private router: Router, private activatedRoute: ActivatedRoute) {
     this.usuario = this.authService.usuario;
     this.pedidoActual.nota = '';

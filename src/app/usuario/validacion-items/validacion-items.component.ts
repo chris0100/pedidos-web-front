@@ -38,7 +38,7 @@ export class ValidacionItemsComponent implements OnInit {
   userList1: any[];
 
 
-  constructor(private pedidosService: PedidoService, private authService: AuthService) {
+  constructor(private pedidosService: PedidoService, public authService: AuthService) {
     this.seleccionExt1 = '';
     this.seleccionExt2 = '';
     this.codigoItem = '';

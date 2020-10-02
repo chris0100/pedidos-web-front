@@ -6,6 +6,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import swal from 'sweetalert2';
 
 
+
 // carga de archivo tooltip
 declare var tooltip: any;
 
@@ -34,11 +35,21 @@ export class PrepareVerErrorComponent implements OnInit {
 
   }
 
+
+
+
+
   ngOnInit() {
     this.showSpinner = true;
     this.cargarPedidoError();
     new tooltip();
+
   }
+
+
+
+
+
 
 
   // Cargar a traves de la ruta del pedido id
@@ -163,6 +174,12 @@ export class PrepareVerErrorComponent implements OnInit {
         console.log(this.itemsPedidoError);
       });
   }
+
+
+
+
+
+
 
 
 }

@@ -16,6 +16,8 @@ export class AuthService {
   // tslint:disable-next-line:variable-name
   private _token: string;
 
+  url = 'http://192.168.160.156:8080';
+
   constructor(private http: HttpClient) {
   }
 
@@ -58,7 +60,7 @@ export class AuthService {
 
   // Se realiza login del usuario
   login(usuario: Usuario): Observable<any> {
-    const urlEndPoint = 'http://localhost:8082/oauth/token';
+    const urlEndPoint = this.url + '/oauth/token';
 
     // credenciales para entrada desde angular
     const credenciales = btoa('angularapp' + ':' + '12345');
@@ -82,7 +84,7 @@ export class AuthService {
 
   // Valida si es un usuario nuevo el que intenta ingresar.
   validaUsuarioNuevoHabilitado(nit: string, password: string, username: string): Observable<string[]> {
-    const urlEndPoint = 'http://localhost:8082/nit-password-usuario-nuevo';
+    const urlEndPoint = this.url + '/nit-password-usuario-nuevo';
     return this.http.get<string[]>(`${urlEndPoint}/${nit}/${password}/${username}`).pipe(
       catchError(e => {
         if (e.status != 401 && e.error.mensaje) {
@@ -97,7 +99,7 @@ export class AuthService {
 
   // Valida si es un proveedor nuevo el que intenta ingresar (username = nit para proveedor)
   validarProveedorNuevoHabilitado(nit: string, password: string): Observable<string[]> {
-    const urlEndPoint = 'http://localhost:8082/nit-password-proveedor-nuevo';
+    const urlEndPoint = this.url  + '/nit-password-proveedor-nuevo';
     return this.http.get<string[]>(`${urlEndPoint}/${nit}/${password}`).pipe(
       catchError(e => {
         if (e.status != 401 && e.error.mensaje) {
@@ -207,21 +209,21 @@ export class AuthService {
 
   // Obtener la sucursal desde el backend
   obtenerSucursalJava(nitCliente: string): Observable<string[]> {
-    const urlEndPoint = 'http://localhost:8082/obtener-sucursal';
+    const urlEndPoint = this.url  + '/obtener-sucursal';
     return this.http.get<string[]>(`${urlEndPoint}/${nitCliente}`);
   }
 
 
   // Obtener el punto de envio desde el backend
   obtenerPuntoEnvioJava(nitCliente: string, sucursal: string): Observable<string[]> {
-    const urlEndPoint = 'http://localhost:8082/obtener-punto-envio';
+    const urlEndPoint = this.url  + '/obtener-punto-envio';
     return this.http.get<string[]>(`${urlEndPoint}/${nitCliente}/${sucursal.substring(0, 3)}`);
   }
 
 
   // Validar la entidad dinamica en el backend
   validarEntidadDinamicaJava(nitCliente: string, sucursal: string): Observable<string[]> {
-    const urlEndPoint = 'http://localhost:8082/validar-entidad-dinamica';
+    const urlEndPoint = this.url + '/validar-entidad-dinamica';
     return this.http.get<string[]>(`${urlEndPoint}/${nitCliente}/${sucursal.substring(0, 3)}`);
   }
 

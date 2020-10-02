@@ -13,12 +13,14 @@ import swal from 'sweetalert2';
 
 export class ProveedorService {
 
+  url = 'http://192.168.160.156:8080';
+
   constructor(private http: HttpClient, private router: Router) { }
 
 
   // Obtener el row id del tercero
   obtenerRowIdTercero(nit: string): Observable<string[]> {
-    const urlEndPoint = 'http://localhost:8082/obtener-row-id-tercero';
+    const urlEndPoint = this.url + '/obtener-row-id-tercero';
     return this.http.get<string[]>(`${urlEndPoint}/${nit}`).pipe(
       catchError(e => {
         if (e.status != 401 && e.error.mensaje) {
@@ -35,7 +37,7 @@ export class ProveedorService {
   // crear PDF despues de seleccionar tipo certificado PCI
   crearPDFIva(mesInicio: string, mesFin: string,
               anioGrabable: string, rowIdTercero: number): Observable<CertificadoRetencionIVA[]> {
-    const urlEndPoint = 'http://localhost:8082/crear-pdf-iva';
+    const urlEndPoint = this.url + '/crear-pdf-iva';
     return this.http.get<CertificadoRetencionIVA[]>(`${urlEndPoint}/${mesInicio}/${mesFin}/${anioGrabable}/${rowIdTercero}`).pipe(
       catchError(e => {
         if (e.status != 401 && e.error.mensaje) {
@@ -52,7 +54,7 @@ export class ProveedorService {
   crearPDFRetencion(anioGrabable: string, rowIdTercero: number,
                     ciudadConsignoParam: string, ciudadPracticoParam: string,
                     tipoCertificado: string): Observable<CertificadoRetencionIVA[]> {
-    const urlEndPoint = 'http://localhost:8082/crear-pdf-retencion';
+    const urlEndPoint = this.url + '/crear-pdf-retencion';
     // tslint:disable-next-line:max-line-length
     return this.http.get<CertificadoRetencionIVA[]>(`${urlEndPoint}/${anioGrabable}
     /${rowIdTercero}/${ciudadConsignoParam}/${ciudadPracticoParam}/${tipoCertificado}`).pipe(

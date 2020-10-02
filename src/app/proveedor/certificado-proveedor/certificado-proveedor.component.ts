@@ -31,7 +31,7 @@ export class CertificadoProveedorComponent implements OnInit {
   consultadoRetencion: boolean;  // Se habilita para mostrar el contenido de retencion pdf
 
 
-  constructor(private proveedorService: ProveedorService, private authService: AuthService) {
+  constructor(private proveedorService: ProveedorService, public authService: AuthService) {
   }
 
   ngOnInit() {

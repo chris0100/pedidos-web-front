@@ -25,7 +25,7 @@ export class HistorialPedidosComponent implements OnInit {
   showSpinner: boolean;
 
   constructor(private pedidosService: PedidoService, private router: Router,
-              private authService: AuthService) {
+              public authService: AuthService) {
   }
 
 

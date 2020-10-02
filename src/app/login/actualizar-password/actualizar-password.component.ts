@@ -18,7 +18,7 @@ export class ActualizarPasswordComponent implements OnInit {
   repetirPassword: string;
 
   constructor(private activatedRoute: ActivatedRoute, private router: Router,
-              private authService: AuthService, private usuariosService: UsuariosService) { }
+              public authService: AuthService, private usuariosService: UsuariosService) { }
 
 
   ngOnInit() {

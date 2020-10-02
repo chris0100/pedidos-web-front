@@ -14,7 +14,7 @@ export class LoginAdminComponent implements OnInit {
 
   usuario: Usuario;
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(public authService: AuthService, private router: Router) {
     this.usuario = new Usuario();
   }
 

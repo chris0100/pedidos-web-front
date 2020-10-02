@@ -33,7 +33,7 @@ export class LoginClientesComponent implements OnInit {
   validaEntidad: boolean;
 
 
-  constructor(private router: Router, private authService: AuthService, private data: DataService) {
+  constructor(private router: Router, public authService: AuthService, private data: DataService) {
     this.usuario = new Usuario();
     this.listadoSucursal = [];
     this.listadoPuntoEnvio = [];

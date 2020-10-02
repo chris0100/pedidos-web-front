@@ -12,7 +12,7 @@ import {Router} from '@angular/router';
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(public authService: AuthService, private router: Router) {
   }
 
 

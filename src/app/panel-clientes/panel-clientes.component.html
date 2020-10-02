@@ -9,13 +9,19 @@
   </div>
 
 
+  <!--pantalla trasera de carga-->
+  <div *ngIf="showSpinner">
+    <app-loading-spinner></app-loading-spinner>
+  </div>
+
+
   <!-- Tab panels -->
 
   <div class="card-body">
 
 
     <!--SECCION PARA VISUALIZAR PANEL DE PROVEEDORES-->
-<!--    <section id="about" *ngIf="authService.hasRole('PRO')">
+    <section id="about" *ngIf="authService.hasRole('PRO')">
 
       <div class="row about-container">
 
@@ -54,7 +60,7 @@
 
       </div>
 
-    </section>-->
+    </section>
     <!--SECCION PARA VISUALIZAR PANEL DE PROVEEDORES-->
 
 
@@ -251,7 +257,7 @@
 
 
     <!--SECCION PARA VISUALIZAR PANEL DE ADMIN-->
-    <!--<section id="admin" *ngIf="authService.hasRole('ADMIN')">
+    <section id="admin" *ngIf="authService.hasRole('ADMIN')">
 
       <div class="row about-container">
 
@@ -289,7 +295,7 @@
 
       </div>
 
-    </section>-->
+    </section>
     <!--SECCION PARA VISUALIZAR PANEL DE ADMIN-->
 
 
@@ -300,7 +306,7 @@
 
 
     <!--SECCION PARA VISUALIZAR PANEL DE SERVICIO AL CLIENTE-->
-    <!--<section id="ser" *ngIf="authService.hasRole('SER')">
+    <section id="ser" *ngIf="authService.hasRole('SER')">
 
       <div class="row about-container">
 
@@ -320,7 +326,7 @@
           </div>
           <div class="icon-box wow fadeInUp">
             <div class="icon"><i class="fas fa-times fa-2x"></i></div>
-            <h4 class="title font-weight-bold">Listado de errores de cada items</h4>
+            <h4 class="title font-weight-bold">Listado de errores de cada item</h4>
             <p class="description">Visualiza y sincroniza el listado de items con posibilidad de editar, eliminar y borrar ítems del pedido</p>
           </div>
           <div class="icon-box wow fadeInUp">
@@ -338,7 +344,7 @@
 
       </div>
 
-    </section>-->
+    </section>
     <!--SECCION PARA VISUALIZAR PANEL DE SERVICIO AL CLIENTE-->
 
 
@@ -348,7 +354,7 @@
 
 
     <!--SECCION PARA VISUALIZAR PANEL DE  JEFE DE SERVICIO AL CLIENTE-->
-    <!--<section id="jser" *ngIf="authService.hasRole('JSER')">
+    <section id="jser" *ngIf="authService.hasRole('JSER')">
 
       <div class="row about-container">
 
@@ -368,7 +374,7 @@
           </div>
           <div class="icon-box wow fadeInUp">
             <div class="icon"><i class="fas fa-times fa-2x"></i></div>
-            <h4 class="title font-weight-bold">Listado de errores de cada items</h4>
+            <h4 class="title font-weight-bold">Listado de errores de cada item</h4>
             <p class="description">Visualiza y sincroniza el listado de items con posibilidad de editar, eliminar y borrar ítems del pedido</p>
           </div>
           <div class="icon-box wow fadeInUp">
@@ -386,7 +392,7 @@
 
       </div>
 
-    </section>-->
+    </section>
     <!--SECCION PARA VISUALIZAR PANEL DE  JEFE DE SERVICIO AL CLIENTE-->
 
   </div>

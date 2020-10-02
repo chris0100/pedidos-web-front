@@ -47,8 +47,7 @@ export class EditarItemComponent implements OnInit {
 
   // afterConsulta: boolean;
 
-  constructor(private pedidosService: PedidoService, private authService: AuthService, private activatedRoute: ActivatedRoute,
-              private router: Router) {
+  constructor(private pedidosService: PedidoService, public authService: AuthService, private activatedRoute: ActivatedRoute) {
   }
 
 

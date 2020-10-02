@@ -18,7 +18,7 @@ export class ListaErroresComponent implements OnInit {
   // Spinner
   showSpinner: boolean;
 
-  constructor(private pedidosService: PedidoService, private authService: AuthService) { }
+  constructor(private pedidosService: PedidoService, public authService: AuthService) { }
 
 
   ngOnInit() {

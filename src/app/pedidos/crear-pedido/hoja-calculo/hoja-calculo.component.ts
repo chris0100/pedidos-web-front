@@ -45,7 +45,7 @@ export class HojaCalculoComponent implements OnInit {
 
 
   // Constructor
-  constructor(private pedidosService: PedidoService, private authService: AuthService) {
+  constructor(private pedidosService: PedidoService, public authService: AuthService) {
   }
 
 

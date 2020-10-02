@@ -37,7 +37,7 @@ export class TuCodigoComponent implements OnInit {
   // afterConsulta: boolean;
 
 
-  constructor(private pedidosService: PedidoService, private authService: AuthService) {
+  constructor(private pedidosService: PedidoService, public authService: AuthService) {
   }
 
 

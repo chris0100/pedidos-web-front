@@ -23,7 +23,7 @@ export class PedidosVerificacionComponent implements OnInit {
   showSpinner: boolean;
 
   constructor(private pedidosService: PedidoService, private router: Router,
-              private authService: AuthService) {
+              public authService: AuthService) {
   }
 
 

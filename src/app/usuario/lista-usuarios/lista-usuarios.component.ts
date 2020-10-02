@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Usuario} from '../usuario';
 import {UsuariosService} from '../usuarios.service';
-import {Router} from '@angular/router';
+
 
 // carga de variable para mdbootstrap
 declare var tablas: any;
@@ -19,7 +19,7 @@ export class ListaUsuariosComponent implements OnInit {
   // Spinner
   showSpinner: boolean;
 
-  constructor(private usuariosService: UsuariosService, private router: Router) {}
+  constructor(private usuariosService: UsuariosService) {}
 
   ngOnInit(): void {
     this.showSpinner = false;

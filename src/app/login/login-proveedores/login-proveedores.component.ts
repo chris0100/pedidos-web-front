@@ -16,7 +16,7 @@ export class LoginProveedoresComponent implements OnInit {
   // Objeto Usuario
   usuario: Usuario;
 
-  constructor(private router: Router, private authService: AuthService, private data: DataService) {
+  constructor(private router: Router, public authService: AuthService, private data: DataService) {
     this.usuario = new Usuario();
   }
 

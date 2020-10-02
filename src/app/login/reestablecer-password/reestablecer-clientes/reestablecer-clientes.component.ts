@@ -33,7 +33,7 @@ export class ReestablecerClientesComponent implements OnInit {
 
   showSpinner: boolean;
 
-  constructor(private router: Router, private authService: AuthService,
+  constructor(private router: Router, public authService: AuthService,
               private usuarioService: UsuariosService) {
   }
 

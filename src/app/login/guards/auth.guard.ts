@@ -9,7 +9,7 @@ import {AuthService} from '../auth.service';
 export class AuthGuard implements CanActivate {
 
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(public authService: AuthService, private router: Router) {
   }
 
   // El guarda esta atento antes de que se vaya a dirigir a la ruta del enlace

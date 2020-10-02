@@ -24,7 +24,7 @@ export class ConfiguracionComponent implements OnInit {
   repetirPasswordNuevo: string;
 
 
-  constructor(private authService: AuthService, private usuariosService: UsuariosService,
+  constructor(public authService: AuthService, private usuariosService: UsuariosService,
               private router: Router) {
   }
 

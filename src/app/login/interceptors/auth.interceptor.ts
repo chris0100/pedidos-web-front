@@ -14,7 +14,7 @@ import swal from 'sweetalert2';
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(public authService: AuthService, private router: Router) {
   }
 
 

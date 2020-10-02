@@ -13,14 +13,16 @@ export class UsuariosService {
 
   public usuario: Usuario;
 
-  constructor(private http: HttpClient, private authService: AuthService,
+  url = 'http://192.168.160.156:8080';
+
+  constructor(private http: HttpClient, public authService: AuthService,
               private router: Router) {
   }
 
 
   // Permite la actualizacion del usuario a traves de la opcion de Configuracion
   updateUsuarioJava(usuarioModificado: Usuario): Observable<any> {
-    const urlEndPoint = 'http://localhost:8082/update-cliente';
+    const urlEndPoint = this.url + '/update-cliente';
 
     // Se llama al usuario actualmente logueado
     this.usuario = this.authService.usuario;
@@ -44,7 +46,7 @@ export class UsuariosService {
 
   // Permite el cambio de contraseña en el backend
   cambiarPasswordJava(passwordActual: string, passwordNuevo: string): Observable<any> {
-    const urlEndPoint = 'http://localhost:8082/update-pass-cliente';
+    const urlEndPoint = this.url + '/update-pass-cliente';
 
     // Se llama al usuario actualmente logueado
     this.usuario = this.authService.usuario;
@@ -73,7 +75,7 @@ export class UsuariosService {
 
 
   updatePasswordOtroUsuarioJava(passwordNuevo: string, id, primerLogin: boolean): Observable<any> {
-    const urlEndPoint = 'http://localhost:8082/update-pass-otro-usuario';
+    const urlEndPoint = this.url + '/update-pass-otro-usuario';
 
     // Retorna lo que se obtiene de la peticion
     return this.http.put(`${urlEndPoint}/${id}/${primerLogin}`, passwordNuevo)
@@ -94,7 +96,7 @@ export class UsuariosService {
 
 
   reestablecerPasswordJava(password: string, token: string): Observable<any> {
-    const urlEndPoint = 'http://localhost:8082/reestablecer-password';
+    const urlEndPoint = this.url + '/reestablecer-password';
 
     // Retorna lo que se obtiene de la peticion
     return this.http.put(`${urlEndPoint}/${token}`, password)
@@ -116,21 +118,21 @@ export class UsuariosService {
 
   // Crear un usuario de parte del admin
   crearUsuarioJava(usuario: Usuario): Observable<any> {
-    const urlEndPoint = 'http://localhost:8082/crear-usuario';
+    const urlEndPoint = this.url + '/crear-usuario';
     return this.http.post<Usuario>(urlEndPoint, usuario);
   }
 
 
   // Listar usuarios de backend
   listarUsuariosJava(): Observable<any> {
-    const urlEndPoint = 'http://localhost:8082/listar-usuarios';
+    const urlEndPoint = this.url + '/listar-usuarios';
     return this.http.get(urlEndPoint);
   }
 
 
   // Obtener un usuario con el id desde el backend
   obtenerUsuarioJava(id): Observable<any> {
-    const urlEndPoint = 'http://localhost:8082/obtener-usuario';
+    const urlEndPoint = this.url + '/obtener-usuario';
     return this.http.get<Usuario>(`${urlEndPoint}/${id}`).pipe(
       catchError(e => {
         if (e.status != 401 && e.error.mensaje) {
@@ -145,7 +147,7 @@ export class UsuariosService {
 
   // Actualizar otro usuario
   editarUsuarioJava(usuario: Usuario): Observable<any> {
-    const urlEndPoint = 'http://localhost:8082/editar-otro-usuario';
+    const urlEndPoint = this.url + '/editar-otro-usuario';
     return this.http.put<any>(`${urlEndPoint}/${usuario.id}`, usuario).pipe(
       catchError(e => {
         if (e.status === 400) {
@@ -162,7 +164,7 @@ export class UsuariosService {
 
   // Encontrar proveddor por nit y email
   generarTokenProveedorJava(email: string, nit: string): Observable<any> {
-    const urlEndPoint = 'http://localhost:8082/generar-token-proveedor';
+    const urlEndPoint = this.url + '/generar-token-proveedor';
     return this.http.get<Usuario>(`${urlEndPoint}/${email}/${nit}`).pipe(
       catchError(e => {
         if (e.status != 401 && e.error.mensaje) {
@@ -176,7 +178,7 @@ export class UsuariosService {
 
   // Encontrar cliente por email, nit, sucursal, punto de envio
   generarTokenClienteJava(email: string, nit: string, sucursal: string, puntoEnvio: string): Observable<any> {
-    const urlEndPoint = 'http://localhost:8082/generar-token-cliente';
+    const urlEndPoint = this.url + '/generar-token-cliente';
     return this.http.get<Usuario>(`${urlEndPoint}/${email}/${nit}/${sucursal}/${puntoEnvio}`).pipe(
       catchError(e => {
         if (e.status != 401 && e.error.mensaje) {
@@ -194,7 +196,7 @@ export class UsuariosService {
 
   // Procesar el token
   procesarTokenJava(token: string): Observable<string[]> {
-    const urlEndPoint = 'http://localhost:8082/procesar-token';
+    const urlEndPoint = this.url + '/procesar-token';
     return this.http.get<string[]>(`${urlEndPoint}/${token}`).pipe(
       catchError(e => {
         if (e.status != 401 && e.error.mensaje) {
