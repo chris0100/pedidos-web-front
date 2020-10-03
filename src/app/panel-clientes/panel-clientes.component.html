@@ -35,19 +35,27 @@
 
           <br><br>
           <div class="icon-box wow fadeInUp">
-            <div class="icon"><i class="fa fa-file fa-2x"></i></div>
-            <h4 class="title font-weight-bold">Certificado de retención por IVA</h4>
-            <p class="description">Descarga tus certificados de retención por IVA bimestrales.</p>
+            <a [routerLink]="['/certificados-proveedor']">
+              <div class="icon"><i class="fa fa-file fa-2x"></i></div>
+              <h4 class="title font-weight-bold">Certificado de retención por IVA</h4>
+              <p class="description">Descarga tus certificados de retención por IVA bimestrales.</p>
+            </a>
           </div>
+
           <div class="icon-box wow fadeInUp">
-            <div class="icon"><i class="fa fa-file fa-2x"></i></div>
-            <h4 class="title font-weight-bold">Certificado de retención en la fuente</h4>
-            <p class="description">Descarga tus certificados de retención en la fuente anuales.</p>
+            <a [routerLink]="['/certificados-proveedor']">
+              <div class="icon"><a [routerLink]="['/certificados-proveedor']"><i class="fa fa-file fa-2x"></i></a></div>
+              <h4 class="title font-weight-bold">Certificado de retención en la fuente</h4>
+              <p class="description">Descarga tus certificados de retención en la fuente anuales.</p>
+            </a>
           </div>
+
           <div class="icon-box wow fadeInUp">
-            <div class="icon"><i class="fa fa-file fa-2x"></i></div>
-            <h4 class="title font-weight-bold">Certificado de retención por ICA</h4>
-            <p class="description">Descarga tus certificados de retención por ICA de la ciudad de Cali o Yumbo.</p>
+            <a [routerLink]="['/certificados-proveedor']">
+              <div class="icon"><a [routerLink]="['/certificados-proveedor']"><i class="fa fa-file fa-2x"></i></a></div>
+              <h4 class="title font-weight-bold">Certificado de retención por ICA</h4>
+              <p class="description">Descarga tus certificados de retención por ICA de la ciudad de Cali o Yumbo.</p>
+            </a>
           </div>
 
 
@@ -62,11 +70,6 @@
 
     </section>
     <!--SECCION PARA VISUALIZAR PANEL DE PROVEEDORES-->
-
-
-
-
-
 
 
     <!--SECCION PARA VISUALIZAR PANEL DE CLIENTES-->
@@ -96,8 +99,10 @@
                      attr.aria-valuenow="{{porcentajeValorCompras}}"
                      aria-valuemin="0" aria-valuemax="100"></div>
               </div>
-              <p class="card-text" *ngIf="masEsteYearTotal">Mas que el año pasado ({{porcentajeValorCompras | number}}%)</p>
-              <p class="card-text" *ngIf="masBeforeYearTotal">Menos que el año pasado ({{porcentajeValorCompras | number}}%)</p>
+              <p class="card-text" *ngIf="masEsteYearTotal">Mas que el año pasado ({{porcentajeValorCompras | number}}
+                %)</p>
+              <p class="card-text" *ngIf="masBeforeYearTotal">Menos que el año pasado
+                ({{porcentajeValorCompras | number}}%)</p>
             </div>
 
           </div>
@@ -125,12 +130,15 @@
             <!-- Card content -->
             <div class="card-body card-body-cascade">
               <div class="progress mb-3">
-                <div class="progress-bar red accent-2" role="progressbar" [ngStyle]="{'width.%': porcentajeCantidadCompras}"
+                <div class="progress-bar red accent-2" role="progressbar"
+                     [ngStyle]="{'width.%': porcentajeCantidadCompras}"
                      attr.aria-valuenow="{{porcentajeCantidadCompras}}"
                      aria-valuemin="0" aria-valuemax="100"></div>
               </div>
-              <p class="card-text" *ngIf="masEsteYearTotal">Mas que el año pasado ({{porcentajeCantidadCompras | number}}%)</p>
-              <p class="card-text" *ngIf="masBeforeYearCantidad">Menos que el año pasado ({{porcentajeCantidadCompras | number}}%)</p>
+              <p class="card-text" *ngIf="masEsteYearTotal">Mas que el año pasado
+                ({{porcentajeCantidadCompras | number}}%)</p>
+              <p class="card-text" *ngIf="masBeforeYearCantidad">Menos que el año pasado
+                ({{porcentajeCantidadCompras | number}}%)</p>
             </div>
 
           </div>
@@ -139,37 +147,37 @@
         </div>
         <!-- Grid column -->
 
-<!--         Grid column
-        <div class="col-xl-4 col-md-6 mb-md-0 mb-4">
+        <!--         Grid column
+                <div class="col-xl-4 col-md-6 mb-md-0 mb-4">
 
-           Card
-          <div class="card card-cascade cascading-admin-card">
+                   Card
+                  <div class="card card-cascade cascading-admin-card">
 
-             Card Data
-            <div class="admin-up">
-              <i class="fas fa-chart-pie success-color-dark lighten-1 mr-3 z-depth-2"></i>
-              <div class="data">
-                <p class="text-uppercase">Producto mas comprado este año</p>
-                <h4 class="font-weight-bold dark-grey-text">POLIESTER ALGODON</h4>
-              </div>
-            </div>
+                     Card Data
+                    <div class="admin-up">
+                      <i class="fas fa-chart-pie success-color-dark lighten-1 mr-3 z-depth-2"></i>
+                      <div class="data">
+                        <p class="text-uppercase">Producto mas comprado este año</p>
+                        <h4 class="font-weight-bold dark-grey-text">POLIESTER ALGODON</h4>
+                      </div>
+                    </div>
 
-             Card content
-            <div class="card-body card-body-cascade">
-              <div class="progress mb-3">
-                <div class="progress-bar success-color accent-2" role="progressbar"
-                     style="width: 75%"
-                     aria-valuenow="75"
-                     aria-valuemin="0" aria-valuemax="100"></div>
-              </div>
-              <p class="card-text">Porcentaje de las compras (75%)</p>
-            </div>
+                     Card content
+                    <div class="card-body card-body-cascade">
+                      <div class="progress mb-3">
+                        <div class="progress-bar success-color accent-2" role="progressbar"
+                             style="width: 75%"
+                             aria-valuenow="75"
+                             aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                      <p class="card-text">Porcentaje de las compras (75%)</p>
+                    </div>
 
-          </div>
-           Card
+                  </div>
+                   Card
 
-        </div>
-         Grid column -->
+                </div>
+                 Grid column -->
       </div>
 
 
@@ -210,7 +218,7 @@
             <tbody>
 
             <tr *ngFor="let pedidoUnoEE of listaItemPedidosUnoee; let indexOfelement=index;">
-              <td>{{indexOfelement+1}}</td>
+              <td>{{indexOfelement + 1}}</td>
               <td>{{pedidoUnoEE.codItem}}</td>
               <td>{{pedidoUnoEE.descripcion}}</td>
               <td>{{pedidoUnoEE.ext1}}</td>
@@ -225,20 +233,20 @@
 
 
           <!-- Grid column -->
-<!--          <div class="col-xl-12 col-lg-12 mb-4 pb-2">
+          <!--          <div class="col-xl-12 col-lg-12 mb-4 pb-2">
 
-            <div class="d-flex justify-content-center">
-              <div class="default-color-dark rounded-sm mt-5 mb-3 d-inline-flex">
-                <h2 class="mb-0 font-weight-500 py-4 px-3 text-center text-white">Grafica Semestral de Compras</h2>
-              </div>
-            </div>
+                      <div class="d-flex justify-content-center">
+                        <div class="default-color-dark rounded-sm mt-5 mb-3 d-inline-flex">
+                          <h2 class="mb-0 font-weight-500 py-4 px-3 text-center text-white">Grafica Semestral de Compras</h2>
+                        </div>
+                      </div>
 
-            &lt;!&ndash; Chart &ndash;&gt;
-            <div class="view view-cascade gradient-card-header blue-gradient mx-auto">
-              <canvas id="lineChart" height="160"></canvas>
-            </div>
+                      &lt;!&ndash; Chart &ndash;&gt;
+                      <div class="view view-cascade gradient-card-header blue-gradient mx-auto">
+                        <canvas id="lineChart" height="160"></canvas>
+                      </div>
 
-          </div>-->
+                    </div>-->
           <!-- Grid column -->
 
         </div>
@@ -246,14 +254,6 @@
       </section>
     </div>
     <!--SECCION PARA VISUALIZAR PANEL DE CLIENTES-->
-
-
-
-
-
-
-
-
 
 
     <!--SECCION PARA VISUALIZAR PANEL DE ADMIN-->
@@ -270,21 +270,31 @@
 
 
           <br><br>
-          <div class="icon-box wow fadeInUp">
-            <div class="icon"><i class="fas fa-user-plus fa-2x"></i></div>
-            <h4 class="title font-weight-bold">Creación de usuarios</h4>
-            <p class="description">Crea usuarios y asigna los roles que se deseen para la visualización de modulos</p>
-          </div>
-          <div class="icon-box wow fadeInUp">
-            <div class="icon"><i class="fas fa-user-edit fa-2x"></i></div>
-            <h4 class="title font-weight-bold">Edición de usuarios</h4>
-            <p class="description">Edita usuarios por roles, nombre, correo electronico y modificación de contraseña</p>
-          </div>
-          <div class="icon-box wow fadeInUp">
-            <div class="icon"><i class="fas fa-cart-plus fa-2x"></i></div>
-            <h4 class="title font-weight-bold">Valida los ítem creados</h4>
-            <p class="description">Revisa a traves del filtro de busqueda los diferentes ítems que han sido creados</p>
-          </div>
+          <a [routerLink]="['/crear-usuario']">
+            <div class="icon-box wow fadeInUp">
+              <div class="icon"><i class="fas fa-user-plus fa-2x"></i></div>
+              <h4 class="title font-weight-bold">Creación de usuarios</h4>
+              <p class="description">Crea usuarios y asigna los roles que se deseen para la visualización de modulos</p>
+            </div>
+          </a>
+
+          <a [routerLink]="['/crear-usuario']">
+            <div class="icon-box wow fadeInUp">
+              <div class="icon"><i class="fas fa-user-edit fa-2x"></i></div>
+              <h4 class="title font-weight-bold">Edición de usuarios</h4>
+              <p class="description">Edita usuarios por roles, nombre, correo electronico y modificación de
+                contraseña</p>
+            </div>
+          </a>
+
+          <a [routerLink]="['/validacion-items']">
+            <div class="icon-box wow fadeInUp">
+              <div class="icon"><i class="fas fa-cart-plus fa-2x"></i></div>
+              <h4 class="title font-weight-bold">Valida los ítem creados</h4>
+              <p class="description">Revisa a traves del filtro de busqueda los diferentes ítems que han sido
+                creados</p>
+            </div>
+          </a>
 
 
         </div>
@@ -299,12 +309,6 @@
     <!--SECCION PARA VISUALIZAR PANEL DE ADMIN-->
 
 
-
-
-
-
-
-
     <!--SECCION PARA VISUALIZAR PANEL DE SERVICIO AL CLIENTE-->
     <section id="ser" *ngIf="authService.hasRole('SER')">
 
@@ -313,27 +317,38 @@
         <div class="col-lg-6">
 
           <h4>
-            Este es un portal diseñado para el Asesor de Servicio al Cliente con el fin de facilitar la gestión y revisión de
+            Este es un portal diseñado para el Asesor de Servicio al Cliente con el fin de facilitar la gestión y
+            revisión de
             lista de errores de solicitud de pedidos, aquí puedes encontrar:
           </h4>
 
 
           <br><br>
-          <div class="icon-box wow fadeInUp">
-            <div class="icon"><i class="fa fa-file fa-2x"></i></div>
-            <h4 class="title font-weight-bold">Listado de Pedidos con Errores asignados al asesor</h4>
-            <p class="description">Visualiza el listado de errores ordenados por fecha de adición</p>
-          </div>
-          <div class="icon-box wow fadeInUp">
-            <div class="icon"><i class="fas fa-times fa-2x"></i></div>
-            <h4 class="title font-weight-bold">Listado de errores de cada item</h4>
-            <p class="description">Visualiza y sincroniza el listado de items con posibilidad de editar, eliminar y borrar ítems del pedido</p>
-          </div>
-          <div class="icon-box wow fadeInUp">
-            <div class="icon"><i class="far fa-share-square fa-2x"></i></div>
-            <h4 class="title font-weight-bold">Envia pedidos para validación</h4>
-            <p class="description">Posterior a la sincronizacion envia el pedido para que sea procesado correctamente</p>
-          </div>
+          <a [routerLink]="['/lista-errores']">
+            <div class="icon-box wow fadeInUp">
+              <div class="icon"><i class="fa fa-file fa-2x"></i></div>
+              <h4 class="title font-weight-bold">Listado de Pedidos con Errores asignados al asesor</h4>
+              <p class="description">Visualiza el listado de errores ordenados por fecha de adición</p>
+            </div>
+          </a>
+
+          <a [routerLink]="['/lista-errores']">
+            <div class="icon-box wow fadeInUp">
+              <div class="icon"><i class="fas fa-times fa-2x"></i></div>
+              <h4 class="title font-weight-bold">Listado de errores de cada item</h4>
+              <p class="description">Visualiza y sincroniza el listado de items con posibilidad de editar, eliminar y
+                borrar ítems del pedido</p>
+            </div>
+          </a>
+
+          <a [routerLink]="['/lista-errores']">
+            <div class="icon-box wow fadeInUp">
+              <div class="icon"><i class="far fa-share-square fa-2x"></i></div>
+              <h4 class="title font-weight-bold">Envia pedidos para validación</h4>
+              <p class="description">Posterior a la sincronizacion envia el pedido para que sea procesado
+                correctamente</p>
+            </div>
+          </a>
 
 
         </div>
@@ -348,11 +363,6 @@
     <!--SECCION PARA VISUALIZAR PANEL DE SERVICIO AL CLIENTE-->
 
 
-
-
-
-
-
     <!--SECCION PARA VISUALIZAR PANEL DE  JEFE DE SERVICIO AL CLIENTE-->
     <section id="jser" *ngIf="authService.hasRole('JSER')">
 
@@ -361,27 +371,40 @@
         <div class="col-lg-6">
 
           <h4>
-            Este es un portal diseñado para el Jefe de Servicio al Cliente con el fin de facilitar la gestión y revisión de
+            Este es un portal diseñado para el Jefe de Servicio al Cliente con el fin de facilitar la gestión y revisión
+            de
             lista de errores completos de solicitud de pedidos, aquí puedes encontrar:
           </h4>
 
 
           <br><br>
-          <div class="icon-box wow fadeInUp">
-            <div class="icon"><i class="fa fa-file fa-2x"></i></div>
-            <h4 class="title font-weight-bold">Listado de Pedidos con Errores completos</h4>
-            <p class="description">Visualiza el listado de errores completos ordenados por fecha de adición</p>
-          </div>
-          <div class="icon-box wow fadeInUp">
-            <div class="icon"><i class="fas fa-times fa-2x"></i></div>
-            <h4 class="title font-weight-bold">Listado de errores de cada item</h4>
-            <p class="description">Visualiza y sincroniza el listado de items con posibilidad de editar, eliminar y borrar ítems del pedido</p>
-          </div>
-          <div class="icon-box wow fadeInUp">
-            <div class="icon"><i class="far fa-share-square fa-2x"></i></div>
-            <h4 class="title font-weight-bold">Envia pedidos para validación</h4>
-            <p class="description">Posterior a la sincronizacion envia el pedido para que sea procesado correctamente</p>
-          </div>
+
+          <a [routerLink]="['/lista-errores-completo']">
+            <div class="icon-box wow fadeInUp">
+              <div class="icon"><i class="fa fa-file fa-2x"></i></div>
+              <h4 class="title font-weight-bold">Listado de Pedidos con Errores completos</h4>
+              <p class="description">Visualiza el listado de errores completos ordenados por fecha de adición</p>
+            </div>
+          </a>
+
+
+          <a [routerLink]="['/lista-errores-completo']">
+            <div class="icon-box wow fadeInUp">
+              <div class="icon"><i class="fas fa-times fa-2x"></i></div>
+              <h4 class="title font-weight-bold">Listado de errores de cada item</h4>
+              <p class="description">Visualiza y sincroniza el listado de items con posibilidad de editar, eliminar y
+                borrar ítems del pedido</p>
+            </div>
+          </a>
+
+          <a [routerLink]="['/lista-errores-completo']">
+            <div class="icon-box wow fadeInUp">
+              <div class="icon"><i class="far fa-share-square fa-2x"></i></div>
+              <h4 class="title font-weight-bold">Envia pedidos para validación</h4>
+              <p class="description">Posterior a la sincronizacion envia el pedido para que sea procesado
+                correctamente</p>
+            </div>
+          </a>
 
 
         </div>
