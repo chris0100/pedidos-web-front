@@ -58,7 +58,6 @@ const routes: Routes = [
   {path: 'prepare-ver-error/:id/:otr', component: PrepareVerErrorComponent, canActivate: [RoleGuard, AuthGuard],  data: {roles: ['JSER', 'SER']}},
   {path: 'editar-item/:idPedido/:idItem/:otr', component: EditarItemComponent, canActivate: [RoleGuard, AuthGuard], data: {roles: ['JSER', 'SER']}},
   {path: 'certificados-proveedor', component: CertificadoProveedorComponent, canActivate: [RoleGuard, AuthGuard], data: {role: 'PRO'}}
-
 ];
 
 

@@ -21,14 +21,22 @@ export class AuthGuard implements CanActivate {
     // Revisa que el usuario este autenticado
     if (this.authService.isAuthenticated()) {
 
+      // Obtiene la posicion del tipo de rol del usuario autenticado
+      const tipologin = this.authService.usuario.roles.findIndex(obj => obj === 'ADMIN');
+
       // Revisa si ha expirado el token
       if (this.isTokenExpirado()) {
         this.authService.logout();
-        this.router.navigate(['/login']);
+        if (tipologin < 0) {
+          this.router.navigate(['/login']);
+        } else {
+          this.router.navigate(['/login-admin']);
+        }
         return false;
       }
       return true;
     }
+
 
     // Si el usuario no esta autenticado, redirecciona a la ventana de login
     this.router.navigate(['/login']);

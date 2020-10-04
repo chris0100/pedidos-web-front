@@ -46,6 +46,7 @@ import { ProcesarTokenComponent } from './login/reestablecer-password/procesar-t
 import { ActualizarPasswordComponent } from './login/actualizar-password/actualizar-password.component';
 import { RegistroUsuarioNuevoComponent } from './usuario/registro-usuario-nuevo/registro-usuario-nuevo.component';
 import { AyudaComponent } from './ayuda/ayuda.component';
+import { DataTableModule } from 'angular-6-datatable';
 
 
 
@@ -99,7 +100,8 @@ registerLocaleData(localeES, 'es');
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    DataTableModule
   ],
   providers: [ { provide: LOCALE_ID, useValue: 'es' },
     {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},

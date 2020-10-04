@@ -20,8 +20,15 @@ export class HeaderComponent implements OnInit {
   // Cerrar sesion
   logout(): void {
     swal('Hasta Pronto', `${this.authService.usuario.nombre}, has cerrado sesión correctamente. Gracias por usar nuestros servicios`, 'success');
+    const tipologin = this.authService.usuario.roles.findIndex(obj => obj === 'ADMIN');
+    console.log(tipologin);
     this.authService.logout();
-    this.router.navigate(['/login']);
+    if (tipologin < 0) {
+      this.router.navigate(['/login']);
+    }
+    else {
+      this.router.navigate(['/login-admin']);
+    }
   }
 
 }
