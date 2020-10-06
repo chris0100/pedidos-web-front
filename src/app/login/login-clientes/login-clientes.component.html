@@ -9,7 +9,7 @@
 
   <form method="post">
 
-    <div class="md-form md-outline font-weight-bold">
+    <div class="md-form md-outline">
       <input type="text"
              id="nit-cliente"
              class="form-control"
@@ -17,7 +17,7 @@
              [(ngModel)]="usuario.nit"
              (change)="obtenerSucursal()"
       >
-      <label for="nit-cliente">Nit Cliente</label>
+      <label for="nit-cliente" class="active">Nit Cliente</label>
     </div>
 
 
@@ -32,7 +32,6 @@
                 (change)="obtenerPuntoEnvio()"
                 style="margin-top: -5px"
         >
-          <option value="" disabled selected class="font-weight-bold">Seleccionar</option>
           <option [value]="item" *ngFor="let item of listadoSucursal">{{item}}</option>
         </select>
 
@@ -52,7 +51,6 @@
                   [(ngModel)]="puntoEnvioSeleccionado"
                   style="margin-top: -5px"
           >
-            <option value="" disabled selected class="font-weight-bold">Seleccionar</option>
             <option [value]="item" *ngFor="let item of listadoPuntoEnvio">{{item}}</option>
           </select>
 
@@ -62,14 +60,14 @@
 
 
 
-    <div class="md-form md-outline font-weight-bold mt-4">
+    <div class="md-form md-outline mt-4">
       <input type="password"
              id="password-cliente"
              class="form-control"
              name="password"
              [(ngModel)]="usuario.password"
       >
-      <label for="password-cliente">Contraseña</label>
+      <label for="password-cliente" class="active">Contraseña</label>
     </div>
 
 

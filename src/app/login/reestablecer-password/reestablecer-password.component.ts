@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Usuario} from '../../usuario/usuario';
 import {ActivatedRoute} from '@angular/router';
+import swal from 'sweetalert2';
 
 // carga de archivo js para mdbootstrap
 declare var login: any;
@@ -24,6 +25,7 @@ export class ReestablecerPasswordComponent implements OnInit {
     // Ejecuta el script
     new login();
     this.recibeId();
+    swal('Restablecer Contraseña', 'Si ha perdido su contraseña tan solo debe diligenciar la siguiente información', 'warning');
   }
 
 

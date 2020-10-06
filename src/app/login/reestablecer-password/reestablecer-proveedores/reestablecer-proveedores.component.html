@@ -1,8 +1,8 @@
 <!-- Body -->
 <div class="modal-body">
 
-  <div class="text-center">
-    <h4 class="font-weight-bold dark-grey-text"><i class="fas fa-key"></i> Reestablece tu contraseña</h4>
+  <div class="text-center" style="margin-top: -10px;">
+    <h5 class="font-weight-bold dark-grey-text"><i class="fas fa-key"></i> Restablecer contraseña</h5>
   </div>
 
   <!--pantalla trasera de carga-->
@@ -10,14 +10,14 @@
     <app-loading-spinner></app-loading-spinner>
   </div>
 
-  <div class="md-form md-outline font-weight-bold">
+  <div class="md-form md-outline">
     <input type="text" id="nit-proveedor" class="form-control" [(ngModel)]="usuario.nit">
-    <label for="nit-proveedor">Nit</label>
+    <label for="nit-proveedor" class="active">Nit</label>
   </div>
 
-  <div class="md-form md-outline font-weight-bold">
+  <div class="md-form md-outline">
     <input type="email" id="password-proveedor" class="form-control" [(ngModel)]="usuario.email">
-    <label for="password-proveedor">Correo Electrónico</label>
+    <label for="password-proveedor" class="active">Correo Electrónico</label>
   </div>
 
   <div class="text-center form-sm mt-2">

@@ -10074,3 +10074,11 @@ a.text-dark:hover, a.text-dark:focus {
   }
 }
 /*# sourceMappingURL=bootstrap.css.map */
+
+
+
+@media only screen and (max-width: 1366px) {
+  .distancia{
+    margin-top: -50px!important;
+  }
+}
