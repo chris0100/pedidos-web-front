@@ -24,37 +24,77 @@
 
 
 
-      <h5 class="font-weight-bold my-4" *ngIf="listaPedidosErrorAsesor?.length>0">Total Pedidos con errores: {{listaPedidosErrorAsesor.length}}</h5>
+      <h5 class="font-weight-bold my-4" *ngIf="data?.length>0">Total Pedidos con errores: {{data.length}}</h5>
 
 
 
-      <table class="table-striped table-hover table">
+      <table class="table-striped table-hover table table-responsive table-fixed"
+             [mfData]="data" #mf="mfDataTable" [mfRowsOnPage]="10">
+
         <thead>
         <tr>
-          <th scope="col"  class="th-sm font-weight-bold">Consecutivo
+          <th scope="col" class="th-sm font-weight-bold">
+            <mfDefaultSorter by="id">Consecutivo <i class="fas fa-sort"></i></mfDefaultSorter>
           </th>
-          <th scope="col"  class="th-sm font-weight-bold">Orden de Compra
+
+          <th scope="col" class="th-sm font-weight-bold">
+            <mfDefaultSorter by="oc">Orden de Compra <i class="fas fa-sort"></i></mfDefaultSorter>
           </th>
-          <th scope="col"  class="th-sm font-weight-bold">Usuario Pedido
+
+          <th scope="col" class="th-sm font-weight-bold">
+            <mfDefaultSorter by="nombre">Usuario Pedido <i class="fas fa-sort"></i></mfDefaultSorter>
           </th>
-          <th scope="col"  class="th-sm font-weight-bold">Notas
+
+          <th scope="col" class="th-sm font-weight-bold">
+            <mfDefaultSorter by="nota">Notas <i class="fas fa-sort"></i></mfDefaultSorter>
           </th>
-          <th scope="col"  class="th-sm font-weight-bold">Sucursal a Facturar
+
+          <th scope="col" class="th-sm font-weight-bold">
+            <mfDefaultSorter by="sucursalFacturar">Sucursal a Facturar <i class="fas fa-sort"></i></mfDefaultSorter>
           </th>
-          <th scope="col"  class="th-sm font-weight-bold">Sucursal a Remisionar
+
+          <th scope="col" class="th-sm font-weight-bold">
+            <mfDefaultSorter by="sucursalRemisionar">Sucursal a Remisionar <i class="fas fa-sort"></i></mfDefaultSorter>
           </th>
-          <th scope="col"  class="th-sm font-weight-bold">Fecha de Pedido
+
+          <th scope="col" class="th-sm font-weight-bold">
+            <mfDefaultSorter by="fechaPedido">Fecha de Pedido <i class="fas fa-sort"></i></mfDefaultSorter>
           </th>
-          <th scope="col"  class="th-sm font-weight-bold">Estado
+
+          <th scope="col" class="th-sm font-weight-bold">
+            <mfDefaultSorter by="estado">Estado <i class="fas fa-sort"></i></mfDefaultSorter>
           </th>
-          <th scope="col"  class="th-sm">
+
+          <th class="th-sm">
+          </th>
+        </tr>
+
+
+        <tr>
+          <th scope="col" class="th-sm font-weight-bold">
+            <input type="text" class="form-control-sm w-50" (change)="searchConsecutivo($event.target.value)">
+          </th>
+          <th scope="col" class="th-sm font-weight-bold">
+            <input type="text" class="form-control-sm w-75" (change)="searchOrdenCompra($event.target.value)">
+          </th>
+          <th scope="col" class="th-sm font-weight-bold">
+            <input type="text" class="form-control-sm w-75" (change)="searchUsuario($event.target.value)">
+          </th>
+          <th scope="col" class="th-sm font-weight-bold">
+            <input type="text" class="form-control-sm w-75" (change)="searchNotas($event.target.value)">
+          </th>
+          <th scope="col" class="th-sm font-weight-bold">
+            <input type="text" class="form-control-sm w-75" (change)="searchSucursalFacturar($event.target.value)">
+          </th>
+          <th scope="col" class="th-sm font-weight-bold">
+            <input type="text" class="form-control-sm w-75" (change)="searchSucursalRemisionar($event.target.value)">
           </th>
         </tr>
         </thead>
 
         <tbody>
 
-        <tr *ngFor="let pedido of listaPedidosErrorAsesor">
+        <tr *ngFor="let pedido of mf.data">
           <td>{{pedido.id}}</td>
           <td>{{pedido.oc}}</td>
           <td>{{pedido.idUsuario.nombre}}</td>
@@ -71,8 +111,16 @@
             </button></td>
         </tr>
 
-
         </tbody>
+
+
+        <tfoot>
+        <tr>
+          <td colspan="12">
+            <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+          </td>
+        </tr>
+        </tfoot>
 
 
       </table>
