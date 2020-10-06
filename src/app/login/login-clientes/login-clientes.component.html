@@ -2,7 +2,7 @@
 
 <div class="modal-body">
 
-    <div class="text-center">
+    <div class="text-center" style="margin-top: -30px;">
       <h4 class="font-weight-bold dark-grey-text"><i class="fas fa-users fa-1x"></i> Portal Web</h4>
     </div>
 
@@ -21,32 +21,32 @@
     </div>
 
 
-    <div class="row" style="margin-top: -20px">
+    <div class="row" style="margin-top: -15px;">
       <div class="col-md-12">
 
-        <select class="mdb-select md-form md-outline colorful-select dropdown-primary"
+        <label class="small">Sucursal</label>
+        <select class="custom-select custom-select-sm"
                 name="sucursalSeleccionada"
                 id="sucursalSeleccionada"
                 [(ngModel)]="sucursalSeleccionada"
                 (change)="obtenerPuntoEnvio()"
+                style="margin-top: -5px"
         >
           <option value="" disabled selected class="font-weight-bold">Seleccionar</option>
           <option [value]="item" *ngFor="let item of listadoSucursal">{{item}}</option>
         </select>
-        <label>Sucursal</label>
+
 
       </div>
     </div>
 
 
 
-    <div class="row" style="margin-top: -10px">
+    <div class="row mt-2">
       <div class="col-md-12">
 
-
-        <div class="form-group">
-          <label>Punto de Envio</label>
-          <select class="form-control"
+          <label class="small">Punto de Envio</label>
+          <select class="custom-select custom-select-sm"
                   name="puntoEnvioSeleccionado"
                   id="puntoEnvioSeleccionado"
                   [(ngModel)]="puntoEnvioSeleccionado"
@@ -55,7 +55,6 @@
             <option value="" disabled selected class="font-weight-bold">Seleccionar</option>
             <option [value]="item" *ngFor="let item of listadoPuntoEnvio">{{item}}</option>
           </select>
-        </div>
 
       </div>
     </div>
@@ -63,7 +62,7 @@
 
 
 
-    <div class="md-form md-outline font-weight-bold" style="margin-top: 0px">
+    <div class="md-form md-outline font-weight-bold mt-4">
       <input type="password"
              id="password-cliente"
              class="form-control"
@@ -92,8 +91,8 @@
   <!-- Footer -->
   <div class="modal-footer display-footer">
     <div class="options text-center text-md-right">
-      <p>¿Necesitas <a [routerLink]="['/ayuda']" class="blue-text">Ayuda?</a></p>
-      <p>¿Contraseña <a [routerLink]="['/reestablecer-password', 0]" class="blue-text">Olvidada?</a></p>
+      <p class="small">¿Necesitas <a [routerLink]="['/ayuda']" class="blue-text">Ayuda?</a></p>
+      <p class="small" style="margin-top: -10px">¿Contraseña <a [routerLink]="['/reestablecer-password', 0]" class="blue-text">Olvidada?</a></p>
      <!-- <p>¿Ingresar como <a [routerLink]="['/login-admin']" class="blue-text">Administrador?</a></p>-->
     </div>
   </div>
