@@ -107,24 +107,37 @@
 
 
 <div class="table-responsive table-striped table-hover" *ngIf="listaInputItemPedidoSelect.length>0">
-  <table class="table">
+  <table class="table" [mfData]="listaInputItemPedidoSelect" #mf="mfDataTable" [mfRowsOnPage]="10">
 
     <thead>
     <tr>
-      <th scope="col" class="font-weight-bold">Código del ítem</th>
-      <th scope="col" class="font-weight-bold">Código EKA</th>
-      <th scope="col" class="font-weight-bold">Descripción</th>
-      <th scope="col" class="font-weight-bold">Extensión 1</th>
-      <th scope="col" class="font-weight-bold">Extensión 2</th>
-      <th scope="col" class="font-weight-bold">Cantidad</th>
-      <th scope="col" class="font-weight-bold">U. Medida</th>
-      <th scope="col" class="font-weight-bold"></th>
+      <th scope="col" class="font-weight-bold">
+        <mfDefaultSorter by="codCliente">Código del ítem del cliente  <i class="fas fa-sort"></i></mfDefaultSorter>
+      </th>
+      <th scope="col" class="font-weight-bold">
+        <mfDefaultSorter by="codItem">Código EKA  <i class="fas fa-sort"></i></mfDefaultSorter>
+      </th>
+      <th scope="col" class="font-weight-bold">
+        <mfDefaultSorter by="descripcion">Descripción  <i class="fas fa-sort"></i></mfDefaultSorter>
+      </th>
+      <th scope="col" class="font-weight-bold">
+        <mfDefaultSorter by="descripcionExt1">Extensión 1  <i class="fas fa-sort"></i></mfDefaultSorter>
+      </th>
+      <th scope="col" class="font-weight-bold">
+        <mfDefaultSorter by="descripcionExt2">Extensión 2  <i class="fas fa-sort"></i></mfDefaultSorter>
+      </th>
+      <th scope="col" class="font-weight-bold">
+        <mfDefaultSorter by="cantidad">Cantidad  <i class="fas fa-sort"></i></mfDefaultSorter>
+      </th>
+      <th scope="col" class="font-weight-bold">
+        <mfDefaultSorter by="unidadMedida">U. Medida  <i class="fas fa-sort"></i></mfDefaultSorter>
+      </th>
     </tr>
     </thead>
 
 
     <tbody>
-    <tr *ngFor="let item of listaInputItemPedidoSelect">
+    <tr *ngFor="let item of mf.data">
       <th scope="row">{{item.codCliente}}</th>
       <td>{{item.codItem}}</td>
       <td>{{item.descripcion}}</td>
@@ -143,6 +156,14 @@
       </ng-template>
     </tr>
     </tbody>
+
+    <tfoot>
+    <tr>
+      <td colspan="12">
+        <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+      </td>
+    </tr>
+    </tfoot>
 
   </table>
 </div>

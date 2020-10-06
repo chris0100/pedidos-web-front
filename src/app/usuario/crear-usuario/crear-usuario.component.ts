@@ -17,6 +17,25 @@ declare var lista: any;
 
 export class CrearUsuarioComponent implements OnInit {
 
+
+  items = [
+    {id: 1, name: 'Python', image: 'python.jpg'},
+    {id: 2, name: 'Node Js', image: 'nodejs.jpg'},
+    {id: 3, name: 'Java', image: 'java.jpg'},
+    {id: 4, name: 'PHP', image: 'php.jpg', disabled: true},
+    {id: 5, name: 'Django', image: 'django.jpg'},
+    {id: 6, name: 'Angular', image: 'angular.jpg'},
+    {id: 7, name: 'Vue', image: 'vue.jpg'},
+    {id: 8, name: 'ReactJs', image: 'reactjs.jpg'},
+  ];
+  selected = [ 2, 8 ];
+
+
+
+
+
+
+
   public usuario: Usuario = new Usuario();
   passwordNuevo: string;
   repetirPasswordNuevo: string;

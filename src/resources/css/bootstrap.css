@@ -1542,9 +1542,15 @@ pre code {
 
 .table th,
 .table td {
-  padding: 0.75rem;
+  padding: 0.25rem;
   vertical-align: top;
   border-top: 1px solid #dee2e6;
+}
+
+
+table > thead >  tr> th > mfdefaultsorter > a {
+  font-weight: bold;
+  white-space: normal !important;
 }
 
 .table thead th {
@@ -1994,11 +2000,13 @@ select.form-control:focus::-ms-value {
 }
 
 .form-control-sm {
-  height: calc(1.5em + 0.5rem + 2px);
-  padding: 0.25rem 0.5rem;
-  font-size: 0.875rem;
+  height: calc(1.5em + 0.3rem + 2px);
+  padding: 0.25rem 0.2rem;
+  font-size: 0.75rem;
   line-height: 1.5;
   border-radius: 0.2rem;
+  color: #495057;
+  border-color: #495057;
 }
 
 .form-control-lg {
@@ -10040,6 +10048,13 @@ a.text-dark:hover, a.text-dark:focus {
   .table th {
     background-color: #fff !important;
   }
+
+  .table-fit{
+    width: 1%!important;
+    padding: 0rem!important;
+    flex-wrap: wrap;
+  }
+
   .table-bordered th,
   .table-bordered td {
     border: 1px solid #dee2e6 !important;

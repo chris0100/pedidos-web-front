@@ -33,34 +33,87 @@
     <!-- Gird column -->
     <div class="col-md-12">
 
-      <h5 class="font-weight-bold my-4" *ngIf="pedidos?.length>0">Total Pedidos en estado de verificación: {{pedidos.length}}</h5>
+      <h5 class="font-weight-bold my-4" *ngIf="data?.length>0">Total Pedidos en estado de verificación: {{data.length}}</h5>
 
 
-      <table class="table table-striped table-hover">
+      <table class="table table-striped table-hover" [mfData]="data" #mf="mfDataTable" [mfRowsOnPage]="10">
+
         <thead>
+
         <tr>
-          <th scope="col" class="th-sm font-weight-bold">Código
+          <th scope="col" class="font-weight-bold table-fit">
+            <mfDefaultSorter by="id">Código <i class="fas fa-sort"></i></mfDefaultSorter>
           </th>
-          <th scope="col" class="th-sm font-weight-bold">Orden de Compra
+
+          <th scope="col" class="font-weight-bold table-fit">
+            <mfDefaultSorter by="oc">Orden de Compra <i class="fas fa-sort"></i></mfDefaultSorter>
           </th>
-          <th scope="col" class="th-sm font-weight-bold">Usuario Pedido
+
+          <th scope="col" class="font-weight-bold table-fit">
+            <mfDefaultSorter by="nombre">Usuario Pedido <i class="fas fa-sort"></i></mfDefaultSorter>
           </th>
-          <th scope="col" class="th-sm font-weight-bold">Notas
+
+          <th scope="col" class="font-weight-bold table-fit">
+            <mfDefaultSorter by="nota">Notas <i class="fas fa-sort"></i></mfDefaultSorter>
           </th>
-          <th scope="col" class="th-sm font-weight-bold">Sucursal a Facturar
+
+          <th scope="col" class="font-weight-bold table-fit">
+            <mfDefaultSorter by="sucursalFacturar">Sucursal a Facturar <i class="fas fa-sort"></i></mfDefaultSorter>
           </th>
-          <th scope="col" class="th-sm font-weight-bold">Sucursal a Remisionar
+
+          <th scope="col" class="font-weight-bold table-fit">
+            <mfDefaultSorter by="sucursalRemisionar">Sucursal a Remisionar <i class="fas fa-sort"></i></mfDefaultSorter>
           </th>
-          <th scope="col" class="th-sm font-weight-bold">Fecha de Pedido
+
+          <th scope="col" class="font-weight-bold table-fit">
+            <mfDefaultSorter by="fechaPedido">Fecha de Pedido <i class="fas fa-sort"></i></mfDefaultSorter>
           </th>
-          <th scope="col"  class="th-sm">
+
+          <th scope="col" class="font-weight-bold table-fit">
           </th>
         </tr>
+
+        <tr>
+          <th scope="col" class="th-sm font-weight-bold">
+            <input type="text" class="form-control-sm w-75" (change)="searchId($event.target.value)">
+          </th>
+
+          <th scope="col" class="th-sm font-weight-bold">
+            <input type="text" class="form-control-sm w-75" (change)="searchOrdenCompra($event.target.value)">
+          </th>
+
+          <th scope="col" class="th-sm font-weight-bold">
+            <input type="text" class="form-control-sm w-75" (change)="searchNombre($event.target.value)">
+          </th>
+
+          <th scope="col" class="th-sm font-weight-bold">
+            <input type="text" class="form-control-sm w-75" (change)="searchNota($event.target.value)">
+          </th>
+
+          <th scope="col" class="th-sm font-weight-bold">
+            <input type="text" class="form-control-sm w-75" (change)="searchFacturar($event.target.value)">
+          </th>
+
+          <th scope="col" class="th-sm font-weight-bold">
+            <input type="text" class="form-control-sm w-75" (change)="searchSucursalRemisionar($event.target.value)">
+          </th>
+
+          <th scope="col" class="th-sm font-weight-bold">
+          </th>
+
+          <th scope="col" class="th-sm font-weight-bold">
+          </th>
+
+          <th scope="col" class="th-sm font-weight-bold">
+          </th>
+
+        </tr>
+
         </thead>
 
         <tbody>
 
-        <tr *ngFor="let pedido of pedidos">
+        <tr *ngFor="let pedido of mf.data">
           <td>{{pedido.id}}</td>
           <td>{{pedido.oc}}</td>
           <td>{{pedido.idUsuario.nombre}}</td>
@@ -76,8 +129,17 @@
             </button></td>
         </tr>
 
-
         </tbody>
+
+
+
+        <tfoot>
+        <tr>
+          <td colspan="12">
+            <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+          </td>
+        </tr>
+        </tfoot>
 
 
       </table>

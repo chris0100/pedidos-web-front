@@ -21,7 +21,6 @@ export class ListaUsuariosComponent implements OnInit {
   showSpinner: boolean;
 
   // Parte nueva para ejemplo de manejo de tablas
-  dataUrl = 'https://jsonplaceholder.typicode.com/users';
   data;
   filterData;
   // Parte nueva para ejemplo de manejo de tablas
@@ -39,9 +38,8 @@ export class ListaUsuariosComponent implements OnInit {
     // Obtener listado de clientes
     this.usuariosService.listarUsuariosJava().subscribe(
       obj => {
+        this.data = obj;
         this.usuarios = obj;
-        console.log(this.usuarios);
-        console.log(obj);
         this.showSpinner = false;
       });
     this.showSpinner = true;
@@ -49,43 +47,227 @@ export class ListaUsuariosComponent implements OnInit {
     // Inicializacion para cargar js
     new tablas();
 
-
-
-    // **************************************************
-    // Parte nueva para ejemplo de manejo de tablas
-    this.obtenerDatosUrl();
-    // Parte nueva para ejemplo de manejo de tablas
-    // **************************************************
   }
 
 
-  search(term: string) {
-    console.log(term);
+  searchNombreResponsable(term: string) {
+    console.log(this.filterData);
+    if (this.filterData === undefined) {
+      this.data = this.usuarios;
+    }
+    else {
+      this.data = this.filterData;
+      console.log('usa de filter');
+    }
+
+
     if (!term) {
-      this.filterData = this.data;
-      this.obtenerDatosUrl();
+      console.log('no envia nada');
+      this.filterData = this.usuarios;
+      this.data = this.filterData;
     } else {
-      this.filterData = this.data.filter(x =>
-        x.name.trim().toLowerCase().includes(term.trim().toLowerCase()) || x.email.trim().toLowerCase().includes(term.trim().toLowerCase())
-      );
+      console.log('si envia algo');
+      this.filterData = this.data.filter(x => {
+        if (x.nombre != null) {
+          return x.nombre.toLowerCase().includes(term.toLowerCase());
+        }
+      });
+      this.data = this.filterData;
+      console.log(this.filterData);
+      }
+    }
+
+
+  searchNit(term: string) {
+    console.log(this.filterData);
+    if (this.filterData === undefined) {
+      this.data = this.usuarios;
+    }
+    else {
+      this.data = this.filterData;
+      console.log('usa de filter');
+    }
+
+    if (!term) {
+      console.log('no envia nada');
+      this.filterData = this.usuarios;
+      this.data = this.filterData;
+    } else {
+      console.log('si envia algo');
+      this.filterData = this.data.filter(x => {
+        if (x.nit != null) {
+          return x.nit.toLowerCase().includes(term.toLowerCase());
+        }
+      });
       this.data = this.filterData;
       console.log(this.filterData);
     }
   }
 
 
-  // Obtener datos de la url
-  private obtenerDatosUrl(): void {
-    this.http.get(this.dataUrl)
-      .subscribe(
-        res => {
-          this.data = res;
-        },
-        err => {
-          console.log('Error occured');
+
+  searchRazon(term: string) {
+    console.log(this.filterData);
+    if (this.filterData === undefined) {
+      this.data = this.usuarios;
+    }
+    else {
+      this.data = this.filterData;
+      console.log('usa de filter');
+    }
+
+    if (!term) {
+      console.log('no envia nada');
+      this.filterData = this.usuarios;
+      this.data = this.filterData;
+    } else {
+      console.log('si envia algo');
+      this.filterData = this.data.filter(x => {
+        if (x.cliente != null) {
+          return x.cliente.toLowerCase().includes(term.toLowerCase());
         }
-      );
+      });
+      this.data = this.filterData;
+      console.log(this.filterData);
+    }
   }
+
+
+
+  searchCorreo(term: string) {
+    console.log(this.filterData);
+    if (this.filterData === undefined) {
+      this.data = this.usuarios;
+    }
+    else {
+      this.data = this.filterData;
+      console.log('usa de filter');
+    }
+
+    if (!term) {
+      console.log('no envia nada');
+      this.filterData = this.usuarios;
+      this.data = this.filterData;
+    } else {
+      console.log('si envia algo');
+      this.filterData = this.data.filter(x => {
+        if (x.cliente != null) {
+          return x.cliente.toLowerCase().includes(term.toLowerCase());
+        }
+      });
+      this.data = this.filterData;
+      console.log(this.filterData);
+    }
+  }
+
+
+
+
+  searchUsername(term: string) {
+    console.log(this.filterData);
+    if (this.filterData === undefined) {
+      this.data = this.usuarios;
+    }
+    else {
+      this.data = this.filterData;
+      console.log('usa de filter');
+    }
+
+    if (!term) {
+      console.log('no envia nada');
+      this.filterData = this.usuarios;
+      this.data = this.filterData;
+    } else {
+      console.log('si envia algo');
+      this.filterData = this.data.filter(x => {
+        if (x.cliente != null) {
+          return x.cliente.toLowerCase().includes(term.toLowerCase());
+        }
+      });
+      this.data = this.filterData;
+      console.log(this.filterData);
+    }
+  }
+
+
+
+  searchSucursal(term: string) {
+    console.log(this.filterData);
+    if (this.filterData === undefined) {
+      this.data = this.usuarios;
+    }
+    else {
+      this.data = this.filterData;
+      console.log('usa de filter');
+    }
+
+    if (!term) {
+      console.log('no envia nada');
+      this.filterData = this.usuarios;
+      this.data = this.filterData;
+    } else {
+      console.log('si envia algo');
+      this.filterData = this.data.filter(x => {
+        if (x.cliente != null) {
+          return x.cliente.toLowerCase().includes(term.toLowerCase());
+        }
+      });
+      this.data = this.filterData;
+      console.log(this.filterData);
+    }
+  }
+
+
+  searchPuntoEnvio(term: string) {
+    console.log(this.filterData);
+    if (this.filterData === undefined) {
+      this.data = this.usuarios;
+    }
+    else {
+      this.data = this.filterData;
+      console.log('usa de filter');
+    }
+
+    if (!term) {
+      console.log('no envia nada');
+      this.filterData = this.usuarios;
+      this.data = this.filterData;
+    } else {
+      console.log('si envia algo');
+      this.filterData = this.data.filter(x => {
+        if (x.cliente != null) {
+          return x.cliente.toLowerCase().includes(term.toLowerCase());
+        }
+      });
+      this.data = this.filterData;
+      console.log(this.filterData);
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 }

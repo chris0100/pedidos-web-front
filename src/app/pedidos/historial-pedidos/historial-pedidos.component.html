@@ -43,60 +43,109 @@
 
       <hr>
 
-      <h5 class="font-weight-bold my-4">Total Pedidos: {{pedidosUnoEE.length}}</h5>
+      <h5 class="font-weight-bold my-4">Total Pedidos: {{data.length}}</h5>
 
 
 
-      <table class="table table-striped table-hover table-responsive">
+      <table class="table table-striped table-hover table-responsive table-fit" [mfData]="data" #mf="mfDataTable" [mfRowsOnPage]="5"
+        style="padding: 0px!important;" border="0" cellspacing="0" cellpadding="0"
+      >
+
         <thead>
         <tr>
-          <th scope="col" class="th-sm font-weight-bold ">Numero Documento
+          <th scope="col" class="font-weight-bold table-fit">
+            Numero Documento
           </th>
-          <th scope="col" class="th-sm font-weight-bold">Razon Social
+          <th scope="col" class="font-weight-bold table-fit">
+            Razon Social
           </th>
-          <th scope="col" class="th-sm font-weight-bold">Estado
+          <th scope="col" class="font-weight-bold table-fit">
+            Estado
           </th>
-          <th scope="col" class="th-sm font-weight-bold">Notas
+          <th scope="col" class="font-weight-bold table-fit">
+            Notas
           </th>
-          <th scope="col" class="th-sm font-weight-bold">Orden de Compra
+          <th scope="col" class="font-weight-bold table-fit">
+            Orden de Compra
           </th>
-          <th scope="col" class="th-sm font-weight-bold">Valor Bruto Pedido
+          <th scope="col" class="font-weight-bold table-fit">
+            Valor Bruto Pedido
           </th>
-          <th scope="col" class="th-sm font-weight-bold">Valor Impuestos Pedido
+          <th scope="col" class="font-weight-bold table-fit">
+            Valor Impuestos Pedido
           </th>
-          <th scope="col" class="th-sm font-weight-bold">Valor Neto Pedido
+          <th scope="col" class="font-weight-bold table-fit">
+            Valor Neto Pedido
           </th>
-          <th scope="col" class="th-sm font-weight-bold">Punto de Envio
+<!--          <th scope="col" class="font-weight-bold table-fit">
+            Punto de Envio
           </th>
-          <th scope="col" class="th-sm font-weight-bold">Descripción Punto Envio
+          <th scope="col" class="font-weight-bold table-fit">
+            Descripción Punto Envio
+          </th>-->
+          <th scope="col" class="font-weight-bold table-fit">
+          Dirección de Envio
           </th>
-          <th scope="col" class="th-sm font-weight-bold">Dirección de Envio
+          <th scope="col" class="font-weight-bold table-fit">
+            Fecha de Creación
           </th>
-          <th scope="col" class="th-sm font-weight-bold">Fecha de Creación
-          </th>
-          <th scope="col" class="th-sm font-weight-bold">Fecha Entrega
+          <th scope="col" class="font-weight-bold table-fit">
+            Fecha Entrega
           </th>
           <th></th>
         </tr>
+
+        <tr>
+          <td class="table-fit">
+            <input type="text" class="form-control-sm w-75" (change)="searchNumeroDocumento($event.target.value)">
+          </td>
+          <td class="table-fit">
+            <input type="text" class="form-control-sm w-75" (change)="searchRazonSocial($event.target.value)">
+          </td>
+          <td class="table-fit">
+            <input type="text" class="form-control-sm w-75" (change)="searchEstado($event.target.value)">
+          </td>
+          <td class="table-fit">
+            <input type="text" class="form-control-sm w-75" (change)="searchNotas($event.target.value)">
+          </td>
+          <td class="table-fit">
+            <input type="text" class="form-control-sm w-75" (change)="searchOc($event.target.value)">
+          </td>
+          <td class="table-fit">
+            <input type="text" class="form-control-sm w-75" (change)="searchValorBruto($event.target.value)">
+          </td>
+          <td class="table-fit">
+            <input type="text" class="form-control-sm w-75" (change)="searchImpuestos($event.target.value)">
+          </td>
+          <td class="table-fit">
+            <input type="text" class="form-control-sm w-75" (change)="searchNeto($event.target.value)">
+          </td>
+          <td class="table-fit">
+            <input type="text" class="form-control-sm w-75" (change)="searchDireccion($event.target.value)">
+          </td>
+
+        </tr>
+
         </thead>
+
 
         <tbody>
 
-        <tr *ngFor="let pedidoUnoEE of pedidosUnoEE">
-          <td>{{pedidoUnoEE.numeroDocumento}}</td>
-          <td>{{pedidoUnoEE.razonSocialCliente}}</td>
-          <td>{{pedidoUnoEE.estado}}</td>
-          <td>{{pedidoUnoEE.notas}}</td>
-          <td>{{pedidoUnoEE.ordenCompra}}</td>
-          <td>${{pedidoUnoEE.valorBrutoDocumento | currency: 0 : ""}}</td>
-          <td>${{pedidoUnoEE.valorImpDocumento | currency: 0 : ""}}</td>
-          <td>${{pedidoUnoEE.valorNetoDocumento | currency: 0 : ""}}</td>
-          <td>{{pedidoUnoEE.idPuntoEnvio}}</td>
-          <td>{{pedidoUnoEE.puntoEnvio}}</td>
-          <td>{{pedidoUnoEE.direccion1}}</td>
-          <td>{{pedidoUnoEE.fecha | date:"EEEE dd, MMMM yyyy"}}</td>
-          <td>{{pedidoUnoEE.fechaEntrega | date:"EEEE dd, MMMM yyyy"}}</td>
-          <td>
+        <tr *ngFor="let pedidoUnoEE of mf.data">
+          <td class="table-fit">{{pedidoUnoEE.numeroDocumento}}</td>
+          <td class="table-fit">{{pedidoUnoEE.razonSocialCliente}}</td>
+          <td class="table-fit">{{pedidoUnoEE.estado}}</td>
+          <td class="table-fit">{{pedidoUnoEE.notas}}</td>
+          <td class="table-fit">{{pedidoUnoEE.ordenCompra}}</td>
+          <td class="table-fit">${{pedidoUnoEE.valorBrutoDocumento | currency: 0 : ""}}</td>
+          <td class="table-fit">${{pedidoUnoEE.valorImpDocumento | currency: 0 : ""}}</td>
+          <td class="table-fit">${{pedidoUnoEE.valorNetoDocumento | currency: 0 : ""}}</td>
+<!--          <td class="table-fit">{{pedidoUnoEE.idPuntoEnvio}}</td>
+          <td class="table-fit">{{pedidoUnoEE.puntoEnvio}}</td>-->
+          <td class="table-fit">{{pedidoUnoEE.direccion1}}</td>
+          <td class="table-fit">{{pedidoUnoEE.fecha | date:"EEEE dd, MMMM yyyy"}}</td>
+          <td class="table-fit">{{pedidoUnoEE.fechaEntrega | date:"EEEE dd, MMMM yyyy"}}</td>
+          <td class="table-fit">
             <button class="btn btn-sm btn-primary btn-rounded"
                                   [routerLink]="['/detalle-historial-pedido', pedidoUnoEE.rowid]"
           >
@@ -104,7 +153,16 @@
           </button></td>
         </tr>
 
+
         </tbody>
+
+        <tfoot>
+        <tr>
+          <td colspan="12">
+            <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+          </td>
+        </tr>
+        </tfoot>
 
       </table>
 

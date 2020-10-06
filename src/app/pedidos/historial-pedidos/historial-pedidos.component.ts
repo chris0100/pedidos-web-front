@@ -24,6 +24,12 @@ export class HistorialPedidosComponent implements OnInit {
   // Spinner
   showSpinner: boolean;
 
+
+  // Parte nueva para ejemplo de manejo de tablas
+  data;
+  filterData;
+  // Parte nueva para ejemplo de manejo de tablas
+
   constructor(private pedidosService: PedidoService, private router: Router,
               public authService: AuthService) {
   }
@@ -36,6 +42,7 @@ export class HistorialPedidosComponent implements OnInit {
 
     // Si se encuentra el historial aun en el session storage
     this.pedidosUnoEE = this.pedidosService.obtenerPedidoUnoEEGuardadoSessionStorage();
+    this.data = this.pedidosService.obtenerPedidoUnoEEGuardadoSessionStorage();
 
     // Remover la busqueda del historial de pedidos, y listaItemProductosSelect
     sessionStorage.removeItem('listaItemPedidoSelect');
@@ -51,6 +58,7 @@ export class HistorialPedidosComponent implements OnInit {
     this.pedidosService.listaHistorialPedidosJava(this.authService.usuario.nit, this.fechaParametro1, this.fechaParametro2).subscribe(
       obj => {
         this.pedidosUnoEE = obj;
+        this.data = obj;
         console.log(this.pedidosUnoEE);
 
         // Se guarda el listado de pedidosUNOEE encontrado en la busqueda
@@ -64,6 +72,279 @@ export class HistorialPedidosComponent implements OnInit {
       });
     this.showSpinner = true;
   }
+
+
+
+
+  searchRazonSocial(term: string) {
+    console.log(this.filterData);
+    if (this.filterData === undefined) {
+      this.data = this.pedidosUnoEE;
+    }
+    else {
+      this.data = this.filterData;
+      console.log('usa de filter');
+    }
+
+
+    if (!term) {
+      console.log('no envia nada');
+      this.filterData = this.pedidosUnoEE;
+      this.data = this.filterData;
+    } else {
+      console.log('si envia algo');
+      this.filterData = this.data.filter(x => {
+        if (x.razonSocialCliente != null) {
+          return x.razonSocialCliente.toLowerCase().includes(term.toLowerCase());
+        }
+      });
+      this.data = this.filterData;
+      console.log(this.filterData);
+    }
+  }
+
+
+
+
+  searchNumeroDocumento(term: string) {
+    console.log(this.filterData);
+    if (this.filterData === undefined) {
+      this.data = this.pedidosUnoEE;
+    }
+    else {
+      this.data = this.filterData;
+      console.log('usa de filter');
+    }
+
+
+    if (!term) {
+      console.log('no envia nada');
+      this.filterData = this.pedidosUnoEE;
+      this.data = this.filterData;
+    } else {
+      console.log('si envia algo');
+      this.filterData = this.data.filter(x => {
+        if (x.numeroDocumento != null) {
+          return x.numeroDocumento.toLowerCase().includes(term.toLowerCase());
+        }
+      });
+      this.data = this.filterData;
+      console.log(this.filterData);
+    }
+  }
+
+
+
+  searchEstado(term: string) {
+    console.log(this.filterData);
+    if (this.filterData === undefined) {
+      this.data = this.pedidosUnoEE;
+    }
+    else {
+      this.data = this.filterData;
+      console.log('usa de filter');
+    }
+
+
+    if (!term) {
+      console.log('no envia nada');
+      this.filterData = this.pedidosUnoEE;
+      this.data = this.filterData;
+    } else {
+      console.log('si envia algo');
+      this.filterData = this.data.filter(x => {
+        if (x.estado != null) {
+          return x.estado.toLowerCase().includes(term.toLowerCase());
+        }
+      });
+      this.data = this.filterData;
+      console.log(this.filterData);
+    }
+  }
+
+
+
+
+  searchNotas(term: string) {
+    console.log(this.filterData);
+    if (this.filterData === undefined) {
+      this.data = this.pedidosUnoEE;
+    }
+    else {
+      this.data = this.filterData;
+      console.log('usa de filter');
+    }
+
+
+    if (!term) {
+      console.log('no envia nada');
+      this.filterData = this.pedidosUnoEE;
+      this.data = this.filterData;
+    } else {
+      console.log('si envia algo');
+      this.filterData = this.data.filter(x => {
+        if (x.notas != null) {
+          return x.notas.toLowerCase().includes(term.toLowerCase());
+        }
+      });
+      this.data = this.filterData;
+      console.log(this.filterData);
+    }
+  }
+
+
+
+
+  searchOc(term: string) {
+    console.log(this.filterData);
+    if (this.filterData === undefined) {
+      this.data = this.pedidosUnoEE;
+    }
+    else {
+      this.data = this.filterData;
+      console.log('usa de filter');
+    }
+
+
+    if (!term) {
+      console.log('no envia nada');
+      this.filterData = this.pedidosUnoEE;
+      this.data = this.filterData;
+    } else {
+      console.log('si envia algo');
+      this.filterData = this.data.filter(x => {
+        if (x.ordenCompra != null) {
+          return x.ordenCompra.toLowerCase().includes(term.toLowerCase());
+        }
+      });
+      this.data = this.filterData;
+      console.log(this.filterData);
+    }
+  }
+
+
+
+
+  searchValorBruto(term: string) {
+    console.log(this.filterData);
+    if (this.filterData === undefined) {
+      this.data = this.pedidosUnoEE;
+    }
+    else {
+      this.data = this.filterData;
+      console.log('usa de filter');
+    }
+
+
+    if (!term) {
+      console.log('no envia nada');
+      this.filterData = this.pedidosUnoEE;
+      this.data = this.filterData;
+    } else {
+      console.log('si envia algo');
+      this.filterData = this.data.filter(x => {
+        const valor = x.valorBrutoDocumento + '';
+        if (valor != null) {
+          return valor.toLowerCase().includes(term.toLowerCase());
+        }
+      });
+      this.data = this.filterData;
+      console.log(this.filterData);
+    }
+  }
+
+
+
+
+  searchNeto(term: string) {
+    console.log(this.filterData);
+    if (this.filterData === undefined) {
+      this.data = this.pedidosUnoEE;
+    }
+    else {
+      this.data = this.filterData;
+      console.log('usa de filter');
+    }
+
+
+    if (!term) {
+      console.log('no envia nada');
+      this.filterData = this.pedidosUnoEE;
+      this.data = this.filterData;
+    } else {
+      console.log('si envia algo');
+      this.filterData = this.data.filter(x => {
+        const valor = x.valorNetoDocumento + '';
+        if (valor != null) {
+          return valor.toLowerCase().includes(term.toLowerCase());
+        }
+      });
+      this.data = this.filterData;
+      console.log(this.filterData);
+    }
+  }
+
+
+
+  searchDireccion(term: string) {
+    console.log(this.filterData);
+    if (this.filterData === undefined) {
+      this.data = this.pedidosUnoEE;
+    }
+    else {
+      this.data = this.filterData;
+      console.log('usa de filter');
+    }
+
+
+    if (!term) {
+      console.log('no envia nada');
+      this.filterData = this.pedidosUnoEE;
+      this.data = this.filterData;
+    } else {
+      console.log('si envia algo');
+      this.filterData = this.data.filter(x => {
+        if (x.direccion1 != null) {
+          return x.direccion1.toLowerCase().includes(term.toLowerCase());
+        }
+      });
+      this.data = this.filterData;
+      console.log(this.filterData);
+    }
+  }
+
+
+  searchImpuestos(term: string) {
+    console.log(this.filterData);
+    if (this.filterData === undefined) {
+      this.data = this.pedidosUnoEE;
+    }
+    else {
+      this.data = this.filterData;
+      console.log('usa de filter');
+    }
+
+
+    if (!term) {
+      console.log('no envia nada');
+      this.filterData = this.pedidosUnoEE;
+      this.data = this.filterData;
+    } else {
+      console.log('si envia algo');
+      this.filterData = this.data.filter(x => {
+        const valor = x.valorImpDocumento + '';
+        if (valor != null) {
+          return valor.toLowerCase().includes(term.toLowerCase());
+        }
+      });
+      this.data = this.filterData;
+      console.log(this.filterData);
+    }
+  }
+
+
+
+
 
 
 }

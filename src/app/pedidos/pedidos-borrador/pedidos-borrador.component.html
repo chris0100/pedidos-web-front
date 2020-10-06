@@ -19,36 +19,63 @@
     <!-- Gird column -->
     <div class="col-md-12 mx-auto">
 
+      <h5 class="font-weight-bold my-4" *ngIf="data?.length>0">Total Pedidos en Borrador: {{data.length}}</h5>
 
-      <h5 class="font-weight-bold my-4" *ngIf="pedidos?.length>0">Total Pedidos en Borrador: {{pedidos.length}}</h5>
-
-
-  <table class="table table-striped table-hover">
+  <table class="table table-striped table-hover" [mfData]="data" #mf="mfDataTable" [mfRowsOnPage]="10">
     <thead>
     <tr>
-      <th scope="col" class="th-sm font-weight-bold">Código
-      </th>
-      <th scope="col" class="th-sm font-weight-bold">Orden de Compra
-      </th>
-      <th scope="col" class="th-sm font-weight-bold">Usuario Pedido
-      </th>
-      <th scope="col" class="th-sm font-weight-bold">Notas
-      </th>
-      <th scope="col" class="th-sm font-weight-bold">Sucursal a Facturar
-      </th>
-      <th scope="col" class="th-sm font-weight-bold">Sucursal a Remisionar
-      </th>
-      <th scope="col" class="th-sm font-weight-bold">Fecha de Pedido
-      </th>
-      <th scope="col" class="th-sm font-weight-bold">Estado
+      <th scope="col" class="th-sm font-weight-bold">
+        <mfDefaultSorter by="id">Código   <i class="fas fa-sort"></i></mfDefaultSorter>
       </th>
       <th scope="col" class="th-sm font-weight-bold">
+        <mfDefaultSorter by="oc">Orden de Compra   <i class="fas fa-sort"></i></mfDefaultSorter>
+      </th>
+      <th scope="col" class="th-sm font-weight-bold">
+        <mfDefaultSorter by="cliente">Usuario Pedido   <i class="fas fa-sort"></i></mfDefaultSorter>
+      </th>
+      <th scope="col" class="th-sm font-weight-bold">
+        <mfDefaultSorter by="nota">Notas   <i class="fas fa-sort"></i></mfDefaultSorter>
+      </th>
+      <th scope="col" class="th-sm font-weight-bold">
+        <mfDefaultSorter by="sucursalFacturar">Sucursal a Facturar   <i class="fas fa-sort"></i></mfDefaultSorter>
+      </th>
+      <th scope="col" class="th-sm font-weight-bold">
+        <mfDefaultSorter by="sucursalRemisionar">Sucursal a Remisionar   <i class="fas fa-sort"></i></mfDefaultSorter>
+      </th>
+      <th scope="col" class="th-sm font-weight-bold">
+        <mfDefaultSorter by="fechaPedido">Fecha<i class="fas fa-sort"></i></mfDefaultSorter>
+      </th>
+<!--      <th scope="col" class="th-sm font-weight-bold">
+        <mfDefaultSorter by="estado">Estado   <i class="fas fa-sort"></i></mfDefaultSorter>
+      </th>-->
+      <th scope="col" class="th-sm font-weight-bold">
+      </th>
+    </tr>
+
+    <tr>
+      <th scope="col" class="th-sm font-weight-bold">
+        <input type="text" class="form-control-sm w-50" (change)="searchCodigo($event.target.value)">
+      </th>
+      <th scope="col" class="th-sm font-weight-bold">
+        <input type="text" class="form-control-sm w-75" (change)="searchOrdenCompra($event.target.value)">
+      </th>
+      <th scope="col" class="th-sm font-weight-bold">
+        <input type="text" class="form-control-sm w-75" (change)="searchUsuarioPedido($event.target.value)">
+      </th>
+      <th scope="col" class="th-sm font-weight-bold">
+        <input type="text" class="form-control-sm w-75" (change)="searchNotas($event.target.value)">
+      </th>
+      <th scope="col" class="th-sm font-weight-bold">
+        <input type="text" class="form-control-sm w-75" (change)="searchSucursalFacturar($event.target.value)">
+      </th>
+      <th scope="col" class="th-sm font-weight-bold">
+        <input type="text" class="form-control-sm w-75" (change)="searchSucursalRemisionar($event.target.value)">
       </th>
     </tr>
     </thead>
 
     <tbody>
-    <tr *ngFor="let pedido of pedidos">
+    <tr *ngFor="let pedido of mf.data">
       <th scope="row">{{pedido.id}}</th>
       <td>{{pedido.oc}}</td>
       <td>{{pedido.idUsuario.cliente}}</td>
@@ -56,7 +83,7 @@
       <td>{{pedido.sucursalFacturar}}</td>
       <td>{{pedido.sucursalRemisionar}}</td>
       <td>{{pedido.fechaPedido | date:"EEEE dd, MMMM yyyy HH:mm"}}</td>
-      <td>{{pedido.estado? 'NO BORRADOR':'EN BORRADOR'}}</td>
+      <!--<td>{{pedido.estado? 'NO BORRADOR':'EN BORRADOR'}}</td>-->
       <td class="d-flex">
         <button class="btn btn-sm btn-warning btn-rounded"
                 [routerLink]="['/detalle-pedido-borrador',pedido.id]"
@@ -72,6 +99,14 @@
       </td>
     </tr>
     </tbody>
+
+    <tfoot>
+    <tr>
+      <td colspan="12">
+        <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+      </td>
+    </tr>
+    </tfoot>
 
   </table>
 </div>

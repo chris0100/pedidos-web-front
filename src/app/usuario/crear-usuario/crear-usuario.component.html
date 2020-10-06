@@ -109,31 +109,20 @@
           <!--LISTA DESPLEGABLE PARA AJUSTAR LOS QUE YA ESTAN SELECT-->
           <div class="col-lg-6">
 
-            <select class="mdb-select colorful-select dropdown-primary md-form" multiple
-                    searchable="Filtrar.." name="roles" [(ngModel)]="usuario.rolesPrincipal" required
-                    [value]="usuario.rolesPrincipal"
+            <select class="form-control" multiple
+                    name="rolesPrincipal" [(ngModel)]="usuario.rolesPrincipal" required
+                    ng
             >
-              <option value="" disabled selected>Seleccionar Roles</option>
               <option value="ADMIN" class="active selected active-check" selected>Admin - ROLE_ADMIN</option>
-              <option value="CLI" selected="selected">CLI - Cliente</option>
-              <option value="ITE">ITE - Validar item existente en unoee</option>
+              <option value="CLI">CLI - Cliente</option>
               <option value="JSER">JSER - Jefe servicio al cliente</option>
               <option value="PRO">PRO - Proveedor</option>
               <option value="SER">SER - Servicio al cliente</option>
-              <option value="USER">USER - ROLE_USER</option>
             </select>
-            <button class="btn-save btn btn-primary btn-sm">Guardar</button>
 
           </div>
 
         </div>
-
-<!--
-        <select class="selectpicker" multiple>
-          <option>Mustard</option>
-          <option>Ketchup</option>
-          <option>Relish</option>
-        </select>-->
 
 
 
@@ -301,3 +290,8 @@
     </div>
   </div>
 </div>
+
+
+
+
+

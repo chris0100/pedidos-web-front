@@ -21,6 +21,12 @@ export class PedidosBorradorComponent implements OnInit {
   // Spinner
   showSpinner: boolean;
 
+
+  // Parte nueva para ejemplo de manejo de tablas
+  data;
+  filterData;
+  // Parte nueva para ejemplo de manejo de tablas
+
   constructor(private pedidosService: PedidoService, private router: Router,
               public authService: AuthService) {
   }
@@ -35,8 +41,9 @@ export class PedidosBorradorComponent implements OnInit {
     // Obtener el listado de pedidos en borrador
     this.pedidosService.listarPedidosBorradorJava(this.authService.usuario.nit).subscribe(
       obj => {
+        this.data = obj;
         this.pedidos = obj;
-        console.log(this.pedidos);
+        console.log(this.data);
         this.showSpinner = false;
 
         // Se envia mensaje sino encuentra resultados
@@ -75,6 +82,190 @@ export class PedidosBorradorComponent implements OnInit {
       }
     });
   }
+
+
+
+
+  searchCodigo(term: string) {
+    console.log(this.filterData);
+    if (this.filterData === undefined) {
+      this.data = this.pedidos;
+    }
+    else {
+      this.data = this.filterData;
+      console.log('usa de filter');
+    }
+
+
+    if (!term) {
+      console.log('no envia nada');
+      this.filterData = this.pedidos;
+      this.data = this.filterData;
+    } else {
+      console.log('si envia algo');
+      this.filterData = this.data.filter(x => {
+        const idString = x.id + '';
+        console.log(idString);
+        if (idString != null) {
+          return idString.includes(term);
+        }
+      });
+      this.data = this.filterData;
+      console.log(this.filterData);
+    }
+  }
+
+
+
+
+  searchOrdenCompra(term: string) {
+    console.log(this.filterData);
+    if (this.filterData === undefined) {
+      this.data = this.pedidos;
+    }
+    else {
+      this.data = this.filterData;
+      console.log('usa de filter');
+    }
+
+
+    if (!term) {
+      console.log('no envia nada');
+      this.filterData = this.pedidos;
+      this.data = this.filterData;
+    } else {
+      console.log('si envia algo');
+      this.filterData = this.data.filter(x => {
+
+        if (x.oc != null) {
+          return x.oc.includes(term);
+        }
+      });
+      this.data = this.filterData;
+      console.log(this.filterData);
+    }
+  }
+
+
+
+  searchUsuarioPedido(term: string) {
+    console.log(this.filterData);
+    if (this.filterData === undefined) {
+      this.data = this.pedidos;
+    }
+    else {
+      this.data = this.filterData;
+      console.log('usa de filter');
+    }
+
+
+    if (!term) {
+      console.log('no envia nada');
+      this.filterData = this.pedidos;
+      this.data = this.filterData;
+    } else {
+      console.log('si envia algo');
+      this.filterData = this.data.filter(x => {
+
+        if (x.idUsuario.cliente != null) {
+          return x.idUsuario.cliente.includes(term);
+        }
+      });
+      this.data = this.filterData;
+      console.log(this.filterData);
+    }
+  }
+
+
+  searchNotas(term: string) {
+    console.log(this.filterData);
+    if (this.filterData === undefined) {
+      this.data = this.pedidos;
+    }
+    else {
+      this.data = this.filterData;
+      console.log('usa de filter');
+    }
+
+
+    if (!term) {
+      console.log('no envia nada');
+      this.filterData = this.pedidos;
+      this.data = this.filterData;
+    } else {
+      console.log('si envia algo');
+      this.filterData = this.data.filter(x => {
+
+        if (x.nota != null) {
+          return x.nota.includes(term);
+        }
+      });
+      this.data = this.filterData;
+      console.log(this.filterData);
+    }
+  }
+
+
+
+  searchSucursalFacturar(term: string) {
+    console.log(this.filterData);
+    if (this.filterData === undefined) {
+      this.data = this.pedidos;
+    }
+    else {
+      this.data = this.filterData;
+      console.log('usa de filter');
+    }
+
+
+    if (!term) {
+      console.log('no envia nada');
+      this.filterData = this.pedidos;
+      this.data = this.filterData;
+    } else {
+      console.log('si envia algo');
+      this.filterData = this.data.filter(x => {
+
+        if (x.sucursalFacturar != null) {
+          return x.sucursalFacturar.includes(term);
+        }
+      });
+      this.data = this.filterData;
+      console.log(this.filterData);
+    }
+  }
+
+
+
+  searchSucursalRemisionar(term: string) {
+    console.log(this.filterData);
+    if (this.filterData === undefined) {
+      this.data = this.pedidos;
+    }
+    else {
+      this.data = this.filterData;
+      console.log('usa de filter');
+    }
+
+
+    if (!term) {
+      console.log('no envia nada');
+      this.filterData = this.pedidos;
+      this.data = this.filterData;
+    } else {
+      console.log('si envia algo');
+      this.filterData = this.data.filter(x => {
+
+        if (x.sucursalRemisionar != null) {
+          return x.sucursalRemisionar.includes(term);
+        }
+      });
+      this.data = this.filterData;
+      console.log(this.filterData);
+    }
+  }
+
+
 
 }
 
