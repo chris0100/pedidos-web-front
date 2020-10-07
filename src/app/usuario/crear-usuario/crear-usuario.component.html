@@ -109,16 +109,39 @@
           <!--LISTA DESPLEGABLE PARA AJUSTAR LOS QUE YA ESTAN SELECT-->
           <div class="col-lg-6">
 
+            <div style="margin-bottom: -8px!important;">
+              <p *ngIf="usuario.rolesPrincipal.length>0" class="text-black-50">Roles Activos: </p>
+              <p *ngIf="!usuario.rolesPrincipal.length>0" class="text-black-50">Roles: <br></p>
+              <div class="d-flex" style="margin-top: -10px;" *ngIf="usuario.rolesPrincipal.length>0">
+                <p *ngFor="let obj of usuario.rolesPrincipal" class="text-primary font-weight-bold">{{obj}} &nbsp;&nbsp;&nbsp;</p>
+              </div>
+            </div>
+
+
+
             <select class="form-control" multiple
                     name="rolesPrincipal" [(ngModel)]="usuario.rolesPrincipal" required
-                    ng
             >
-              <option value="ADMIN" class="active selected active-check" selected>Admin - ROLE_ADMIN</option>
+              <option value="ADMIN">ADMIN - ROLE_ADMIN</option>
               <option value="CLI">CLI - Cliente</option>
               <option value="JSER">JSER - Jefe servicio al cliente</option>
               <option value="PRO">PRO - Proveedor</option>
               <option value="SER">SER - Servicio al cliente</option>
             </select>
+
+
+<!--            <select class="mdb-select md-form" multiple searchable="Buscar.."
+                    name="rolesPrincipal" [(ngModel)]="usuario.rolesPrincipal" required
+                    style="margin-top: -45px!important;"
+            >
+              <option value="" disabled selected>Seleccionar...</option>
+              <option value="ADMIN">ADMIN - ROLE_ADMIN</option>
+              <option value="CLI">CLI - Cliente</option>
+              <option value="JSER">JSER - Jefe servicio al cliente</option>
+              <option value="PRO">PRO - Proveedor</option>
+              <option value="SER">SER - Servicio al cliente</option>
+            </select>
+            <button class="btn-save btn btn-primary btn-sm">Guardar</button>-->
 
           </div>
 
