@@ -42,18 +42,20 @@ export class ProcesarTokenComponent implements OnInit {
     this.usuariosService.procesarTokenJava(token).subscribe(
       obj => {
         const respuesta = obj[0];
+        console.log(respuesta);
         // Si la respuesta contiene esas palabras significa que no se puede cambiar, porque esta vencido
         if (respuesta.includes('no se')) {
           swal('Error', 'El token se encuentra vencido, por favor intenta nuevamente', 'error');
-          this.router.navigate(['/reestablecer-password']);
+          this.router.navigate(['/reestablecer-password', 0]);
         }
         // Si la respuesta no co es porque no existe ese token
         else if (respuesta.includes('no co')) {
           swal('Error', 'No se ha encontrado el token, por favor envia una nueva solicitud para reestablecer tu contraseña', 'error');
-          this.router.navigate(['/reestablecer-password']);
+          this.router.navigate(['/reestablecer-password', 0]);
         }
         // Sino el token es correcto
         else {
+          swal('Correcto', 'Ingresa tu nueva contraseña para que sea actualizada correctamente', 'success');
           console.log('todo bien');
         }
       }

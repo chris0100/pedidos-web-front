@@ -9,12 +9,12 @@
   </div>
 
 
-  <div class="col-sm-8 d-flex align-items-center flex-column"
+  <div class="col-sm-8 d-flex align-items-center"
        style="background: url(resources/img/demo8/bg-10.jpg); background-position: center; background-size: cover">
 
-    <div class="alert bg-primary text-white mb-2 mx-auto mt-5">
+<!--    <div class="alert bg-primary text-white mb-2 mx-auto mt-5">
       <p>¡Bienvenido, para continuar solicitamos diligenciar la siguiente información de contacto! </p>
-    </div>
+    </div>-->
 
     <!-- Grid column -->
     <div class="col-md-6 mb-4 mx-auto">
@@ -56,47 +56,47 @@
                   <form method="post">
 
 
-                    <div class="md-form md-outline font-weight-bold" style="margin-top: 5px">
+                    <div class="md-form md-outline" style="margin-top: 5px">
                       <input type="text"
                              id="nombre"
                              class="form-control"
                              name="nombre"
                              [(ngModel)]="usuario.nombre"
                       >
-                      <label for="nombre">Nombre del responsable</label>
+                      <label for="nombre" class="active">Nombre del responsable</label>
                     </div>
 
 
-                    <div class="md-form md-outline font-weight-bold" style="margin-top: 5px">
+                    <div class="md-form md-outline" style="margin-top: 5px">
                       <input type="email"
                              id="email"
                              class="form-control"
                              name="email"
                              [(ngModel)]="usuario.email"
                       >
-                      <label for="email">Email del responsable</label>
+                      <label for="email" class="active">Email del responsable</label>
                     </div>
 
 
-                    <div class="md-form md-outline font-weight-bold" style="margin-top: 5px">
+                    <div class="md-form md-outline" style="margin-top: 5px">
                       <input type="password"
                              id="password"
                              class="form-control"
                              name="password"
                              [(ngModel)]="usuario.password"
                       >
-                      <label for="password">Contraseña</label>
+                      <label for="password" class="active">Contraseña</label>
                     </div>
 
 
-                    <div class="md-form md-outline font-weight-bold" style="margin-top: 5px">
+                    <div class="md-form md-outline" style="margin-top: 5px">
                       <input type="password"
                              id="repetirPassword"
                              class="form-control"
                              name="repetirPassword"
                              [(ngModel)]="repetirPassword"
                       >
-                      <label for="repetirPassword">Repetir contraseña</label>
+                      <label for="repetirPassword" class="active">Repetir contraseña</label>
                     </div>
 
 

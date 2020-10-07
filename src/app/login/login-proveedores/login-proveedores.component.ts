@@ -64,7 +64,7 @@ export class LoginProveedoresComponent implements OnInit {
             this.data.storage = this.usuario;
 
             // Se redirecciona a la pagina de registro nuevo usuario
-            swal('Correcto', 'Diligencia la siguiente información para completar tu usuario', 'success');
+            swal('Bienvenido', 'Para continuar solicitamos diligenciar la siguiente información de contacto', 'success');
             this.router.navigate(['/registro-usuario-nuevo']);
             return;
           }

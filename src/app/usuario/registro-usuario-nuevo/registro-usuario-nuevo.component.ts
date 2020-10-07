@@ -30,6 +30,13 @@ export class RegistroUsuarioNuevoComponent implements OnInit {
     if (this.data.storage === undefined) {
       console.log('toma del session storage');
       this.usuario = JSON.parse(sessionStorage.getItem('usuarioTemp'));
+      console.log(this.usuario);
+
+      // Si luego de ver que esta vacio no encuentra nada, envia error y redirecciona
+      if (this.usuario == null) {
+        swal('Error', 'No tiene privilegios para acceder a este sitio', 'error');
+        this.router.navigate(['/login']);
+      }
     }
 
     // sino encuentra los datos previamente cargados, va al session storage.
