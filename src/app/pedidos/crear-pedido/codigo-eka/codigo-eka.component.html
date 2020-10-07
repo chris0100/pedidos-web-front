@@ -39,13 +39,16 @@
 
   </div>
 
+  <!--tamaño-->
   <div class="col-md-4">
-    <label class="small"
-           style="margin-top: 9px; margin-left: 10px;z-index: 100"
+    <label
+           style="margin-top: 14px; margin-left: 10px;z-index: 100;
+           background-color: white!important; padding: 1px!important;
+            font-size: 12px!important;"
     >{{descripcionLabelExt1}}</label>
     <select class="form-control"
             [(ngModel)]="itemPedidoActual.descripcionExt1"
-            style="margin-top: -12px"
+            style="margin-top: -17px"
     >
       <option value="" disabled selected>Seleccionar</option>
       <option [value]="item" *ngFor="let item of listaExt1">{{item}}</option>

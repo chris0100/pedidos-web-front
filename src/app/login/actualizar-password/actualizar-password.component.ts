@@ -25,6 +25,7 @@ export class ActualizarPasswordComponent implements OnInit {
     this.usuario = new Usuario();
     this.password = '';
     this.repetirPassword = '';
+    swal('Bienvenido', 'Ingresa tu nueva contraseña para que sea actualizada correctamente', 'success');
   }
 
 
