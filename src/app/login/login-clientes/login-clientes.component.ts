@@ -92,7 +92,7 @@ export class LoginClientesComponent implements OnInit {
 
     // Revisa que no esten vacios los campos
     if (this.usuario.nit.trim() === '' || this.usuario.password.trim() === '' ) {
-      swal('Error de ingreso', 'Username o Password vacios', 'error');
+      swal('Error de ingreso', 'El nit o la contraseña se encuentran sin diligenciar', 'error');
       return;
     }
 
@@ -183,7 +183,7 @@ export class LoginClientesComponent implements OnInit {
       },
       error => {
         if (error.status === 400 || error.status === 401) {
-          swal('Error Login', 'Username o Password incorrectos', 'error');
+          swal('Error', 'Autenticación incorrecta', 'error');
         }
       }
     );

@@ -58,7 +58,7 @@
 
 <!--Navbar secundaria-->
 <!--Navbar-->
-<nav class="navbar navbar-expand-lg navbar-dark primary-color-dark fixed-top" style="margin-top: 70px; z-index: 1">
+<nav class="navbar navbar-expand-lg navbar-dark primary-color-dark fixed-top" style="margin-top: 70px; z-index: 2">
 
   <div class="container">
     <!-- Collapse button -->
@@ -80,9 +80,23 @@
         </li>
 
         <!-- Dropdown -->
-        <li class="nav-item dropdown multi-level-dropdown" *ngIf="authService.hasRole('CLI')" [ngClass]="{'active' : router.url.includes('pedido')}">
-          <a href="#" id="menu" data-toggle="dropdown" class="nav-link dropdown-toggle w-100">Gestión de Pedidos</a>
-          <ul class="dropdown-menu mt-2 rounded-0 primary-color-dark border-0 z-depth-1">
+        <li class="nav-item dropdown" *ngIf="authService.hasRole('CLI')" [ngClass]="{'active' : router.url.includes('pedido')}">
+          <a href="#" id="dropdownMenuLink" data-toggle="dropdown" class="nav-link dropdown-toggle w-100"
+             aria-haspopup="true" aria-expanded="false" role="button"
+          >
+            Gestión de Pedidos
+          </a>
+
+
+          <div class="dropdown-menu rounded-0 primary-color-dark border-0 z-depth-1" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item text-white" [routerLink]="['/crear-pedido']">Crear Nuevo Pedido</a>
+            <a class="dropdown-item text-white" [routerLink]="['/pedidos-borrador']">Pedidos en Borrador</a>
+            <a class="dropdown-item text-white" [routerLink]="['/historial-pedidos']">Historial de Pedidos</a>
+            <a class="dropdown-item text-white" [routerLink]="['/pedidos-verificacion']">Pedidos en Verificación</a>
+          </div>
+
+
+<!--          <ul class="dropdown-menu mt-2 rounded-0 primary-color-dark border-0 z-depth-1">
 
             <li class="dropdown-item dropdown-submenu" style="padding: 0.5rem 0 0.5rem 0!important;">
               <a [routerLink]="['/crear-pedido']" class="text-white w-100" >Crear Nuevo Pedido</a>
@@ -100,7 +114,9 @@
               <a [routerLink]="['/pedidos-verificacion']" class="text-white w-100">Pedidos en Verificación</a>
             </li>
 
-          </ul>
+          </ul>-->
+
+
         </li>
 
         <li class="nav-item" *ngIf="authService.hasRole('ADMIN')" [ngClass]="{'active' : router.url.includes('validacion')}">
