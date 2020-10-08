@@ -25,7 +25,8 @@ export class ReestablecerPasswordComponent implements OnInit {
     // Ejecuta el script
     new login();
     this.recibeId();
-    swal('Restablecer Contraseña', 'Si ha perdido su contraseña tan solo debe diligenciar la siguiente información', 'warning');
+    // tslint:disable-next-line:max-line-length
+    swal('Actualizar Contraseña', 'Estimado usuario, su contraseña ha vencido, por favor diligencia los siguientes campos para ingresar', 'warning');
   }
 
 

@@ -23,7 +23,7 @@ export class PrepareVerErrorComponent implements OnInit {
   itemsPedidoError: ItemPedido[];
   comeback: string;
   idLocal: number;
-  textoConvertido: string;
+  arr: string[];  // Arreglo que extrae los mensajes de error xml
 
 
   // Spinner
@@ -36,18 +36,13 @@ export class PrepareVerErrorComponent implements OnInit {
   }
 
 
-
-
-
   ngOnInit() {
     this.showSpinner = true;
     this.cargarPedidoError();
+    this.arr = [];
     new tooltip();
 
   }
-
-
-
 
 
 
@@ -131,13 +126,22 @@ export class PrepareVerErrorComponent implements OnInit {
     this.pedidosService.obtenerPedidoVBJava(this.idLocal).subscribe(
       obj => {
         this.pedidoError = obj;
-        console.log(this.pedidoError);
 
         this.itemsPedidoError = obj.listaItemPedido;
-        console.log(this.itemsPedidoError);
 
-        this.textoConvertido = this.pedidoError.mensajeWB;
-        console.log(this.textoConvertido);
+        const lop = this.pedidoError.mensajeWB.split('f_detalle>');
+        let a = 1;
+
+        lop.filter(x => {
+          if (a % 2 === 0) {
+            a++;
+            this.arr.push(x.substring(0, x.length - 2));
+            console.log(this.arr);
+          } else {
+            a++;
+          }
+        });
+
         this.showSpinner = false;
       });
     this.showSpinner = true;

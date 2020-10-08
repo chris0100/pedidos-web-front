@@ -183,7 +183,8 @@ export class LoginClientesComponent implements OnInit {
       },
       error => {
         if (error.status === 400 || error.status === 401) {
-          swal('Error', 'Autenticación incorrecta', 'error');
+          // swal('Error', 'Autenticación incorrecta', 'error');
+          this.router.navigate(['/restablecer-password', 0]);
         }
       }
     );

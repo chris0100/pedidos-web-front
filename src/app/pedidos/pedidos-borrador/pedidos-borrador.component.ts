@@ -59,7 +59,7 @@ export class PedidosBorradorComponent implements OnInit {
   eliminarPedidoBorrador(pedidoBorrador: Pedido): void {
     swal({
       title: 'Eliminar Borrador',
-      text: `¿Desea eliminar el Borrador con código ${pedidoBorrador.id}?`,
+      text: `¿Desea eliminar el pedido en borrador con código ${pedidoBorrador.id}?`,
       type: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -74,7 +74,7 @@ export class PedidosBorradorComponent implements OnInit {
       if (result.value) {
         this.pedidosService.eliminarBorradorJava(pedidoBorrador.id).subscribe(
           () => {
-            this.pedidos = this.pedidos.filter(obj => obj !== pedidoBorrador);
+            this.data = this.data.filter(obj => obj !== pedidoBorrador);
             swal('Borrador Eliminado!',
               `El borrador con código ${pedidoBorrador.id} ha sido eliminado con éxito`,
               'success');

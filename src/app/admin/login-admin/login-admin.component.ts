@@ -67,8 +67,8 @@ export class LoginAdminComponent implements OnInit {
       },
       error => {
         if (error.status === 400 || error.status === 401) {
-          swal('Error Login', 'Username o Password incorrectos', 'error');
-          return;
+          // swal('Error Login', 'Username o Password incorrectos', 'error');
+          this.router.navigate(['/restablecer-password', 1]);
         }
       });
   }

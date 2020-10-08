@@ -1,14 +1,12 @@
 <app-header></app-header>
 
 
-
 <!-- CARD DE CONTENIDO SEGUN PAGINA-->
 <div class="card mx-auto mb-5" style="width: 90%; margin-top: 200px;min-height: 70vh">
 
   <div class="card-header warning-color-dark">
     <h5 class="font-weight-bold text-black">Lista de pedidos con errores</h5>
   </div>
-
 
 
   <div class="card-body">
@@ -23,113 +21,117 @@
       </div>
 
 
-
       <h5 class="font-weight-bold my-4" *ngIf="data?.length>0">Total Pedidos con errores: {{data.length}}</h5>
 
 
+      <div class="table-responsive">
 
-      <table class="table-striped table-hover table table-responsive table-fixed"
-             [mfData]="data" #mf="mfDataTable" [mfRowsOnPage]="10">
+        <table class="table-striped table-hover table"
+               [mfData]="data" #mf="mfDataTable" [mfRowsOnPage]="10">
 
-        <thead>
-        <tr>
-          <th scope="col" class="th-sm font-weight-bold">
-            <mfDefaultSorter by="id">Consecutivo <i class="fas fa-sort"></i></mfDefaultSorter>
-          </th>
+          <thead>
+          <tr>
+            <th scope="col" class="th-sm font-weight-bold">
+              <mfDefaultSorter by="id">Consecutivo <i class="fas fa-sort"></i></mfDefaultSorter>
+            </th>
 
-          <th scope="col" class="th-sm font-weight-bold">
-            <mfDefaultSorter by="oc">Orden de Compra <i class="fas fa-sort"></i></mfDefaultSorter>
-          </th>
+            <th scope="col" class="th-sm font-weight-bold">
+              <mfDefaultSorter by="oc">Orden de Compra <i class="fas fa-sort"></i></mfDefaultSorter>
+            </th>
 
-          <th scope="col" class="th-sm font-weight-bold">
-            <mfDefaultSorter by="nombre">Usuario Pedido <i class="fas fa-sort"></i></mfDefaultSorter>
-          </th>
+            <th scope="col" class="th-sm font-weight-bold">
+              <mfDefaultSorter by="nombre">Usuario Pedido <i class="fas fa-sort"></i></mfDefaultSorter>
+            </th>
 
-          <th scope="col" class="th-sm font-weight-bold">
-            <mfDefaultSorter by="nota">Notas <i class="fas fa-sort"></i></mfDefaultSorter>
-          </th>
+            <th scope="col" class="th-sm font-weight-bold">
+              <mfDefaultSorter by="nota">Notas <i class="fas fa-sort"></i></mfDefaultSorter>
+            </th>
 
-          <th scope="col" class="th-sm font-weight-bold">
-            <mfDefaultSorter by="sucursalFacturar">Sucursal a Facturar <i class="fas fa-sort"></i></mfDefaultSorter>
-          </th>
+            <th scope="col" class="th-sm font-weight-bold">
+              <mfDefaultSorter by="sucursalFacturar">Sucursal a Facturar <i class="fas fa-sort"></i></mfDefaultSorter>
+            </th>
 
-          <th scope="col" class="th-sm font-weight-bold">
-            <mfDefaultSorter by="sucursalRemisionar">Sucursal a Remisionar <i class="fas fa-sort"></i></mfDefaultSorter>
-          </th>
+            <th scope="col" class="th-sm font-weight-bold">
+              <mfDefaultSorter by="sucursalRemisionar">Sucursal a Remisionar <i class="fas fa-sort"></i>
+              </mfDefaultSorter>
+            </th>
 
-          <th scope="col" class="th-sm font-weight-bold">
-            <mfDefaultSorter by="fechaPedido">Fecha de Pedido <i class="fas fa-sort"></i></mfDefaultSorter>
-          </th>
+            <th scope="col" class="th-sm font-weight-bold">
+              <mfDefaultSorter by="fechaPedido">Fecha de Pedido <i class="fas fa-sort"></i></mfDefaultSorter>
+            </th>
 
-          <th scope="col" class="th-sm font-weight-bold">
-            <mfDefaultSorter by="estado">Estado <i class="fas fa-sort"></i></mfDefaultSorter>
-          </th>
+            <th scope="col" class="th-sm font-weight-bold">
+              <mfDefaultSorter by="estado">Estado <i class="fas fa-sort"></i></mfDefaultSorter>
+            </th>
 
-          <th class="th-sm">
-          </th>
-        </tr>
-
-
-        <tr>
-          <th scope="col" class="th-sm font-weight-bold">
-            <input type="text" class="form-control-sm w-50" (change)="searchConsecutivo($event.target.value)">
-          </th>
-          <th scope="col" class="th-sm font-weight-bold">
-            <input type="text" class="form-control-sm w-75" (change)="searchOrdenCompra($event.target.value)">
-          </th>
-          <th scope="col" class="th-sm font-weight-bold">
-            <input type="text" class="form-control-sm w-75" (change)="searchUsuario($event.target.value)">
-          </th>
-          <th scope="col" class="th-sm font-weight-bold">
-            <input type="text" class="form-control-sm w-75" (change)="searchNotas($event.target.value)">
-          </th>
-          <th scope="col" class="th-sm font-weight-bold">
-            <input type="text" class="form-control-sm w-75" (change)="searchSucursalFacturar($event.target.value)">
-          </th>
-          <th scope="col" class="th-sm font-weight-bold">
-            <input type="text" class="form-control-sm w-75" (change)="searchSucursalRemisionar($event.target.value)">
-          </th>
-
-          <th></th>
-
-          <th></th>
-
-          <th></th>
-        </tr>
-        </thead>
-
-        <tbody>
-
-        <tr *ngFor="let pedido of mf.data">
-          <td>{{pedido.id}}</td>
-          <td>{{pedido.oc}}</td>
-          <td>{{pedido.idUsuario.nombre}}</td>
-          <td>{{pedido.nota}}</td>
-          <td>{{pedido.sucursalFacturar}}</td>
-          <td>{{pedido.sucursalRemisionar}}</td>
-          <td>{{pedido.fechaPedido | date:"EEEE dd, MMMM yyyy HH:mm"}}</td>
-          <td>{{pedido.estado==0? 'EN BORRADOR':'APROBADO'}}</td>
-          <td>
-            <button class="btn btn-sm btn-primary btn-rounded"
-                    [routerLink]="['/prepare-ver-error',pedido.id,'le']"
-            >
-              <i class="fas fa-search"></i>
-            </button></td>
-        </tr>
-
-        </tbody>
+            <th class="th-sm">
+            </th>
+          </tr>
 
 
-        <tfoot>
-        <tr>
-          <td colspan="12">
-            <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
-          </td>
-        </tr>
-        </tfoot>
+          <tr>
+            <th scope="col" class="th-sm font-weight-bold">
+              <input type="text" class="form-control-sm w-50" (change)="searchConsecutivo($event.target.value)">
+            </th>
+            <th scope="col" class="th-sm font-weight-bold">
+              <input type="text" class="form-control-sm w-75" (change)="searchOrdenCompra($event.target.value)">
+            </th>
+            <th scope="col" class="th-sm font-weight-bold">
+              <input type="text" class="form-control-sm w-75" (change)="searchUsuario($event.target.value)">
+            </th>
+            <th scope="col" class="th-sm font-weight-bold">
+              <input type="text" class="form-control-sm w-75" (change)="searchNotas($event.target.value)">
+            </th>
+            <th scope="col" class="th-sm font-weight-bold">
+              <input type="text" class="form-control-sm w-75" (change)="searchSucursalFacturar($event.target.value)">
+            </th>
+            <th scope="col" class="th-sm font-weight-bold">
+              <input type="text" class="form-control-sm w-75" (change)="searchSucursalRemisionar($event.target.value)">
+            </th>
+
+            <th></th>
+
+            <th></th>
+
+            <th></th>
+          </tr>
+          </thead>
+
+          <tbody>
+
+          <tr *ngFor="let pedido of mf.data">
+            <td>{{pedido.id}}</td>
+            <td>{{pedido.oc}}</td>
+            <td>{{pedido.idUsuario.nombre}}</td>
+            <td>{{pedido.nota}}</td>
+            <td>{{pedido.sucursalFacturar}}</td>
+            <td>{{pedido.sucursalRemisionar}}</td>
+            <td>{{pedido.fechaPedido | date:"EEEE dd, MMMM yyyy HH:mm"}}</td>
+            <td>{{pedido.estado == 0 ? 'EN BORRADOR' : 'APROBADO'}}</td>
+            <td>
+              <button class="btn btn-sm btn-primary btn-rounded"
+                      [routerLink]="['/prepare-ver-error',pedido.id,'le']"
+              >
+                <i class="fas fa-search"></i>
+              </button>
+            </td>
+          </tr>
+
+          </tbody>
 
 
-      </table>
+          <tfoot>
+          <tr>
+            <td colspan="12">
+              <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+            </td>
+          </tr>
+          </tfoot>
+
+
+        </table>
+
+      </div>
 
     </div>
 
