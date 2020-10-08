@@ -48,7 +48,7 @@ export class PedidosBorradorComponent implements OnInit {
 
         // Se envia mensaje sino encuentra resultados
         if (this.pedidos == null || this.pedidos.length === 0) {
-          swal('Advertencia', 'No se han encontrado resultados en la busqueda', 'warning');
+          swal('Advertencia', 'No se han encontrado resultados en la búsqueda', 'warning');
         }
       });
     this.showSpinner = true;

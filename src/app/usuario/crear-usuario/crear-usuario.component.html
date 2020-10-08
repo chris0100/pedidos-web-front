@@ -111,7 +111,7 @@
 
             <div style="margin-bottom: -8px!important;">
               <p *ngIf="usuario.rolesPrincipal.length>0" class="text-black-50">Roles Activos: </p>
-              <p *ngIf="!usuario.rolesPrincipal.length>0" class="text-black-50">Roles: <br></p>
+              <p *ngIf="usuario.rolesPrincipal.length<=0" class="text-black-50">Roles: <br></p>
               <div class="d-flex" style="margin-top: -10px;" *ngIf="usuario.rolesPrincipal.length>0">
                 <p *ngFor="let obj of usuario.rolesPrincipal" class="text-primary font-weight-bold">{{obj}} &nbsp;&nbsp;&nbsp;</p>
               </div>

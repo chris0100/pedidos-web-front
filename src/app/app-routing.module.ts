@@ -34,7 +34,7 @@ const routes: Routes = [
   {path: '', redirectTo: '/login', pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
   {path: 'login-admin', component: LoginAdminComponent},
-  {path: 'reestablecer-password/:id', component: ReestablecerPasswordComponent},
+  {path: 'restablecer-password/:id', component: ReestablecerPasswordComponent},
   {path: 'procesar-token/:id', component: ProcesarTokenComponent},
   {path: 'actualizar-password', component: ActualizarPasswordComponent, canActivate: [RoleGuard, AuthGuard], data: {roles: ['ADMIN', 'CLI', 'JSER', 'PRO', 'SER']}},
   {path: 'registro-usuario-nuevo', component: RegistroUsuarioNuevoComponent},

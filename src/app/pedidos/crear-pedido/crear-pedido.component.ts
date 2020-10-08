@@ -152,14 +152,12 @@ export class CrearPedidoComponent implements OnInit {
 
   // Se retorna a una ventana de volver a editar
   volverAEditar(): void {
-    console.log('se retorn a la ventana de volver a editar');
     this.habilitaVerificacionPedido = false;
   }
 
 
   // Añadir pedido como borrador
   addPedidoBorrador(): void {
-    console.log('se procede a añadir el pedido como borrador');
     this.pedidoActual.estado = 0;
     this.pedidoActual.listaItemPedido = this.listaItemPedidoSelect;
     // this.pedidoActual.nota = this.notas;
@@ -176,7 +174,7 @@ export class CrearPedidoComponent implements OnInit {
       obj => {
         console.log(obj);
 
-        swal('Correcto', 'El Borrador ha sido creado con exito', 'success');
+        swal('Correcto', 'El Borrador ha sido creado con éxito', 'success');
         this.router.navigate(['/pedidos-borrador']);
 
         this.pedidoActual.idUsuario.roles = roles;

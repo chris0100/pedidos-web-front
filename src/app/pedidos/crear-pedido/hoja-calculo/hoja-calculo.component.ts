@@ -187,7 +187,7 @@ export class HojaCalculoComponent implements OnInit {
         // tslint:disable-next-line:one-line max-line-length
         if ((contador < 1 && !obj.includes('CÓDIGO') || (contador === 2 && !obj.includes('CANTIDAD'))
           || (contador === 1 && !obj.includes('CÓDIGO') && this.areaHoja.includes('CÓDIGO')) || this.areaHoja.includes('ERROR'))) {
-          swal('Error de carga', 'El archivo cargado contiene errores, verificalo por favor', 'error');
+          swal('Error de carga', 'El archivo cargado contiene errores, verifícalo por favor', 'error');
           this.errorLectura = true;
           this.listaEx = [];
 
@@ -302,7 +302,7 @@ export class HojaCalculoComponent implements OnInit {
                 });
             }
             // Mostrar mensaje de exito
-            swal('Correcto', `Los items se han añadido exitosamente`, 'success');
+            swal('Correcto', `Los ítems se han añadido exitosamente`, 'success');
 
             // Se inicializa la lista de excel
             this.listaItemsExcel = [];
@@ -324,9 +324,9 @@ export class HojaCalculoComponent implements OnInit {
 
             // Evalua si hay un solo error o varios errores
             if (countErr === 1) {
-              swal('Error', 'No se encuentra el siguiente codigo: ' + listaErroresCodBarras, 'error');
+              swal('Error', 'No se encuentra el siguiente código: ' + listaErroresCodBarras, 'error');
             } else {
-              swal('Error', 'No se encuentran los siguientes codigos: ' + listaErroresCodBarras, 'error');
+              swal('Error', 'No se encuentran los siguientes códigos: ' + listaErroresCodBarras, 'error');
             }
             // Se reestablece inactivacion de boton procesar archivo
             this.errorLectura = true;
@@ -366,7 +366,7 @@ export class HojaCalculoComponent implements OnInit {
     this.listaInputItemPedidoSelect.splice(index, 1);  // borrar elemento
 
     // Mostrar mensaje satisfactorio de elemento eliminado
-    swal('Correcto', `Se ha eliminado el item ${nombreItemEliminar} exitosamente`, 'success');
+    swal('Correcto', `Se ha eliminado el ítem ${nombreItemEliminar} exitosamente`, 'success');
 
     // Guardar en el session storage
     this.pedidosService.guardarListaItemPedidoSelectStorage(this.listaInputItemPedidoSelect);
@@ -391,7 +391,7 @@ export class HojaCalculoComponent implements OnInit {
         this.listaInputItemPedidoSelect.splice(index, 1);  // borrar elemento
 
         // Mostrar mensaje satisfactorio de elemento eliminado
-        swal('Correcto', `Se ha eliminado el item ${nombreItemEliminar} exitosamente`, 'success');
+        swal('Correcto', `Se ha eliminado el ítem ${nombreItemEliminar} exitosamente`, 'success');
         console.log(this.listaInputItemPedidoSelect);
 
         // Guardar en el session storage

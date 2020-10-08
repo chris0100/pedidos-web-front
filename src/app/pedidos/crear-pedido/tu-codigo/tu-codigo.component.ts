@@ -151,7 +151,7 @@ export class TuCodigoComponent implements OnInit {
     this.listaItemPedidoSelect = this.pedidosService.obtenerListaItemPedidoSelectStoragee();
 
     // Mostrar mensaje de exito
-    swal('Correcto', `Se ha añadido el item ${this.itemPedidoActual.descripcion} exitosamente`, 'success');
+    swal('Correcto', `Se ha añadido el ítem ${this.itemPedidoActual.descripcion} exitosamente`, 'success');
 
     // Se unicializan campos
     this.limpiarCampos();
@@ -200,7 +200,7 @@ export class TuCodigoComponent implements OnInit {
     this.listaInputItemPedidoSelect.splice(index, 1);  // borrar elemento
 
     // Mostrar mensaje satisfactorio de elemento eliminado
-    swal('Correcto', `Se ha eliminado el item ${nombreItemEliminar} exitosamente`, 'success');
+    swal('Correcto', `Se ha eliminado el ítem ${nombreItemEliminar} exitosamente`, 'success');
     console.log(this.listaInputItemPedidoSelect);
 
     // Guardar en el session storage
@@ -226,7 +226,7 @@ export class TuCodigoComponent implements OnInit {
         this.listaInputItemPedidoSelect.splice(index, 1);  // borrar elemento
 
         // Mostrar mensaje satisfactorio de elemento eliminado
-        swal('Correcto', `Se ha eliminado el item ${nombreItemEliminar} exitosamente`, 'success');
+        swal('Correcto', `Se ha eliminado el ítem ${nombreItemEliminar} exitosamente`, 'success');
         console.log(this.listaInputItemPedidoSelect);
 
         // Guardar en el session storage

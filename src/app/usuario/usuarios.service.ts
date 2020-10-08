@@ -13,7 +13,7 @@ export class UsuariosService {
 
   public usuario: Usuario;
 
-  url = 'http://localhost:8080';
+  url = 'http://192.168.160.156:8080';
 
   constructor(private http: HttpClient, public authService: AuthService,
               private router: Router) {
