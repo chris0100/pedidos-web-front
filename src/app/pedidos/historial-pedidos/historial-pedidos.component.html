@@ -14,25 +14,29 @@
   </div>
 
 
-  <div class="d-flex pt-5 pl-5">
-    <div class="md-form mr-5">
-      <input placeholder=" " type="date" id="date-picker-example" class="form-control datepicker" [(ngModel)]="fechaParametro1">
-      <label for="date-picker-example">Fecha Inicio</label>
-    </div>
+  <div class="pt-5 pl-5 row">
 
-    <div class="md-form mr-5">
-      <input placeholder=" " type="date" id="date-picker-example2" class="form-control datepicker" [(ngModel)]="fechaParametro2">
-      <label for="date-picker-example2">Fecha Final</label>
-    </div>
+      <div class="md-form mr-5 col-md-2">
+        <input placeholder=" " type="date" id="date-picker-example" class="form-control datepicker"
+               [(ngModel)]="fechaParametro1">
+        <label for="date-picker-example">Fecha Inicio</label>
+      </div>
+
+      <div class="md-form mr-5 col-md-2">
+        <input placeholder=" " type="date" id="date-picker-example2" class="form-control datepicker"
+               [(ngModel)]="fechaParametro2">
+        <label for="date-picker-example2">Fecha Final</label>
+      </div>
 
 
-    <div>
-      <button class="btn btn-primary btn-rounded" (click)="consultar()" [disabled]="fechaParametro1.length==0 || fechaParametro2.length==0"><i class="fas fa-search"></i> Consultar</button>
-    </div>
+      <div>
+        <button class="btn btn-primary btn-rounded" (click)="consultar()"
+                [disabled]="fechaParametro1.length==0 || fechaParametro2.length==0"><i class="fas fa-search"></i>
+          Consultar
+        </button>
+      </div>
+
   </div>
-
-
-
 
 
   <!-- Tab panels -->
@@ -46,136 +50,140 @@
       <h5 class="font-weight-bold my-4">Total Pedidos: {{data.length}}</h5>
 
 
+      <div class="table-responsive">
 
-      <table class="table table-striped table-hover table-responsive table-fit" [mfData]="data" #mf="mfDataTable" [mfRowsOnPage]="5"
-        style="padding: 0px!important;" border="0" cellspacing="0" cellpadding="0"
-      >
+        <table class="table table-striped table-hover table-fit" [mfData]="data" #mf="mfDataTable" [mfRowsOnPage]="5"
+               style="padding: 0px!important;" border="0" cellspacing="0" cellpadding="0"
+        >
 
-        <thead>
-        <tr>
-          <th scope="col" class="font-weight-bold table-fit">
-            Numero Documento
-          </th>
+          <thead>
+          <tr>
+            <th scope="col" class="font-weight-bold table-fit">
+              Numero Documento
+            </th>
 
-          <th scope="col" class="font-weight-bold table-fit">
-            Razon Social
-          </th>
+            <th scope="col" class="font-weight-bold table-fit">
+              Razon Social
+            </th>
 
-          <th scope="col" class="font-weight-bold table-fit">
-            Estado
-          </th>
+            <th scope="col" class="font-weight-bold table-fit">
+              Estado
+            </th>
 
-          <th scope="col" class="font-weight-bold table-fit">
-            Notas
-          </th>
+            <th scope="col" class="font-weight-bold table-fit">
+              Notas
+            </th>
 
-          <th scope="col" class="font-weight-bold table-fit">
-            Orden de Compra
-          </th>
+            <th scope="col" class="font-weight-bold table-fit">
+              Orden de Compra
+            </th>
 
-          <th scope="col" class="font-weight-bold table-fit">
-            Valor Bruto Pedido
-          </th>
+            <th scope="col" class="font-weight-bold table-fit">
+              Valor Bruto Pedido
+            </th>
 
-          <th scope="col" class="font-weight-bold table-fit">
-            Valor Impuestos Pedido
-          </th>
+            <th scope="col" class="font-weight-bold table-fit">
+              Valor Impuestos Pedido
+            </th>
 
-          <th scope="col" class="font-weight-bold table-fit">
-            Valor Neto Pedido
-          </th>
+            <th scope="col" class="font-weight-bold table-fit">
+              Valor Neto Pedido
+            </th>
 
-<!--          <th scope="col" class="font-weight-bold table-fit">
-            Punto de Envio
-          </th>
-          <th scope="col" class="font-weight-bold table-fit">
-            Descripción Punto Envio
-          </th>-->
-          <th scope="col" class="font-weight-bold table-fit">
-          Dirección de Envio
-          </th>
+            <!--          <th scope="col" class="font-weight-bold table-fit">
+                        Punto de Envio
+                      </th>
+                      <th scope="col" class="font-weight-bold table-fit">
+                        Descripción Punto Envio
+                      </th>-->
+            <th scope="col" class="font-weight-bold table-fit">
+              Dirección de Envio
+            </th>
 
-          <th scope="col" class="font-weight-bold table-fit">
-            Fecha de Creación
-          </th>
+            <th scope="col" class="font-weight-bold table-fit">
+              Fecha de Creación
+            </th>
 
-          <th scope="col" class="font-weight-bold table-fit">
-            Fecha Entrega
-          </th>
+            <th scope="col" class="font-weight-bold table-fit">
+              Fecha Entrega
+            </th>
 
-          <th></th>
-        </tr>
+            <th></th>
+          </tr>
 
-        <tr>
-          <td class="table-fit">
-            <input type="text" class="form-control-sm w-75" (change)="searchNumeroDocumento($event.target.value)">
-          </td>
-          <td class="table-fit">
-            <input type="text" class="form-control-sm w-75" (change)="searchRazonSocial($event.target.value)">
-          </td>
-          <td class="table-fit">
-            <input type="text" class="form-control-sm w-75" (change)="searchEstado($event.target.value)">
-          </td>
-          <td class="table-fit">
-            <input type="text" class="form-control-sm w-75" (change)="searchNotas($event.target.value)">
-          </td>
-          <td class="table-fit">
-            <input type="text" class="form-control-sm w-75" (change)="searchOc($event.target.value)">
-          </td>
-          <td class="table-fit">
-            <input type="text" class="form-control-sm w-75" (change)="searchValorBruto($event.target.value)">
-          </td>
-          <td class="table-fit">
-            <input type="text" class="form-control-sm w-75" (change)="searchImpuestos($event.target.value)">
-          </td>
-          <td class="table-fit">
-            <input type="text" class="form-control-sm w-75" (change)="searchNeto($event.target.value)">
-          </td>
-          <td class="table-fit">
-            <input type="text" class="form-control-sm w-75" (change)="searchDireccion($event.target.value)">
-          </td>
+          <tr>
+            <td class="table-fit">
+              <input type="text" class="form-control-sm w-75" (change)="searchNumeroDocumento($event.target.value)">
+            </td>
+            <td class="table-fit">
+              <input type="text" class="form-control-sm w-75" (change)="searchRazonSocial($event.target.value)">
+            </td>
+            <td class="table-fit">
+              <input type="text" class="form-control-sm w-75" (change)="searchEstado($event.target.value)">
+            </td>
+            <td class="table-fit">
+              <input type="text" class="form-control-sm w-75" (change)="searchNotas($event.target.value)">
+            </td>
+            <td class="table-fit">
+              <input type="text" class="form-control-sm w-75" (change)="searchOc($event.target.value)">
+            </td>
+            <td class="table-fit">
+              <input type="text" class="form-control-sm w-75" (change)="searchValorBruto($event.target.value)">
+            </td>
+            <td class="table-fit">
+              <input type="text" class="form-control-sm w-75" (change)="searchImpuestos($event.target.value)">
+            </td>
+            <td class="table-fit">
+              <input type="text" class="form-control-sm w-75" (change)="searchNeto($event.target.value)">
+            </td>
+            <td class="table-fit">
+              <input type="text" class="form-control-sm w-75" (change)="searchDireccion($event.target.value)">
+            </td>
 
-        </tr>
+          </tr>
 
-        </thead>
-
-
-        <tbody>
-
-        <tr *ngFor="let pedidoUnoEE of mf.data">
-          <td class="table-fit">{{pedidoUnoEE.numeroDocumento}}</td>
-          <td class="table-fit">{{pedidoUnoEE.razonSocialCliente}}</td>
-          <td class="table-fit">{{pedidoUnoEE.estado}}</td>
-          <td class="table-fit">{{pedidoUnoEE.notas}}</td>
-          <td class="table-fit">{{pedidoUnoEE.ordenCompra}}</td>
-          <td class="table-fit">${{pedidoUnoEE.valorBrutoDocumento | currency: 0 : ""}}</td>
-          <td class="table-fit">${{pedidoUnoEE.valorImpDocumento | currency: 0 : ""}}</td>
-          <td class="table-fit">${{pedidoUnoEE.valorNetoDocumento | currency: 0 : ""}}</td>
-<!--          <td class="table-fit">{{pedidoUnoEE.idPuntoEnvio}}</td>
-          <td class="table-fit">{{pedidoUnoEE.puntoEnvio}}</td>-->
-          <td class="table-fit">{{pedidoUnoEE.direccion1}}</td>
-          <td class="table-fit">{{pedidoUnoEE.fecha | date:"EEEE dd, MMMM yyyy"}}</td>
-          <td class="table-fit">{{pedidoUnoEE.fechaEntrega | date:"EEEE dd, MMMM yyyy"}}</td>
-          <td class="table-fit">
-            <button class="btn btn-sm btn-primary btn-rounded"
-                                  [routerLink]="['/detalle-historial-pedido', pedidoUnoEE.rowid]"
-          >
-              <i class="fas fa-search"></i>
-          </button></td>
-        </tr>
+          </thead>
 
 
-        </tbody>
+          <tbody>
 
-        <tfoot>
-        <tr>
-          <td colspan="12">
-            <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
-          </td>
-        </tr>
-        </tfoot>
+          <tr *ngFor="let pedidoUnoEE of mf.data">
+            <td class="table-fit">{{pedidoUnoEE.numeroDocumento}}</td>
+            <td class="table-fit">{{pedidoUnoEE.razonSocialCliente}}</td>
+            <td class="table-fit">{{pedidoUnoEE.estado}}</td>
+            <td class="table-fit">{{pedidoUnoEE.notas}}</td>
+            <td class="table-fit">{{pedidoUnoEE.ordenCompra}}</td>
+            <td class="table-fit">${{pedidoUnoEE.valorBrutoDocumento | currency: 0 : ""}}</td>
+            <td class="table-fit">${{pedidoUnoEE.valorImpDocumento | currency: 0 : ""}}</td>
+            <td class="table-fit">${{pedidoUnoEE.valorNetoDocumento | currency: 0 : ""}}</td>
+            <!--          <td class="table-fit">{{pedidoUnoEE.idPuntoEnvio}}</td>
+                      <td class="table-fit">{{pedidoUnoEE.puntoEnvio}}</td>-->
+            <td class="table-fit">{{pedidoUnoEE.direccion1}}</td>
+            <td class="table-fit">{{pedidoUnoEE.fecha | date:"EEEE dd, MMMM yyyy"}}</td>
+            <td class="table-fit">{{pedidoUnoEE.fechaEntrega | date:"EEEE dd, MMMM yyyy"}}</td>
+            <td class="table-fit">
+              <button class="btn btn-sm btn-primary btn-rounded"
+                      [routerLink]="['/detalle-historial-pedido', pedidoUnoEE.rowid]"
+              >
+                <i class="fas fa-search"></i>
+              </button>
+            </td>
+          </tr>
 
-      </table>
+
+          </tbody>
+
+          <tfoot>
+          <tr>
+            <td colspan="12">
+              <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+            </td>
+          </tr>
+          </tfoot>
+
+        </table>
+
+      </div>
 
     </div>
 

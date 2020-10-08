@@ -195,42 +195,43 @@
         <!-- Grid row -->
         <div class="row" style="z-index: -10">
 
-          <table class="table table-striped table-hover">
-            <thead>
-            <tr>
-              <th scope="col" class="th-sm font-weight-bold ">Posición
-              </th>
-              <th scope="col" class="th-sm font-weight-bold">Código EKA
-              </th>
-              <th scope="col" class="th-sm font-weight-bold">Descripción
-              </th>
-              <th scope="col" class="th-sm font-weight-bold">Extensión 1
-              </th>
-              <th scope="col" class="th-sm font-weight-bold">Extensión 2
-              </th>
-              <th scope="col" class="th-sm font-weight-bold">Cantidad
-              </th>
-              <th scope="col" class="th-sm font-weight-bold">U. medida
-              </th>
-            </tr>
-            </thead>
+          <div class="table-responsive">
+            <table class="table table-hover table-striped">
+              <thead>
+              <tr>
+                <th scope="col" class="font-weight-bold ">Posición
+                </th>
+                <th scope="col" class="font-weight-bold">Código EKA
+                </th>
+                <th scope="col" class="font-weight-bold">Descripción
+                </th>
+                <th scope="col" class="font-weight-bold">Extensión 1
+                </th>
+                <th scope="col" class="font-weight-bold">Extensión 2
+                </th>
+                <th scope="col" class="font-weight-bold">Cantidad
+                </th>
+                <th scope="col" class="font-weight-bold">U. medida
+                </th>
+              </tr>
+              </thead>
 
-            <tbody>
+              <tbody>
 
-            <tr *ngFor="let pedidoUnoEE of listaItemPedidosUnoee; let indexOfelement=index;">
-              <td>{{indexOfelement + 1}}</td>
-              <td>{{pedidoUnoEE.codItem}}</td>
-              <td>{{pedidoUnoEE.descripcion}}</td>
-              <td>{{pedidoUnoEE.ext1}}</td>
-              <td>{{pedidoUnoEE.ext2}}</td>
-              <td>{{pedidoUnoEE.cantPedida | number}}</td>
-              <td>{{pedidoUnoEE.und}}</td>
-            </tr>
+              <tr *ngFor="let pedidoUnoEE of listaItemPedidosUnoee; let indexOfelement=index;">
+                <td>{{indexOfelement + 1}}</td>
+                <td>{{pedidoUnoEE.codItem}}</td>
+                <td>{{pedidoUnoEE.descripcion}}</td>
+                <td>{{pedidoUnoEE.ext1}}</td>
+                <td>{{pedidoUnoEE.ext2}}</td>
+                <td>{{pedidoUnoEE.cantPedida | number}}</td>
+                <td>{{pedidoUnoEE.und}}</td>
+              </tr>
 
-            </tbody>
+              </tbody>
 
-          </table>          <!-- Grid column -->
-
+            </table>          <!-- Grid column -->
+          </div>
 
           <!-- Grid column -->
           <!--          <div class="col-xl-12 col-lg-12 mb-4 pb-2">

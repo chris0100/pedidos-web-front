@@ -36,7 +36,9 @@
       <h5 class="font-weight-bold my-4" *ngIf="data?.length>0">Total Pedidos en estado de verificación: {{data.length}}</h5>
 
 
-      <table class="table table-striped table-hover table-responsive table-fixed" [mfData]="data" #mf="mfDataTable" [mfRowsOnPage]="10">
+      <div class="table-responsive">
+
+      <table class="table table-striped table-hover" [mfData]="data" #mf="mfDataTable" [mfRowsOnPage]="10">
 
         <thead>
 
@@ -74,34 +76,34 @@
         </tr>
 
         <tr>
-          <th scope="col" class="th-sm font-weight-bold">
+          <th scope="col" class="font-weight-bold">
             <input type="text" class="form-control-sm w-75" (change)="searchId($event.target.value)">
           </th>
 
-          <th scope="col" class="th-sm font-weight-bold">
+          <th scope="col" class="font-weight-bold">
             <input type="text" class="form-control-sm w-75" (change)="searchOrdenCompra($event.target.value)">
           </th>
 
-          <th scope="col" class="th-sm font-weight-bold">
+          <th scope="col" class="font-weight-bold">
             <input type="text" class="form-control-sm w-75" (change)="searchNombre($event.target.value)">
           </th>
 
-          <th scope="col" class="th-sm font-weight-bold">
+          <th scope="col" class="font-weight-bold">
             <input type="text" class="form-control-sm w-75" (change)="searchNota($event.target.value)">
           </th>
 
-          <th scope="col" class="th-sm font-weight-bold">
+          <th scope="col" class="font-weight-bold">
             <input type="text" class="form-control-sm w-75" (change)="searchFacturar($event.target.value)">
           </th>
 
-          <th scope="col" class="th-sm font-weight-bold">
+          <th scope="col" class="font-weight-bold">
             <input type="text" class="form-control-sm w-75" (change)="searchSucursalRemisionar($event.target.value)">
           </th>
 
-          <th scope="col" class="th-sm font-weight-bold">
+          <th scope="col" class="font-weight-bold">
           </th>
 
-          <th scope="col" class="th-sm font-weight-bold">
+          <th scope="col" class="font-weight-bold">
           </th>
 
         </tr>
@@ -140,6 +142,8 @@
 
 
       </table>
+
+      </div>
 
     </div>
 

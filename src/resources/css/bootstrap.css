@@ -10076,9 +10076,37 @@ a.text-dark:hover, a.text-dark:focus {
 /*# sourceMappingURL=bootstrap.css.map */
 
 
-
+/*hasta 1366px*/
 @media only screen and (max-width: 1366px) {
   .distancia{
     margin-top: -50px!important;
   }
 }
+
+
+
+@media only screen and (min-width: 567px) {
+  .adaptive{
+    width: 50%;
+  }
+}
+
+
+@media only screen and (max-width: 381px) {
+  .adaptive{
+    width: 50%;
+  }
+}
+
+
+
+@media only screen and (max-width: 768px) {
+  .caja-responsiva{
+    margin-bottom: 50px!important;
+  }
+}
+
+
+
+
+
