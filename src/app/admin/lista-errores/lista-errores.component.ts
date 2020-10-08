@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Pedido} from '../../pedidos/pedido';
 import {PedidoService} from '../../pedidos/pedido.service';
 import {AuthService} from '../../login/auth.service';
+import swal from "sweetalert2";
 
 @Component({
   selector: 'app-lista-errores',
@@ -37,6 +38,10 @@ export class ListaErroresComponent implements OnInit {
         this.listaPedidosErrorAsesor = obj;
         this.data = obj;
         this.showSpinner = false;
+
+        if ( this.listaPedidosErrorAsesor == null || this.listaPedidosErrorAsesor.length === 0) {
+          swal('Advertencia', 'No se han encontrado pedidos con error', 'warning');
+        }
       });
     this.showSpinner = true;
   }
