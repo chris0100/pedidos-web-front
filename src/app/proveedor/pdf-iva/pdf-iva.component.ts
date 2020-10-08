@@ -1,14 +1,6 @@
-import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {CertificadoRetencionIVA} from '../certificado-retencion-iva';
-import html2canvas from 'html2canvas';
-// import jsPDF from 'jspdf';
-import * as html2pdf from 'html2pdf.js';
-// @ts-ignore
-import printJS from 'print-js';
-import * as es6printJS from 'print-js';
-import {startTimeRange} from '@angular/core/src/profile/wtf_impl';
 
- declare var jsPDF: any;
 
 @Component({
   selector: 'app-pdf-iva',
@@ -38,15 +30,6 @@ export class PdfIvaComponent implements OnInit {
 
   // Actual forma para realizar la impresion pdf
   printTest(): void {
-
-    // es6printJS('contentToConvert', 'html');
-    function print() {
-      printJS({
-        printable: 'content',
-        type: 'html',
-        targetStyles: ['*']
-      });
-    }
 
     // Se ocultan etiquetas para generador del pdf para imprimir.
     this.hide = false;

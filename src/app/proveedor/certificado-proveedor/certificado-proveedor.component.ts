@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {ProveedorService} from '../proveedor.service';
 import {AuthService} from '../../login/auth.service';
 import {CertificadoRetencionIVA} from '../certificado-retencion-iva';
-import html2canvas from 'html2canvas';
 import swal from 'sweetalert2';
 
 
