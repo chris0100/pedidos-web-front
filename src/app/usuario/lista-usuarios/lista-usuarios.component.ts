@@ -180,8 +180,8 @@ export class ListaUsuariosComponent implements OnInit {
     } else {
       console.log('si envia algo');
       this.filterData = this.data.filter(x => {
-        if (x.cliente != null) {
-          return x.cliente.toLowerCase().includes(term.toLowerCase());
+        if (x.username != null) {
+          return x.username.toLowerCase().includes(term.toLowerCase());
         }
       });
       this.data = this.filterData;

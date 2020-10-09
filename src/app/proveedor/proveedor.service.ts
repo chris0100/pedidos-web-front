@@ -13,7 +13,7 @@ import swal from 'sweetalert2';
 
 export class ProveedorService {
 
-  url = 'http://localhost:8080';
+  url = 'http://192.168.160.181:8082';
 
   constructor(private http: HttpClient, private router: Router) { }
 
