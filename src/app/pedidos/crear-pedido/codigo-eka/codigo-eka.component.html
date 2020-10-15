@@ -15,6 +15,7 @@
              style="margin-bottom: 0px !important;"
              [(ngModel)]="coditemPatronBuscado"
              (change)="consultarTipoExt()"
+             [disabled]="afterConsulta"
       >
       <datalist id="dynmicUserIds">
         <option *ngFor="let item of userList1">{{item}}</option>
@@ -61,6 +62,7 @@
 
 <div class="row" style="margin-top: -30px">
 
+  <!--COLOR-->
   <div class="col-md-4">
 
     <div class="md-form md-outline">
@@ -73,6 +75,7 @@
              style="margin-bottom: 0px !important;"
              [(ngModel)]="itemPedidoActual.descripcionExt2"
              (change)="toggleInputBuscarColor()"
+             [disabled]="afterConsultaColor"
       >
       <datalist id="dynmicUserIds2">
         <option *ngFor="let item of userList2">{{item}}</option>
@@ -84,6 +87,7 @@
 
 
 
+  <!--CANTIDAD-->
   <div class="col-md-4">
 
     <div class="md-form md-outline">
@@ -100,13 +104,20 @@
 
 <div class="row mb-5 d-flex justify-content-center" style="margin-top: -15px">
   <button class="btn btn-success btn-rounded"
-          style="min-width: 270px"
+          style="min-width: 200px"
           (click)="agregarItem()"
           [disabled]="itemPedidoActual.cantidad<1 || itemPedidoActual.descripcionExt1.length==0 || itemPedidoActual.descripcionExt2.length==0 ||
                       coditemPatronBuscado.length==0"
   >
     <i class="fas fa-plus"></i> Agregar
     ítem
+  </button>
+
+  <button class="btn btn-warning btn-rounded"
+          style="min-width: 200px"
+          (click)="limpiarCampos()"
+  >
+    <i class="fas fa-broom"></i> Limpiar busqueda
   </button>
 </div>
 

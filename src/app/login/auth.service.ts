@@ -16,7 +16,7 @@ export class AuthService {
   // tslint:disable-next-line:variable-name
   private _token: string;
 
-  url = 'http://192.168.160.181:8082';
+  url = 'http://localhost:8082';
 
   constructor(private http: HttpClient) {
   }

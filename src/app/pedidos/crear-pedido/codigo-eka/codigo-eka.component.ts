@@ -48,8 +48,8 @@ export class CodigoEkaComponent implements OnInit {
 
 
   // Habilitacion y deshabilitacion de input luego de busqueda
-  // afterConsulta: boolean;
-  // afterConsultaColor: boolean;
+   afterConsulta: boolean;
+   afterConsultaColor: boolean;
 
 
   constructor(private pedidosService: PedidoService, public authService: AuthService) {
@@ -57,8 +57,8 @@ export class CodigoEkaComponent implements OnInit {
 
 
   ngOnInit(): void {
-    // this.afterConsulta = false;
-    // this.afterConsultaColor = false;
+     this.afterConsulta = false;
+     this.afterConsultaColor = false;
 
     // Se unicializan campos
     this.limpiarCampos();
@@ -104,7 +104,9 @@ export class CodigoEkaComponent implements OnInit {
     this.itemPedidoActual.cantidad = 0;
     this.itemPedidoActual.descripcionExt2 = '';
 
-    // this.afterConsultaColor = false;
+    // Habilita escritura en campos de codigo y color respectivamente.
+    this.afterConsulta = false;
+    this.afterConsultaColor = false;
   }
 
 
@@ -175,31 +177,45 @@ export class CodigoEkaComponent implements OnInit {
     console.log(this.coditemPatronBuscado);
     this.codigoItem = this.coditemPatronBuscado.substring(0, 7);
 
+
+
+
+
     // Condiciona para evitar errores
     if (this.coditemPatronBuscado !== '') {
       // Obtener tipo de extensiones(TAMAÑO Y COLOR)
       this.pedidosService.consultarTipoExtJava(this.codigoItem).subscribe(
         obj => {
-          this.tipoExt1 = obj[0].substring(0, 2);
-          this.tipoExt2 = obj[0].substring(2, 4);
-          console.log(this.tipoExt1 + ' : ' + this.tipoExt2);
+          if (obj.length === 0) {
+            swal('Error', 'La busqueda no arrojo datos', 'error');
+            this.limpiarCampos();
+            return;
+          }
+          else {
+            this.tipoExt1 = obj[0].substring(0, 2);
+            this.tipoExt2 = obj[0].substring(2, 4);
+            console.log(this.tipoExt1 + ' : ' + this.tipoExt2);
 
-          // LISTA TAMAÑOS
-          this.pedidosService.consultaExt1Java(this.tipoExt1).subscribe(
-            objx1 => {
-              this.listaExt1 = objx1;
-              console.log(this.listaExt1);
-            });
+            // LISTA TAMAÑOS
+            this.pedidosService.consultaExt1Java(this.tipoExt1).subscribe(
+              objx1 => {
+                this.listaExt1 = objx1;
+                console.log(this.listaExt1);
+              });
 
-          // LISTA COLORES
-          this.pedidosService.consultaExt2Java(this.tipoExt2).subscribe(
-            objx2 => {
-              this.listaExt2 = objx2;
-              console.log(this.listaExt2);
-            });
+            // LISTA COLORES
+            this.pedidosService.consultaExt2Java(this.tipoExt2).subscribe(
+              objx2 => {
+                this.listaExt2 = objx2;
+                console.log(this.listaExt2);
+              });
 
-          // Consultar la descripcion label Ext
-          this.consultarDescripcionLabelExt();
+            // Consultar la descripcion label Ext
+            this.consultarDescripcionLabelExt();
+          }
+        }, error => {
+          swal('Error', 'La busqueda no arrojo datos', 'error');
+          this.limpiarCampos();
         });
 
 
@@ -225,9 +241,13 @@ export class CodigoEkaComponent implements OnInit {
           this.itemPedidoActual.idBodega = obj[0];
         });
     }
+    else {
+      this.limpiarCampos();
+    }
+
 
     // se deshabilita input temporalmente
-    // this.afterConsulta = true;
+     this.afterConsulta = true;
   }
 
 
@@ -249,11 +269,8 @@ export class CodigoEkaComponent implements OnInit {
 
 
 
-
-
   // Agregar Item a la lista
   agregarItem(): void {
-
     this.itemPedidoActual.codItem = parseInt(this.codigoItem, 0);
     this.itemPedidoActual.descripcion = this.coditemPatronBuscado.substring(10, 50);
     this.itemPedidoActual.idExt1Detalle = this.itemPedidoActual.descripcionExt1.substring(0, 4);
@@ -295,7 +312,7 @@ export class CodigoEkaComponent implements OnInit {
     // Prueba para emitir lista.
     this.listaOutputItemPedidoSelect.emit(this.listaItemPedidoSelect);
 
-    // this.afterConsulta = false;
+     this.afterConsulta = false;
   }
 
 
@@ -359,16 +376,16 @@ export class CodigoEkaComponent implements OnInit {
 
   // Se habilita el input de la primera consulta.
   habilitarInputBuscar(): void {
-    // this.afterConsulta = false;
-    // this.limpiarCampos();
+     this.afterConsulta = false;
+     this.limpiarCampos();
   }
 
   // Se habilita el input de la consulta del color.
   toggleInputBuscarColor(): void {
-    // this.afterConsultaColor = !this.afterConsultaColor;
-    // if (!this.afterConsultaColor) {
-      // this.itemPedidoActual.descripcionExt2 = '';
-   // }
+     this.afterConsultaColor = !this.afterConsultaColor;
+     if (!this.afterConsultaColor) {
+       this.itemPedidoActual.descripcionExt2 = '';
+    }
   }
 
 

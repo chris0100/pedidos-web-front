@@ -12,8 +12,7 @@ import {Router} from '@angular/router';
 export class UsuariosService {
 
   public usuario: Usuario;
-
-  url = 'http://192.168.160.181:8082';
+  url = 'http://localhost:8082';
 
   constructor(private http: HttpClient, public authService: AuthService,
               private router: Router) {

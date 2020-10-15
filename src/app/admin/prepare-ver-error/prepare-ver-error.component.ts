@@ -131,6 +131,7 @@ export class PrepareVerErrorComponent implements OnInit {
 
         const lop = this.pedidoError.mensajeWB.split('f_detalle>');
         let a = 1;
+        this.arr = [];
 
         lop.filter(x => {
           if (a % 2 === 0) {
