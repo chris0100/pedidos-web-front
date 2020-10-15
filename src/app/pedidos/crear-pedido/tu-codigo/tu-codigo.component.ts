@@ -53,13 +53,18 @@ export class TuCodigoComponent implements OnInit {
 
 
   consultarItemHomologado(): void {
-    console.log('algo esta cambiando' + this.codigoCliente);
 
     this.pedidosService.contarHomologarItemDuplicado(this.authService.usuario.nit, this.codigoCliente).subscribe(
       obj => {
-        if (obj.length <= 1) {
+        console.log(obj);
+
+        if (obj.length == 0) {
+          swal('Error', 'La busqueda no arrojo datos', 'error');
+          this.limpiarCampos();
+          return;
+        }
+        else {
           this.itemHomologado = obj[0];
-          console.log(this.itemHomologado);
 
           // Se agregan los datos tomados del item homologado
           this.itemPatron = this.itemHomologado.substring(0, 50);
@@ -90,10 +95,10 @@ export class TuCodigoComponent implements OnInit {
               this.itemPedidoActual.idBodega = obj[0];
             });
 
-        } else {
-          swal('Error', 'Ha ocurrido un error, revisa los datos ingresados', 'error');
-          return;
-        }
+        };
+      }, error => {
+        swal('Error', 'La busqueda no arrojo datos', 'error');
+        this.limpiarCampos();
       });
      this.afterConsulta = true;
   }
