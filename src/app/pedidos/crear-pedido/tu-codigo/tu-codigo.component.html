@@ -12,6 +12,7 @@
              style="margin-bottom: 0px !important;"
              [(ngModel)]="codigoCliente"
              (change)="consultarItemHomologado()"
+             [disabled]="afterConsulta"
       >
       <label for="cod-item-cliente" data-error="wrong" data-success="right">Código del
         cliente del ítem</label>
@@ -114,6 +115,13 @@
           (click)="agregarItem()"
   ><i class="fas fa-plus"></i>
     Agregar ítem
+  </button>
+
+  <button class="btn btn-warning btn-rounded"
+          style="min-width: 200px"
+          (click)="limpiarCampos()"
+  >
+    <i class="fas fa-broom"></i> Limpiar busqueda
   </button>
 </div>
 
