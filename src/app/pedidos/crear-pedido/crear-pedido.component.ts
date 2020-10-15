@@ -31,6 +31,7 @@ export class CrearPedidoComponent implements OnInit {
   habilitaVerificacionPedido = false;
 
 
+
   constructor(private pedidosService: PedidoService, public authService: AuthService,
               private router: Router, private activatedRoute: ActivatedRoute) {
     this.usuario = this.authService.usuario;
@@ -259,6 +260,9 @@ export class CrearPedidoComponent implements OnInit {
       return;
     }
   }
+
+
+
 
 
 }
