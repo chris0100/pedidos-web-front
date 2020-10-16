@@ -16,7 +16,8 @@ export class AuthService {
   // tslint:disable-next-line:variable-name
   private _token: string;
 
-  url = 'http://localhost:8082';
+  url = 'http://localhost:8082/api';
+  urlAuth = 'http://localhost:8082';
 
   constructor(private http: HttpClient) {
   }
@@ -60,7 +61,7 @@ export class AuthService {
 
   // Se realiza login del usuario
   login(usuario: Usuario): Observable<any> {
-    const urlEndPoint = this.url + '/oauth/token';
+    const urlEndPoint = this.urlAuth + '/oauth/token';
 
     // credenciales para entrada desde angular
     const credenciales = btoa('angularapp' + ':' + '12345');
@@ -88,7 +89,6 @@ export class AuthService {
     return this.http.get<string[]>(`${urlEndPoint}/${nit}/${password}/${username}`).pipe(
       catchError(e => {
         if (e.status != 401 && e.error.mensaje) {
-          console.log('error encontrado');
           console.log(e.error.mensaje);
         }
         return throwError(e);
@@ -103,7 +103,6 @@ export class AuthService {
     return this.http.get<string[]>(`${urlEndPoint}/${nit}/${password}`).pipe(
       catchError(e => {
         if (e.status != 401 && e.error.mensaje) {
-          console.log('error encontrado');
           console.log(e.error.mensaje);
         }
         return throwError(e);

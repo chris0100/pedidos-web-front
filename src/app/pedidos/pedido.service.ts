@@ -18,7 +18,7 @@ import {ItemExcel} from './item-excel';
 export class PedidoService {
 
   public pedido: Pedido;
-  url = 'http://localhost:8082';
+  url = 'http://localhost:8082/api';
 
 
   constructor(private http: HttpClient, private router: Router) {

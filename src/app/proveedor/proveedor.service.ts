@@ -13,7 +13,7 @@ import swal from 'sweetalert2';
 
 export class ProveedorService {
 
-  url = 'http://localhost:8082';
+  url = 'http://localhost:8082/api';
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -25,7 +25,6 @@ export class ProveedorService {
       catchError(e => {
         if (e.status != 401 && e.error.mensaje) {
           this.router.navigate(['/panel-principal']);
-          console.log(e.error.mensaje);
         }
         return throwError(e);
       })
@@ -42,7 +41,6 @@ export class ProveedorService {
       catchError(e => {
         if (e.status != 401 && e.error.mensaje) {
           swal('Error', e.error.mensaje, 'error');
-          console.log(e.error.mensaje);
         }
         return throwError(e);
       })
@@ -61,7 +59,6 @@ export class ProveedorService {
       catchError(e => {
         if (e.status != 401 && e.error.mensaje) {
           swal('Error', e.error.mensaje, 'error');
-          console.log(e.error.mensaje);
         }
         return throwError(e);
       })

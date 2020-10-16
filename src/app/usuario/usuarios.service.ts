@@ -5,6 +5,7 @@ import {Usuario} from './usuario';
 import {Observable, throwError} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import {Router} from '@angular/router';
+import swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,8 @@ import {Router} from '@angular/router';
 export class UsuariosService {
 
   public usuario: Usuario;
-  url = 'http://localhost:8082';
+
+  url = 'http://localhost:8082/api';
 
   constructor(private http: HttpClient, public authService: AuthService,
               private router: Router) {
@@ -136,7 +138,6 @@ export class UsuariosService {
       catchError(e => {
         if (e.status != 401 && e.error.mensaje) {
           this.router.navigate(['/clientes']);
-          console.log(e.error.mensaje);
         }
         return throwError(e);
       })
@@ -167,7 +168,6 @@ export class UsuariosService {
     return this.http.get<Usuario>(`${urlEndPoint}/${email}/${nit}`).pipe(
       catchError(e => {
         if (e.status != 401 && e.error.mensaje) {
-          console.log(e.error.mensaje);
         }
         return throwError(e);
       })
@@ -181,7 +181,7 @@ export class UsuariosService {
     return this.http.get<Usuario>(`${urlEndPoint}/${email}/${nit}/${sucursal}/${puntoEnvio}`).pipe(
       catchError(e => {
         if (e.status != 401 && e.error.mensaje) {
-          console.log(e.error.mensaje);
+          swal('Error', 'Error al generar token', 'error');
         }
         return throwError(e);
       })
@@ -200,7 +200,6 @@ export class UsuariosService {
       catchError(e => {
         if (e.status != 401 && e.error.mensaje) {
           this.router.navigate(['/clientes']);
-          console.log(e.error.mensaje);
         }
         return throwError(e);
       })
