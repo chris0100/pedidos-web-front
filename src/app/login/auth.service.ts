@@ -11,6 +11,16 @@ import {catchError} from 'rxjs/operators';
 
 export class AuthService {
 
+  HTTP_OPTIONS = {
+    headers: new HttpHeaders({
+      'Content-Type':  'application/json',
+      'Access-Control-Allow-Credentials' : 'true',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, PATCH, DELETE, PUT, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With',
+    })
+  };
+
   // tslint:disable-next-line:variable-name
   private _usuario: Usuario;
   // tslint:disable-next-line:variable-name
@@ -18,6 +28,7 @@ export class AuthService {
 
   url = 'http://localhost:8082/api';
   urlAuth = 'http://localhost:8082';
+  urlPrueba = 'http://localhost:8082';
 
   constructor(private http: HttpClient) {
   }
@@ -208,6 +219,11 @@ export class AuthService {
   // Obtener la sucursal desde el backend
   obtenerSucursalJava(nitCliente: string): Observable<string[]> {
     const urlEndPoint = this.url  + '/obtener-sucursal';
+
+    const httpHeaders = new HttpHeaders({
+      'X-Requested-With' : 'XMLHttpRequest'
+    });
+
     return this.http.get<string[]>(`${urlEndPoint}/${nitCliente}`);
   }
 
